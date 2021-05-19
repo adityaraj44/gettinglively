@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Shippori Mincho", serif !important;
+
+  font-weight: bold !important;
+  font-size: 60px;
+  line-height: 64px;
+}
+
+nav {
+  background-color: #1d1b1b !important;
+}
+
+nav li a h4 {
+  color: whitesmoke !important;
+  font-size: 35px;
+}
+
+.uk-offcanvas-bar {
+  background-color: #1d1b1b !important;
+  text-align: center;
+  justify-content: center;
+}
+
+.uk-offcanvas-bar li a {
+  color: #ec4d37 !important;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.uk-dropdown-nav a {
+  font-size: 20px;
+}
+
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.brand {
+  margin: 0 auto;
+}
+
+.brand:hover {
+  color: white;
+}
+
+.headimgs img {
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.slidersec {
+  background: url(/img/body2.jpg) center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.uk-section-custom {
+  height: 100vh;
+  border-bottom: 8px solid #ec4d37;
+}
+
+.uk-button-custom {
+  background: #ec4d37 !important;
+  color: white;
+}
+
+.uk-section-black {
+  background-color: black;
+}
+
+.logoimg {
+  margin-left: 30px;
+}
+
+.tilecustom img {
+  background-size: cover;
+  background-position: center;
+  width: 800px;
+  height: 400px;
+}
+
+.foodsection {
+  background: url(/img/body.jpg) center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top: 8px solid #ec4d37;
+  border-bottom: 8px solid #ec4d37;
+}
+
+footer {
+  height: auto;
+  background: #1d1b1b;
+  background: url(/img/body3.jpg) center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+footer a {
+  text-decoration: transparent !important;
+  color: white !important;
+  font-size: 20px;
+}
+
+footer p {
+  /* text-decoration: transparent !important; */
+  color: white !important;
+  font-size: 20px;
+  margin: 15px !important;
+}

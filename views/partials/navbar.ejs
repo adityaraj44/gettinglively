@@ -1,0 +1,89 @@
+<nav
+  class="uk-navbar-container"
+  uk-sticky="show-on-up: true animation: uk-animation-slide-top;"
+  uk-navbar
+>
+  <div class="uk-navbar-right">
+    <ul class="uk-navbar-nav">
+      <li
+        class="
+          uk-button-text
+          noSelect
+          uk-text-normal uk-position-left uk-margin-small-left
+        "
+      >
+        <a
+          class="uk-navbar-toggle noSelect"
+          uk-navbar-toggle-icon
+          uk-toggle="target: #offcanvas-push"
+        ></a>
+      </li>
+      <li class="noSelect uk-position-center">
+        <img
+        class="uk-border-circle"
+        width="70"
+        height="70"
+        src="/img/livelybrand.png"
+      />
+      </li>
+      <li class="uk-button-text uk-text-bold noSelect uk-margin-small-right">
+        <a href="/" class="uk-margin-small-right noSelect"
+          ><h4 class="brand">Getting Lively</h4></a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="offcanvas-push" uk-offcanvas="mode: reveal; overlay: true">
+  <button
+    class="uk-offcanvas-close uk-close-large noSelect uk-button-text"
+    type="button"
+    uk-close
+  ></button>
+  <div class="uk-offcanvas-bar uk-flex uk-flex-row text-center">
+    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+      <li>
+        <img
+          class="uk-border-circle uk-margin-small-bottom"
+          width="180"
+          height="180"
+          src="/img/livelybrand.png"
+        /><br />
+
+        <hr />
+      </li>
+      <li>
+        <a href="/" class="uk-button-text noSelect"
+          ><span class= noSelect"></span> Restaurants</a
+        >
+      </li>
+      <li>
+        <a href="/" class="uk-button-text noSelect"
+          ><span class= noSelect"></span> Bars</a
+        >
+      </li>
+      <li>
+        <a href="/" class="uk-button-text noSelect"
+          ><span class= noSelect"></span> Pubs</a
+        >
+      </li>
+
+      <li>
+        <a href="/" class="uk-button-text noSelect"
+          ><span class=" noSelect"></span> Clubs</a
+        >
+      </li>
+      <li>
+        <a class="uk-button-text noSelect">Business</a>
+
+        <div uk-dropdown>
+          <ul class="uk-nav uk-dropdown-nav">
+            <li><a href="/" class="uk-button-text">Gifting</a></li>
+            <li><a class="uk-button-text">Promotion</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
