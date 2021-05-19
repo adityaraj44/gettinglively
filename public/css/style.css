@@ -7,8 +7,10 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   font-family: "Raleway", sans-serif !important;
+  overflow-x: hidden !important;
 }
 
 h1,
@@ -136,7 +138,7 @@ footer p {
   margin: 15px !important;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .headimgs img {
     height: 400px;
     width: 100%;
