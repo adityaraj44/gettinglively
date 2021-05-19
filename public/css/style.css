@@ -135,3 +135,24 @@ footer p {
   font-size: 20px;
   margin: 15px !important;
 }
+
+@media (max-width: 760px) {
+  .headimgs img {
+    height: 400px;
+    width: 100%;
+
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .navbarbrand {
+    display: none;
+  }
+  .slidersec {
+    height: auto;
+  }
+
+  .uk-section-custom {
+    height: auto;
+  }
+}
