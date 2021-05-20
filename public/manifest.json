@@ -1,0 +1,21 @@
+{
+    "short_name": "Getting Lively",
+    "name": "Getting Lively",
+    "icons": [
+      {
+        "src": "/img/livelybrand.png",
+        "type": "image/png"
+       
+      }
+      
+    ],
+    "start_url": "/",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#ec4d37",
+    
+    "description": "Getting Lively"
+    
+    
+  }
