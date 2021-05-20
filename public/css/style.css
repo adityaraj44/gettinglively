@@ -132,7 +132,7 @@ nav li a h4 {
   margin-top: 4px;
 }
 
-.foodsection {
+.detailsection {
   background: url(/img/foodbody.jpg) center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -140,22 +140,12 @@ nav li a h4 {
   border-bottom: 8px solid #ec4d37;
 }
 
-.foodsection h4 {
+.detailsection h4 {
   padding: 10px;
   font-size: 45px;
   /* background-color: rgb(243, 243, 243); */
   line-height: 50px;
   margin: 5px;
-}
-
-.foodsection img {
-  filter: blur(1px);
-  filter: grayscale(2);
-  transition: all 0.1s ease;
-}
-
-.foodsection img:hover {
-  filter: grayscale(0);
 }
 
 .row {
@@ -168,9 +158,9 @@ nav li a h4 {
 
 /* Create four equal columns that sits next to each other */
 .column {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
-  max-width: 25%;
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+  max-width: 50%;
   padding: 0 4px;
 }
 
@@ -205,13 +195,8 @@ nav li a h4 {
     margin-top: 2px;
   }
 
-  .foodrow {
+  .details {
     margin-top: 100px;
-  }
-
-  .foodsection img {
-    filter: grayscale(0);
-    filter: blur(0);
   }
 
   .column {
