@@ -246,6 +246,7 @@
 </div>
 
 <!-- footer -->
+<%- include('./partials/modals.ejs'); %>
 <footer class="uk-section uk-section-black">
   <div class="uk-text-center" uk-grid>
     <div class="uk-width-1-1@s">
@@ -258,7 +259,10 @@
     </div>
 
     <div class="uk-width-1-1@s uk-text-left uk-margin-large-left uk-light">
-      <a href="/" class="uk-button uk-button-text uk-margin-large-right"
+      <a
+        href="#terms"
+        class="uk-button uk-button-text uk-margin-large-right"
+        uk-toggle
         >Terms and Conditions</a
       >
 

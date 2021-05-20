@@ -209,6 +209,15 @@ nav li a h4 {
   .search-container h4 {
     font-size: 45px !important;
   }
+
+  .modal-title {
+    font-size: 40px !important;
+    line-height: 41px;
+  }
+}
+
+.modal {
+  color: rgb(24, 24, 24) !important;
 }
 
 footer {
