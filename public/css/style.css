@@ -22,7 +22,7 @@ h6 {
   font-family: "Shippori Mincho", serif !important;
 
   font-weight: bold !important;
-  font-size: 60px;
+  font-size: 80px;
   line-height: 64px;
 }
 
@@ -69,21 +69,6 @@ nav li a h4 {
   color: white;
 }
 
-.headimgs img {
-  height: 100vh;
-  width: 100%;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.slidersec {
-  background: url(/img/body2.jpg) center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
-
 .uk-section-custom {
   height: 100vh;
   border-bottom: 8px solid #ec4d37;
@@ -107,6 +92,22 @@ nav li a h4 {
   background-position: center;
   width: 800px;
   height: 400px;
+}
+
+.parallaxslider img {
+  background: #000;
+  opacity: 0.6;
+}
+
+.parallaxslider h2 {
+  font-size: 70px !important;
+}
+
+.parallaxslider p {
+  font-size: 30px !important;
+  color: white !important;
+  padding: 4px;
+  margin-top: 4px;
 }
 
 .foodsection {
@@ -149,9 +150,6 @@ footer p {
   }
   .navbarbrand {
     display: none;
-  }
-  .slidersec {
-    height: auto;
   }
 
   .uk-section-custom {

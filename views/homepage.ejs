@@ -1,97 +1,63 @@
 <%- include('./partials/navbar.ejs'); %>
 
-<div class="uk-section-secondary">
+<div class="uk-section-black parallaxslider">
   <div
-    class="slidersec uk-margin-remove uk-visible-toggle uk-light"
+    class="uk-position-relative uk-visible-toggle uk-light"
     tabindex="-1"
-    uk-slider="clsActivated: uk-transition-active; center: true"
+    uk-slideshow="animation: push"
   >
-    <ul class="uk-slider-items uk-grid headimgs">
-      <li class="uk-width-1-2">
-        <div class="uk-panel">
-          <img src="/img/header.jpg" alt="" />
-          <div
-            class="
-              uk-overlay
-              uk-overlay-primary
-              uk-position-bottom
-              uk-text-center
-              uk-transition-slide-bottom
-            "
+    <ul class="uk-slideshow-items">
+      <li>
+        <img src="/img/header.jpg" alt="" uk-cover />
+        <div class="uk-position-center uk-position-small uk-text-center">
+          <h1 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">WELCOME TO</h1>
+          <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">
+            GETTING LIVELY
+          </h2>
+          <p
+            class="uk-text-large"
+            uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0"
           >
-            <h3 class="uk-margin">Getting Lively</h3>
-            <p class="uk-margin">
-              For bars, pubs, restaurants and nightclubs this is the place to be
-            </p>
-          </div>
+            For bars, pubs, restaurants and nightclubs this is the place to be
+          </p>
         </div>
       </li>
-      <li class="uk-width-1-2">
-        <div class="uk-panel">
-          <img src="/img/restaurant.jpg" alt="" />
-          <div
-            class="
-              uk-overlay
-              uk-overlay-primary
-              uk-position-bottom
-              uk-text-center
-              uk-transition-slide-bottom
-            "
-          >
-            <h3 class="uk-margin">Restaurant</h3>
-            <p class="uk-margin">Good Friends, Good Food, Good Times</p>
-          </div>
+      <li>
+        <img src="/img/restaurant.jpg" alt="" uk-cover />
+        <div class="uk-position-center uk-position-small uk-text-center">
+          <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">
+            Restaurants
+          </h2>
+          <p uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0">
+            Good Friends, Good Food, Good Times
+          </p>
         </div>
       </li>
-      <li class="uk-width-1-2">
-        <div class="uk-panel">
-          <img src="/img/bar.jpg" alt="" />
-          <div
-            class="
-              uk-overlay
-              uk-overlay-primary
-              uk-position-bottom
-              uk-text-center
-              uk-transition-slide-bottom
-            "
-          >
-            <h3 class="uk-margin">Bar</h3>
-            <p class="uk-margin">Let's rum away</p>
-          </div>
+      <li>
+        <img src="/img/club.jpg" alt="" uk-cover />
+        <div class="uk-position-center uk-position-small uk-text-center">
+          <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">Clubs</h2>
+          <p uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0">
+            Live for today, plan for tomorrow, party tonight, party tonight
+          </p>
         </div>
       </li>
-      <li class="uk-width-1-2">
-        <div class="uk-panel">
-          <img src="/img/club.jpg" alt="" />
-          <div
-            class="
-              uk-overlay
-              uk-overlay-primary
-              uk-position-bottom
-              uk-text-center
-              uk-transition-slide-bottom
-            "
-          >
-            <h3 class="uk-margin">Club</h3>
-            <p class="uk-margin">Bands and peace</p>
-          </div>
+      <li>
+        <img src="/img/bar.jpg" alt="" uk-cover />
+        <div class="uk-position-center uk-position-small uk-text-center">
+          <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">Bars</h2>
+          <p uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0">
+            Let's rum away
+          </p>
         </div>
       </li>
-      <li class="uk-width-1-2">
-        <div class="uk-panel">
-          <img src="/img/pub.jpg" alt="" />
-          <div
-            class="
-              uk-overlay
-              uk-overlay-primary
-              uk-position-bottom
-              uk-text-center
-              uk-transition-slide-bottom
-            "
-          >
-            <h3 class="uk-margin">Pub</h3>
-            <p class="uk-margin">You meet a better class of person in pubs</p>
-          </div>
+      <li>
+        <img src="/img/pub.jpg" alt="" uk-cover />
+        <div class="uk-position-center uk-position-small uk-text-center">
+          <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">Pubs</h2>
+          <p uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0">
+            Drink Happy Thoughts
+          </p>
         </div>
       </li>
     </ul>
@@ -100,13 +66,13 @@
       class="uk-position-center-left uk-position-small uk-hidden-hover"
       href="#"
       uk-slidenav-previous
-      uk-slider-item="previous"
+      uk-slideshow-item="previous"
     ></a>
     <a
       class="uk-position-center-right uk-position-small uk-hidden-hover"
       href="#"
       uk-slidenav-next
-      uk-slider-item="next"
+      uk-slideshow-item="next"
     ></a>
   </div>
 </div>
