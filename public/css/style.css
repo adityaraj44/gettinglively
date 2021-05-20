@@ -126,7 +126,7 @@ nav li a h4 {
 }
 
 .detailsection {
-  background: url(/img/foodbody.jpg) center;
+  background: url(/img/foodbody.jpeg) center;
   background-repeat: no-repeat;
   background-size: cover;
   border-top: 8px solid #ec4d37;
@@ -214,7 +214,7 @@ nav li a h4 {
 footer {
   height: auto;
   background: #1d1b1b;
-  background: url(/img/body3.jpg) center;
+  background: url(/img/body3.jpeg) center;
   background-repeat: no-repeat;
   background-size: cover;
 }
