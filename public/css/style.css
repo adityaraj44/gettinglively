@@ -109,13 +109,6 @@ nav li a h4 {
   margin-left: 30px;
 }
 
-.tilecustom img {
-  background-size: cover;
-  background-position: center;
-  width: 800px;
-  height: 400px;
-}
-
 .parallaxslider img {
   background: #000;
   opacity: 0.6;
@@ -173,9 +166,13 @@ nav li a h4 {
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
   .column {
-    -ms-flex: 50%;
-    flex: 50%;
-    max-width: 50%;
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .navbarbrand {
+    display: none;
   }
 }
 
@@ -200,9 +197,17 @@ nav li a h4 {
   }
 
   .column {
-    -ms-flex: 50%;
-    flex: 50%;
-    max-width: 50%;
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .uk-section-custom {
+    height: auto;
+  }
+
+  .search-container h4 {
+    font-size: 45px !important;
   }
 }
 
@@ -228,19 +233,26 @@ footer p {
 }
 
 @media (max-width: 768px) {
-  .headimgs img {
-    height: 400px;
-    width: 100%;
+}
 
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-  .navbarbrand {
-    display: none;
-  }
+/* overlay on the umage */
+.img-container {
+  position: relative;
+}
+.overlay {
+  position: absolute !important;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
 
-  .uk-section-custom {
-    height: auto;
-  }
+.overlay:hover {
+  padding: 30px;
 }

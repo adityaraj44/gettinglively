@@ -1,7 +1,13 @@
 <%- include('./partials/navbar.ejs'); %>
 
 <!-- search -->
-
+<video
+  src="/img/searchvideo.mp4"
+  loop
+  muted
+  playsinline
+  uk-video="autoplay: inview"
+></video>
 <div
   class="
     uk-section
@@ -12,8 +18,14 @@
     uk-light
   "
 >
-  <div class="uk-container">
-    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+  <div class="uk-container search-container">
+    <h4
+      class="
+        uk-text-uppercase uk-text-center uk-margin-top-large
+        searchheading
+        tagline1
+      "
+    >
       Search For
     </h4>
     <p class="uk-text-center uk-text-large uk-margin-medium-top tagline2">
@@ -144,16 +156,48 @@
   <div class="uk-container">
     <div class="row details">
       <div class="column">
-        <img src="/img/restaurant2.jpg" class="food1" style="width: 100%" />
-        <img src="/img/club2.jpg" class="food1" style="width: 100%" />
+        <div class="img-container" data-aos="fade-up">
+          <img src="/img/restaurant2.jpg" class="food1" style="width: 100%" />
+          <div class="overlay">
+            Restaurants, Fine Dining to Great value and Great food
+          </div>
+        </div>
+
+        <div class="img-container" data-aos="fade-up">
+          <img src="/img/club2.jpg" class="food1" style="width: 100%" />
+          <div class="overlay">
+            Nightclubs, the coolest and the best nights out
+          </div>
+        </div>
       </div>
       <div class="column">
-        <img src="/img/bar2.jpg" class="food1" style="width: 100%" />
-        <img src="/img/pub2.jpg" class="food1" style="width: 100%" />
-        <img src="/img/venues2.jpg" class="food1" style="width: 100%" />
+        <div class="img-container" data-aos="fade-up">
+          <img src="/img/bar2.jpg" class="food1" style="width: 100%" />
+          <div class="overlay">
+            Bars, Style Bars, Theme Bars and Sports Bars and everthing else in
+            between
+          </div>
+        </div>
+        <div class="img-container" data-aos="fade-up">
+          <img src="/img/pub2.jpg" class="food1" style="width: 100%" />
+          <div class="overlay">
+            Pubs, great selections and great atmospheres
+          </div>
+        </div>
+        <div class="img-container" data-aos="fade-up">
+          <img src="/img/venues2.jpg" class="food1" style="width: 100%" />
+          <div class="overlay">
+            Live Venues, Live Music from across the board
+          </div>
+        </div>
       </div>
       <div class="column">
-        <img src="/img/business2.jpg" class="food1" style="width: 100%" />
+        <div class="img-container" data-aos="fade-up">
+          <img src="/img/business2.jpg" class="food1" style="width: 100%" />
+          <div class="overlay">
+            Promote your business Uk wide with our great sales options
+          </div>
+        </div>
       </div>
       <!-- <div class="column"></div> -->
     </div>
@@ -225,7 +269,12 @@
         >Terms and Conditions</a
       >
 
-      <a href="/" class="uk-button-text uk-button">Privacy Policy</a>
+      <a href="/" class="uk-button-text uk-button uk-margin-large-right"
+        >Privacy Policy</a
+      >
+      <a href="/" class="uk-button-text uk-button"
+        >End User License Agreement</a
+      >
     </div>
   </div>
   <div>
