@@ -148,6 +148,15 @@ nav li a h4 {
   margin: 5px;
 }
 
+.foodsection img {
+  filter: grayscale(2);
+  transition: all 0.5s ease;
+}
+
+.foodsection img:hover {
+  filter: grayscale(0);
+}
+
 .row {
   display: -ms-flexbox; /* IE10 */
   display: flex;
@@ -182,18 +191,23 @@ nav li a h4 {
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .parallaxslider h2 {
-    font-size: 30px !important;
+    font-size: 20px !important;
   }
   .parallaxslider h1 {
-    font-size: 35px !important;
+    font-size: 25px !important;
   }
 
   .parallaxslider p {
-    font-size: 25px !important;
+    font-size: 15px !important;
     color: white !important;
     padding: 2px;
     margin-top: 2px;
   }
+
+  .foodrow {
+    margin-top: 100px;
+  }
+
   .column {
     -ms-flex: 50%;
     flex: 50%;
