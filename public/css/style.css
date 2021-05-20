@@ -220,6 +220,10 @@ nav li a h4 {
   color: rgb(24, 24, 24) !important;
 }
 
+.modal strong {
+  font-size: 24px !important;
+}
+
 footer {
   height: auto;
   background: #1d1b1b;
