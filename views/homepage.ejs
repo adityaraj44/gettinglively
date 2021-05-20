@@ -1,6 +1,56 @@
 <%- include('./partials/navbar.ejs'); %>
 
-<div class="uk-section-black parallaxslider">
+<!-- search -->
+
+<div
+  class="
+    uk-section
+    uk-section-large
+    uk-section-black
+    uk-section-auto
+    uk-search-section
+    uk-light
+  "
+>
+  <div class="uk-container">
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Search and Book
+    </h4>
+    <p class="uk-text-center uk-text-large uk-margin-medium-top tagline2">
+      1000s Of Restaurants, Bars, Clubs and Pubs
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-container uk-flex uk-flex-center uk-margin-large tagline4">
+      <a
+        class="uk-navbar-toggle uk-button-text uk-text-large"
+        href="#modal-full"
+        uk-icon="icon: search; ratio:3"
+        uk-toggle
+      >
+        <span class="uk-margin-medium-right search">Search</span></a
+      >
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div
+    class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle"
+    uk-height-viewport
+  >
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large">
+      <input
+        class="uk-search-input uk-input-large uk-text-center"
+        type="search"
+        placeholder="All of Manchester"
+        autofocus
+      />
+    </form>
+  </div>
+</div>
+
+<div class="uk-section-black uk-section-auto parallaxslider">
   <div
     class="uk-position-relative uk-visible-toggle uk-light"
     tabindex="-1"
@@ -78,104 +128,90 @@
 </div>
 
 <!-- ads -->
-<div class="uk-section uk-section-large uk-section-muted foodsection">
+<div class="uk-section uk-section-muted uk-padding-small foodsection">
+  <h4 class="uk-text-uppercase uk-text-center" data-aos="fade-down">
+    Keep Calm And Find A Great Place To Eat In Manchester
+  </h4>
   <div class="uk-container">
-    <div class="uk-text-center tilecustom" uk-grid>
-      <div class="uk-width-1-2@s">
-        <div
-          class="
-            card1
-            uk-card
-            uk-card-hover
-            uk-padding-small
-            uk-card-large
-            uk-card-default
-            uk-card-body
-          "
-          data-aos="fade-up-right"
-        >
-          <img src="/img/food1.jpg" alt="" />
+    <div class="row">
+      <div class="column">
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food1.jpg" class="food1" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food4.jpg" class="food2" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="uk-width-1-2@s">
-        <div
-          class="
-            card2
-            uk-card
-            uk-card-hover
-            uk-padding-small
-            uk-card-large
-            uk-card-default
-            uk-card-body
-          "
-          data-aos="fade-up-left"
-        >
-          <img src="/img/food2.jpg" alt="" />
+      <div class="column">
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food3.jpg" class="food3" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food8.jpg" class="food8" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="uk-width-1-2@s">
-        <div
-          class="
-            card3
-            uk-card
-            uk-card-hover
-            uk-padding-small
-            uk-card-large
-            uk-card-default
-            uk-card-body
-          "
-          data-aos="fade-up-right"
-        >
-          <img src="/img/food3.jpg" alt="" />
+      <div class="column">
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food6.jpg" class="food6" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food5.jpg" class="food5" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food9.jpg" class="food9" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
         </div>
       </div>
-
-      <div class="uk-width-1-2@s">
-        <div
-          class="
-            card4
-            uk-card
-            uk-card-hover
-            uk-padding-small
-            uk-card-large
-            uk-card-default
-            uk-card-body
-          "
-          data-aos="fade-up-left"
-        >
-          <img src="/img/food4.jpg" alt="" />
+      <div class="column">
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food7.jpg" class="food7" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="uk-width-1-2@s">
-        <div
-          class="
-            card5
-            uk-card
-            uk-card-hover
-            uk-padding-small
-            uk-card-large
-            uk-card-default
-            uk-card-body
-          "
-          data-aos="fade-up-right"
-        >
-          <img src="/img/food5.jpg" alt="" />
-        </div>
-      </div>
-      <div class="uk-width-1-2@s uk-transition-toggle">
-        <div
-          class="
-            card6
-            uk-card
-            uk-card-hover
-            uk-padding-small
-            uk-card-large
-            uk-card-default
-            uk-card-body
-          "
-          data-aos="fade-up-left"
-        >
-          <img src="/img/food6.jpg" alt="" />
+        <div class="uk-inline" data-aos="fade-up">
+          <img src="/img/food7.jpg" class="food7" style="width: 100%" />
+          <div class="uk-overlay uk-overlay-primary uk-position-bottom">
+            <p>
+              Default Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -184,7 +220,7 @@
 
 <!-- section form -->
 
-<div class="uk-section uk-section-large uk-section-muted uk-section-custom">
+<div class="uk-section uk-section-large uk-section-muted">
   <div class="uk-container">
     <h4
       class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1"
@@ -242,10 +278,11 @@
       />
     </div>
 
-    <div class="uk-width-1-1@s uk-text-center">
+    <div class="uk-width-1-1@s uk-text-center uk-light">
       <a href="/" class="uk-button uk-button-text uk-margin-large-right"
         >Terms and Conditions</a
       >
+
       <a href="/" class="uk-button-text uk-button">Privacy Policy</a>
     </div>
   </div>

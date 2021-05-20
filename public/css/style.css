@@ -13,6 +13,17 @@ body {
   overflow-x: hidden !important;
 }
 
+::-moz-selection {
+  /* Code for Firefox */
+  color: #ec4d37;
+  background: #1d1b1b;
+}
+
+::selection {
+  color: #ec4d37;
+  background: #1d1b1b;
+}
+
 h1,
 h2,
 h3,
@@ -20,10 +31,10 @@ h4,
 h5,
 h6 {
   font-family: "Shippori Mincho", serif !important;
-
+  margin: 5px;
   font-weight: bold !important;
   font-size: 80px;
-  line-height: 64px;
+  line-height: 85px;
 }
 
 nav {
@@ -68,10 +79,21 @@ nav li a h4 {
 .brand:hover {
   color: white;
 }
+.uk-search-section {
+  border-bottom: 8px solid white;
+}
+
+.uk-search-section .search {
+  font-size: 40px;
+}
 
 .uk-section-custom {
   height: 100vh;
   border-bottom: 8px solid #ec4d37;
+}
+
+.uk-section-auto {
+  height: auto;
 }
 
 .uk-button-custom {
@@ -111,11 +133,72 @@ nav li a h4 {
 }
 
 .foodsection {
-  background: url(/img/body.jpg) center;
+  background: url(/img/foodbody.jpg) center;
   background-repeat: no-repeat;
   background-size: cover;
   border-top: 8px solid #ec4d37;
   border-bottom: 8px solid #ec4d37;
+}
+
+.foodsection h4 {
+  padding: 10px;
+  font-size: 45px;
+  /* background-color: rgb(243, 243, 243); */
+  line-height: 50px;
+  margin: 5px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 10px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .parallaxslider h2 {
+    font-size: 30px !important;
+  }
+  .parallaxslider h1 {
+    font-size: 35px !important;
+  }
+
+  .parallaxslider p {
+    font-size: 25px !important;
+    color: white !important;
+    padding: 2px;
+    margin-top: 2px;
+  }
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
 }
 
 footer {
