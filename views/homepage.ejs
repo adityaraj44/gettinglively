@@ -43,10 +43,14 @@
     class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle"
     uk-height-viewport
   >
-    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <button
+      class="uk-modal-close-full noSelect"
+      type="button"
+      uk-close
+    ></button>
     <form class="uk-search uk-search-large">
       <input
-        class="uk-search-input uk-input-large uk-text-center"
+        class="uk-search-input noSelect uk-input-large uk-text-center"
         type="search"
         placeholder="All of Manchester"
         autofocus
@@ -223,7 +227,7 @@
             <div class="uk-form-control">
               <input
                 required
-                class="uk-input uk-form-large tagline3"
+                class="uk-input uk-form-large tagline3 noSelect"
                 type="text"
                 id="email"
                 name="email"
@@ -261,15 +265,17 @@
     <div class="uk-width-1-1@s uk-text-left uk-margin-large-left uk-light">
       <a
         href="#terms"
-        class="uk-button uk-button-text uk-margin-large-right"
+        class="uk-button uk-button-text uk-margin-large-right noSelect"
         uk-toggle
         >Terms and Conditions</a
       >
 
-      <a href="/" class="uk-button-text uk-button uk-margin-large-right"
+      <a
+        href="/"
+        class="uk-button-text uk-button uk-margin-large-right noSelect"
         >Privacy Policy</a
       >
-      <a href="/" class="uk-button-text uk-button"
+      <a href="/" class="uk-button-text uk-button noSelect"
         >End User License Agreement</a
       >
     </div>
