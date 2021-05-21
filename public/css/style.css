@@ -79,9 +79,6 @@ nav li a h4 {
 .brand:hover {
   color: white;
 }
-.uk-search-section {
-  border-bottom: 8px solid #ec4d37;
-}
 
 .uk-search-section .search {
   font-size: 40px;
@@ -130,10 +127,6 @@ nav li a h4 {
 }
 
 .detailsection {
-  background: url(/img/foodbody.jpeg) center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
   border-bottom: 8px solid #ec4d37;
 }
 
@@ -143,6 +136,11 @@ nav li a h4 {
   /* background-color: rgb(243, 243, 243); */
   line-height: 50px;
   margin: 5px;
+}
+
+.detailsection ul li h1 {
+  font-size: 18px !important;
+  color: white !important;
 }
 
 .row {
@@ -277,4 +275,8 @@ footer p {
 
 .bartext {
   padding: 0 15px;
+}
+
+.borderBottom {
+  border-bottom: 8px solid #ec4d37;
 }
