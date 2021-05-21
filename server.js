@@ -5,9 +5,22 @@ const expressLayouts = require("express-ejs-layouts");
 const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 
-// sentry tracking
+// dotenv
+dotenv.config({
+  path: "./config/config.env",
+});
+
+const app = express();
+
+// sentry application monitoring
 Sentry.init({
-  dsn: "https://524ca26785ee4060a7ccd38662244927@o697793.ingest.sentry.io/5776578",
+  dsn: "https://ca42aebb414d463dbaee1f6be0271272@o697793.ingest.sentry.io/5777246",
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+    // enable Express.js middleware tracing
+    new Tracing.Integrations.Express({ app }),
+  ],
 
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
@@ -15,27 +28,27 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-const transaction = Sentry.startTransaction({
-  op: "test",
-  name: "First Test",
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
+app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
+
+// All controllers should live here
+app.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My first Sentry error!");
 });
 
-setTimeout(() => {
-  try {
-    foo();
-  } catch (e) {
-    Sentry.captureException(e);
-  } finally {
-    transaction.finish();
-  }
-}, 99);
+// The error handler must be before any other error middleware and after all controllers
+app.use(Sentry.Handlers.errorHandler());
 
-// dotenv
-dotenv.config({
-  path: "./config/config.env",
+// Optional fallthrough error handler
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
 });
-
-const app = express();
 
 // body parser
 app.use(
@@ -57,7 +70,9 @@ app.get("/", (req, res) => {
   res.render("homepage");
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`.green.bold);
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${port}`.green.bold
+  );
 });
