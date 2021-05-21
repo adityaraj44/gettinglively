@@ -66,9 +66,9 @@ app.use(expressLayouts);
 app.set("layout", "layouts/layout");
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  res.render("homepage");
-});
+// routes
+app.use("/", require("./routes/index"));
+app.use((req, res) => res.send("Page in development or not found"));
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
