@@ -80,7 +80,7 @@ nav li a h4 {
   color: white;
 }
 .uk-search-section {
-  border-bottom: 8px solid white;
+  border-bottom: 8px solid #ec4d37;
 }
 
 .uk-search-section .search {
@@ -109,6 +109,10 @@ nav li a h4 {
   margin-left: 30px;
 }
 
+.parallaxslider {
+  border-bottom: 8px solid #ec4d37;
+}
+
 .parallaxslider img {
   background: #000;
   opacity: 0.6;
@@ -129,7 +133,7 @@ nav li a h4 {
   background: url(/img/foodbody.jpeg) center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-top: 8px solid #ec4d37;
+
   border-bottom: 8px solid #ec4d37;
 }
 
@@ -161,6 +165,57 @@ nav li a h4 {
   margin-top: 10px;
   vertical-align: middle;
   width: 100%;
+}
+
+.modal {
+  color: rgb(24, 24, 24) !important;
+}
+
+.modal strong {
+  font-size: 24px !important;
+}
+
+footer {
+  height: auto;
+  background: #1d1b1b;
+  background: url(/img/body3.jpeg) center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+footer a {
+  text-decoration: transparent !important;
+  color: white !important;
+  font-size: 20px;
+}
+
+footer p {
+  /* text-decoration: transparent !important; */
+  color: white !important;
+  font-size: 20px;
+  margin: 15px !important;
+}
+
+/* overlay on the umage */
+.img-container {
+  position: relative;
+}
+.overlay {
+  position: absolute !important;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.overlay:hover {
+  padding: 30px;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
@@ -216,56 +271,10 @@ nav li a h4 {
   }
 }
 
-.modal {
-  color: rgb(24, 24, 24) !important;
+.uk-section-bar {
+  border-bottom: 8px solid #ec4d37;
 }
 
-.modal strong {
-  font-size: 24px !important;
-}
-
-footer {
-  height: auto;
-  background: #1d1b1b;
-  background: url(/img/body3.jpeg) center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-footer a {
-  text-decoration: transparent !important;
-  color: white !important;
-  font-size: 20px;
-}
-
-footer p {
-  /* text-decoration: transparent !important; */
-  color: white !important;
-  font-size: 20px;
-  margin: 15px !important;
-}
-
-@media (max-width: 768px) {
-}
-
-/* overlay on the umage */
-.img-container {
-  position: relative;
-}
-.overlay {
-  position: absolute !important;
-  bottom: 0;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1;
-  width: 100%;
-  transition: 0.5s ease;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
-}
-
-.overlay:hover {
-  padding: 30px;
+.bartext {
+  padding: 0 15px;
 }

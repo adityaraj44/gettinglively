@@ -1,0 +1,179 @@
+<%- include('./partials/navbar.ejs'); %>
+
+<div class="uk-section uk-section-bar uk-section-muted uk-section-auto">
+  <div class="uk-container">
+    <ul class="uk-breadcrumb">
+      <li><a href="/" class="uk-button uk-button-text noSelect">Home</a></li>
+      <li>
+        <a href="/bars" class="uk-button uk-button-text noSelect">Bars</a>
+      </li>
+    </ul>
+
+    <h4 class="tagline1 uk-text-center uk-margin-medium-top">BARS</h4>
+    <hr class="uk-divider-icon" />
+    <p
+      class="
+        uk-text-center@s uk-text-medium uk-margin-medium-top
+        tagline2
+        bartext
+      "
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, quibusdam?
+      Adipisci laboriosam dicta esse doloremque officia unde dignissimos
+      aliquid! Aut placeat et blanditiis officiis laudantium dignissimos non
+      ratione, illum recusandae? Adipisci, praesentium itaque consectetur nam,
+      cumque eum nisi vitae quos nemo
+    </p>
+  </div>
+</div>
+
+<!-- slider section -->
+<div class="uk-section-auto uk-section-black parallaxslider">
+  <div class="uk-container">
+    <div
+      class="uk-position-relative uk-visible-toggle uk-light"
+      tabindex="-1"
+      uk-slideshow="animation: push"
+    >
+      <ul class="uk-slideshow-items">
+        <li>
+          <img src="/img/bars/bar1.jpg" alt="" uk-cover />
+          <div class="uk-position-center uk-position-small uk-text-center">
+            <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">
+              Permanently Insurmountable
+            </h2>
+            <p
+              class="uk-text-large uk-text-capitalize"
+              uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0"
+            >
+              when life gives you lemons grab tequila and salt
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="/img/bars/bar2.jpg" alt="" uk-cover />
+          <div class="uk-position-center uk-position-small uk-text-center">
+            <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">
+              Impassable Golden
+            </h2>
+            <p
+              class="uk-text-large uk-text-capitalize"
+              uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0"
+            >
+              we all deserve an alocholiday
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="/img/bars/bar3.jpg" alt="" uk-cover />
+          <div class="uk-position-center uk-position-small uk-text-center">
+            <h2 uk-slideshow-parallax="y: -50,0,0; opacity: 1,1,0">
+              Black Subterminal
+            </h2>
+            <p
+              class="uk-text-large uk-text-capitalize"
+              uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0"
+            >
+              i followed my heart and it led me to the bar
+            </p>
+          </div>
+        </li>
+      </ul>
+
+      <a
+        class="uk-position-center-left uk-position-small uk-hidden-hover"
+        href="#"
+        uk-slidenav-previous
+        uk-slideshow-item="previous"
+      ></a>
+      <a
+        class="uk-position-center-right uk-position-small uk-hidden-hover"
+        href="#"
+        uk-slidenav-next
+        uk-slideshow-item="next"
+      ></a>
+    </div>
+  </div>
+</div>
+
+<!--  search for bars -->
+<!-- search -->
+<div
+  class="uk-section uk-section-large uk-section-auto uk-search-section uk-dark"
+>
+  <div class="uk-container search-container">
+    <h4
+      class="
+        uk-text-uppercase uk-text-center uk-margin-top-large
+        searchheading
+        tagline1
+      "
+      data-aos="fade-up"
+    >
+      Search For
+    </h4>
+    <p
+      class="uk-text-center uk-text-large uk-margin-medium-top tagline3"
+      data-aos="fade-up"
+    >
+      Bars all over UK
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-margin-large tagline4 uk-text-center">
+      <form class="uk-search uk-search-large" data-aos="fade-down">
+        <span uk-search-icon></span>
+        <input
+          class="uk-search-input"
+          type="search"
+          placeholder="Search for Bars"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+<!-- search section ends here -->
+<div class="uk-section uk-section-auto uk-section-black uk-light">
+  <div class="uk-container">
+    <h1 class="uk-text-center@s">Discover The Best Bars In UK</h1>
+    <hr class="uk-divider-icon" />
+  </div>
+</div>
+
+<!-- footer -->
+<!-- footer -->
+<%- include('./partials/modals.ejs'); %>
+<footer class="uk-section uk-section-black">
+  <div class="uk-text-center" uk-grid>
+    <div class="uk-width-1-1@s">
+      <img
+        class="uk-border-circle"
+        width="250"
+        height="250"
+        src="/img/livelybrand.png"
+      />
+    </div>
+
+    <div class="uk-width-1-1@s uk-text-left uk-margin-large-left uk-light">
+      <a
+        href="#terms"
+        class="uk-button uk-button-text uk-margin-large-right noSelect"
+        uk-toggle
+        >Terms and Conditions</a
+      >
+
+      <a
+        href="/"
+        class="uk-button-text uk-button uk-margin-large-right noSelect"
+        >Privacy Policy</a
+      >
+      <a href="/" class="uk-button-text uk-button noSelect"
+        >End User License Agreement</a
+      >
+    </div>
+  </div>
+  <div class="uk-margin-medium-top">
+    <p class="uk-text-medium uk-text-center uk-margin-medium">
+      © 2021 Getting Lively. All Rights Reserved
+    </p>
+  </div>
+</footer>

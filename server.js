@@ -68,6 +68,7 @@ app.set("view engine", "ejs");
 
 // routes
 app.use("/", require("./routes/index"));
+app.use("/bars", require("./routes/bars"));
 app.use((req, res) => res.send("Page in development or not found"));
 
 const port = process.env.PORT || 8000;
