@@ -25,7 +25,7 @@ router.get("/register", ensureGuest, (req, res) => {
 });
 
 // post register
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET);
   const { name, email, password } = req.body;
   let errors = [];
@@ -44,7 +44,7 @@ router.post("/register", (req, res) => {
       password,
     });
   } else {
-    User.findOne({ email: email }).then((user) => {
+    await User.findOne({ email: email }).then((user) => {
       if (user) {
         errors.push({ msg: "Email already exists" });
         res.render("signup", {
@@ -61,12 +61,16 @@ router.post("/register", (req, res) => {
           confirmationCode: verifytoken,
         });
 
-        newUser.save().then((user) => {
-          req.flash(
+        newUser.save().then(async (user) => {
+          await req.flash(
             "success_msg",
             "You are now registered! Please check your email for verification"
           );
-          res.redirect("/users/register");
+          req.flash(
+            "error_msg",
+            "You can not login without verifying your email!"
+          );
+          res.redirect("/users/login");
         });
       }
     });
