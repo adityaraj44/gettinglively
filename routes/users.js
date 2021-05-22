@@ -97,7 +97,7 @@ router.post("/register", (req, res) => {
 });
 
 // verify user email
-router.get("/verify/:token", (req, res) => {
+router.get("/verify/:token", ensureGuest, (req, res) => {
   User.findOne({
     confirmationCode: req.params.token,
   })
