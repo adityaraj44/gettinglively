@@ -6,6 +6,7 @@ const { ensureGuest } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const async = require("async");
+const jwt = require("jsonwebtoken");
 // user model
 const User = require("../models/User");
 
@@ -25,6 +26,7 @@ router.get("/register", ensureGuest, (req, res) => {
 
 // post register
 router.post("/register", (req, res) => {
+  const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET);
   const { name, email, password } = req.body;
   let errors = [];
   if (!name || !email || !password) {
@@ -56,30 +58,69 @@ router.post("/register", (req, res) => {
           name,
           email,
           password,
+          confirmationCode: verifytoken,
         });
 
         newUser.save().then((user) => {
-          req.flash("success_msg", "You are now registered");
-          res.redirect("/users/login");
+          req.flash(
+            "success_msg",
+            "You are now registered! Please check your email for verification"
+          );
+          res.redirect("/users/register");
         });
-
-        // // hash password
-        // bcrypt.genSalt(10, (err, salt) => {
-        //   bcrypt.hash(newUser.password, salt, (err, hash) => {
-        //     if (err) throw err;
-        //     newUser.password = hash;
-        //     newUser
-        //       .save()
-        //       .then((user) => {
-        //         req.flash("success_msg", "You are now registered");
-        //         res.redirect("/users/login");
-        //       })
-        //       .catch((err) => console.log(err));
-        //   });
-        // });
       }
     });
   }
+  // nodemailer
+  var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "punk43496@gmail.com",
+      pass: "punk43496",
+    },
+  });
+  var mailOptions = {
+    to: email,
+    from: "GettingLively.com",
+    subject: "Getting Lively Email Verification",
+    text:
+      "You are receiving this because you need to verify your email.\n\n" +
+      "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+      "http://" +
+      req.headers.host +
+      "/users/verify/" +
+      verifytoken +
+      "\n\n" +
+      "If you did not request this, please ignore this email.\n",
+  };
+  smtpTransport.sendMail(mailOptions).catch((err) => console.log(err));
+});
+
+// verify user email
+router.get("/verify/:token", (req, res) => {
+  User.findOne({
+    confirmationCode: req.params.token,
+  })
+    .then((user) => {
+      req.flash("success_msg", "Account verified successfully!");
+      if (!user) {
+        req.flash("error_msg", "User not found");
+      }
+
+      user.status = "Active";
+
+      user.save((err) => {
+        res.render("verify", {
+          layout: "layouts/auth",
+        });
+
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+      });
+    })
+    .catch((e) => console.log("error", e));
 });
 
 // login handle
