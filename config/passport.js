@@ -10,7 +10,7 @@ module.exports = function (passport) {
       User.findOne({
         email: email,
       }).then((user) => {
-        if (user.status != "Active") {
+        if (user && user.status != "Active") {
           return done(null, false, { message: "That email is not verified" });
         }
         if (!user) {
