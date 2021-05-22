@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const colors = require("colors");
 const dotenv = require("dotenv");
 const expressLayouts = require("express-ejs-layouts");
-const helmet = require("helmet");
 const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 const connectDB = require("./config/db");
@@ -64,9 +63,6 @@ app.use(function onError(err, req, res, next) {
   res.statusCode = 500;
   res.end(res.sentry + "\n");
 });
-
-// helmet
-app.use(helmet());
 
 // express session
 // express session
