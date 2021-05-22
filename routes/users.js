@@ -98,7 +98,7 @@ router.get("/logout", (req, res) => {
 });
 
 // forgotpass
-router.get("/forgot", (req, res) => {
+router.get("/forgot", ensureGuest, (req, res) => {
   res.render("forgotpassword", {
     layout: "layouts/auth",
   });
@@ -173,7 +173,7 @@ router.post("/forgot", (req, res) => {
 });
 
 // reset page
-router.get("/reset/:token", function (req, res) {
+router.get("/reset/:token", ensureGuest, function (req, res) {
   User.findOne(
     {
       resetPasswordToken: req.params.token,
