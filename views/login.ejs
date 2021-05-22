@@ -1,0 +1,66 @@
+<div class="uk-container">
+  <div
+    class="
+      uk-card
+      uk-card-hover
+      uk-card-default
+      uk-text-center
+      uk-width-1-1
+      uk-position-center
+      uk-card-large
+      uk-margin-small
+    "
+  >
+    <div class="uk-card-header">
+      <h3 class="uk-card-title uk-margin-bottom uk-text-uppercase">Login</h3>
+    </div>
+    <div class="uk-card-body">
+      <form class="uk-width-1-1" method="POST" action="/users/login">
+        <div class="uk-form-stacked">
+          <div class="uk-margin-medium">
+            <div class="uk-form-control">
+              <input
+                required
+                class="uk-input uk-form-large noSelect"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+              />
+            </div>
+            <div class="uk-form-control">
+              <input
+                required
+                class="uk-input uk-form-large noSelect"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+          <div class="uk-margin-medium uk-text-center">
+            <div class="uk-form-control">
+              <button type="submit" class="uk-button uk-button-custom noSelect">
+                Login
+              </button>
+            </div>
+          </div>
+          <%- include('./partials/errors.ejs'); %>
+          <a
+            href="/users/forgot"
+            class="uk-button uk-button-text uk-text-medium"
+            >Forgot Password ?</a
+          >
+        </div>
+      </form>
+    </div>
+    <div class="uk-card-footer uk-text-center">
+      <a
+        href="/users/register"
+        class="uk-button uk-button-text uk-text-center@s noSelect"
+        >Create an account</a
+      >
+    </div>
+  </div>
+</div>

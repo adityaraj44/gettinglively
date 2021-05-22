@@ -13,10 +13,33 @@
       <input
         class="uk-search-input noSelect uk-input-large uk-text-center"
         type="search"
+        id="searchinput"
         placeholder="All of UK"
         autofocus
       />
     </form>
+  </div>
+</div>
+
+<!-- logout modal -->
+<div id="userslogout" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <h2 class="uk-modal-title">Are you sure?</h2>
+    <p>Changes will be saved</p>
+    <p class="uk-text-right">
+      <button
+        class="uk-button uk-button-text uk-modal-close noSelect"
+        type="button"
+      >
+        Cancel
+      </button>
+      <a
+        href="/users/logout"
+        class="uk-button noSelect uk-button-text uk-margin-small-left"
+        type="button"
+        >Logout</a
+      >
+    </p>
   </div>
 </div>
 

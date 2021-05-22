@@ -1,14 +1,28 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const colors = require("colors");
 const dotenv = require("dotenv");
 const expressLayouts = require("express-ejs-layouts");
 const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
+const connectDB = require("./config/db");
+const morgan = require("morgan");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const passport = require("passport");
+const flash = require("connect-flash");
+const methodOverride = require("method-override");
 
 // dotenv
 dotenv.config({
   path: "./config/config.env",
 });
+
+// passport config
+require("./config/passport")(passport);
+
+// config db
+connectDB();
 
 const app = express();
 
@@ -50,6 +64,37 @@ app.use(function onError(err, req, res, next) {
   res.end(res.sentry + "\n");
 });
 
+// express session
+// express session
+app.use(
+  session({
+    secret: "memyself",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
+
+// flash message
+app.use(flash());
+
+// global var
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+});
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// morgan logger
+// using morgan for logging
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
 // body parser
 app.use(
   express.urlencoded({
@@ -57,6 +102,18 @@ app.use(
   })
 );
 app.use(express.json());
+
+// method overrride
+app.use(
+  methodOverride((req, res) => {
+    if (req.body && typeof req.body === "object" && "_method" in req.body) {
+      // look in urlencoded POST bodies and delete it
+      var method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
 
 // static files server
 app.use(express.static(`${__dirname}/public`));
@@ -68,8 +125,10 @@ app.set("view engine", "ejs");
 
 // routes
 app.use("/", require("./routes/index"));
+app.use("/users", require("./routes/users"));
+
 app.use("/bars", require("./routes/bars"));
-app.use((req, res) => res.send("Page in development or not found"));
+app.use((req, res) => res.render("errors/pagenotfound"));
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

@@ -138,12 +138,6 @@ nav li a h4 {
   margin: 5px;
 }
 
-.detailsection ul li h1 {
-  font-size: 18px !important;
-  line-height: 20px;
-  color: white !important;
-}
-
 .row {
   display: -ms-flexbox; /* IE10 */
   display: flex;
@@ -280,4 +274,8 @@ footer p {
 
 .borderBottom {
   border-bottom: 8px solid #ec4d37;
+}
+
+.error {
+  color: black;
 }

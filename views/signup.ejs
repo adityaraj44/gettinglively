@@ -1,0 +1,73 @@
+<div class="uk-container">
+  <div
+    class="
+      uk-card
+      uk-card-hover
+      uk-card-default
+      uk-text-center
+      uk-width-1-1
+      uk-position-center
+      uk-card-large
+    "
+  >
+    <div class="uk-card-header">
+      <h3 class="uk-card-title uk-margin-bottom uk-text-uppercase">Register</h3>
+    </div>
+    <div class="uk-card-body">
+      <form class="uk-width-1-1" method="POST" action="/users/register">
+        <div class="uk-form-stacked">
+          <div class="uk-margin-medium">
+            <div class="uk-form-control">
+              <input
+                required
+                class="uk-input uk-form-large noSelect"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                value="<%= typeof name != 'undefined' ? name : '' %>"
+              />
+            </div>
+            <div class="uk-form-control">
+              <input
+                required
+                class="uk-input uk-form-large noSelect"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                value="<%= typeof email != 'undefined' ? email : '' %>"
+              />
+            </div>
+            <div class="uk-form-control">
+              <input
+                required
+                class="uk-input uk-form-large noSelect"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                value="<%= typeof password != 'undefined' ? password : '' %>"
+              />
+            </div>
+          </div>
+          <div class="uk-margin-medium uk-text-center">
+            <div class="uk-form-control">
+              <button type="submit" class="uk-button uk-button-custom noSelect">
+                Register
+              </button>
+            </div>
+          </div>
+          <%- include('./partials/errors.ejs'); %>
+        </div>
+      </form>
+    </div>
+    <div class="uk-card-footer">
+      <a
+        href="/users/login"
+        class="uk-button uk-button-text uk-text-center uk-margin-large noSelect"
+        >I already have an account</a
+      >
+    </div>
+  </div>
+</div>
