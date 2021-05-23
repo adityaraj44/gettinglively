@@ -8,7 +8,10 @@ router.get("/", ensureAuthenticated, (req, res) => {
 });
 
 router.get("/home", ensureAuthenticated, (req, res) => {
-  res.render("homepage");
+  res.render("homepage", {
+    user: req.user,
+    helper: require("../helpers/ejs"),
+  });
 });
 
 module.exports = router;

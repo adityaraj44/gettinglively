@@ -59,6 +59,7 @@ router.post("/register", async (req, res) => {
           email,
           password,
           confirmationCode: verifytoken,
+          role: "basic",
         });
 
         newUser.save().then(async (user) => {
@@ -79,8 +80,8 @@ router.post("/register", async (req, res) => {
   var smtpTransport = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "punk43496@gmail.com",
-      pass: "punk43496",
+      user: "aatishraj123006@gmail.com",
+      pass: "sahilkumar@123",
     },
   });
   var mailOptions = {
@@ -181,8 +182,8 @@ router.post("/forgot", (req, res) => {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "punk43496@gmail.com",
-            pass: "punk43496",
+            user: "aatishraj123006@gmail.com",
+            pass: "sahilkumar@123",
           },
         });
         var mailOptions = {
@@ -280,8 +281,8 @@ router.post("/reset/:token", function (req, res) {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "punk43496@gmail.com",
-            pass: "punk43496",
+            user: "aatishraj123006@gmail.com",
+            pass: "sahilkumar@123",
           },
         });
         var mailOptions = {

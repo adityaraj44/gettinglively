@@ -1,0 +1,42 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Admin Dashboard
+    </h4>
+    <hr class="uk-divider-icon" />
+    <div
+      class="
+        uk-child-width-1-1
+        uk-child-width-1-2@s
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default uk-card-body">
+          <h3 class="uk-card-title uk-text-center uk-margin-medium">
+            Users Joined
+          </h3>
+          <p><canvas id="myChart"></canvas></p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default uk-card-body">
+          <h3 class="uk-card-title uk-text-center uk-margin-medium">
+            Memberships
+          </h3>
+          <p><canvas id="myChart2"></canvas></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

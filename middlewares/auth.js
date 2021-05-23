@@ -1,3 +1,5 @@
+const User = require("../models/User");
+
 module.exports = {
   ensureAuthenticated: function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -12,6 +14,14 @@ module.exports = {
       res.redirect("/home");
     } else {
       return next();
+    }
+  },
+
+  ensureAdmin: (req, res, next) => {
+    if (req.user.role === "admin") {
+      return next();
+    } else {
+      res.redirect("/home");
     }
   },
 };

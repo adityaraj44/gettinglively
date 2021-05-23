@@ -82,6 +82,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
+  res.locals.user = req.user || null;
   next();
 });
 
@@ -128,6 +129,7 @@ app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 
 app.use("/bars", require("./routes/bars"));
+app.use("/admin", require("./routes/admin"));
 app.use((req, res) => res.render("errors/pagenotfound"));
 
 const port = process.env.PORT || 8000;

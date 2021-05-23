@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema(
       enum: ["Pending", "Active"],
       default: "Pending",
     },
+    role: {
+      type: String,
+      enum: ["basic", "member", "admin"],
+      default: "basic",
+    },
     confirmationCode: {
       type: String,
       unique: true,
