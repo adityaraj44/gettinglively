@@ -16,8 +16,8 @@ const data = {
   datasets: [
     {
       label: "My First dataset",
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "#ec4d37",
+      borderColor: "#ec4d37",
       data: [0, 10, 5, 2, 20, 30, 45],
     },
   ],
@@ -33,3 +33,5 @@ const config = {
 
 var myChart = new Chart(document.getElementById("myChart"), config);
 var myChart2 = new Chart(document.getElementById("myChart2"), config);
+var myChart3 = new Chart(document.getElementById("myChart3"), config);
+var myChart4 = new Chart(document.getElementById("myChart4"), config);

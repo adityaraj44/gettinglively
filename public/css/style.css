@@ -53,7 +53,7 @@ nav li a h4 {
 }
 
 .uk-offcanvas-bar li a {
-  color: #ec4d37 !important;
+  /* color: #ec4d37 !important; */
   font-size: 25px;
   font-weight: 700;
 }
