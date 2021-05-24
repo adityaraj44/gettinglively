@@ -1,21 +1,21 @@
 <% if(typeof errors != 'undefined') { %> <% errors.forEach(function(error){ %>
 <div class="uk-alert-danger" uk-alert>
-  <a class="uk-alert-close" uk-close></a>
+  <a class="uk-alert-close noSelect" uk-close></a>
   <p><%- error.msg %></p>
 </div>
 <% }); %> <% } %> <% if(success_msg != '') { %>
 <div class="uk-alert-success" uk-alert>
-  <a class="uk-alert-close" uk-close></a>
+  <a class="uk-alert-close noSelect" uk-close></a>
   <p><%- success_msg %></p>
 </div>
 <% } %> <% if(error_msg != '') { %>
 <div class="uk-alert-danger" uk-alert>
-  <a class="uk-alert-close" uk-close></a>
+  <a class="uk-alert-close noSelect" uk-close></a>
   <p><%- error_msg %></p>
 </div>
 <% } %> <% if(warning_msg != '') { %>
 <div class="uk-alert-warning" uk-alert>
-  <a class="uk-alert-close" uk-close></a>
+  <a class="uk-alert-close noSelect" uk-close></a>
   <p><%- warning_msg %></p>
 </div>
 <% } %>

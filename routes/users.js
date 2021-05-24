@@ -26,7 +26,9 @@ router.get("/register", ensureGuest, (req, res) => {
 
 // post register
 router.post("/register", async (req, res) => {
-  const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET);
+  const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET, {
+    expiresIn: "1d",
+  });
   const { name, email, password } = req.body;
   let errors = [];
   if (!name || !email || !password) {
@@ -62,49 +64,43 @@ router.post("/register", async (req, res) => {
           role: "basic",
         });
 
-        // nodemailer
-        var smtpTransport = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
-          },
+        newUser.save().then(async (user) => {
+          req.flash(
+            "success_msg",
+            "You are now registered! Please check your email for verification"
+          );
+          req.flash(
+            "error_msg",
+            "You can not login without verifying your email!"
+          );
+          res.redirect("/users/login");
         });
-        var mailOptions = {
-          to: email,
-          from: "Gettinglively.com",
-          subject: "Getting Lively Email Verification",
-          text:
-            "You are receiving this because you need to verify your email.\n\n" +
-            "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
-            "http://" +
-            req.headers.host +
-            "/users/verify/" +
-            verifytoken +
-            "\n\n" +
-            "If you did not request this, please ignore this email.\n",
-        };
-        smtpTransport
-          .sendMail(mailOptions)
-          .then(
-            newUser.save().then(async (user) => {
-              req.flash(
-                "success_msg",
-                "You are now registered! Please check your email for verification"
-              );
-              req.flash(
-                "error_msg",
-                "You can not login without verifying your email!"
-              );
-              res.redirect("/users/login");
-            })
-          )
-          .catch((err) => {
-            console.log(err);
-          });
       }
     });
   }
+  // nodemailer
+  var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "gettinglivelytest@gmail.com",
+      pass: "sahilkumar@123",
+    },
+  });
+  var mailOptions = {
+    to: email,
+    from: "GettingLively.com",
+    subject: "Getting Lively Email Verification",
+    text:
+      "You are receiving this because you need to verify your email.\n\n" +
+      "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+      "http://" +
+      req.headers.host +
+      "/users/verify/" +
+      verifytoken +
+      "\n\n" +
+      "If you did not request this, please ignore this email.\n",
+  };
+  smtpTransport.sendMail(mailOptions).catch((err) => console.log(err));
 });
 
 // verify user email
@@ -119,7 +115,6 @@ router.get("/verify/:token", ensureGuest, (req, res) => {
       }
 
       user.status = "Active";
-      user.confirmationCode = undefined;
 
       user.save((err) => {
         res.render("verify", {
@@ -139,6 +134,7 @@ router.get("/verify/:token", ensureGuest, (req, res) => {
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/home",
+    failureMessage: req.flash("loginError_msg", "Incorrect Credentails"),
     failureRedirect: "/users/login",
   })(req, res, next);
 });
