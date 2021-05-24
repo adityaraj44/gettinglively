@@ -119,6 +119,7 @@ router.get("/verify/:token", ensureGuest, (req, res) => {
       }
 
       user.status = "Active";
+      user.confirmationCode = undefined;
 
       user.save((err) => {
         res.render("verify", {
@@ -138,7 +139,6 @@ router.get("/verify/:token", ensureGuest, (req, res) => {
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/home",
-    failureMessage: req.flash("error_msg", "Email or Password is incorrect"),
     failureRedirect: "/users/login",
   })(req, res, next);
 });

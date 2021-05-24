@@ -229,7 +229,7 @@
       </h4>
       <hr class="uk-divider-icon" data-aos="fade-down" />
       <div class="uk-container uk-flex uk-flex-center uk-margin-large">
-        <form class="uk-width-1-2">
+        <form class="uk-width-1-2" action="/emailupdates" method="POST">
           <div class="uk-form-stacked">
             <div class="uk-margin-medium">
               <label class="uk-form-label" for="email"
@@ -243,24 +243,27 @@
               <div class="uk-form-control">
                 <input
                   required
-                  class="uk-input uk-form-large tagline3 noSelect"
+                  class="uk-input uk-form-large noSelect"
                   type="text"
                   id="email"
                   name="email"
                   placeholder="Email Address"
+                  
                 />
               </div>
             </div>
+            <%- include('./partials/errors.ejs'); %>
             <div class="uk-margin-medium uk-text-center">
               <div class="uk-form-control" data-aos="fade-down">
                 <input
                   type="submit"
-                  class="uk-button uk-button-custom noSelect tagline4"
+                  class="uk-button uk-button-custom noSelect tagline2"
                 />
               </div>
             </div>
           </div>
         </form>
+        
       </div>
     </div>
   </div>

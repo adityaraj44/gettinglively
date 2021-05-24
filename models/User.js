@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema(
       enum: ["basic", "member", "admin"],
       default: "basic",
     },
+    emailUpdates: {
+      type: String,
+      enum: ["in", "out"],
+      default: "out",
+    },
     confirmationCode: {
       type: String,
       unique: true,
