@@ -1,0 +1,11 @@
+<% if(upload_msg != '') { %>
+<div class="uk-alert-success" uk-alert>
+  <a class="uk-alert-close noSelect" uk-close></a>
+  <p><%- upload_msg %></p>
+</div>
+<% } %> <% if(errorupload_msg != '') { %>
+<div class="uk-alert-danger" uk-alert>
+  <a class="uk-alert-close noSelect" uk-close></a>
+  <p><%- errorupload_msg %></p>
+</div>
+<% } %>

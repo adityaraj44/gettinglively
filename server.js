@@ -12,6 +12,7 @@ const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 const flash = require("connect-flash");
 const methodOverride = require("method-override");
+const fileUpload = require("express-fileupload");
 
 // dotenv
 dotenv.config({
@@ -25,6 +26,9 @@ require("./config/passport")(passport);
 connectDB();
 
 const app = express();
+
+// file upload
+app.use(fileUpload());
 
 // sentry application monitoring
 Sentry.init({
@@ -84,6 +88,8 @@ app.use((req, res, next) => {
   res.locals.error_msg = req.flash("error_msg");
   res.locals.warning_msg = req.flash("warning_msg");
   res.locals.loginError_msg = req.flash("loginError_msg");
+  res.locals.upload_msg = req.flash("upload_msg");
+  res.locals.errorupload_msg = req.flash("errorupload_msg");
   res.locals.user = req.user || null;
   next();
 });

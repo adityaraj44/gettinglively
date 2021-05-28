@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 const User = require("../models/User");
+const Post = require("../models/Post");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
+
+// get request to the /admincreate
 
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
@@ -16,6 +20,8 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   }
 });
 
+// post /admincreate/emailUpdates
+// desc Post emails
 router.post(
   "/emailupdates",
   ensureAuthenticated,
@@ -63,5 +69,33 @@ router.post(
     }
   }
 );
+
+// post data to all the view pages
+// /createPosts
+router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
+  try {
+    const { name, desc, typeOfPlace, typeOfVenue } = req.body;
+    let image = req.files.image;
+    image.mv(
+      path.resolve(__dirname, "..", "public/img", image.name),
+      async (error) => {
+        await Post.create({
+          name,
+          desc: desc.replace(/(<([^>]+)>)/gi, ""),
+          typeOfPlace,
+          typeOfVenue,
+          user: req.user.id,
+          image: "/img/" + image.name,
+        }).then((post) => {
+          req.flash("upload_msg", "Post sent for verification!");
+          res.redirect("/admincreate");
+        });
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.render("errors/500");
+  }
+});
 
 module.exports = router;
