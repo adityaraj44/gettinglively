@@ -7,6 +7,12 @@ ScrollReveal().reveal(".tagline4", { delay: 1150 });
 //aos
 AOS.init();
 
+// text editor
+CKEDITOR.replace("body", {
+  plugins:
+    "wysiwygarea, toolbar, basicstyles,link,image,emoji,clipboard,colorbutton,mentions,undo",
+});
+
 // charts
 
 // <block:setup:1>

@@ -132,6 +132,7 @@ app.use("/users", require("./routes/users"));
 app.use("/emailupdates", require("./routes/emailsub"));
 app.use("/bars", require("./routes/bars"));
 app.use("/admin", require("./routes/admin"));
+app.use("/admincreate", require("./routes/create"));
 app.use((req, res) => res.render("errors/pagenotfound"));
 
 const port = process.env.PORT || 8000;
