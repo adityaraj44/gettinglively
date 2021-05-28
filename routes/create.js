@@ -79,6 +79,18 @@ router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
     image.mv(
       path.resolve(__dirname, "..", "public/img", image.name),
       async (error) => {
+        if (desc.length < 500) {
+          req.flash(
+            "errorupload_msg",
+            "Description must be atleast 500 characters"
+          );
+          res.render("admin/create", {
+            layout: "layouts/layout",
+            name,
+            desc,
+            typeOfVenue,
+          });
+        }
         await Post.create({
           name,
           desc: desc.replace(/(<([^>]+)>)/gi, ""),

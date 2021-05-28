@@ -13,10 +13,10 @@ CKEDITOR.replace("body", {
     "wysiwygarea, toolbar, basicstyles,link,image,emoji,clipboard,colorbutton,mentions,undo",
 });
 
-// CKEDITOR.replace("desc", {
-//   plugins:
-//     "wysiwygarea, toolbar, basicstyles,link,image,emoji,clipboard,colorbutton,mentions,undo",
-// });
+CKEDITOR.replace("desc", {
+  plugins:
+    "wysiwygarea, toolbar, basicstyles,link,image,emoji,clipboard,colorbutton,mentions,undo",
+});
 
 // charts
 
