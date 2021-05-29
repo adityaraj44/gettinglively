@@ -25,49 +25,49 @@
       All Members
     </h4>
     <hr class="uk-divider-icon" />
-    <diiv class="uk-overflow-auto">
-        <table
-          class="
-            uk-table
-            uk-table-striped
-            uk-table-hover
-            uk-table-middle
-            uk-table-divider
-          "
-        >
-          <thead>
-            <tr>
-              <th class="uk-width-small">Name</th>
-              <th>Email</th>
-              <th>Joined</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if(memberUsers.length > 0) { %> <% memberUsers.forEach((memberUser)=>
-            { %>
-            <tr>
-              <td><%- memberUser.name %></td>
-              <td><%- memberUser.email %></td>
-              <td>
-                <%- helper.formatDate(memberUser.createdAt, 'MMMM Do YYYY')%>
-              </td>
-              <td>
-                <a
-                  class="uk-button uk-button-text uk-text-primary noSelect"
-                  href="/admin/members/memberusers/<%- memberUser._id %>"
-                  >Details</a
-                >
-              </td>
-            </tr>
-            <% }) %> <% } else { %>
-  
-            <p class="uk-text-center uk-text-large uk-text-warning">
-              No Memberships
-            </p>
-  
-            <% } %>
-          </tbody>
-        </table>
-      </div>
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Email</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(memberUsers.length > 0) { %> <%
+          memberUsers.forEach((memberUser)=> { %>
+          <tr>
+            <td><%- memberUser.name %></td>
+            <td><%- memberUser.email %></td>
+            <td>
+              <%- helper.formatDate(memberUser.createdAt, 'MMMM Do YYYY')%>
+            </td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/members/memberusers/<%- memberUser._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large uk-text-warning">
+            No Memberships
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
