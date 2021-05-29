@@ -1,4 +1,5 @@
-<%- include('./partials/navbar.ejs'); %>
+<%- include('./partials/navbar.ejs'); %> <% if(user) { %> <%-
+helper.showAdminOption(user) %> <%- helper.showUserOption(user) %> <% } %>
 
 <div class="uk-section uk-section-bar uk-section-muted uk-section-auto">
   <div class="uk-container">
@@ -123,6 +124,7 @@
         <input
           class="uk-search-input"
           type="search"
+          id="barsearch"
           placeholder="Search for Bars"
         />
       </form>

@@ -1,0 +1,73 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin" class="uk-button uk-button-text noSelect"
+      >Back to dashboard</a
+    >
+  </li>
+  <li>
+    <a href="/admin/users" class="active uk-button uk-button-text noSelect"
+      >Users</a
+    >
+  </li>
+</ul>
+
+<!-- USERS AND DETAILS -->
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      All Users
+    </h4>
+    <hr class="uk-divider-icon" />
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Email</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(basicUsers.length > 0) { %> <% basicUsers.forEach((basicUser)=>
+          { %>
+          <tr>
+            <td><%- basicUser.name %></td>
+            <td><%- basicUser.email %></td>
+            <td>
+              <%- helper.formatDate(basicUser.createdAt, 'MMMM Do YYYY')%>
+            </td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/users/basicusers/<%- basicUser._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large uk-text-warning">
+            No Users Joined
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

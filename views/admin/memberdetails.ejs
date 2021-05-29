@@ -1,0 +1,115 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin" class="uk-button uk-button-text noSelect"
+      >Back to dashboard</a
+    >
+  </li>
+  <li>
+    <a href="/admin/members" class="active uk-button uk-button-text noSelect"
+      >Members</a
+    >
+  </li>
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Members Details
+    </h4>
+    <hr class="uk-divider-icon" />
+
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default">
+          <div class="uk-card-header">
+            <h3 class="uk-card-title uk-text-center"><%- user.name %></h3>
+            <p
+              class="
+                uk-text-primary uk-text-center uk-padding-medium uk-text-break
+              "
+            >
+              <%- user.email %>
+            </p>
+          </div>
+          <div class="uk-card-body">
+            <ul uk-accordion>
+              <li>
+                <a class="uk-accordion-title" href="#">Role</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-primary">
+                    <%- user.role %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Status</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-primary">
+                    <%- user.status %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Email Updates</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-primary">
+                    <%- user.emailUpdates %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Joined On</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- helper.formatDate(user.createdAt, 'MMMM Do YYYY') %>
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <!-- <p class="uk-text-success uk-text-bolder">Joined on</p>
+            <p class="uk-text-meta uk-margin-remove-top">
+              <%- helper.formatDate(user.createdAt, 'MMMM Do YYYY')%>
+            </p> -->
+          </div>
+          <div class="uk-card-footer">
+            <div class="uk-clearfix">
+              <form
+                action="/admin/members/memberusers/delete/<%-user._id %>"
+                method="POST"
+                id="delete-form"
+              >
+                <input type="hidden" name="_method" value="DELETE" />
+                <button
+                  type="submit"
+                  class="
+                    uk-button uk-button-text
+                    noSelect
+                    uk-text-danger uk-float-right
+                  "
+                >
+                  <span class="noSelect" uk-icon="icon: trash; ratio: 2"></span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

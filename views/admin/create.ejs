@@ -127,6 +127,17 @@
                     />
                   </div>
                   <div class="uk-form-control">
+                    <input
+                      required
+                      type="text"
+                      name="location"
+                      id="location"
+                      placeholder="Complete Address"
+                      class="uk-input uk-form-large noSelect"
+                      value="<%= typeof location != 'undefined' ? location: '' %>"
+                    />
+                  </div>
+                  <div class="uk-form-control">
                     <textarea
                       required
                       name="desc"

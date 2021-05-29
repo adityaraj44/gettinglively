@@ -10,12 +10,12 @@ AOS.init();
 // text editor
 CKEDITOR.replace("body", {
   plugins:
-    "wysiwygarea, toolbar, basicstyles,link,image,emoji,clipboard,colorbutton,mentions,undo",
+    "wysiwygarea, toolbar, basicstyles,link,image,clipboard,colorbutton,mentions,undo",
 });
 
 CKEDITOR.replace("desc", {
   plugins:
-    "wysiwygarea, toolbar, basicstyles,link,image,emoji,clipboard,colorbutton,mentions,undo",
+    "wysiwygarea, toolbar, basicstyles,link,image,clipboard,colorbutton,mentions,undo",
 });
 
 // charts

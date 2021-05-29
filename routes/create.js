@@ -74,7 +74,7 @@ router.post(
 // /createPosts
 router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    const { name, desc, typeOfPlace, typeOfVenue } = req.body;
+    const { name, desc, typeOfPlace, typeOfVenue, location } = req.body;
     let image = req.files.image;
     image.mv(
       path.resolve(__dirname, "..", "public/img", image.name),
@@ -87,7 +87,7 @@ router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
           res.render("admin/create", {
             layout: "layouts/layout",
             name,
-            desc,
+            desc: desc.replace(/(<([^>]+)>)/gi, ""),
             typeOfVenue,
           });
         }
@@ -95,6 +95,7 @@ router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
           name,
           desc: desc.replace(/(<([^>]+)>)/gi, ""),
           typeOfPlace,
+          location,
           typeOfVenue,
           user: req.user.id,
           image: "/img/" + image.name,

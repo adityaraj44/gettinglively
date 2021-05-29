@@ -25,7 +25,7 @@ router.get("/register", ensureGuest, (req, res) => {
 });
 
 // post register
-router.post("/register", async (req, res) => {
+router.post("/register", ensureGuest, async (req, res) => {
   const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET, {
     expiresIn: "1d",
   });
@@ -131,7 +131,7 @@ router.get("/verify/:token", ensureGuest, (req, res) => {
 });
 
 // login handle
-router.post("/login", (req, res, next) => {
+router.post("/login", ensureGuest, (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/home",
     failureMessage: req.flash("loginError_msg", "Incorrect Credentails"),
@@ -142,7 +142,7 @@ router.post("/login", (req, res, next) => {
 // logouthandle
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/users/login");
+  res.redirect("/");
 });
 
 // forgotpass
@@ -153,7 +153,7 @@ router.get("/forgot", ensureGuest, (req, res) => {
 });
 
 // post forgot email
-router.post("/forgot", (req, res) => {
+router.post("/forgot", ensureGuest, (req, res) => {
   async.waterfall(
     [
       function (done) {
@@ -244,7 +244,7 @@ router.get("/reset/:token", ensureGuest, function (req, res) {
 });
 
 // reset post
-router.post("/reset/:token", function (req, res) {
+router.post("/reset/:token", ensureGuest, function (req, res) {
   async.waterfall(
     [
       function (done) {

@@ -1,5 +1,31 @@
 <%- include('../partials/adminNavbar.ejs'); %>
 
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin/users" class="active uk-button uk-button-text noSelect"
+      >Users</a
+    >
+  </li>
+  <li>
+    <a href="/admin/members" class="active uk-button uk-button-text noSelect"
+      >Members</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate" class="active uk-button uk-button-text noSelect"
+      >Create</a
+    >
+  </li>
+  <li>
+    <a
+      href="/users/logout"
+      class="uk-button active uk-button-text noSelect"
+      uk-toggle="target: #userslogout"
+      ><span class="noSelect"></span>Logout</a
+    >
+  </li>
+</ul>
+
 <div
   class="
     uk-section uk-section-muted uk-section-statistics uk-section-large
