@@ -6,11 +6,6 @@
       >Back to dashboard</a
     >
   </li>
-  <li>
-    <a href="/admincreate" class="active uk-button uk-button-text noSelect"
-      >Create</a
-    >
-  </li>
 </ul>
 
 <div
@@ -20,183 +15,232 @@
   "
 >
   <div class="uk-container">
-    <div
-      class="
-        uk-child-width-1-1
-        uk-grid-small
-        uk-grid-match
-        uk-margin-large-top
-        uk-margin-large-bottom
-      "
-      uk-grid
-    >
-      <div>
-        <div class="uk-card uk-card-hover uk-card-default">
-          <div class="uk-card-header">
-            <h3 class="uk-card-title uk-text-center">Create Email Updates</h3>
-            <p
-              class="
-                uk-text-primary uk-text-center uk-padding-medium uk-text-break
-              "
-            >
-              Email notifications for all users
-            </p>
-          </div>
-          <div class="uk-card-body">
-            <form action="/admincreate/emailupdates" method="POST">
-              <div class="uk-form-stacked">
-                <div class="uk-margin-small">
-                  <div class="uk-form-control">
-                    <input
-                      required
-                      type="text"
-                      name="subject"
-                      id="subject"
-                      placeholder="Subject"
-                      class="uk-input uk-form-large noSelect"
-                      value="<%= typeof subject != 'undefined' ? subject: '' %>"
-                    />
-                  </div>
-                  <div class="uk-form-control">
-                    <textarea
-                      required
-                      name="body"
-                      id="body"
-                      class="uk-textarea"
-                    ></textarea>
-                  </div>
-                </div>
-                <%- include('../partials/errors.ejs'); %>
-                <div class="uk-marign-medium uk-text-center">
-                  <div class="uk-form-control">
-                    <button
-                      type="submit"
-                      class="uk-button uk-button-custom noSelect"
-                    >
-                      Send
-                    </button>
-                  </div>
-                </div>
+    <div uk-switcher="animation: uk-animation-fade; toggle: > *">
+      <button class="uk-button uk-button-custom" type="button">
+        Create Email Updates
+      </button>
+      <button class="uk-button uk-button-custom" type="button">
+        Create Entries
+      </button>
+      <button class="uk-button uk-button-custom" type="button">
+        Edit / Delete Entries
+      </button>
+      <button class="uk-button uk-button-custom" type="button">
+        Review Entries
+      </button>
+    </div>
+
+    <ul class="uk-switcher uk-margin">
+      <li>
+        <div
+          class="
+            uk-child-width-1-1
+            uk-grid-small
+            uk-grid-match
+            uk-margin-large-top
+            uk-margin-large-bottom
+          "
+          uk-grid
+        >
+          <div>
+            <div class="uk-card uk-card-hover uk-card-default">
+              <div class="uk-card-header">
+                <h3 class="uk-card-title uk-text-center">
+                  Create Email Updates
+                </h3>
+                <p
+                  class="
+                    uk-text-primary
+                    uk-text-center
+                    uk-padding-medium
+                    uk-text-break
+                  "
+                >
+                  Email notifications for all users
+                </p>
               </div>
-            </form>
-          </div>
-          <div class="uk-card-footer"></div>
-        </div>
-      </div>
-      <!-- post creation -->
-      <div>
-        <div class="uk-card uk-card-hover uk-card-default">
-          <div class="uk-card-header">
-            <h3 class="uk-card-title uk-text-center">Create New Place</h3>
-            <p
-              class="
-                uk-text-primary uk-text-center uk-padding-medium uk-text-break
-              "
-            >
-              New location creation
-            </p>
-          </div>
-          <div class="uk-card-body">
-            <form
-              action="/admincreate/places"
-              method="POST"
-              enctype="multipart/form-data"
-            >
-              <div class="uk-form-stacked">
-                <div class="uk-margin-small">
-                  <div class="uk-form-control">
-                    <input
-                      required
-                      type="text"
-                      name="name"
-                      id="name"
-                      placeholder="Name of the place"
-                      class="uk-input uk-form-large noSelect"
-                      value="<%= typeof name != 'undefined' ? name: '' %>"
-                    />
-                  </div>
-                  <div class="uk-form-control">
-                    <input
-                      required
-                      type="text"
-                      name="typeOfVenue"
-                      id="typeOfVenue"
-                      placeholder="Type of Venue (use commas for multiple)"
-                      class="uk-input uk-form-large noSelect"
-                      value="<%= typeof typeOfVenue != 'undefined' ? typeOfVenue: '' %>"
-                    />
-                  </div>
-                  <div class="uk-form-control">
-                    <input
-                      required
-                      type="text"
-                      name="location"
-                      id="location"
-                      placeholder="Complete Address"
-                      class="uk-input uk-form-large noSelect"
-                      value="<%= typeof location != 'undefined' ? location: '' %>"
-                    />
-                  </div>
-                  <div class="uk-form-control">
-                    <textarea
-                      required
-                      name="desc"
-                      id="desc"
-                      class="uk-textarea"
-                    >
-<%- typeof desc != 'undefined' ? desc: '' %></textarea
-                    >
-                  </div>
-                  <div class="uk-form-control">
-                    <div uk-form-custom="target: true">
-                      <input
-                        type="file"
-                        required
-                        name="image"
-                        value="<%= typeof
-                      image != 'undefined'? image: '' %>"
-                      />
-                      <input
-                        class="uk-input uk-form-width-large noSelect"
-                        type="text"
-                        placeholder="Select image for post"
-                        disabled
-                      />
+              <div class="uk-card-body">
+                <form action="/admincreate/emailupdates" method="POST">
+                  <div class="uk-form-stacked">
+                    <div class="uk-margin-small">
+                      <div class="uk-form-control">
+                        <input
+                          required
+                          type="text"
+                          name="subject"
+                          id="subject"
+                          placeholder="Subject"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof subject != 'undefined' ? subject: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control">
+                        <textarea
+                          required
+                          name="body"
+                          id="body"
+                          class="uk-textarea"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <%- include('../partials/errors.ejs'); %>
+                    <div class="uk-marign-medium uk-text-center">
+                      <div class="uk-form-control">
+                        <button
+                          type="submit"
+                          class="uk-button uk-button-custom noSelect"
+                        >
+                          Send
+                        </button>
+                      </div>
                     </div>
                   </div>
-
-                  <div class="uk-form-control">
-                    <select
-                      name="typeOfPlace"
-                      id="typeOfPlace"
-                      class="uk-select"
-                      required
-                    >
-                      <option value="restaurant">Restaurant</option>
-                      <option value="bar">Bar</option>
-                      <option value="club">Club</option>
-                      <option value="pub">Pub</option>
-                      <option value="venue">Venue</option>
-                    </select>
-                  </div>
-                </div>
-                <%- include('../partials/uploadmess.ejs'); %>
-                <div class="uk-marign-medium uk-text-center">
-                  <div class="uk-form-control">
-                    <button
-                      type="submit"
-                      class="uk-button uk-button-custom noSelect"
-                    >
-                      Post
-                    </button>
-                  </div>
-                </div>
+                </form>
               </div>
-            </form>
+              <div class="uk-card-footer"></div>
+            </div>
           </div>
-          <div class="uk-card-footer"></div>
+          <!-- post creation -->
         </div>
-      </div>
-    </div>
+      </li>
+      <li>
+        <div
+          class="
+            uk-child-width-1-1
+            uk-grid-small
+            uk-grid-match
+            uk-margin-large-top
+            uk-margin-large-bottom
+          "
+          uk-grid
+        >
+          <!-- post creation -->
+          <div>
+            <div class="uk-card uk-card-hover uk-card-default">
+              <div class="uk-card-header">
+                <h3 class="uk-card-title uk-text-center">Create New Place</h3>
+                <p
+                  class="
+                    uk-text-primary
+                    uk-text-center
+                    uk-padding-medium
+                    uk-text-break
+                  "
+                >
+                  New location creation
+                </p>
+              </div>
+              <div class="uk-card-body">
+                <form
+                  action="/admincreate/places"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  <div class="uk-form-stacked">
+                    <div class="uk-margin-small">
+                      <div class="uk-form-control">
+                        <input
+                          required
+                          type="text"
+                          name="name"
+                          id="name"
+                          placeholder="Name of the place"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof name != 'undefined' ? name: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control">
+                        <input
+                          required
+                          type="text"
+                          name="typeOfVenue"
+                          id="typeOfVenue"
+                          placeholder="Type of Venue (use commas for multiple)"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof typeOfVenue != 'undefined' ? typeOfVenue: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control">
+                        <input
+                          required
+                          type="text"
+                          name="location"
+                          id="location"
+                          placeholder="Complete Address"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof location != 'undefined' ? location: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control">
+                        <textarea
+                          required
+                          name="desc"
+                          id="desc"
+                          class="uk-textarea"
+                        >
+<%- typeof desc != 'undefined' ? desc: '' %></textarea
+                        >
+                      </div>
+                      <div class="uk-form-control">
+                        <div uk-form-custom="target: true">
+                          <input
+                            type="file"
+                            required
+                            name="image"
+                            value="<%= typeof
+                      image != 'undefined'? image: '' %>"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            placeholder="Select image for post"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div class="uk-form-control">
+                        <select
+                          name="typeOfPlace"
+                          id="typeOfPlace"
+                          class="uk-select"
+                          required
+                        >
+                          <option value="restaurant">Restaurant</option>
+                          <option value="bar">Bar</option>
+                          <option value="club">Club</option>
+                          <option value="pub">Pub</option>
+                          <option value="venue">Venue</option>
+                        </select>
+                      </div>
+                    </div>
+                    <%- include('../partials/uploadmess.ejs'); %>
+                    <div class="uk-marign-medium uk-text-center">
+                      <div class="uk-form-control">
+                        <button
+                          type="submit"
+                          class="uk-button uk-button-custom noSelect"
+                        >
+                          Post
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="uk-card-footer"></div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur, sed do eiusmod.
+      </li>
+      <li>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur, sed do eiusmod.
+      </li>
+    </ul>
   </div>
 </div>
