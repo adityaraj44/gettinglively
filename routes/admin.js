@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const User = require("../models/User");
+const Post = require("../models/Post");
 
 // admin dashboard
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -16,10 +17,13 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
       .sort({ createdAt: "desc" })
       .lean();
 
+    const entries = await Post.find({ reviewStatus: "reviewed" }).lean();
+
     res.render("admin/admindash", {
       layout: "layouts/layout",
       basicUsers,
       memberUsers,
+      entries,
     });
   } catch (error) {
     console.log(error);
