@@ -7,22 +7,22 @@ const Post = require("../models/Post");
 // admin dashboard
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    const basicUsers = await User.find({ role: "basic" })
+    const customerMembers = await User.find({ role: "customer" })
       .sort({ createdAt: "desc" })
       .lean();
     // finding members
-    const memberUsers = await User.find({
-      role: "member",
+    const businessMembers = await User.find({
+      role: "business",
     })
       .sort({ createdAt: "desc" })
       .lean();
 
-    const entries = await Post.find({ reviewStatus: "reviewed" }).lean();
+    const entries = await Post.find({ reviewStatus: "inprocess" }).lean();
 
     res.render("admin/admindash", {
       layout: "layouts/layout",
-      basicUsers,
-      memberUsers,
+      customerMembers,
+      businessMembers,
       entries,
     });
   } catch (error) {
@@ -31,15 +31,18 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   }
 });
 
-router.get("/users", ensureAuthenticated, ensureAdmin, async (req, res) => {
+router.get("/customers", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    const basicUsers = await User.find({ role: "basic", status: "Active" })
+    const customerMembers = await User.find({
+      role: "customer",
+      status: "Active",
+    })
       .sort({ createdAt: "desc" })
       .lean();
 
-    res.render("admin/allUsers", {
+    res.render("admin/customerMembers", {
       layout: "layouts/layout",
-      basicUsers,
+      customerMembers,
       helper: require("../helpers/ejs"),
     });
   } catch (error) {
@@ -49,15 +52,18 @@ router.get("/users", ensureAuthenticated, ensureAdmin, async (req, res) => {
 });
 
 // get members
-router.get("/members", ensureAuthenticated, ensureAdmin, async (req, res) => {
+router.get("/business", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    const memberUsers = await User.find({ role: "member", status: "Active" })
+    const businessMembers = await User.find({
+      role: "business",
+      status: "Active",
+    })
       .sort({ createdAt: "desc" })
       .lean();
 
-    res.render("admin/adminMembers", {
+    res.render("admin/businessMembers", {
       layout: "layouts/layout",
-      memberUsers,
+      businessMembers,
       helper: require("../helpers/ejs"),
     });
   } catch (error) {
@@ -70,14 +76,14 @@ router.get("/members", ensureAuthenticated, ensureAdmin, async (req, res) => {
 // /users/:id
 
 router.get(
-  "/users/basicusers/:id",
+  "/customers/:id",
   ensureAuthenticated,
   ensureAdmin,
   async (req, res) => {
     try {
       const user = await User.findById({ _id: req.params.id }).lean();
       console.log(user);
-      res.render("admin/userdetails", {
+      res.render("admin/customerDetails", {
         layout: "layouts/layout",
         user,
         helper: require("../helpers/ejs"),
@@ -93,7 +99,7 @@ router.get(
 // /users/memberusers/:id
 
 router.get(
-  "/members/memberusers/:id",
+  "/members/businessmembers/:id",
   ensureAuthenticated,
   ensureAdmin,
   async (req, res) => {
@@ -115,13 +121,13 @@ router.get(
 // delete user using method overrride
 // admin/users/delete/:id
 router.delete(
-  "/users/basicusers/delete/:id",
+  "/customers/delete/:id",
   ensureAuthenticated,
   ensureAdmin,
   async (req, res) => {
     try {
       await User.remove({ _id: req.params.id });
-      res.redirect("/admin/users");
+      res.redirect("/admin/customers");
     } catch (error) {
       console.log(error);
       return res.render("errors/500");
@@ -132,13 +138,13 @@ router.delete(
 // delete member using method override
 // admin/members/memberusers/delete/:id
 router.delete(
-  "/members/memberusers/delete/:id",
+  "/members/businessmembers/delete/:id",
   ensureAuthenticated,
   ensureAdmin,
   async (req, res) => {
     try {
       await User.remove({ _id: req.params.id });
-      res.redirect("/admin/members");
+      res.redirect("/admin/business");
     } catch (error) {
       console.log(error);
       return res.render("errors/500");

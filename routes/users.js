@@ -61,7 +61,7 @@ router.post("/register", ensureGuest, async (req, res) => {
           email,
           password,
           confirmationCode: verifytoken,
-          role: "basic",
+          role: "customer",
         });
 
         newUser.save().then(async (user) => {
@@ -133,7 +133,7 @@ router.get("/verify/:token", ensureGuest, (req, res) => {
 // login handle
 router.post("/login", ensureGuest, (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/home",
+    successRedirect: "/",
     failureMessage: req.flash("loginError_msg", "Incorrect Credentails"),
     failureRedirect: "/users/login",
   })(req, res, next);

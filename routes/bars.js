@@ -3,7 +3,9 @@ const router = express.Router();
 const { ensureAuthenticated, ensureGuest } = require("../middlewares/auth");
 
 router.get("/", (req, res) => {
-  res.render("bars");
+  res.render("bars", {
+    user: req.user,
+  });
 });
 
 module.exports = router;

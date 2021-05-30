@@ -8,7 +8,7 @@
   </li>
   <li>
     <a href="/admin/members" class="active uk-button uk-button-text noSelect"
-      >Members</a
+      >Business Members</a
     >
   </li>
 </ul>
@@ -22,7 +22,7 @@
 >
   <div class="uk-container">
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      All Members
+      All Business Members
     </h4>
     <hr class="uk-divider-icon" />
     <div class="uk-overflow-auto">
@@ -43,18 +43,18 @@
           </tr>
         </thead>
         <tbody>
-          <% if(memberUsers.length > 0) { %> <%
-          memberUsers.forEach((memberUser)=> { %>
+          <% if(businessMembers.length > 0) { %> <%
+          businessMembers.forEach((businessMember)=> { %>
           <tr>
-            <td><%- memberUser.name %></td>
-            <td><%- memberUser.email %></td>
+            <td><%- businessMember.name %></td>
+            <td><%- businessMember.email %></td>
             <td>
-              <%- helper.formatDate(memberUser.createdAt, 'MMMM Do YYYY')%>
+              <%- helper.formatDate(businessMember.createdAt, 'MMMM Do YYYY')%>
             </td>
             <td>
               <a
                 class="uk-button uk-button-text uk-text-primary noSelect"
-                href="/admin/members/memberusers/<%- memberUser._id %>"
+                href="/admin/members/businessMembers/<%- businessMember._id %>"
                 >Details</a
               >
             </td>

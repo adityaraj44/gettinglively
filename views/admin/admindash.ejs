@@ -2,13 +2,13 @@
 
 <ul class="uk-breadcrumb uk-margin-large-left">
   <li>
-    <a href="/admin/users" class="active uk-button uk-button-text noSelect"
-      >Users</a
+    <a href="/admin/customers" class="active uk-button uk-button-text noSelect"
+      >Customers</a
     >
   </li>
   <li>
-    <a href="/admin/members" class="active uk-button uk-button-text noSelect"
-      >Members</a
+    <a href="/admin/business" class="active uk-button uk-button-text noSelect"
+      >Business Members</a
     >
   </li>
   <li>
@@ -51,13 +51,13 @@
       <div class="tagline1">
         <div class="uk-card uk-card-hover uk-card-default uk-card-body">
           <h3 class="uk-card-title uk-text-center uk-margin-medium">
-            Users Joined
+            Customers Joined
           </h3>
           <hr />
           <p
             class="uk-text-large uk-text-center uk-text-primary uk-text-medium"
           >
-            <%- basicUsers.length %>
+            <%- customerMembers.length %>
           </p>
           <p><canvas id="myChart"></canvas></p>
         </div>
@@ -71,7 +71,7 @@
           <p
             class="uk-text-large uk-text-center uk-text-primary uk-text-medium"
           >
-            <%- memberUsers.length %>
+            <%- businessMembers.length %>
           </p>
           <p><canvas id="myChart2"></canvas></p>
         </div>

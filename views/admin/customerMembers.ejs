@@ -7,8 +7,8 @@
     >
   </li>
   <li>
-    <a href="/admin/users" class="active uk-button uk-button-text noSelect"
-      >Users</a
+    <a href="/admin/customers" class="active uk-button uk-button-text noSelect"
+      >Customers</a
     >
   </li>
 </ul>
@@ -22,7 +22,7 @@
 >
   <div class="uk-container">
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      All Users
+      All Customers
     </h4>
     <hr class="uk-divider-icon" />
     <div class="uk-overflow-auto">
@@ -43,18 +43,18 @@
           </tr>
         </thead>
         <tbody>
-          <% if(basicUsers.length > 0) { %> <% basicUsers.forEach((basicUser)=>
-          { %>
+          <% if(customerMembers.length > 0) { %> <%
+          customerMembers.forEach((customerMember)=> { %>
           <tr>
-            <td><%- basicUser.name %></td>
-            <td><%- basicUser.email %></td>
+            <td><%- customerMember.name %></td>
+            <td><%- customerMember.email %></td>
             <td>
-              <%- helper.formatDate(basicUser.createdAt, 'MMMM Do YYYY')%>
+              <%- helper.formatDate(customerMember.createdAt, 'MMMM Do YYYY')%>
             </td>
             <td>
               <a
                 class="uk-button uk-button-text uk-text-primary noSelect"
-                href="/admin/users/basicusers/<%- basicUser._id %>"
+                href="/admin/customers/<%- customerMember._id %>"
                 >Details</a
               >
             </td>
@@ -62,7 +62,7 @@
           <% }) %> <% } else { %>
 
           <p class="uk-text-center uk-text-large uk-text-warning">
-            No Users Joined
+            No Customers Joined
           </p>
 
           <% } %>

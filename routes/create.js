@@ -111,4 +111,25 @@ router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
   }
 });
 
+router.get(
+  "/allentries",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const allPosts = await Post.find({ reviewStatus: "inprogress" })
+        .sort({ createdAt: "desc" })
+        .lean();
+      res.render("admin/allEntries", {
+        layout: "layouts/layout",
+        allPosts,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
 module.exports = router;
