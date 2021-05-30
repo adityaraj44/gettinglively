@@ -11,14 +11,16 @@
     "
   >
     <div class="uk-card-header">
-      <h3 class="uk-card-title uk-margin-bottom uk-text-uppercase">Register</h3>
+      <h3 class="uk-card-title uk-margin-bottom uk-text-uppercase">
+        Register as Business
+      </h3>
       <hr />
       <a href="/home" class="uk-button uk-button-text noSelect uk-text-primary"
         >Go To Homepage</a
       >
     </div>
     <div class="uk-card-body">
-      <form class="uk-width-1-1" method="POST" action="/users/register">
+      <form class="uk-width-1-1" method="POST" action="/users/businessregister">
         <div class="uk-form-stacked">
           <div class="uk-margin-medium">
             <div class="uk-form-control">
@@ -30,6 +32,17 @@
                 name="name"
                 placeholder="Name"
                 value="<%= typeof name != 'undefined' ? name : '' %>"
+              />
+            </div>
+            <div class="uk-form-control">
+              <input
+                required
+                class="uk-input uk-form-large noSelect"
+                type="text"
+                id="businessName"
+                name="businessName"
+                placeholder="Business Name"
+                value="<%= typeof businessName != 'undefined' ? businessName : '' %>"
               />
             </div>
             <div class="uk-form-control">
@@ -68,14 +81,8 @@
     </div>
     <div class="uk-card-footer">
       <a
-        href="/users/businessregister"
-        class="uk-button uk-button-text uk-text-center noSelect"
-        >Register as business</a
-      >
-      <hr />
-      <a
         href="/users/login"
-        class="uk-button uk-button-text uk-text-center noSelect"
+        class="uk-button uk-button-text uk-text-center uk-margin-large noSelect"
         >I already have an account</a
       >
     </div>

@@ -141,7 +141,7 @@ app.use("/admin", require("./routes/admin"));
 app.use("/admincreate", require("./routes/create"));
 app.use((req, res) => res.render("errors/pagenotfound"));
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port ${port}`.green.bold

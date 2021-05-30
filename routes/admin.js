@@ -7,12 +7,16 @@ const Post = require("../models/Post");
 // admin dashboard
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    const customerMembers = await User.find({ role: "customer" })
+    const customerMembers = await User.find({
+      role: "customer",
+      status: "Active",
+    })
       .sort({ createdAt: "desc" })
       .lean();
     // finding members
     const businessMembers = await User.find({
       role: "business",
+      status: "Active",
     })
       .sort({ createdAt: "desc" })
       .lean();

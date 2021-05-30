@@ -24,6 +24,13 @@ router.get("/register", ensureGuest, (req, res) => {
   });
 });
 
+// register as business page
+router.get("/businessregister", ensureGuest, (req, res) => {
+  res.render("businessSignup", {
+    layout: "layouts/auth",
+  });
+});
+
 // post register
 router.post("/register", ensureGuest, async (req, res) => {
   const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET, {
@@ -62,6 +69,116 @@ router.post("/register", ensureGuest, async (req, res) => {
           password,
           confirmationCode: verifytoken,
           role: "customer",
+        });
+
+        newUser.save().then(async (user) => {
+          req.flash(
+            "success_msg",
+            "You are now registered! Please check your email for verification"
+          );
+          req.flash(
+            "error_msg",
+            "You can not login without verifying your email!"
+          );
+          res.redirect("/users/login");
+        });
+      }
+    });
+  }
+  // nodemailer
+  var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "gettinglivelytest@gmail.com",
+      pass: "sahilkumar@123",
+    },
+  });
+  var mailOptions = {
+    to: email,
+    from: "GettingLively.com",
+    subject: "Getting Lively Email Verification",
+    text:
+      "You are receiving this because you need to verify your email.\n\n" +
+      "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+      "http://" +
+      req.headers.host +
+      "/users/verify/" +
+      verifytoken +
+      "\n\n" +
+      "If you did not request this, please ignore this email.\n",
+  };
+  smtpTransport.sendMail(mailOptions).catch((err) => console.log(err));
+});
+
+// verify user email
+router.get("/verify/:token", ensureGuest, (req, res) => {
+  User.findOne({
+    confirmationCode: req.params.token,
+  })
+    .then((user) => {
+      req.flash("success_msg", "Account verified successfully!");
+      if (!user) {
+        req.flash("error_msg", "User not found");
+      }
+
+      user.status = "Active";
+
+      user.save((err) => {
+        res.render("verify", {
+          layout: "layouts/auth",
+        });
+
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+      });
+    })
+    .catch((e) => console.log("error", e));
+});
+
+// desc business register
+// users/businessregister
+router.post("/businessregister", ensureGuest, async (req, res) => {
+  const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET, {
+    expiresIn: "1d",
+  });
+  const { name, businessName, email, password } = req.body;
+  let errors = [];
+  if (!name || !email || !password || !businessName) {
+    errors.push({ msg: "Please enter all fields" });
+  }
+
+  if (password.length < 6) {
+    errors.push({ msg: "Password must be at least 6 characters" });
+  }
+  if (errors.length > 0) {
+    res.render("signup", {
+      errors,
+      name,
+      businessName,
+      email,
+      password,
+    });
+  } else {
+    await User.findOne({ email: email }).then((user) => {
+      if (user) {
+        errors.push({ msg: "Email already exists" });
+        res.render("signup", {
+          errors,
+          businessName,
+          name,
+          email,
+          password,
+        });
+      } else {
+        const newUser = new User({
+          name,
+          businessName,
+          email,
+          password,
+          confirmationCode: verifytoken,
+          role: "business",
         });
 
         newUser.save().then(async (user) => {
