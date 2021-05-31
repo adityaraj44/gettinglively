@@ -11,42 +11,14 @@ module.exports = {
   formatDate: (date, format) => {
     return moment(date).format(format);
   },
-  showUserOption: (loggedUser) => {
-    if (loggedUser) {
-      return `<nav class="uk-navbar-container " uk-navbar>
-        <div class="uk-navbar-right uk-light">
-    
-            <ul class="uk-navbar-nav">
-  
-                <li>
-          <a href="/users/logout" class="uk-button-text noSelect uk-margin-medium-right"
-          uk-toggle="target: #userslogout"
-            ><span class=" noSelect"></span> Logout</a
-          >
-        </li>
-                
-            </ul>
-    
-        </div>
-    </nav>`;
-    } else {
-      `<nav class="uk-navbar-container " uk-navbar>
-      <div class="uk-navbar-right uk-light">
-  
-          <ul class="uk-navbar-nav">
-             
-            
-          <li>
-          <a href="/users/login" class="uk-button-text noSelect uk-margin-medium-right"
-          uk-toggle="target: #userslogout"
-            ><span class=" noSelect"></span>Login/SignUp</a
-          >
-        </li>
-              
-          </ul>
-  
-      </div>
-  </nav>`;
+  truncate: function (str, len) {
+    if (str.length > len && str.length > 0) {
+      let new_str = str + " ";
+      new_str = str.substr(0, len);
+      new_str = str.substr(0, new_str.lastIndexOf(" "));
+      new_str = new_str.length > 0 ? new_str : str.substr(0, len);
+      return new_str + "...";
     }
+    return str;
   },
 };

@@ -9,6 +9,15 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    bookingStatus: {
+      type: String,
+      default: "Not taking bookings",
+      enum: ["Taking bookings", "Not taking bookings"],
+    },
     typeOfPlace: {
       type: String,
       default: "none",
@@ -32,6 +41,7 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     image: String,
+    menu: String,
   },
   { timestamps: true }
 );

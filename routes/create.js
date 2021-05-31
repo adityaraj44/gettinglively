@@ -10,9 +10,19 @@ const nodemailer = require("nodemailer");
 
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    // render create view
+    const allEntries = await Post.find({ reviewStatus: "reviewed" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean();
+    const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean();
     res.render("admin/create", {
       layout: "layouts/layout",
+      allEntries,
+      reviewEntries,
+      helper: require("../helpers/ejs"),
     });
   } catch (error) {
     console.log(error);
@@ -35,9 +45,10 @@ router.post(
       }
       if (errors.length > 0) {
         req.flash("error_msg", "Please enter all the fields");
-        res.render("admin/create", {
+        res.render("partials/createEmail", {
           layout: "layouts/layout",
           subject: subject,
+          body: body.replace(/(<([^>]+)>)/gi, ""),
         });
       } else {
         const users = await User.find({ emailUpdates: "in" });
@@ -72,59 +83,59 @@ router.post(
 
 // post data to all the view pages
 // /createPosts
-router.post("/places", ensureAuthenticated, ensureAdmin, async (req, res) => {
-  try {
-    const { name, desc, typeOfPlace, typeOfVenue, location } = req.body;
-    let image = req.files.image;
-    image.mv(
-      path.resolve(__dirname, "..", "public/img", image.name),
-      async (error) => {
-        if (desc.length < 500) {
-          req.flash(
-            "errorupload_msg",
-            "Description must be atleast 500 characters"
-          );
-          res.render("admin/create", {
-            layout: "layouts/layout",
-            name,
-            desc: desc.replace(/(<([^>]+)>)/gi, ""),
-            typeOfVenue,
-          });
-        }
+router.post(
+  "/places",
+  ensureAuthenticated,
+  ensureAdmin,
+
+  async (req, res) => {
+    try {
+      const {
+        name,
+        desc,
+        typeOfPlace,
+        typeOfVenue,
+        location,
+        rating,
+        bookingStatus,
+      } = req.body;
+      let image = req.files.image;
+      image.mv(path.resolve(__dirname, "..", "public/img", image.name));
+      let menu = req.files.menu;
+      menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
+
+      if (desc.length < 500) {
+        req.flash(
+          "errorupload_msg",
+          "Description must be atleast 500 characters"
+        );
+        res.render("partials/createEntry", {
+          layout: "layouts/layout",
+          name,
+          location,
+          desc: desc.replace(/(<([^>]+)>)/gi, ""),
+          typeOfVenue,
+          image,
+          rating,
+          menu,
+        });
+      } else {
         await Post.create({
           name,
           desc: desc.replace(/(<([^>]+)>)/gi, ""),
           typeOfPlace,
           location,
           typeOfVenue,
+          rating,
+          bookingStatus,
           user: req.user.id,
           image: "/img/" + image.name,
+          menu: "/docs/" + menu.name,
         }).then((post) => {
           req.flash("upload_msg", "Post sent for verification!");
           res.redirect("/admincreate");
         });
       }
-    );
-  } catch (error) {
-    console.log(error);
-    res.render("errors/500");
-  }
-});
-
-router.get(
-  "/allentries",
-  ensureAuthenticated,
-  ensureAdmin,
-  async (req, res) => {
-    try {
-      const allPosts = await Post.find({ reviewStatus: "inprogress" })
-        .sort({ createdAt: "desc" })
-        .lean();
-      res.render("admin/allEntries", {
-        layout: "layouts/layout",
-        allPosts,
-        helper: require("../helpers/ejs"),
-      });
     } catch (error) {
       console.log(error);
       res.render("errors/500");

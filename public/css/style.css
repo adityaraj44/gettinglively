@@ -267,6 +267,11 @@ footer p {
     font-size: 45px !important;
     line-height: 50px;
   }
+
+  .uk-bar-section h1 {
+    font-size: 45px !important;
+    line-height: 50px;
+  }
 }
 
 .uk-section-bar {

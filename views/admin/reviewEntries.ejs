@@ -9,7 +9,8 @@
   "
   uk-grid
 >
-  <% if(allEntries.length > 0) { %> <% allEntries.forEach((allEntry)=> { %>
+  <% if(reviewEntries.length > 0) { %> <% reviewEntries.forEach((reviewEntry)=>
+  { %>
   <div>
     <a href="#" class="noSelect"
       ><div class="uk-card uk-card-hover uk-card-default">
@@ -23,7 +24,7 @@
                 uk-text-medium
                 uk-text-bold
               "
-              ><%- allEntry.typeOfPlace %></span
+              ><%- reviewEntry.typeOfPlace %></span
             >
             <span
               class="
@@ -33,7 +34,7 @@
                 uk-text-medium
                 uk-text-bold
               "
-              ><%- allEntry.bookingStatus %></span
+              ><%- reviewEntry.bookingStatus %></span
             >
             <span
               class="
@@ -43,10 +44,10 @@
                 uk-text-medium
                 uk-text-bold
               "
-              ><%- allEntry.rating +" " + "/" + " " + 5%></span
+              ><%- reviewEntry.rating +" " + "/" + " " + 5%></span
             >
           </div>
-          <img src="<%- allEntry.image %>" alt="<%- allEntry.image %>" />
+          <img src="<%- reviewEntry.image %>" alt="<%- reviewEntry.image %>" />
         </div></div
     ></a>
   </div>
