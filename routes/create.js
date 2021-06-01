@@ -5,28 +5,30 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
+const multer = require("multer");
+
+// initialize multer
+// var storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "public/uploads/");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + file.originalname);
+//   },
+// });
+
+// var upload = multer({ storage: storage });
 
 // get request to the /admincreate
 
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
-    const allEntries = await Post.find({ reviewStatus: "reviewed" })
-      .populate("user")
-      .sort({ createdAt: "desc" })
-      .lean();
-    const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
-      .populate("user")
-      .sort({ createdAt: "desc" })
-      .lean();
     res.render("admin/create", {
       layout: "layouts/layout",
-      allEntries,
-      reviewEntries,
-      helper: require("../helpers/ejs"),
     });
   } catch (error) {
     console.log(error);
-    res.render("errors/500");
+    res.render("errors/pagenotfound");
   }
 });
 
@@ -39,16 +41,11 @@ router.post(
   async (req, res) => {
     try {
       const { subject, body } = req.body;
-      let errors = [];
       if (!subject || !body) {
-        errors.push({ msg: "Please enter all fields" });
-      }
-      if (errors.length > 0) {
-        req.flash("error_msg", "Please enter all the fields");
-        res.render("partials/createEmail", {
+        req.flash("error_msg", "Enter all the fields");
+        res.render("admin/create", {
           layout: "layouts/layout",
           subject: subject,
-          body: body.replace(/(<([^>]+)>)/gi, ""),
         });
       } else {
         const users = await User.find({ emailUpdates: "in" });
@@ -81,10 +78,21 @@ router.post(
   }
 );
 
+router.get("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
+  try {
+    res.render("admin/createEntry", {
+      layout: "layouts/layout",
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("errors/pagenotfound");
+  }
+});
+
 // post data to all the view pages
 // /createPosts
 router.post(
-  "/places",
+  "/entry",
   ensureAuthenticated,
   ensureAdmin,
 
@@ -105,11 +113,7 @@ router.post(
       menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
 
       if (desc.length < 500) {
-        req.flash(
-          "errorupload_msg",
-          "Description must be atleast 500 characters"
-        );
-        res.render("partials/createEntry", {
+        res.render("admin/createEntry", {
           layout: "layouts/layout",
           name,
           location,
@@ -119,6 +123,7 @@ router.post(
           rating,
           menu,
         });
+        req.flash("warning_msg", "Description must be atleast 500 characters");
       } else {
         await Post.create({
           name,
@@ -133,9 +138,57 @@ router.post(
           menu: "/docs/" + menu.name,
         }).then((post) => {
           req.flash("upload_msg", "Post sent for verification!");
-          res.redirect("/admincreate");
+          res.redirect("/admincreate/entry");
         });
       }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+// get all entries
+router.get(
+  "/allentries",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const allEntries = await Post.find({ reviewStatus: "reviewed" })
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
+
+      res.render("admin/allEntries", {
+        layout: "layouts/layout",
+        allEntries,
+
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// get review entries
+router.get(
+  "/reviewentries",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
+      res.render("admin/reviewEntries", {
+        layout: "layouts/layout",
+
+        reviewEntries,
+        helper: require("../helpers/ejs"),
+      });
     } catch (error) {
       console.log(error);
       res.render("errors/500");

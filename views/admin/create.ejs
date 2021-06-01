@@ -6,6 +6,28 @@
       >Back to dashboard</a
     >
   </li>
+  <li>
+    <a href="/admincreate" class="uk-button uk-button-text noSelect"
+      >Create Email Updates</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
+      >Create New Entry</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
+      >All Entries</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admincreate/reviewentries"
+      class="uk-button uk-button-text noSelect"
+      >Review Entries</a
+    >
+  </li>
 </ul>
 
 <div
@@ -15,26 +37,77 @@
   "
 >
   <div class="uk-container">
-    <div uk-switcher="animation: uk-animation-fade; toggle: > *">
-      <button class="uk-button uk-button-custom" type="button">
-        Create Email Updates
-      </button>
-      <button class="uk-button uk-button-custom" type="button">
-        Create Entries
-      </button>
-      <button class="uk-button uk-button-custom" type="button">
-        All Entries
-      </button>
-      <button class="uk-button uk-button-custom" type="button">
-        Entries for review
-      </button>
-    </div>
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default">
+          <%- include('../partials/errors.ejs'); %>
+          <div class="uk-card-header">
+            <h3 class="uk-card-title uk-text-center">Create Email Updates</h3>
+            <p
+              class="
+                uk-text-primary uk-text-center uk-padding-medium uk-text-break
+              "
+            >
+              Email notifications for all users
+            </p>
+          </div>
+          <div class="uk-card-body">
+            <form
+              id="emailForm"
+              action="/admincreate/emailupdates"
+              method="POST"
+            >
+              <div class="uk-form-stacked">
+                <div class="uk-margin-small">
+                  <div class="uk-form-control">
+                    <input
+                      type="text"
+                      required
+                      name="subject"
+                      id="subject"
+                      placeholder="Subject"
+                      class="uk-input uk-form-large noSelect"
+                      value="<%- typeof subject != 'undefined' ? subject: '' %>"
+                    />
+                  </div>
+                  <div class="uk-form-control">
+                    <textarea
+                      required
+                      name="body"
+                      id="body"
+                      class="uk-textarea"
+                    >
+<%- typeof body != 'undefined' ? body: '' %></textarea
+                    >
+                  </div>
+                </div>
 
-    <ul class="uk-switcher uk-margin">
-      <li><%- include('../partials/createEmail.ejs'); %></li>
-      <li><%- include('../partials/createEntry.ejs'); %></li>
-      <li><%- include('./allEntries.ejs'); %></li>
-      <li><%- include('./reviewEntries.ejs'); %></li>
-    </ul>
+                <div class="uk-marign-medium uk-text-center">
+                  <div class="uk-form-control">
+                    <button
+                      type="submit"
+                      class="uk-button uk-button-custom noSelect"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="uk-card-footer"></div>
+        </div>
+      </div>
+      <!-- post creation -->
+    </div>
   </div>
 </div>
