@@ -25,8 +25,8 @@ const postSchema = new mongoose.Schema(
     },
     reviewStatus: {
       type: String,
-      enum: ["inprocess", "reviewed"],
-      default: "inprocess",
+      enum: ["inprocess", "incomplete", "reviewed"],
+      default: "incomplete",
     },
     typeOfVenue: {
       type: String,
@@ -40,8 +40,6 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: String,
-    menu: String,
   },
   { timestamps: true }
 );

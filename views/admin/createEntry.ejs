@@ -61,7 +61,6 @@
           <!-- post creation -->
           <div>
             <div class="uk-card uk-card-hover uk-card-default">
-              <%- include('../partials/errors.ejs'); %>
               <div class="uk-card-header">
                 <h3 class="uk-card-title uk-text-center">Create New Entry</h3>
                 <p
@@ -76,12 +75,7 @@
                 </p>
               </div>
               <div class="uk-card-body">
-                <form
-                  onsubmit="(e)=> e.preventDefault()"
-                  action="/admincreate/entry"
-                  method="POST"
-                  enctype="multipart/form-data"
-                >
+                <form action="/admincreate/entry" method="POST">
                   <div class="uk-form-stacked">
                     <div class="uk-margin-small">
                       <div class="uk-form-control">
@@ -177,37 +171,11 @@
                           id="desc"
                           class="uk-textarea"
                         >
-<%- typeof desc != 'undefined' ? desc: '' %></textarea
+ <%- typeof desc != 'undefined' ? desc: '' %></textarea
                         >
                       </div>
-                      <div class="uk-form-control">
-                        <div uk-form-custom="target: true">
-                          <input type="file" required name="image" />
-                          <input
-                            class="uk-input uk-form-width-large noSelect"
-                            type="text"
-                            value="<%= typeof
-                    image != 'undefined'? image: '' %>"
-                            placeholder="Select image gallery for the entry"
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      <div class="uk-form-control">
-                        <div uk-form-custom="target: true">
-                          <input required type="file" name="menu" />
-                          <input
-                            class="uk-input uk-form-width-large noSelect"
-                            type="text"
-                            value="<%= typeof
-                    menu != 'undefined'? menu: '' %>"
-                            placeholder="Select menu of your place (pdf format only)"
-                            disabled
-                          />
-                        </div>
-                      </div>
                     </div>
-
+                    <%- include('../partials/errors.ejs'); %>
                     <div class="uk-marign-medium uk-text-center">
                       <div class="uk-form-control">
                         <button

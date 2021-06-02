@@ -37,6 +37,7 @@
   "
 >
   <div class="uk-container">
+    <%- include('../partials/uploadmess.ejs'); %>
     <div
       class="
         uk-child-width-1-1
@@ -86,7 +87,7 @@
                       id="body"
                       class="uk-textarea"
                     >
-<%- typeof body != 'undefined' ? body: '' %></textarea
+  <%- typeof body != 'undefined' ? body: '' %></textarea
                     >
                   </div>
                 </div>
