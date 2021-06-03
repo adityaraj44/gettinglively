@@ -153,7 +153,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
     errors.push({ msg: "Password must be at least 6 characters" });
   }
   if (errors.length > 0) {
-    res.render("signup", {
+    res.render("businessSignup", {
       errors,
       name,
       businessName,
@@ -164,7 +164,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
     await User.findOne({ email: email }).then((user) => {
       if (user) {
         errors.push({ msg: "Email already exists" });
-        res.render("signup", {
+        res.render("businessSignup", {
           errors,
           businessName,
           name,
@@ -192,32 +192,32 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
           );
           res.redirect("/users/login");
         });
+        // nodemailer
+        var smtpTransport = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "gettinglivelytest@gmail.com",
+            pass: "sahilkumar@123",
+          },
+        });
+        var mailOptions = {
+          to: email,
+          from: "GettingLively.com",
+          subject: "Getting Lively Email Verification",
+          text:
+            "You are receiving this because you need to verify your email.\n\n" +
+            "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+            "http://" +
+            req.headers.host +
+            "/users/verify/" +
+            verifytoken +
+            "\n\n" +
+            "If you did not request this, please ignore this email.\n",
+        };
+        smtpTransport.sendMail(mailOptions).catch((err) => console.log(err));
       }
     });
   }
-  // nodemailer
-  var smtpTransport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "gettinglivelytest@gmail.com",
-      pass: "sahilkumar@123",
-    },
-  });
-  var mailOptions = {
-    to: email,
-    from: "GettingLively.com",
-    subject: "Getting Lively Email Verification",
-    text:
-      "You are receiving this because you need to verify your email.\n\n" +
-      "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
-      "http://" +
-      req.headers.host +
-      "/users/verify/" +
-      verifytoken +
-      "\n\n" +
-      "If you did not request this, please ignore this email.\n",
-  };
-  smtpTransport.sendMail(mailOptions).catch((err) => console.log(err));
 });
 
 // verify user email
