@@ -271,4 +271,47 @@ router.get(
   }
 );
 
+router.get("/myentries", ensureAuthenticated, ensureAdmin, async (req, res) => {
+  try {
+    const myEntries = await Post.find({ user: req.user.id })
+      .sort({ createdAt: "desc" })
+      .lean();
+    res.render("entries/myEntries", {
+      layout: "layouts/layout",
+      myEntries,
+      helper: require("../helpers/ejs"),
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("errors/pagenotfound");
+  }
+});
+
+// get single entry
+router.get(
+  "/myentries/entry/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+
+      if (!entry) {
+        res.render("errors/404");
+      }
+      res.render("entries/entryDetail", {
+        layout: "layouts/layout",
+        entry,
+        user: req.user,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
 module.exports = router;

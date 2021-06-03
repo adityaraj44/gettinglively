@@ -41,7 +41,7 @@
 >
   <div class="uk-container">
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      Entries for review
+      My Entries
     </h4>
     <hr class="uk-divider-icon" />
     <div
@@ -54,13 +54,12 @@
       "
       uk-grid
     >
-      <% if(reviewEntries.length > 0) { %> <%
-      reviewEntries.forEach((reviewEntry)=> { %>
+      <% if(myEntries.length > 0) { %> <% myEntries.forEach((myEntry)=> { %>
       <div>
         <a
-          href="/admincreate/myentries/entry/<%- reviewEntry._id %>"
+          href="/admincreate/myentries/entry/<%- myEntry._id %>"
           class="noSelect"
-          ><div class="uk-card uk-card-custom uk-card-hover uk-card-default">
+          ><div class="uk-card uk-card-hover uk-card-default">
             <div class="uk-card-media-top">
               <div class="uk-clearfix uk-position-absolute">
                 <span
@@ -71,7 +70,7 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- reviewEntry.typeOfPlace %></span
+                  ><%- myEntry.typeOfPlace %></span
                 >
                 <span
                   class="
@@ -81,7 +80,7 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- reviewEntry.bookingStatus %></span
+                  ><%- myEntry.bookingStatus %></span
                 >
                 <span
                   class="
@@ -91,13 +90,10 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- reviewEntry.rating +" " + "/" + " " + 5%></span
+                  ><%- myEntry.rating +" " + "/" + " " + 5%></span
                 >
               </div>
-              <img
-                src="<%- reviewEntry.cover %>"
-                alt="<%- reviewEntry.cover %>"
-              />
+              <img src="<%- myEntry.cover %>" alt="<%- myEntry.cover %>" />
             </div></div
         ></a>
       </div>

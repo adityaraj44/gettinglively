@@ -289,3 +289,8 @@ footer p {
 .error {
   color: black;
 }
+
+.uk-card-custom {
+  min-height: 80vh;
+  border-radius: 10px !important;
+}

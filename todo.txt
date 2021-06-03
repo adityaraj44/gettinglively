@@ -1,7 +1,4 @@
-* create Weekly timeschedule  (open close in 24hr format...  can use number input field)
-* create my entries page where user can see their full entry and add images and menu
-* change the status to inprocess from incomplete
-* render the entries in review entries
+* create user review page
 * create  a member area where member create entries, delete and edit their entries and send for review similar view like admin
 
 

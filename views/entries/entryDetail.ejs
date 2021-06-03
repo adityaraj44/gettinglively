@@ -1,0 +1,249 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin" class="uk-button uk-button-text noSelect"
+      >Back to dashboard</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate" class="uk-button uk-button-text noSelect"
+      >Create Email Updates</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
+      >Create New Entry</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
+      >All Entries</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/myEntries" class="uk-button uk-button-text noSelect"
+      >Review Entries</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
+      >My Entries</a
+    >
+  </li>
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      <%- entry.name %>
+    </h4>
+    <hr />
+    <div class="uk-clearfix uk-text-center">
+      <span
+        class="
+          uk-label uk-float-center uk-label-danger uk-text-medium uk-text-bold
+        "
+        ><%- entry.typeOfVenue %></span
+      >
+      <span
+        class="
+          uk-label uk-float-center uk-label-primary uk-text-medium uk-text-bold
+        "
+        ><%- entry.bookingStatus %></span
+      >
+      <span
+        class="
+          uk-label uk-float-center uk-label-success uk-text-medium uk-text-bold
+        "
+        ><%- entry.rating +" " + "/" + " " + 5%></span
+      >
+    </div>
+    <hr class="uk-divider-icon" />
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-slider-container-offset uk-margin-large-top" uk-slider>
+          <div
+            class="uk-position-relative uk-visible-toggle uk-light"
+            tabindex="-1"
+          >
+            <ul class="uk-slider-items uk-child-width-1-1 uk-grid">
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.cover %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image1 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image2 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image3 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image4 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image5 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image6 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image7 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image8 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+              <li>
+                <div class="uk-card-media-top">
+                  <img src="<%- entry.image9 %>" alt="<%- entry.cover %>" />
+                </div>
+              </li>
+            </ul>
+            <a
+              class="uk-position-center-left uk-position-small uk-hidden-hover"
+              href="#"
+              uk-slidenav-previous
+              uk-slider-item="previous"
+            ></a>
+            <a
+              class="uk-position-center-right uk-position-small uk-hidden-hover"
+              href="#"
+              uk-slidenav-next
+              uk-slider-item="next"
+            ></a>
+          </div>
+          <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+        </div>
+      </div>
+      <div
+        class="
+          uk-card uk-card-custom uk-card-hover uk-card-default uk-card-body
+        "
+      >
+        <ul uk-tab>
+          <li><a href="#">Description</a></li>
+          <li><a href="#">Hours</a></li>
+          <li><a href="#">Location</a></li>
+          <li><a href="#">Menus</a></li>
+        </ul>
+
+        <ul
+          class="uk-switcher uk-margin"
+          uk-switcher="animation: uk-animation-fade"
+        >
+          <li>
+            <p class="uk-text-break"><%- entry.desc %></p>
+          </li>
+          <li>
+            <table
+              class="uk-table uk-table-striped uk-table-middle uk-table-divider"
+            >
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Open</th>
+                  <th>Close</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Monday</th>
+                  <td><%- entry.monopening ? entry.monopening : "-" %></td>
+                  <td><%- entry.monclose ? entry.monclose : "-" %></td>
+                </tr>
+                <tr>
+                  <th>Tuesday</th>
+                  <td><%- entry.tueopening ? entry.tueopening : "-" %></td>
+                  <td><%- entry.tueclose ? entry.tueclose : "-" %></td>
+                </tr>
+                <tr>
+                  <th>Wednesday</th>
+                  <td><%- entry.wedopening ? entry.wedopening : "-" %></td>
+                  <td><%- entry.wedclose ? entry.wedclose : "-" %></td>
+                </tr>
+                <tr>
+                  <th>Thursday</th>
+                  <td><%- entry.thuopening ? entry.thuopening : "-" %></td>
+                  <td><%- entry.thuclose ? entry.thuclose : "-" %></td>
+                </tr>
+                <tr>
+                  <th>Friday</th>
+                  <td><%- entry.friopening ? entry.friopening : "-" %></td>
+                  <td><%- entry.friclose ? entry.friclose : "-" %></td>
+                </tr>
+                <tr>
+                  <th>Saturday</th>
+                  <td><%- entry.satopening ? entry.satopening : "-" %></td>
+                  <td><%- entry.satclose ? entry.satclose : "-" %></td>
+                </tr>
+                <tr>
+                  <th>Sunday</th>
+                  <td><%- entry.sunopening ? entry.sunopening : "-" %></td>
+                  <td><%- entry.sunclose ? entry.sunclose : "-" %></td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>
+            <h1 class="uk-card-title">Address</h1>
+            <p class="uk-text-break uk-margin">
+              <span
+                class="uk-margin-medium-right uk-text-success"
+                uk-icon="icon: location; ratio: 2"
+              ></span
+              ><%- entry.location %>
+            </p>
+          </li>
+          <li>
+            <p class="uk-text-break uk-margin">
+              <span
+                class="uk-margin-small-right uk-text-primary"
+                uk-icon="icon:  file-pdf; ratio: 2"
+              ></span
+              ><a
+                href="/public<%- entry.menu %>"
+                target="_blank"
+                class="uk-button uk-button-muted"
+                download="mwnu"
+                ><%- entry.name + " " + "Menu" %></a
+              >
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
