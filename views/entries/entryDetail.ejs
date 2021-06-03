@@ -61,103 +61,93 @@
         class="
           uk-label uk-float-center uk-label-success uk-text-medium uk-text-bold
         "
-        ><%- entry.rating +" " + "/" + " " + 5%></span
+        >User reviews - <%- entry.rating +" " + "/" + " " + 5%></span
       >
     </div>
     <hr class="uk-divider-icon" />
-    <div
-      class="
-        uk-child-width-1-1
-        uk-grid-small
-        uk-margin-large-top
-        uk-margin-large-bottom
-      "
-      uk-grid
-    >
-      <div>
-        <div class="uk-slider-container-offset uk-margin-large-top" uk-slider>
-          <div
-            class="uk-position-relative uk-visible-toggle uk-light"
-            tabindex="-1"
-          >
-            <ul class="uk-slider-items uk-child-width-1-1 uk-grid">
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.cover %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image1 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image2 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image3 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image4 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image5 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image6 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image7 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image8 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-              <li>
-                <div class="uk-card-media-top">
-                  <img src="<%- entry.image9 %>" alt="<%- entry.cover %>" />
-                </div>
-              </li>
-            </ul>
-            <a
-              class="uk-position-center-left uk-position-small uk-hidden-hover"
-              href="#"
-              uk-slidenav-previous
-              uk-slider-item="previous"
-            ></a>
-            <a
-              class="uk-position-center-right uk-position-small uk-hidden-hover"
-              href="#"
-              uk-slidenav-next
-              uk-slider-item="next"
-            ></a>
-          </div>
-          <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
+    <div>
+      <div class="uk-slider-container-offset uk-margin-large-top" uk-slider>
+        <div
+          class="uk-position-relative uk-visible-toggle uk-light"
+          tabindex="-1"
+        >
+          <ul class="uk-slider-items uk-child-width-1-1 uk-grid">
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.cover %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image1 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image2 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image3 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image4 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image5 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image6 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image7 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image8 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+            <li>
+              <div class="uk-card-media-top">
+                <img src="<%- entry.image9 %>" alt="<%- entry.cover %>" />
+              </div>
+            </li>
+          </ul>
+          <a
+            class="uk-position-center-left uk-position-small uk-hidden-hover"
+            href="#"
+            uk-slidenav-previous
+            uk-slider-item="previous"
+          ></a>
+          <a
+            class="uk-position-center-right uk-position-small uk-hidden-hover"
+            href="#"
+            uk-slidenav-next
+            uk-slider-item="next"
+          ></a>
         </div>
+        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
       </div>
-      <div
-        class="
-          uk-card uk-card-custom uk-card-hover uk-card-default uk-card-body
-        "
-      >
+    </div>
+    <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
+      <div class="uk-card-body">
         <ul uk-tab>
           <li><a href="#">Description</a></li>
           <li><a href="#">Hours</a></li>
           <li><a href="#">Location</a></li>
           <li><a href="#">Menus</a></li>
+          <li><a href="#">User Reviews</a></li>
         </ul>
 
         <ul
@@ -234,7 +224,7 @@
                 uk-icon="icon:  file-pdf; ratio: 2"
               ></span
               ><a
-                href="/public<%- entry.menu %>"
+                href="<%- entry.menu %>"
                 target="_blank"
                 class="uk-button uk-button-muted"
                 download="mwnu"
@@ -242,6 +232,7 @@
               >
             </p>
           </li>
+          <li>no review</li>
         </ul>
       </div>
     </div>

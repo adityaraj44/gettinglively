@@ -1,4 +1,4 @@
-* create user review page
+* create user review form, schemea , route
 * create  a member area where member create entries, delete and edit their entries and send for review similar view like admin
 
 
