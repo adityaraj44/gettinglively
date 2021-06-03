@@ -67,3 +67,32 @@ var myChart = new Chart(document.getElementById("myChart"), config);
 var myChart2 = new Chart(document.getElementById("myChart2"), config);
 var myChart3 = new Chart(document.getElementById("myChart3"), config);
 var myChart4 = new Chart(document.getElementById("myChart4"), config);
+
+// autocomplete
+
+let autocomplete;
+function initAutoComplete() {
+  autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("addressEntry"),
+    {
+      types: ["establishments"],
+      componentRestrictions: { country: ["UK"] },
+      fields: ["place_id", "geometry", "name"],
+    }
+  );
+  autocomplete.addListener("place_changed", onPlaceChanged);
+}
+
+function onPlaceChanged() {
+  var place = autocomplete.getPlace();
+
+  if (!place.geometry) {
+    // user did not enter
+    document.getElementById("addressEntry").placeholder =
+      "Enter complete address";
+  } else {
+    document.getElementById("location").innerHTML = place.name;
+  }
+}
+
+initAutoComplete();

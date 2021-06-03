@@ -75,7 +75,11 @@
                 </p>
               </div>
               <div class="uk-card-body">
-                <form action="/admincreate/entry" method="POST">
+                <form
+                  action="/admincreate/entry"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
                   <div class="uk-form-stacked">
                     <div class="uk-margin-small">
                       <div class="uk-form-control">
@@ -141,7 +145,7 @@
                           required
                           type="text"
                           name="location"
-                          id="location"
+                          id="addressEntry"
                           placeholder="Complete Address"
                           class="uk-input uk-form-large noSelect"
                           value="<%= typeof location != 'undefined' ? location: '' %>"
@@ -160,6 +164,187 @@
                           value="<%= typeof rating != 'undefined' ? rating: '' %>"
                         />
                       </div>
+                      <p
+                        class="
+                          uk-text-center
+                          uk-text-medium
+                          uk-text-primary
+                          uk-text-bold
+                        "
+                      >
+                        Hours Schedule
+                      </p>
+                      <hr />
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="monday" class="uk-text-meta"
+                          >Monday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="monopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof monopening != 'undefined' ? monopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Monday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="monclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof monclose != 'undefined' ? monclose: '' %>"
+                        />
+                      </div>
+                      <!--  -->
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="tuesday" class="uk-text-meta"
+                          >Tuesday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="tueopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof tueopening != 'undefined' ? tueopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Tuesday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="tueclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof tueclose != 'undefined' ? tueclose: '' %>"
+                        />
+                      </div>
+                      <!--  -->
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="wed" class="uk-text-meta"
+                          >Wednesday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="wedopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof wedopening != 'undefined' ? wedopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Wednesday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="wedclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof wedclose != 'undefined' ? wedclose: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="thu" class="uk-text-meta"
+                          >Thursday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="thuopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof thuopening != 'undefined' ? thuopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Thursday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="thuclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof thuclose != 'undefined' ? thuclose: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="fri" class="uk-text-meta"
+                          >Friday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="friopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof friopening != 'undefined' ? friopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Friday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="friclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof friclose != 'undefined' ? friclose: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="sat" class="uk-text-meta"
+                          >Saturday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="satopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof satopening != 'undefined' ? satopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Saturday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="satclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof satclose != 'undefined' ? satclose: '' %>"
+                        />
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="tuesday" class="uk-text-meta"
+                          >Sunday Opening Time</label
+                        >
+                        <input
+                          type="time"
+                          name="sunopening"
+                          placeholder="Opening"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof sunopening != 'undefined' ? sunopening: '' %>"
+                        />
+                        <label for="monday" class="uk-text-meta"
+                          >Sunday Closing Time</label
+                        >
+                        <input
+                          type="time"
+                          name="sunclose"
+                          placeholder="Closing"
+                          id="rating"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%= typeof sunclose != 'undefined' ? sunclose: '' %>"
+                        />
+                      </div>
                       <div class="uk-form-control uk-margin-small-top">
                         <label for="desc" class="uk-text-meta"
                           >Full Description of the place. Description should not
@@ -173,6 +358,248 @@
                         >
 <%- typeof desc != 'undefined' ? desc: '' %></textarea
                         >
+                      </div>
+                      <p
+                        class="
+                          uk-text-center
+                          uk-text-medium
+                          uk-text-primary
+                          uk-text-bold
+                        "
+                      >
+                        Upload files
+                      </p>
+                      <hr />
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Cover image of the entry</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="cover"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select cover image for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 1</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image1"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 1 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 2</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image2"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 2 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 3</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image3"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 3 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 4</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image4"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 4 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 5</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image5"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 5 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 6</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image6"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 6 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 7</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image7"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 7 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 8</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image8"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 8 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <div uk-form-custom="target: true">
+                          <label for="coverimg" class="uk-text-meta"
+                            >Image 9</label
+                          >
+                          <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            required
+                            name="image9"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                        image != 'undefined'? image: '' %>"
+                            placeholder="Select image 9 for the entry"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="menu" class="uk-text-meta"
+                          >Menu of the place</label
+                        >
+                        <div uk-form-custom="target: true">
+                          <input
+                            type="file"
+                            accept="application/pdf"
+                            required
+                            name="menu"
+                          />
+                          <input
+                            class="uk-input uk-form-width-large noSelect"
+                            type="text"
+                            value="<%= typeof
+                    image != 'undefined'? image: '' %>"
+                            placeholder="Select menu for the entry"
+                            disabled
+                          />
+                        </div>
                       </div>
                     </div>
                     <%- include('../partials/errors.ejs'); %>

@@ -28,7 +28,7 @@ connectDB();
 const app = express();
 
 // file upload
-// app.use(fileUpload());
+app.use(fileUpload());
 
 // sentry application monitoring
 Sentry.init({
