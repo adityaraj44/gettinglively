@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require("path");
 const User = require("../models/User");
 const Post = require("../models/Post");
-const Reviews = require("../models/Reviews");
+const Review = require("../models/Review");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 
@@ -234,7 +234,7 @@ router.get(
         .populate("reviews")
         .sort({ createdAt: "desc" })
         .lean();
-      const reviews = await Reviews.find({})
+      const reviews = await Review.find({})
         .populate("post")
         .populate("user")
         .lean();
@@ -262,17 +262,16 @@ router.get(
       const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
         .populate("user")
         .populate("reviews")
+
         .sort({ createdAt: "desc" })
         .lean();
 
-      const reviews = await Reviews.find({})
-        .populate("post")
-        .populate("user")
-        .lean();
+      const reviews = await Review.find({}).populate("post").populate("user");
+
+      console.log(reviews);
 
       res.render("admin/reviewEntries", {
         layout: "layouts/layout",
-
         reviewEntries,
         reviews,
         helper: require("../helpers/ejs"),
@@ -290,7 +289,7 @@ router.get("/myentries", ensureAuthenticated, ensureAdmin, async (req, res) => {
       .populate("reviews")
       .sort({ createdAt: "desc" })
       .lean();
-    const reviews = await Reviews.find({})
+    const reviews = await Review.find({})
       .populate("post")
       .populate("user")
       .lean();

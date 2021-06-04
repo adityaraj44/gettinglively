@@ -3,7 +3,7 @@ const router = express.Router();
 
 const User = require("../models/User");
 const Post = require("../models/Post");
-const Reviews = require("../models/Reviews");
+const Review = require("../models/Review");
 
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 
@@ -26,12 +26,15 @@ router.post(
       //   });
       //   await post.save();
 
-      await Reviews.create({
+      await Review.create({
         userScore,
         userComment,
         post: req.params.id,
         user: req.user.id,
       });
+      const post = await Post.findById({ _id: req.params.id }).populate(
+        "reviews"
+      );
       req.flash("success_msg", "Thanks for giving review");
       res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
     } catch (error) {
