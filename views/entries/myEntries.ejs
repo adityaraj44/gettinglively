@@ -22,7 +22,9 @@
     >
   </li>
   <li>
-    <a href="/admincreate/myEntries" class="uk-button uk-button-text noSelect"
+    <a
+      href="/admincreate/reviewEntries"
+      class="uk-button uk-button-text noSelect"
       >Review Entries</a
     >
   </li>
@@ -91,7 +93,8 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- myEntry.rating +" " + "/" + " " + 5%></span
+                  ><%- reviews.length > 0 ? "User Reviews" + "-" +
+                  reviews.length:'No reviews yet' %></span
                 >
               </div>
               <img src="<%- myEntry.cover %>" alt="<%- myEntry.cover %>" />

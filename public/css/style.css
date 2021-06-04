@@ -268,6 +268,11 @@ footer p {
     line-height: 50px;
   }
 
+  .uk-section-entrydetail h4 {
+    font-size: 40px !important;
+    line-height: 50px;
+  }
+
   .uk-bar-section h1 {
     font-size: 45px !important;
     line-height: 50px;

@@ -22,7 +22,9 @@
     >
   </li>
   <li>
-    <a href="/admincreate/myEntries" class="uk-button uk-button-text noSelect"
+    <a
+      href="/admincreate/reviewEntries"
+      class="uk-button uk-button-text noSelect"
       >Review Entries</a
     >
   </li>
@@ -60,7 +62,7 @@
         <a
           href="/admincreate/myentries/entry/<%- reviewEntry._id %>"
           class="noSelect"
-          ><div class="uk-card uk-card-custom uk-card-hover uk-card-default">
+          ><div class="uk-card uk-card-hover uk-card-default">
             <div class="uk-card-media-top">
               <div class="uk-clearfix uk-position-absolute">
                 <span
@@ -91,8 +93,8 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- reviews.length > 0 ? reviews.length : 'No reviews yet'
-                  %></span
+                  ><%- reviews.length > 0 ? "User Reviews" + "-" +
+                  reviews.length:'No reviews yet' %></span
                 >
               </div>
               <img

@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require("path");
 const User = require("../models/User");
 const Post = require("../models/Post");
-
+const Reviews = require("../models/Reviews");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 
@@ -231,12 +231,17 @@ router.get(
     try {
       const allEntries = await Post.find({ reviewStatus: "reviewed" })
         .populate("user")
+        .populate("reviews")
         .sort({ createdAt: "desc" })
         .lean();
-
+      const reviews = await Reviews.find({})
+        .populate("post")
+        .populate("user")
+        .lean();
       res.render("admin/allEntries", {
         layout: "layouts/layout",
         allEntries,
+        reviews,
 
         helper: require("../helpers/ejs"),
       });
@@ -256,13 +261,20 @@ router.get(
     try {
       const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
         .populate("user")
+        .populate("reviews")
         .sort({ createdAt: "desc" })
+        .lean();
+
+      const reviews = await Reviews.find({})
+        .populate("post")
+        .populate("user")
         .lean();
 
       res.render("admin/reviewEntries", {
         layout: "layouts/layout",
 
         reviewEntries,
+        reviews,
         helper: require("../helpers/ejs"),
       });
     } catch (error) {
@@ -275,11 +287,17 @@ router.get(
 router.get("/myentries", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
     const myEntries = await Post.find({ user: req.user.id })
+      .populate("reviews")
       .sort({ createdAt: "desc" })
+      .lean();
+    const reviews = await Reviews.find({})
+      .populate("post")
+      .populate("user")
       .lean();
     res.render("entries/myEntries", {
       layout: "layouts/layout",
       myEntries,
+      reviews,
       helper: require("../helpers/ejs"),
     });
   } catch (error) {
@@ -297,6 +315,7 @@ router.get(
     try {
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
+        .populate("reviews")
         .lean();
 
       if (!entry) {

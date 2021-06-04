@@ -14,6 +14,17 @@ router.post(
   async (req, res) => {
     try {
       const { userScore, userComment } = req.body;
+      //   const post = await Post.find({ id: req.user.id });
+      //   const newReview = new Reviews({
+      //     userScore: req.body.userScore,
+      //     userComment: req.body.userComment,
+      //     post: post.id,
+      //   });
+
+      //   await newReview.save().then((review) => {
+      //     post.books.push(newReview);
+      //   });
+      //   await post.save();
 
       await Reviews.create({
         userScore,
