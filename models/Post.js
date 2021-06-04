@@ -9,9 +9,11 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    rating: {
-      type: Number,
-      required: true,
+    userReview: {
+      type: String,
+    },
+    userComment: {
+      type: String,
     },
     bookingStatus: {
       type: String,
@@ -35,6 +37,10 @@ const postSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    reviews: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
     },
     location: {
       type: String,

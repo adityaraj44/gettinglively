@@ -40,6 +40,7 @@
   "
 >
   <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
       <%- entry.name %>
     </h4>
@@ -142,6 +143,41 @@
     </div>
     <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
       <div class="uk-card-body">
+        <%- helper.getEntryUser(user,entry.user) %>
+        <!-- logout modal -->
+        <div id="deleteEntryAdmin" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Are you sure?</h2>
+            <p>This entry will be deleted permanently!</p>
+            <span>
+              <button
+                class="uk-button uk-button-default uk-modal-close noSelect"
+                type="button"
+              >
+                Cancel
+              </button>
+            </span>
+            <span
+              ><form
+                class="uk-float-right"
+                action="/admincreate/myentries/entry/delete/<%- entry._id %>"
+                method="POST"
+              >
+                <input type="hidden" name="_method" value="DELETE" />
+                <button
+                  type="submit"
+                  class="
+                    uk-button uk-button-danger
+                    noSelect
+                    uk-margin-small-left
+                  "
+                >
+                  Delete
+                </button>
+              </form></span
+            >
+          </div>
+        </div>
         <ul uk-tab>
           <li><a href="#">Description</a></li>
           <li><a href="#">Hours</a></li>
@@ -229,8 +265,53 @@
               ><%- entry.name + " " + "Menu" %></a
             >
           </li>
-          <li>no review</li>
+          <li>sd</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div
+      class="uk-card uk-card-custom uk-card-hover uk-card-default uk-margin-top"
+    >
+      <div class="uk-card-body">
+        <h1 class="uk-card-title uk-text-center">Give reviews</h1>
+        <form action="/userreviews/admin/<%- entry._id %>" method="POST">
+          <div class="uk-form-stacked">
+            <div class="uk-margin-small">
+              <div class="uk-form-control">
+                <input
+                  required
+                  type="number"
+                  name="userScore"
+                  min="1"
+                  max="5"
+                  placeholder="Initial score out of 5"
+                  id="rating"
+                  class="uk-input uk-form-large noSelect"
+                  value="<%= typeof userScore != 'undefined' ? userScore: '' %>"
+                />
+              </div>
+              <div class="uk-form-control">
+                <textarea
+                  required
+                  class="uk-textarea"
+                  name="userComment"
+                ></textarea>
+              </div>
+            </div>
+            <div class="uk-marign-medium uk-text-center">
+              <div class="uk-form-control">
+                <button
+                  type="submit"
+                  class="uk-button uk-button-custom noSelect"
+                >
+                  Post review
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

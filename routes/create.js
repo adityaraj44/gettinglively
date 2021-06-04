@@ -142,7 +142,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
         location,
         desc: desc.replace(/(<([^>]+)>)/gi, ""),
         typeOfVenue,
-        rating,
+
         monopening,
         monclose,
         tueopening,
@@ -166,7 +166,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       typeOfPlace,
       location,
       typeOfVenue,
-      rating,
+
       bookingStatus,
       monopening,
       monclose,
@@ -258,6 +258,7 @@ router.get(
         .populate("user")
         .sort({ createdAt: "desc" })
         .lean();
+
       res.render("admin/reviewEntries", {
         layout: "layouts/layout",
 
@@ -310,6 +311,24 @@ router.get(
     } catch (error) {
       console.log(error);
       res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// delete entry using method overrride
+// /myentries/entry/delete/:id
+router.delete(
+  "/myentries/entry/delete/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      await Post.remove({ _id: req.params.id });
+      req.flash("success_msg", "Entry Deleted Successfully!");
+      res.redirect("/admincreate/myentries");
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/500");
     }
   }
 );

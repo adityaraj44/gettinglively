@@ -90,7 +90,8 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- allEntry.rating +" " + "/" + " " + 5%></span
+                  ><%- reviews.length > 0 ? reviews.length : 'No reviews yet'
+                  %></span
                 >
               </div>
               <img src="<%- allEntry.image %>" alt="<%- allEntry.image %>" />

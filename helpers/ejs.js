@@ -21,4 +21,26 @@ module.exports = {
     }
     return str;
   },
+  getEntryUser: function (loggedUser, entryUser) {
+    if (
+      loggedUser.role === "admin" ||
+      loggedUser._id.toString() == entryUser._id.toString()
+    ) {
+      return `<span
+      ><a href="#"  class="uk-button uk-button-secondary noSelect"
+        >Edit</a
+      ></span
+    >
+
+    <span
+      ><a
+        href="#deleteEntryAdmin" uk-toggle
+        class="uk-button uk-button-danger noSelect uk-marign-small-right"
+        >Delete</a
+      ></span
+    >`;
+    } else {
+      return ``;
+    }
+  },
 };
