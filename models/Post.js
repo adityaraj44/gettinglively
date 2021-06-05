@@ -38,9 +38,9 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    reviews: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Review",
+    location: {
+      type: String,
+      required: true,
     },
     monopening: { type: String },
     monclose: { type: String },

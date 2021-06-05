@@ -162,11 +162,10 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     }
     await Post.create({
       name,
-      desc: desc.replace(/(<([^>]+)>)/gi, ""),
+      desc,
       typeOfPlace,
       location,
       typeOfVenue,
-
       bookingStatus,
       monopening,
       monclose,
@@ -261,19 +260,17 @@ router.get(
     try {
       const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
         .populate("user")
-        .populate("reviews")
 
         .sort({ createdAt: "desc" })
         .lean();
 
-      const reviews = await Review.find({}).populate("post").populate("user");
-
-      console.log(reviews);
+      //   const reviews = await Review.find(Post).populate("post").populate("user");
+      //   console.log(reviews);
 
       res.render("admin/reviewEntries", {
         layout: "layouts/layout",
         reviewEntries,
-        reviews,
+
         helper: require("../helpers/ejs"),
       });
     } catch (error) {
@@ -286,17 +283,17 @@ router.get(
 router.get("/myentries", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
     const myEntries = await Post.find({ user: req.user.id })
-      .populate("reviews")
+
       .sort({ createdAt: "desc" })
       .lean();
-    const reviews = await Review.find({})
-      .populate("post")
-      .populate("user")
-      .lean();
+    // const reviews = await Review.find({})
+    //   .populate("post")
+    //   .populate("user")
+    //   .lean();
     res.render("entries/myEntries", {
       layout: "layouts/layout",
       myEntries,
-      reviews,
+
       helper: require("../helpers/ejs"),
     });
   } catch (error) {
@@ -314,8 +311,16 @@ router.get(
     try {
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
-        .populate("reviews")
         .lean();
+      const allReview = await Review.find({ post: req.params.id })
+        .populate("post")
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
+      let totalScore = 0;
+      for (i = 0; i < allReview.length; i++) {
+        totalScore = totalScore + allReview[i].userScore;
+      }
 
       if (!entry) {
         res.render("errors/404");
@@ -323,6 +328,8 @@ router.get(
       res.render("entries/entryDetail", {
         layout: "layouts/layout",
         entry,
+        allReview,
+        totalScore,
         user: req.user,
         helper: require("../helpers/ejs"),
       });

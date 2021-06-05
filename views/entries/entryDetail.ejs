@@ -62,8 +62,8 @@
         class="
           uk-label uk-float-center uk-label-success uk-text-medium uk-text-bold
         "
-        >User reviews - <%- entry.rating +" " + "/" + " " + 5%></span
-      >
+        ><%- allReview.length != 0 ? 'User reviews' + ' ' + '-' + ' ' +  Math.round(totalScore/allReview.length) + '/' + '5' : 'No reviews' %>
+      </span>
     </div>
     <hr class="uk-divider-icon" />
 
@@ -183,7 +183,6 @@
           <li><a href="#">Hours</a></li>
           <li><a href="#">Location</a></li>
           <li><a href="#">Menus</a></li>
-          <li><a href="#">User Reviews</a></li>
         </ul>
 
         <ul
@@ -265,7 +264,6 @@
               ><%- entry.name + " " + "Menu" %></a
             >
           </li>
-          <li>sd</li>
         </ul>
       </div>
     </div>
@@ -309,6 +307,58 @@
             </div>
           </div>
         </form>
+        <hr class="uk-divider-icon" />
+        <p class="uk-text-lead uk-text-bold uk-text-center@s">
+          Total Reviews: <%- allReview.length %>
+        </p>
+
+        <p class="uk-text-headline uk-text-secondary uk-text-center@s">
+          <%- allReview.length != 0 ? 'Total Score:'+ ' ' +  Math.round(totalScore/allReview.length)+ '/'+ '5': 'Total Score:' + ' ' + '0' %>
+        </p>
+        <p class="uk-text-meta uk-text-success uk-text-normal uk-text-center@s">
+          Based on <%- allReview.length%> customer reviews
+        </p>
+        <ul class="uk-comment-list">
+          <% allReview.forEach(review => { %>
+          <li>
+            <article
+              class="
+                uk-comment
+                uk-visible-toggle
+                uk-padding-small
+                uk-box-shadow-small
+              "
+              tabindex="-1"
+            >
+              <header class="uk-comment-header uk-position-relative">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                  <div class="uk-width-expand">
+                    <p class="uk-comment-title uk-margin-remove">
+                      <p class="uk-margin--medium-right"
+                        ><%- review.user.name %></p
+                      >
+                      <span
+                        class="
+                          uk-text-bold uk-text-success uk-marign-medium-left
+                        "
+                        >gave - <%- review.userScore %> / 5</span
+                      >
+                    </p>
+                    <p class="uk-comment-meta uk-margin-remove-top">
+                      <a class="uk-link-reset" href="#"
+                        ><%- helper.formatDate(review.createdAt, 'LL') %></a
+                      >
+                    </p>
+                  </div>
+                </div>
+              </header>
+              <div class="uk-comment-body">
+                <p class="uk-text-break"><%- review.userComment %></p>
+              </div>
+            </article>
+          </li>
+          <% }) %>
+        </ul>
       </div>
     </div>
   </div>

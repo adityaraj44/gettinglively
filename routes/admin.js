@@ -21,7 +21,7 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
       .sort({ createdAt: "desc" })
       .lean();
 
-    const entries = await Post.find({ reviewStatus: "inprocess" }).lean();
+    const entries = await Post.find({ reviewStatus: "reviewed" }).lean();
 
     res.render("admin/admindash", {
       layout: "layouts/layout",

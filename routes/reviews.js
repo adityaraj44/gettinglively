@@ -13,30 +13,39 @@ router.post(
   ensureAdmin,
   async (req, res) => {
     try {
-      const { userScore, userComment } = req.body;
-      //   const post = await Post.find({ id: req.user.id });
-      //   const newReview = new Reviews({
+      await Review.findOne({
+        user: req.user.id,
+      }).then((user) => {
+        if (user) {
+          req.flash("error_msg", "You have already submitted a review");
+          res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+        } else {
+          const newReview = new Review({
+            userScore: req.body.userScore,
+            userComment: req.body.userComment,
+            post: req.params.id,
+            user: req.user.id,
+          });
+
+          newReview.save().then((review) => {
+            //   });
+            req.flash("success_msg", "Thanks for giving review");
+            res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+          });
+        }
+      });
+      //   await Review.create({
       //     userScore: req.body.userScore,
       //     userComment: req.body.userComment,
-      //     post: post.id,
+      //     post: req.params.id,
+      //     user: req.user.id,
       //   });
-
-      //   await newReview.save().then((review) => {
-      //     post.books.push(newReview);
+      //   await Post.findByIdAndUpdate({ _id: req.params.id }, Review, {
+      //     new: true,
+      //     runValidators: true,
       //   });
-      //   await post.save();
-
-      await Review.create({
-        userScore,
-        userComment,
-        post: req.params.id,
-        user: req.user.id,
-      });
-      const post = await Post.findById({ _id: req.params.id }).populate(
-        "reviews"
-      );
-      req.flash("success_msg", "Thanks for giving review");
-      res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+      //   req.flash("success_msg", "Thanks for giving review");
+      //   res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
     } catch (error) {
       console.log(error);
       res.render("errors/500");
