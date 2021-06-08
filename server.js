@@ -140,6 +140,7 @@ app.use("/bars", require("./routes/bars"));
 app.use("/admin", require("./routes/admin"));
 app.use("/admincreate", require("./routes/create"));
 app.use("/userreviews", require("./routes/reviews"));
+app.use("/business", require("./routes/business"));
 app.use((req, res) => res.render("errors/pagenotfound"));
 
 const port = process.env.PORT || 4000;

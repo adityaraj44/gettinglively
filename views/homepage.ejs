@@ -22,6 +22,29 @@
     
         </div>
     </nav>
+<% } else if(user && user.role === 'business') { %>
+    <nav class="uk-navbar-container " uk-navbar>
+        <div class="uk-navbar-right uk-light">
+    
+            <ul class="uk-navbar-nav">
+               
+                <li>
+                    <a href="/business" class="uk-button uk-button-text
+                    noSelect uk-text-large">Go To Business Dashboard</a>
+                    
+                </li>
+  
+                <li>
+          <a href="/users/logout" class="uk-button-text noSelect uk-margin-medium-right"
+          uk-toggle="target: #userslogout"
+            ><span class=" noSelect"></span> Logout</a
+          >
+        </li>
+                
+            </ul>
+    
+        </div>
+    </nav>
 <% } else if(user && user.role !== 'admin') { %>
     <nav class="uk-navbar-container " uk-navbar>
         <div class="uk-navbar-right uk-light">

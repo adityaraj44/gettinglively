@@ -1,36 +1,17 @@
-<%- include('../partials/adminNavbar.ejs'); %>
+<%- include('../partials/businessNavbar.ejs'); %>
 
 <ul class="uk-breadcrumb uk-margin-large-left">
   <li>
-    <a href="/admin" class="uk-button uk-button-text noSelect"
-      >Back to dashboard</a
+    <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
+  </li>
+  <li>
+    <a href="/business/createentries" class="uk-button uk-button-text noSelect"
+      >Create Entries</a
     >
   </li>
   <li>
-    <a href="/admincreate" class="uk-button uk-button-text noSelect"
-      >Create Email Updates</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
-      >Create New Entry</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
-      >All Entries</a
-    >
-  </li>
-  <li>
-    <a
-      href="/admincreate/reviewEntries"
-      class="uk-button uk-button-text noSelect"
-      >Review Entries</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
-      >My Entries</a
+    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
+      >Entries For Review</a
     >
   </li>
 </ul>
@@ -42,8 +23,9 @@
   "
 >
   <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      All Entries
+      My Entries
     </h4>
     <hr class="uk-divider-icon" />
     <div
@@ -56,10 +38,11 @@
       "
       uk-grid
     >
-      <% if(allEntries.length > 0) { %> <% allEntries.forEach((allEntry)=> { %>
+      <% if(allBusinessEntries.length > 0) { %> <%
+      allBusinessEntries.forEach((allBusinessEntry)=> { %>
       <div>
         <a
-          href="/admincreate/myentries/entry/<%- allEntry._id %>"
+          href="/business/myentries/entry/<%- allBusinessEntry._id %>"
           class="noSelect"
           ><div class="uk-card uk-card-hover uk-card-default">
             <div class="uk-card-media-top">
@@ -72,7 +55,7 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- allEntry.typeOfPlace %></span
+                  ><%- allBusinessEntry.typeOfPlace %></span
                 >
                 <span
                   class="
@@ -82,21 +65,13 @@
                     uk-text-medium
                     uk-text-bold
                   "
-                  ><%- allEntry.bookingStatus %></span
+                  ><%- allBusinessEntry.bookingStatus %></span
                 >
-                <!-- <span
-                  class="
-                    uk-label
-                    uk-float-right
-                    uk-label-success
-                    uk-text-medium
-                    uk-text-bold
-                  "
-                  ><%- reviews.length > 0 ? "User Reviews" + "-" +
-                  reviews.length:'No reviews yet' %></span
-                > -->
               </div>
-              <img src="<%- allEntry.cover %>" alt="<%- allEntry.image %>" />
+              <img
+                src="<%- allBusinessEntry.cover %>"
+                alt="<%- allBusinessEntry.cover %>"
+              />
             </div></div
         ></a>
       </div>

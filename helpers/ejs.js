@@ -27,7 +27,7 @@ module.exports = {
       loggedUser._id.toString() == entryUser._id.toString()
     ) {
       return `<span
-      ><a href="#"  class="uk-button uk-button-secondary noSelect"
+      ><a href="#editEntryAdmin"  uk-toggle  class="uk-button uk-button-secondary noSelect"
         >Edit</a
       ></span
     >
@@ -41,6 +41,38 @@ module.exports = {
     >`;
     } else {
       return ``;
+    }
+  },
+  getBusinessEntryUser: function (loggedUser, entryUser) {
+    if (loggedUser._id.toString() == entryUser._id.toString()) {
+      return `<span
+      ><a href="#editBusinessEntry"  uk-toggle  class="uk-button uk-button-secondary noSelect"
+        >Edit</a
+      ></span
+    >
+
+    <span
+      ><a
+        href="#deleteBusinessEntry" uk-toggle
+        class="uk-button uk-button-danger noSelect uk-marign-small-right"
+        >Delete</a
+      ></span
+    >`;
+    } else {
+      return ``;
+    }
+  },
+  getReviewStatus: function (entry) {
+    if (entry.reviewStatus == "inprocess") {
+      return `<span
+          ><a
+            href="#markasreviewed" uk-toggle
+            class="uk-button uk-button-primary noSelect uk-marign-small-right"
+            >Mark as reviewed</a
+          ></span
+        >`;
+    } else {
+      return `<span class="uk-label uk-label-success uk-margin-large-left">Reviewed</span>`;
     }
   },
 };

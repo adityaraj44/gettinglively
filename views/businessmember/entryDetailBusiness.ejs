@@ -1,34 +1,17 @@
-<%- include('../partials/adminNavbar.ejs'); %>
+<%- include('../partials/businessNavbar.ejs'); %>
 
 <ul class="uk-breadcrumb uk-margin-large-left">
   <li>
-    <a href="/admin" class="uk-button uk-button-text noSelect"
-      >Back to dashboard</a
+    <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
+  </li>
+  <li>
+    <a href="/business/createentries" class="uk-button uk-button-text noSelect"
+      >Create Entries</a
     >
   </li>
   <li>
-    <a href="/admincreate" class="uk-button uk-button-text noSelect"
-      >Create Email Updates</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
-      >Create New Entry</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
-      >All Entries</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/myEntries" class="uk-button uk-button-text noSelect"
-      >Review Entries</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
-      >My Entries</a
+    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
+      >Entries For Review</a
     >
   </li>
 </ul>
@@ -144,10 +127,10 @@
     
     <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
       <div class="uk-card-body">
-        <%- helper.getEntryUser(user,entry.user) %>
-        <%- helper.getReviewStatus(entry) %>
+        <%- helper.getBusinessEntryUser(user,entry.user) %>
+        
         <!-- edit -->
-        <div id="editEntryAdmin" uk-modal>
+        <div id="editBusinessEntry" uk-modal>
             <div class="uk-modal-dialog uk-modal-body">
               <h2 class="uk-modal-title">Are you sure?</h2>
               <p>Go to the edit page</p>
@@ -161,7 +144,7 @@
               </span>
               <span
                 ><a
-                href="/admincreate/myentries/entry/edit/<%- entry._id %>"
+                href="/business/myentries/entry/edit/<%- entry._id %>"
                 class="uk-button uk-button-default  noSelect"
                 type="button"
               >
@@ -170,32 +153,9 @@
               >
             </div>
           </div>
-          <!-- mark as reviewed -->
-          <div id="markasreviewed" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-              <h2 class="uk-modal-title">Are you sure?</h2>
-              <p>Mark this entry as reviewd. This entry will now be visible to everyone</p>
-              <span>
-                <button
-                  class="uk-button uk-button-default uk-modal-close noSelect"
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </span>
-              <span
-                ><a
-                href="/admincreate/myentries/entry/review/<%- entry._id %>"
-                class="uk-button uk-button-default  noSelect"
-                type="button"
-              >
-                Done
-              </a></span
-              >
-            </div>
-          </div>
-        <!-- logout modal -->
-        <div id="deleteEntryAdmin" uk-modal>
+          
+        <!-- delete modal -->
+        <div id="deleteBusinessEntry" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
             <h2 class="uk-modal-title">Are you sure?</h2>
             <p>This entry will be deleted permanently!</p>
@@ -210,7 +170,7 @@
             <span
               ><form
                 class="uk-float-right"
-                action="/admincreate/myentries/entry/delete/<%- entry._id %>"
+                action="/business/myentries/entry/delete/<%- entry._id %>"
                 method="POST"
               >
                 <input type="hidden" name="_method" value="DELETE" />
