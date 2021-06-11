@@ -18,35 +18,6 @@ CKEDITOR.replace("desc", {
     "wysiwygarea, toolbar, basicstyles,link,image,clipboard,colorbutton,mentions,undo",
 });
 
-// autocomplete
-
-let autocomplete;
-function initAutoComplete() {
-  autocomplete = new google.maps.places.Autocomplete(
-    document.getElementById("addressEntry"),
-    {
-      types: ["establishments"],
-      componentRestrictions: { country: ["UK"] },
-      fields: ["place_id", "geometry", "name"],
-    }
-  );
-  autocomplete.addListener("place_changed", onPlaceChanged);
-}
-
-function onPlaceChanged() {
-  var place = autocomplete.getPlace();
-
-  if (!place.geometry) {
-    // user did not enter
-    document.getElementById("addressEntry").placeholder =
-      "Enter complete address";
-  } else {
-    document.getElementById("location").innerHTML = place.name;
-  }
-}
-
-initAutoComplete();
-
 // algolia
 const search = instantsearch({
   indexName: "dev_BARS",

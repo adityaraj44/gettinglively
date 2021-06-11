@@ -318,6 +318,7 @@ footer p {
 
 .ais-SearchBox {
   width: 80%;
+  margin-bottom: 20px;
   margin: 0px auto;
 }
 
@@ -327,4 +328,12 @@ footer p {
   padding: 30px 40px;
 
   /* margin: 20px; */
+}
+
+.ais-Hits {
+  margin-top: 25px;
+}
+
+.ais-Pagination {
+  margin-top: 15px;
 }
