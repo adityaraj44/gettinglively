@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureAuthenticated, ensureGuest } = require("../middlewares/auth");
 const Post = require("../models/Post");
 const User = require("../models/User");
+const PageDetail = require("../models/PageDetail");
 const Review = require("../models/Review");
 
 router.get("/bars", async (req, res) => {
@@ -13,10 +14,17 @@ router.get("/bars", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+  const pagedetails = await PageDetail.find({
+    typeOfPlace: "bar",
+  })
+    .sort({ createdAt: "desc" })
+    .lean();
 
   res.render("bars", {
     user: req.user,
+    pagedetails,
     allEntries,
+
     helper: require("../helpers/ejs"),
   });
 });
@@ -31,9 +39,16 @@ router.get("/restaurant", async (req, res) => {
     .sort({ createdAt: "desc" })
     .lean();
 
+  const pagedetails = await PageDetail.find({
+    typeOfPlace: "restaurant",
+  })
+    .sort({ createdAt: "desc" })
+    .lean();
+
   res.render("restaurant", {
     user: req.user,
     allEntries,
+    pagedetails,
     helper: require("../helpers/ejs"),
   });
 });

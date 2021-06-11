@@ -6,6 +6,7 @@ const Post = require("../models/Post");
 const Review = require("../models/Review");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
+const PageDetail = require("../models/PageDetail");
 
 // get request to the /admincreate
 
@@ -63,6 +64,66 @@ router.post(
         req.flash("success_msg", "Emails sent successfully");
         res.redirect("/admincreate");
       }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// get detail page
+router.get(
+  "/pagedetails",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      res.render("admin/pagedetails", {
+        layout: "layouts/layout",
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// post detail page
+router.post(
+  "/pagedetails",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const { title, desc, typeOfPlace } = req.body;
+      const errors = [];
+
+      let image = req.files.image;
+      image.mv(path.resolve(__dirname, "..", "public/img", image.name));
+
+      if (desc.length > 200) {
+        errors.push({ msg: "Description must be less than 200 characters" });
+        //   req.flash("warning_msg", "Description must be atleast 500 characters");
+        return res.render("admin/pagedetails", {
+          layout: "layouts/layout",
+          title,
+
+          desc: desc.replace(/(<([^>]+)>)/gi, ""),
+
+          errors,
+        });
+      }
+      await PageDetail.create({
+        title,
+        desc,
+        typeOfPlace,
+
+        user: req.user.id,
+        image: "/img/" + image.name,
+      }).then((post) => {
+        req.flash("upload_msg", "Detail created.");
+      });
+      res.redirect("/admincreate");
     } catch (error) {
       console.log(error);
       res.render("errors/500");
