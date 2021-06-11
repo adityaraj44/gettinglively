@@ -19,6 +19,20 @@ router.get("/bars", async (req, res) => {
   })
     .sort({ createdAt: "desc" })
     .lean();
+  //   const barEntries = { allEntries };
+  //   // algolia
+  //   const client = await algoliasearch(
+  //     process.env.SEARCH_APP_ID,
+  //     process.env.SEARCH_APP_KEY
+  //   );
+  //   const index = await client.initIndex("dev_ENTRIES");
+  //   index
+  //     .saveObject(barEntries, {
+  //       autoGenerateObjectIDIfNotExist: true,
+  //     })
+  //     .then((error) => {
+  //       console.log(error);
+  //     });
 
   res.render("bars", {
     user: req.user,

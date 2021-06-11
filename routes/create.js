@@ -7,7 +7,7 @@ const Review = require("../models/Review");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 const PageDetail = require("../models/PageDetail");
-
+const algoliasearch = require("algoliasearch");
 // get request to the /admincreate
 
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -431,6 +431,24 @@ router.get(
       }).then((entry) => {
         if (entry.reviewStatus == "inprocess") {
           entry.reviewStatus = "reviewed";
+          if ((entry.typeOfPlace = "bar")) {
+            // algolia
+            const client = algoliasearch(
+              process.env.SEARCH_APP_ID,
+              process.env.SEARCH_APP_KEY
+            );
+            const index = client.initIndex("dev_BARS");
+            index
+              .saveObject(
+                { entry },
+                {
+                  autoGenerateObjectIDIfNotExist: true,
+                }
+              )
+              .then((error) => {
+                console.log(error);
+              });
+          }
           entry.save((err) => {
             req.flash("success_msg", "Entry reviewed successfully!");
             res.redirect(`/admincreate/myentries/entry/${req.params.id}`);

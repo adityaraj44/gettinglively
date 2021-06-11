@@ -12,61 +12,11 @@ CKEDITOR.replace("body", {
   plugins:
     "wysiwygarea, toolbar, basicstyles,link,image,clipboard,colorbutton,mentions,undo",
 });
-// tinymce.init({
-//   selector: "#body",
-//   plugins:
-//     "a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker",
-//   toolbar:
-//     "a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table",
-//   toolbar_mode: "floating",
-//   tinycomments_mode: "embedded",
-//   tinycomments_author: "Author name",
-// });
-
-// tinymce.init({
-//   selector: "#desc",
-//   plugins:
-//     "a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker",
-//   toolbar:
-//     "a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table",
-//   toolbar_mode: "floating",
-//   tinycomments_mode: "embedded",
-//   tinycomments_author: "Author name",
-// });
 
 CKEDITOR.replace("desc", {
   plugins:
     "wysiwygarea, toolbar, basicstyles,link,image,clipboard,colorbutton,mentions,undo",
 });
-
-// charts
-
-// <block:setup:1>
-const labels = ["January", "February", "March", "April", "May", "June"];
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: "#ec4d37",
-      borderColor: "#ec4d37",
-      data: [0, 10, 5, 2, 20, 30, 45],
-    },
-  ],
-};
-// </block:setup>
-
-// <block:config:0>
-const config = {
-  type: "line",
-  data,
-  options: {},
-};
-
-var myChart = new Chart(document.getElementById("myChart"), config);
-var myChart2 = new Chart(document.getElementById("myChart2"), config);
-var myChart3 = new Chart(document.getElementById("myChart3"), config);
-var myChart4 = new Chart(document.getElementById("myChart4"), config);
 
 // autocomplete
 
@@ -96,3 +46,68 @@ function onPlaceChanged() {
 }
 
 initAutoComplete();
+
+// algolia
+const search = instantsearch({
+  indexName: "dev_BARS",
+  searchClient: algoliasearch("5XADSF6L2U", "50d12b33efa2a813b77e2dcfa3643286"),
+});
+
+search.addWidgets([
+  instantsearch.widgets.searchBox({
+    container: "#barsearch",
+  }),
+
+  instantsearch.widgets.hits({
+    container: "#hits",
+    templates: {
+      item: `
+      <a href="/places/entries/entry/{{entry._id}}" class="noSelect"
+      ><div class="uk-card uk-card-hover uk-card-default">
+        <div class="uk-card-media-top">
+          <div class="uk-clearfix uk-position-absolute">
+            <span
+              class="
+                uk-label
+                uk-float-left
+                uk-label-danger
+                uk-text-medium
+                uk-text-bold
+              "
+              >{{entry.typeOfPlace}}</span
+            >
+            <span
+              class="
+                uk-label
+                uk-float-left
+                uk-label-primary
+                uk-text-medium
+                uk-text-bold
+              "
+              >{{entry.bookingStatus}}</span
+            >
+          </div>
+          <img src="{{entry.cover}}" alt="<%- entry.cover %>" />
+        </div>
+        <div
+          class="
+            uk-card-footer
+            uk-card-secondary
+            uk-text-left
+            uk-text-default
+            uk-text-bold
+          "
+        >
+          {{entry.name}}
+        </div>
+      </div></a
+    >
+        `,
+    },
+  }),
+  instantsearch.widgets.pagination({
+    container: "#pagination",
+  }),
+]);
+
+search.start();

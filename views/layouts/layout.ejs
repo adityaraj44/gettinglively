@@ -8,6 +8,10 @@
     <link rel="manifest" href="/manifest.json" />
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/uikit@3.6.21/dist/css/uikit.min.css"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -15,10 +19,14 @@
     <title>Getting Lively</title>
   </head>
   <body>
+    <!-- algolia serach -->
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
     <%- body %>
     <!-- ui kit scripts -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.21/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.21/dist/js/uikit-icons.min.js"></script>
+
     <!-- scroll reveal -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- aos  -->
@@ -27,14 +35,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.16.0/ckeditor.js"></script>
     <!-- jquery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-    <!-- charts js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- plcaes -->
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDre9q5oLWS-B2T1mO3FZS0u_IdBPsHj00&libraries=places"
-    ></script>
 
     <script src="/main.js"></script>
   </body>

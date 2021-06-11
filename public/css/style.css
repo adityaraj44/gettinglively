@@ -315,3 +315,16 @@ footer p {
   min-height: 80vh;
   border-radius: 10px !important;
 }
+
+.ais-SearchBox {
+  width: 80%;
+  margin: 0px auto;
+}
+
+.ais-SearchBox input {
+  height: 50px;
+  outline: none;
+  padding: 30px 40px;
+
+  /* margin: 20px; */
+}
