@@ -228,9 +228,11 @@ footer p {
 @media screen and (max-width: 600px) {
   .parallaxslider h2 {
     font-size: 20px !important;
+    line-height: 22px !important;
   }
   .parallaxslider h1 {
     font-size: 25px !important;
+    line-height: 27px !important;
   }
 
   .parallaxslider p {

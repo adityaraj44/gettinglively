@@ -62,10 +62,16 @@ router.get("/club", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+  const pagedetails = await PageDetail.find({
+    typeOfPlace: "club",
+  })
+    .sort({ createdAt: "desc" })
+    .lean();
 
   res.render("club", {
     user: req.user,
     allEntries,
+    pagedetails,
     helper: require("../helpers/ejs"),
   });
 });
@@ -79,9 +85,14 @@ router.get("/pubs", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
-
+  const pagedetails = await PageDetail.find({
+    typeOfPlace: "pub",
+  })
+    .sort({ createdAt: "desc" })
+    .lean();
   res.render("pub", {
     user: req.user,
+    pagedetails,
     allEntries,
     helper: require("../helpers/ejs"),
   });
@@ -96,10 +107,15 @@ router.get("/venue", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
-
+  const pagedetails = await PageDetail.find({
+    typeOfPlace: "venue",
+  })
+    .sort({ createdAt: "desc" })
+    .lean();
   res.render("venue", {
     user: req.user,
     allEntries,
+    pagedetails,
     helper: require("../helpers/ejs"),
   });
 });
