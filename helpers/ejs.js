@@ -75,4 +75,51 @@ module.exports = {
       return `<span class="uk-label uk-label-success uk-margin-large-left">Reviewed</span>`;
     }
   },
+  getFooter: function (user) {
+    if (user && user.role == "business") {
+      return `<div
+         class="uk-width-2-4@s uk-light uk-text-center@s uk-margin-small-left"
+       >
+         <a
+           href="/"
+           class="uk-button uk-button-text uk-margin-medium-right noSelect"
+           uk-toggle
+           >Terms and Conditions</a
+         >
+ 
+         <a
+           href="/"
+           class="uk-button-text uk-button noSelect uk-margin-medium-right"
+           >Privacy Policy</a
+         >
+         <a
+           href="/"
+           class="uk-button-text uk-button noSelect uk-margin-medium-right"
+           >End User License Agreement</a
+         >
+       </div>`;
+    } else {
+      return `<div
+        class="uk-width-2-4@s uk-light uk-text-center@s uk-margin-small-left"
+      >
+        <a
+          href="#terms"
+          class="uk-button uk-button-text uk-margin-medium-right noSelect"
+          uk-toggle
+          >Terms and Conditions</a
+        >
+
+        <a
+          href="/"
+          class="uk-button-text uk-button noSelect uk-margin-medium-right"
+          >Privacy Policy</a
+        >
+        <a
+          href="/"
+          class="uk-button-text uk-button noSelect uk-margin-medium-right"
+          >End User License Agreement</a
+        >
+      </div>`;
+    }
+  },
 };

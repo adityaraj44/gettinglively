@@ -40,7 +40,7 @@
     <div
       class="
         uk-child-width-1-1
-        uk-child-width-1-2@s
+        uk-child-width-1-4@s
         uk-grid-small
         uk-grid-match
         uk-margin-large-top
@@ -49,7 +49,7 @@
       uk-grid
     >
       <div class="tagline1">
-        <div class="uk-card uk-card-hover uk-card-default uk-card-body">
+        <div class="uk-card uk-card-hover uk-card-primary uk-card-body">
           <h3 class="uk-card-title uk-text-center uk-margin-medium">
             Customers Joined
           </h3>
@@ -59,7 +59,6 @@
           >
             <%- customerMembers.length %>
           </p>
-          <p><canvas id="myChart"></canvas></p>
         </div>
       </div>
       <div class="tagline2">
@@ -73,44 +72,15 @@
           >
             <%- businessMembers.length %>
           </p>
-          <p><canvas id="myChart2"></canvas></p>
         </div>
       </div>
-    </div>
-
-    <!-- transactions -->
-    <div
-      class="
-        uk-child-width-1-1
-        uk-grid-small
-        uk-grid-match
-        uk-margin-large-top
-        uk-margin-large-bottom
-      "
-      uk-grid
-    >
       <div class="tagline2">
-        <div class="uk-card uk-card-hover uk-card-default uk-card-body">
+        <div class="uk-card uk-card-hover uk-card-primary uk-card-body">
           <h3 class="uk-card-title uk-text-center uk-margin-medium">
             Total Transactions
           </h3>
-
-          <p><canvas id="myChart3"></canvas></p>
         </div>
       </div>
-    </div>
-
-    <!-- total entries -->
-    <div
-      class="
-        uk-child-width-1-1
-        uk-grid-small
-        uk-grid-match
-        uk-margin-large-top
-        uk-margin-large-bottom
-      "
-      uk-grid
-    >
       <div class="tagline3">
         <div class="uk-card uk-card-hover uk-card-default uk-card-body">
           <h3 class="uk-card-title uk-text-center uk-margin-medium">
@@ -121,7 +91,6 @@
           >
             <%- entries.length %>
           </p>
-          <p><canvas id="myChart4"></canvas></p>
         </div>
       </div>
     </div>

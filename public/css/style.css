@@ -268,6 +268,11 @@ footer p {
     line-height: 50px;
   }
 
+  .uk-section-restaurant h4 {
+    font-size: 35px !important;
+    line-height: 50px;
+  }
+
   .uk-section-entrydetail h4 {
     font-size: 40px !important;
     line-height: 50px;
@@ -277,9 +282,18 @@ footer p {
     font-size: 45px !important;
     line-height: 50px;
   }
+
+  .uk-section-restaurant h4 {
+    font-size: 25px !important;
+    line-height: 50px;
+  }
 }
 
 .uk-section-bar {
+  border-bottom: 8px solid #ec4d37;
+}
+
+.uk-section-restaurant {
   border-bottom: 8px solid #ec4d37;
 }
 

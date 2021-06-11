@@ -1,42 +1,10 @@
-<%- include('../partials/adminNavbar.ejs'); %>
+<%- include('./partials/navbar.ejs'); %>
+<!-- <ul class="uk-breadcrumb uk-margin-large-left">
+   <li>
+    <a href="/places/bars" class="uk-button uk-button-text noSelect">Bars</a>
+  </li>
+</ul> -->
 
-<ul class="uk-breadcrumb uk-margin-large-left">
-  <li>
-    <a href="/admin" class="uk-button uk-button-text noSelect"
-      >Back to dashboard</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate" class="uk-button uk-button-text noSelect"
-      >Create Email Updates</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/pagedetails" class="uk-button uk-button-text noSelect"
-      >Create Page Detail</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
-      >Create New Entry</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
-      >All Entries</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/myEntries" class="uk-button uk-button-text noSelect"
-      >Review Entries</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
-      >My Entries</a
-    >
-  </li>
-</ul>
 
 <div
   class="
@@ -45,7 +13,7 @@
   "
 >
   <div class="uk-container">
-    <%- include('../partials/errors.ejs'); %>
+    <%- include('./partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
       <%- entry.name %>
     </h4>
@@ -149,90 +117,6 @@
     
     <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
       <div class="uk-card-body">
-        <%- helper.getEntryUser(user,entry.user) %>
-        <%- helper.getReviewStatus(entry) %>
-        <!-- edit -->
-        <div id="editEntryAdmin" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-              <h2 class="uk-modal-title">Are you sure?</h2>
-              <p>Go to the edit page</p>
-              <span>
-                <button
-                  class="uk-button uk-button-default uk-modal-close noSelect"
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </span>
-              <span
-                ><a
-                href="/admincreate/myentries/entry/edit/<%- entry._id %>"
-                class="uk-button uk-button-default  noSelect"
-                type="button"
-              >
-                Edit
-              </a></span
-              >
-            </div>
-          </div>
-          <!-- mark as reviewed -->
-          <div id="markasreviewed" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-              <h2 class="uk-modal-title">Are you sure?</h2>
-              <p>Mark this entry as reviewd. This entry will now be visible to everyone</p>
-              <span>
-                <button
-                  class="uk-button uk-button-default uk-modal-close noSelect"
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </span>
-              <span
-                ><a
-                href="/admincreate/myentries/entry/review/<%- entry._id %>"
-                class="uk-button uk-button-default  noSelect"
-                type="button"
-              >
-                Done
-              </a></span
-              >
-            </div>
-          </div>
-        <!-- logout modal -->
-        <div id="deleteEntryAdmin" uk-modal>
-          <div class="uk-modal-dialog uk-modal-body">
-            <h2 class="uk-modal-title">Are you sure?</h2>
-            <p>This entry will be deleted permanently!</p>
-            <span>
-              <button
-                class="uk-button uk-button-default uk-modal-close noSelect"
-                type="button"
-              >
-                Cancel
-              </button>
-            </span>
-            <span
-              ><form
-                class="uk-float-right"
-                action="/admincreate/myentries/entry/delete/<%- entry._id %>"
-                method="POST"
-              >
-                <input type="hidden" name="_method" value="DELETE" />
-                <button
-                  type="submit"
-                  class="
-                    uk-button uk-button-danger
-                    noSelect
-                    uk-margin-small-left
-                  "
-                >
-                  Delete
-                </button>
-              </form></span
-            >
-          </div>
-        </div>
         <ul uk-tab>
           <li><a href="#">Description</a></li>
           <li><a href="#">Hours</a></li>
@@ -327,7 +211,7 @@
     <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
       <div class="uk-card-body">
         <h1 class="uk-card-title uk-text-center">Add reviews</h1>
-        <form action="/userreviews/<%- entry._id %>" method="POST">
+        <form action="/places/userreviews/<%- entry._id %>" method="POST">
           <div class="uk-form-stacked">
             <div class="uk-margin-small">
               <div class="uk-form-control">
