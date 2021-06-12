@@ -317,9 +317,13 @@ footer p {
 }
 
 .ais-SearchBox {
+  top: 0;
+  left: 0;
+
   width: 80%;
+
   margin-bottom: 20px;
-  margin: 0px auto;
+  margin: 70px auto;
 }
 
 .ais-SearchBox input {
@@ -331,9 +335,23 @@ footer p {
 }
 
 .ais-Hits {
-  margin-top: 25px;
+  margin: 50px 65px;
 }
 
 .ais-Pagination {
-  margin-top: 15px;
+  margin: 25px 0px;
 }
+
+.ais-Hits-item {
+  margin: 20px;
+  padding: 0;
+  width: 100%;
+  outline: none;
+}
+
+/* 
+@media screen and (max-width: 890px) {
+  .ais-Hits-item {
+    width: 30vw;
+  }
+} */

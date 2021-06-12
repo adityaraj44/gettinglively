@@ -33,6 +33,7 @@ search.addWidgets([
     container: "#hits",
     templates: {
       item: `
+      <div>
       <a href="/places/entries/entry/{{entry._id}}" class="noSelect"
       ><div class="uk-card uk-card-hover uk-card-default">
         <div class="uk-card-media-top">
@@ -73,6 +74,7 @@ search.addWidgets([
         </div>
       </div></a
     >
+    </div>
         `,
     },
   }),
