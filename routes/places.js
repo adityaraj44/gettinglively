@@ -5,6 +5,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const PageDetail = require("../models/PageDetail");
 const Review = require("../models/Review");
+const algoliasearch = require("algoliasearch");
 
 router.get("/bars", async (req, res) => {
   const allEntries = await Post.find({
@@ -19,20 +20,20 @@ router.get("/bars", async (req, res) => {
   })
     .sort({ createdAt: "desc" })
     .lean();
-  //   const barEntries = { allEntries };
-  //   // algolia
-  //   const client = await algoliasearch(
-  //     process.env.SEARCH_APP_ID,
-  //     process.env.SEARCH_APP_KEY
-  //   );
-  //   const index = await client.initIndex("dev_ENTRIES");
-  //   index
-  //     .saveObject(barEntries, {
-  //       autoGenerateObjectIDIfNotExist: true,
-  //     })
-  //     .then((error) => {
-  //       console.log(error);
-  //     });
+  const barEntries = { allEntries };
+  // algolia
+  const client = await algoliasearch(
+    process.env.SEARCH_APP_ID,
+    process.env.SEARCH_APP_KEY
+  );
+  const index = await client.initIndex("dev_BARS");
+  index
+    .partialUpdateObjects(barEntries, {
+      autoGenerateObjectIDIfNotExist: true,
+    })
+    .then((error) => {
+      console.log(error);
+    });
 
   res.render("bars", {
     user: req.user,
@@ -59,6 +60,21 @@ router.get("/restaurant", async (req, res) => {
     .sort({ createdAt: "desc" })
     .lean();
 
+  const barEntries = { allEntries };
+  // algolia
+  const client = await algoliasearch(
+    process.env.SEARCH_APP_ID,
+    process.env.SEARCH_APP_KEY
+  );
+  const index = await client.initIndex("dev_BARS");
+  index
+    .partialUpdateObjects(barEntries, {
+      autoGenerateObjectIDIfNotExist: true,
+    })
+    .then((error) => {
+      console.log(error);
+    });
+
   res.render("restaurant", {
     user: req.user,
     allEntries,
@@ -81,6 +97,20 @@ router.get("/club", async (req, res) => {
   })
     .sort({ createdAt: "desc" })
     .lean();
+  const barEntries = { allEntries };
+  // algolia
+  const client = await algoliasearch(
+    process.env.SEARCH_APP_ID,
+    process.env.SEARCH_APP_KEY
+  );
+  const index = await client.initIndex("dev_BARS");
+  index
+    .partialUpdateObjects(barEntries, {
+      autoGenerateObjectIDIfNotExist: true,
+    })
+    .then((error) => {
+      console.log(error);
+    });
 
   res.render("club", {
     user: req.user,
@@ -104,6 +134,20 @@ router.get("/pubs", async (req, res) => {
   })
     .sort({ createdAt: "desc" })
     .lean();
+  const barEntries = { allEntries };
+  // algolia
+  const client = await algoliasearch(
+    process.env.SEARCH_APP_ID,
+    process.env.SEARCH_APP_KEY
+  );
+  const index = await client.initIndex("dev_BARS");
+  index
+    .partialUpdateObjects(barEntries, {
+      autoGenerateObjectIDIfNotExist: true,
+    })
+    .then((error) => {
+      console.log(error);
+    });
   res.render("pub", {
     user: req.user,
     pagedetails,
@@ -126,6 +170,20 @@ router.get("/venue", async (req, res) => {
   })
     .sort({ createdAt: "desc" })
     .lean();
+  const barEntries = { allEntries };
+  // algolia
+  const client = await algoliasearch(
+    process.env.SEARCH_APP_ID,
+    process.env.SEARCH_APP_KEY
+  );
+  const index = await client.initIndex("dev_BARS");
+  index
+    .partialUpdateObjects(barEntries, {
+      autoGenerateObjectIDIfNotExist: true,
+    })
+    .then((error) => {
+      console.log(error);
+    });
   res.render("venue", {
     user: req.user,
     allEntries,

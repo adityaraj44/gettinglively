@@ -159,16 +159,26 @@
       Pubs all over UK
     </p>
     <hr class="uk-divider-icon" />
-    <div class="uk-margin-large tagline4 uk-text-center">
-      <form class="uk-search uk-search-large" data-aos="fade-down">
-        <span uk-search-icon></span>
-        <input
-          class="uk-search-input"
-          type="search"
-          id="barsearch"
-          placeholder="Search for Pubs"
-        />
-      </form>
+    <div class="uk-container uk-flex uk-flex-center tagline1">
+      <a
+        class="uk-navbar-toggle uk-button-text uk-text-large noSelect"
+        href="#searchbarmodal"
+        uk-icon="icon: search; ratio:3"
+        uk-toggle
+      >
+        <span class="uk-margin-medium-right search noSelect">Search...</span></a
+      >
+    </div>
+
+    <div id="searchbarmodal" uk-modal>
+      <div class="uk-modal-dialog" uk-height-viewport uk-width-viewport>
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <div class="uk-text-center ais-InstantSearch">
+          <div id="barsearch" class="ais-SearchBox uk-margin-medium"></div>
+        </div>
+        <div id="hits"></div>
+        <div id="pagination"></div>
+      </div>
     </div>
   </div>
 </div>
