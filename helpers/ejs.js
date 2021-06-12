@@ -110,8 +110,8 @@ module.exports = {
         >
 
         <a
-          href="/"
-          class="uk-button-text uk-button noSelect uk-margin-medium-right"
+          href="#privacypolicy"
+          class="uk-button-text uk-button noSelect uk-margin-medium-right" uk-toggle
           >Privacy Policy</a
         >
         <a
