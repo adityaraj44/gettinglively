@@ -81,21 +81,21 @@ module.exports = {
          class="uk-width-2-4@s uk-light uk-text-center@s uk-margin-small-left"
        >
          <a
-           href="/"
+           href="/docs/termsandconditions.html" target="blank"
            class="uk-button uk-button-text uk-margin-medium-right noSelect"
-           uk-toggle
+           
            >Terms and Conditions</a
          >
  
          <a
-           href="/"
+           href="/docs/privacypolicy.html" target="blank"
            class="uk-button-text uk-button noSelect uk-margin-medium-right"
            >Privacy Policy</a
          >
          <a
-           href="/"
+           href="/docs/termsofuse.html" target="blank"
            class="uk-button-text uk-button noSelect uk-margin-medium-right"
-           >End User License Agreement</a
+           >Terms Of Use</a
          >
        </div>`;
     } else {
@@ -115,11 +115,30 @@ module.exports = {
           >Privacy Policy</a
         >
         <a
-          href="/"
-          class="uk-button-text uk-button noSelect uk-margin-medium-right"
+          href="#enduser"
+          class="uk-button-text uk-button noSelect uk-margin-medium-right" uk-toggle
           >End User License Agreement</a
         >
       </div>`;
+    }
+  },
+  getBusinessOfferUser: function (loggedUser, entryuser) {
+    if (loggedUser._id.toString() == entryuser._id.toString()) {
+      return `
+        <span
+      ><a href="#editOffer"  uk-toggle  class="uk-button uk-button-secondary noSelect"
+        >Edit</a
+      ></span
+    >
+
+    <span
+      ><a
+        href="#deleteOffer" uk-toggle
+        class="uk-button uk-button-danger noSelect uk-marign-small-right"
+        >Delete</a
+      ></span
+    >
+        `;
     }
   },
 };

@@ -3,9 +3,11 @@ const router = express.Router();
 const Post = require("../models/Post");
 const User = require("../models/User");
 const Review = require("../models/Review");
+const Offer = require("../models/Offer");
 const path = require("path");
 const { ensureAuthenticated, ensureBusiness } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
+const { response } = require("express");
 
 // get business dash
 router.get("/", ensureAuthenticated, ensureBusiness, async (req, res) => {
@@ -61,7 +63,7 @@ router.post(
         typeOfPlace,
         typeOfVenue,
         location,
-
+        postcode,
         bookingStatus,
         monopening,
         monclose,
@@ -98,6 +100,7 @@ router.post(
       image7.mv(path.resolve(__dirname, "..", "public/img", image7.name));
       let image8 = req.files.image8;
       image8.mv(path.resolve(__dirname, "..", "public/img", image8.name));
+
       let image9 = req.files.image9;
       image9.mv(path.resolve(__dirname, "..", "public/img", image9.name));
       let menu = req.files.menu;
@@ -112,7 +115,7 @@ router.post(
           location,
           desc: desc.replace(/(<([^>]+)>)/gi, ""),
           typeOfVenue,
-
+          postcode,
           monopening,
           monclose,
           tueopening,
@@ -135,6 +138,7 @@ router.post(
         desc,
         typeOfPlace,
         location,
+        postcode,
         typeOfVenue,
         bookingStatus,
         monopening,
@@ -232,6 +236,11 @@ router.get(
       })
         .populate("user")
         .lean();
+      const allOffers = await Offer.find({ post: req.params.id })
+        .populate("post")
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
       const allReview = await Review.find({ post: req.params.id })
         .populate("post")
         .populate("user")
@@ -248,6 +257,7 @@ router.get(
         layout: "layouts/layout",
         entry,
         allReview,
+        allOffers,
         totalScore,
         user: req.user,
         helper: require("../helpers/ejs"),
@@ -319,6 +329,7 @@ router.put(
         typeOfPlace,
         typeOfVenue,
         location,
+        postcode,
         bookingStatus,
         monopening,
         monclose,
@@ -385,6 +396,7 @@ router.put(
             desc,
             typeOfPlace,
             location,
+            postcode,
             typeOfVenue,
             bookingStatus,
             monopening,
@@ -429,6 +441,140 @@ router.put(
     } catch (error) {
       console.log(error);
       return res.render("errors/404");
+    }
+  }
+);
+
+// post offer
+router.post(
+  "/createoffer/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const { offername, offeramount, offerdesc } = req.body;
+
+      if (!offerdesc) {
+        req.flash("error_msg", "Please enter description");
+        return res.redirect(`/business/myentries/entry/${req.params.id}`);
+      }
+      await Offer.create({
+        offername,
+        offerdesc,
+        offeramount,
+        user: req.user.id,
+        post: req.params.id,
+      }).then((data) => {
+        req.flash("success_msg", "Offer created successfully!");
+        res.redirect(`/business/myentries/entry/${req.params.id}`);
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// delete
+// delete business entry
+router.delete(
+  "/myentries/offer/delete/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      let offer = await Offer.findById(req.params.id).populate("post").lean();
+      await Offer.remove({ _id: req.params.id });
+      req.flash("success_msg", "Offer Deleted Successfully!");
+      res.redirect(`/business/myentries/entry/${offer.post._id}`);
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/500");
+    }
+  }
+);
+
+// get offer edit page
+router.get(
+  "/myentries/offer/edit/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const offer = await Offer.findOne({ _id: req.params.id })
+        .populate("post")
+        .lean();
+      if (!offer) {
+        return res.render("error/404");
+      }
+      if (offer.user != req.user.id) {
+        req.flash("error_msg", "Cannot process request at the moment!");
+        res.redirect(`/business/myentries/entry/${offer.post._id}`);
+      } else {
+        res.render("businessmember/offeredit", {
+          layout: "layouts/layout",
+          offer,
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// edit offer
+router.put(
+  "/createoffer/edit/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const { offername, offerdesc, offeramount } = req.body;
+      if (!offerdesc) {
+        req.flash("error_msg", "Please enter description");
+        return res.redirect(`/business/myentries/offer/edit/${req.params.id}`);
+      }
+      let offer = await Offer.findById(req.params.id).populate("post").lean();
+      if (!offer) {
+        return res.render("error/404");
+      }
+
+      if (offer.user != req.user.id) {
+        req.flash("error_msg", "You can not edit this offer. Try again!");
+        res.redirect(`/business/myentries/entry/${offer.post._id}`);
+      } else {
+        offer = await Offer.findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          {
+            offername,
+            offerdesc,
+            offeramount,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        await Post.findById({ _id: offer.post }).then((post) => {
+          if (post.reviewStatus == "reviewed") {
+            post.reviewStatus = "inprocess";
+          }
+          post.save((err) => {
+            offer.save().then((go) => {
+              req.flash("success_msg", "Offer edited successfully");
+              res.redirect(`/business/myentries/entry/${offer.post._id}`);
+            });
+          });
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
     }
   }
 );

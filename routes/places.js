@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureAuthenticated, ensureGuest } = require("../middlewares/auth");
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Offer = require("../models/Offer");
 const PageDetail = require("../models/PageDetail");
 const Review = require("../models/Review");
 const algoliasearch = require("algoliasearch");
@@ -197,8 +198,17 @@ router.get("/entries/entry/:id", async (req, res) => {
   try {
     const entry = await Post.findById({
       _id: req.params.id,
+      reviewStatus: "reviewed",
     })
       .populate("user")
+      .lean();
+    if (!entry) {
+      res.render("errors/404");
+    }
+    const allOffers = await Offer.find({ post: req.params.id })
+      .populate("post")
+      .populate("user")
+      .sort({ createdAt: "desc" })
       .lean();
     const allReview = await Review.find({ post: req.params.id })
       .populate("post")
@@ -209,12 +219,11 @@ router.get("/entries/entry/:id", async (req, res) => {
     for (i = 0; i < allReview.length; i++) {
       totalScore = totalScore + allReview[i].userScore;
     }
-    if (!entry) {
-      res.render("errors/404");
-    }
+
     res.render("singleEntry", {
       layout: "layouts/layout",
       entry,
+      allOffers,
       allReview,
       totalScore,
       user: req.user,

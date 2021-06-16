@@ -1,0 +1,119 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin" class="uk-button uk-button-text noSelect"
+      >Back to dashboard</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate" class="uk-button uk-button-text noSelect"
+      >Create Email Updates</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/pagedetails" class="uk-button uk-button-text noSelect"
+      >Create Page Detail</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
+      >Create New Entry</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
+      >All Entries</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/myEntries" class="uk-button uk-button-text noSelect"
+      >Review Entries</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
+      >My Entries</a
+    >
+  </li>
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-create-uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
+          <div class="uk-card-header">
+            <h3 class="uk-card-title uk-text-center">Edit Entry</h3>
+          </div>
+          <div class="uk-card-body">
+            <form
+              action="/admincreate/createoffer/edit/<%- offer._id %>"
+              method="POST"
+            >
+              <input type="hidden" name="_method" value="PUT" />
+              <div class="uk-form-stacked">
+                <div class="uk-margin-small">
+                  <div class="uk-form-control">
+                    <input
+                      class="uk-input uk-form-large noSelect"
+                      required
+                      type="text"
+                      name="offername"
+                      placeholder="Title of offer"
+                      value="<%- offer.offername %>"
+                    />
+                  </div>
+                  <div class="uk-form-control uk-margin-small-top">
+                    <label for="desc" class="uk-text-meta"
+                      >Full Description of the offer.</label
+                    >
+                    <textarea required name="offerdesc" class="uk-textarea">
+<%- offer.offerdesc %></textarea
+                    >
+                  </div>
+                  <div class="uk-form-control">
+                    <input
+                      required
+                      type="number"
+                      name="offeramount"
+                      id="offeramount"
+                      placeholder="Enter offer amount in USD"
+                      class="uk-input uk-form-large noSelect"
+                      value="<%- offer.offeramount %>"
+                    />
+                  </div>
+                </div>
+                <div class="uk-margin-medium uk-text-center">
+                  <div class="uk-form-control">
+                    <button
+                      type="submit"
+                      class="uk-button uk-button-custom noSelect"
+                    >
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

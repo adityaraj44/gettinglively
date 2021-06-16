@@ -46,6 +46,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    postcode: {
+      type: Number,
+      required: true,
+    },
     monopening: { type: String },
     monclose: { type: String },
     tueopening: { type: String },
