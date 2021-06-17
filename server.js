@@ -76,6 +76,9 @@ app.use(
     secret: "memyself",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+    },
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
