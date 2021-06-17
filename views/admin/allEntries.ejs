@@ -102,8 +102,20 @@
                 > -->
               </div>
               <img src="<%- allEntry.cover %>" alt="<%- allEntry.image %>" />
-            </div></div
-        ></a>
+            </div>
+            <div
+              class="
+                uk-card-footer
+                uk-card-secondary
+                uk-text-left
+                uk-text-default
+                uk-text-bold
+              "
+            >
+              <%- allEntry.name %>
+            </div>
+          </div></a
+        >
       </div>
       <% }) %> <% } else { %>
       <p class="uk-text-center uk-text-large uk-text-warning">No Entries</p>

@@ -92,8 +92,20 @@
                 >
               </div>
               <img src="<%- myEntry.cover %>" alt="<%- myEntry.cover %>" />
-            </div></div
-        ></a>
+            </div>
+            <div
+              class="
+                uk-card-footer
+                uk-card-secondary
+                uk-text-left
+                uk-text-default
+                uk-text-bold
+              "
+            >
+              <%- myEntry.name %>
+            </div>
+          </div></a
+        >
       </div>
       <% }) %> <% } else { %>
       <p class="uk-text-center uk-text-large uk-text-warning">No Entries</p>

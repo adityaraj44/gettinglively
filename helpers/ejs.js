@@ -139,6 +139,118 @@ module.exports = {
       ></span
     >
         `;
+    } else {
+      return ``;
+    }
+  },
+  getAdminOfferform: function (loggedUser, entryuser) {
+    if (loggedUser._id.toString() == entryuser._id.toString()) {
+      return `
+          <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
+            <div class="uk-card-body">
+              <h1 class="uk-card-title uk-text-center">Add Offers</h1>
+              <form action="/admincreate/createoffer/<%- entry._id %>" method="POST">
+                <div class="uk-form-stacked">
+                    <div class="uk-margin-small">
+                        <div class="uk-form-control">
+                            <input class="uk-input uk-form-large noSelect" required type="text" name="offername" 
+                            placeholder="Title of offer"  value="<%= typeof offername != 'undefined' ? offername : '' %>" />
+                        </div>
+                        <div class="uk-form-control uk-margin-small-top">
+                            <label for="desc" class="uk-text-meta"
+                              >Full Description of the offer.</label
+                            >
+                            <textarea
+                              required
+                                
+                              name="offerdesc"
+                              class="uk-textarea"
+                            ></textarea
+                            >
+                          </div>
+                          <div class="uk-form-control">
+                            <input
+                              required
+                              type="number"
+                              name="offeramount"
+                              id="offeramount"
+                              placeholder="Enter offer amount in USD"
+                              class="uk-input uk-form-large noSelect"
+                              
+                            />
+                          </div>
+                    </div>
+                    <div class="uk-margin-medium uk-text-center">
+                        <div class="uk-form-control">
+                            <button
+                              type="submit"
+                              class="uk-button uk-button-custom noSelect"
+                            >
+                              Post
+                            </button>
+                          </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+          </div>`;
+    } else {
+      return ``;
+    }
+  },
+  getBusinessOfferform: function (loggedUser, entryuser) {
+    if (loggedUser._id.toString() == entryuser._id.toString()) {
+      return `
+      <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
+      <div class="uk-card-body">
+        <h1 class="uk-card-title uk-text-center">Add Offers</h1>
+        <form action="/business/createoffer/<%- entry._id %>" method="POST">
+          <div class="uk-form-stacked">
+              <div class="uk-margin-small">
+                  <div class="uk-form-control">
+                      <input class="uk-input uk-form-large noSelect" required type="text" name="offername" 
+                      placeholder="Title of offer" />
+                  </div>
+                  <div class="uk-form-control uk-margin-small-top">
+                      <label for="desc" class="uk-text-meta"
+                        >Full Description of the offer.</label
+                      >
+                      <textarea
+                        required
+                          
+                        name="offerdesc"
+                        class="uk-textarea"
+                      ></textarea
+                      >
+                    </div>
+                    <div class="uk-form-control">
+                      <input
+                        required
+                        type="number"
+                        name="offeramount"
+                        id="offeramount"
+                        placeholder="Enter offer amount in USD"
+                        class="uk-input uk-form-large noSelect"
+                        value="<%= typeof offeramount != 'undefined' ? offeramount: '' %>"
+                      />
+                    </div>
+              </div>
+              <div class="uk-margin-medium uk-text-center">
+                  <div class="uk-form-control">
+                      <button
+                        type="submit"
+                        class="uk-button uk-button-custom noSelect"
+                      >
+                        Post
+                      </button>
+                    </div>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>`;
+    } else {
+      return ``;
     }
   },
 };
