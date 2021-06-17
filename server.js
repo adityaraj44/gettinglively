@@ -128,28 +128,6 @@ app.use(
   })
 );
 
-// // algolia
-// const client = algoliasearch(
-//   process.env.SEARCH_APP_ID,
-//   process.env.SEARCH_APP_KEY
-// );
-// const index = client.initIndex("dev_ENTRIES");
-
-// const posts = [
-//   {
-//     name: "Aditya",
-//     rating: "34",
-//   },
-//   {
-//     name: "Adfya",
-//     rating: "24",
-//   },
-// ];
-
-// index.saveObject(posts, {
-//   autoGenerateObjectIDIfNotExist: true,
-// });
-
 // static files server
 app.use(express.static(`${__dirname}/public`));
 
