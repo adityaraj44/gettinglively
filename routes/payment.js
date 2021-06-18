@@ -15,6 +15,7 @@ router.get("/:id", ensureAuthenticated, async (req, res) => {
       res.render("payment", {
         allOffer,
         layout: "layouts/layout",
+        user: req.user,
         helper: require("../helpers/ejs"),
       });
     } else {
