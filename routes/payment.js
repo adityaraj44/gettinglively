@@ -4,6 +4,9 @@ const { ensureAuthenticated } = require("../middlewares/auth");
 const Offer = require("../models/Offer");
 const { paymentsApi, locationsApi } = require("../middlewares/square");
 const { v4: uuidv4 } = require("uuid");
+const voucher_codes = require("voucher-code-generator");
+const Voucher = require("../models/Voucher");
+const nodemailer = require("nodemailer");
 
 router.get("/:id", ensureAuthenticated, async (req, res) => {
   try {
@@ -29,6 +32,19 @@ router.get("/:id", ensureAuthenticated, async (req, res) => {
 
 router.post("/:id", ensureAuthenticated, async (req, res) => {
   try {
+    const allOffer = await Offer.findById({ _id: req.params.id })
+
+      .populate("user")
+      .lean();
+
+    const voucher_code = voucher_codes.generate({
+      length: 16,
+      count: 1,
+      pattern: "####-####-####-####",
+      prefix: "gettinglively-",
+      charset: voucher_codes.charset("alphanumeric"),
+    });
+
     const token = req.body.sourceId;
     // console.log(req.header.arguments);
     // length of idempotency_key should be less than 45
@@ -43,11 +59,10 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
       idempotencyKey,
       sourceId: token,
       amountMoney: {
-        amount: 100, // $1.00 charge
+        amount: allOffer.offeramount * 100, // $1.00 charge
         currency,
       },
     };
-
     try {
       const {
         result: { payment },
@@ -60,13 +75,49 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
         },
         4
       );
+      if (result) {
+        const newPayment = new Voucher({
+          vouchercode: voucher_code[0],
+          offer: req.params.id,
+          user: req.user._id,
+          post: allOffer.post,
+        });
 
-      res.json({
-        result,
-      });
+        newPayment.save().then((resp) => {
+          req.flash(
+            "success_msg",
+            `Offer purchased successfully. Your code is ${voucher_code[0]}. Voucher code has also been sent on your email.`
+          );
+          res.redirect(req.originalUrl);
+        });
+
+        var smtpTransport = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: "gettinglivelytest@gmail.com",
+            pass: "sahilkumar@123",
+          },
+        });
+        var mailOptions = {
+          to: req.user.email,
+          from: "GettingLively.com",
+          subject: "Voucher Purchased",
+          text: `Voucher purchased successfully. Your code: ${voucher_code[0]}`,
+          // text: body,
+        };
+        smtpTransport
+          .sendMail(mailOptions)
+
+          .catch((err) => console.log(err));
+        console.log("done");
+      } else {
+        req.flash("error_msg", "Error in payment. Try again");
+        res.redirect(`/places/entries/entry/${allOffer.post}`);
+      }
       console.log(result);
     } catch (error) {
-      res.json(error.result);
+      console.log(error);
+      res.redirect(`/places/entries/entry/${allOffer.post}`);
     }
   } catch (error) {
     console.log(error);

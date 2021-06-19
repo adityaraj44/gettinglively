@@ -45,7 +45,8 @@
     "square": "^12.0.0",
     "square-connect": "^6.20201216.0",
     "util": "^0.12.4",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "voucher-code-generator": "^1.1.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

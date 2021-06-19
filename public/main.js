@@ -135,11 +135,11 @@ if (document.querySelector("#card-container")) {
     });
 
     if (paymentResponse.ok) {
-      return paymentResponse.json();
+      return paymentResponse.text();
     }
 
-    const errorBody = await paymentResponse.text();
-    throw new Error(errorBody);
+    // const errorBody = await paymentResponse.text();
+    // throw new Error(errorBody);
   }
 
   async function tokenize(paymentMethod) {

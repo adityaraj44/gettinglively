@@ -185,10 +185,12 @@
       Payment page
     </h4>
     <hr /> -->
+    <%- include('./partials/errors.ejs'); %>
     <div class="uk-card uk-card-hover uk-card-default uk-text-center">
       <div class="uk-card-body uk-text-center">
         <p class="uk-card-title uk-text-center uk-margin-medium-bottom">
-          <%- 'Total Amount' + ' ' + '-' + ' ' + allOffer.offeramount %>
+          <%- 'Total Amount' + ' ' + '-' + ' ' + '&#163;' + allOffer.offeramount
+          %>
         </p>
         <form
           id="payment-form"
@@ -197,7 +199,7 @@
         >
           <div id="card-container"></div>
           <button class="button" id="card-button" type="button">
-            <%- 'Pay' + ' ' + allOffer.offeramount %>
+            <%- 'Pay' + ' ' + '&#163;'+ allOffer.offeramount %>
           </button>
         </form>
         <div id="payment-status-container"></div>

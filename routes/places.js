@@ -9,47 +9,6 @@ const Review = require("../models/Review");
 const algoliasearch = require("algoliasearch");
 const squareConnect = require("square-connect");
 
-//access
-const accessToken =
-  "EAAAECTLtAHQA0G4U_6DjHEoxAN6AlqP9ImZn5Ybt3l1Rr4xKhFG1pljhVbCFqMf";
-// Set Square Connect credentials and environment
-const defaultClient = squareConnect.ApiClient.instance;
-// Set 'basePath' to switch between sandbox env and production env
-// sandbox: https://connect.squareupsandbox.com
-// production: https://connect.squareup.com
-defaultClient.basePath = "https://connect.squareupsandbox.com";
-
-router.post("/process-payment", async (req, res) => {
-  const request_params = req.body;
-
-  // length of idempotency_key should be less than 45
-  const idempotency_key = crypto.randomBytes(22).toString("hex");
-
-  // Charge the customer's card
-  const payments_api = new squareConnect.PaymentsApi();
-  const request_body = {
-    source_id: request_params.nonce,
-    amount_money: {
-      amount: 100, // $1.00 charge
-      currency: "EUR",
-    },
-    idempotency_key: idempotency_key,
-  };
-
-  try {
-    const response = await payments_api.createPayment(request_body);
-    res.status(200).json({
-      title: "Payment Successful",
-      result: response,
-    });
-  } catch (error) {
-    res.status(500).json({
-      title: "Payment Failure",
-      result: error.response.text,
-    });
-  }
-});
-
 router.get("/bars", async (req, res) => {
   const allEntries = await Post.find({
     reviewStatus: "reviewed",
