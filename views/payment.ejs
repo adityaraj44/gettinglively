@@ -190,7 +190,11 @@
         <p class="uk-card-title uk-text-center uk-margin-medium-bottom">
           <%- 'Total Amount' + ' ' + '-' + ' ' + allOffer.offeramount %>
         </p>
-        <form id="payment-form">
+        <form
+          id="payment-form"
+          method="POST"
+          action="/payment/<%- allOffer._id %>"
+        >
           <div id="card-container"></div>
           <button class="button" id="card-button" type="button">
             <%- 'Pay' + ' ' + allOffer.offeramount %>

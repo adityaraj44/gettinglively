@@ -27,7 +27,7 @@ router.get("/:id", ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.post("/", ensureAuthenticated, async (req, res) => {
+router.post("/:id", ensureAuthenticated, async (req, res) => {
   try {
     const token = req.body.sourceId;
     // console.log(req.header.arguments);

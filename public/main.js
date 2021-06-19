@@ -124,7 +124,9 @@ if (document.querySelector("#card-container")) {
       sourceId: token,
     });
 
-    const paymentResponse = await fetch(`/payment`, {
+    let action = document.getElementById("payment-form").action;
+
+    const paymentResponse = await fetch(`${action}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
