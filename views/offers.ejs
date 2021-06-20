@@ -1,0 +1,24 @@
+<%- include('./partials/navbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/home" class="uk-button uk-button-text noSelect">Back To Home</a>
+  </li>
+  <li>
+    <a href="/offers/redeem" class="active uk-button uk-button-text noSelect"
+      >Redeem Offers</a
+    >
+  </li>
+</ul>
+
+<% if(offerbyuser.length > 0) { %> <% offerbyuser.forEach((offer)=>{ %>
+<p>yes</p>
+<% }) %> <% } else { %>
+<p class="uk-text-center uk-margin-large-top uk-text-large uk-text-warning">
+  You don't have any vouchers now.
+</p>
+<br />
+<p class="uk-text-center uk-margin-small-top uk-text-meta">
+  Your purchased offers appear here.
+</p>
+<% } %>

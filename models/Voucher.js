@@ -5,10 +5,6 @@ const voucherSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    offer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Offer",
-    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
