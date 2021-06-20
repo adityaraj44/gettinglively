@@ -11,6 +11,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     const offerbyuser = await Voucher.find({ user: req.user.id })
       .populate("user")
       .populate("offer")
+      .populate("post")
       .lean();
 
     res.render("offers", {
