@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Offer = require("../models/Offer");
 const Voucher = require("../models/Voucher");
 
+// offers page
 router.get("/", ensureAuthenticated, async (req, res) => {
   try {
     const offerbyuser = await Voucher.find({ user: req.user.id })
@@ -23,6 +24,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   }
 });
 
+// redeem voucher page
 router.get("/redeem", ensureAuthenticated, async (req, res) => {
   try {
     res.render("redeempage", {
