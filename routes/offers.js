@@ -25,17 +25,4 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   }
 });
 
-// redeem voucher page
-router.get("/redeem", ensureAuthenticated, async (req, res) => {
-  try {
-    res.render("redeempage", {
-      layout: "layouts/layout",
-      helper: require("../helpers/ejs"),
-    });
-  } catch (error) {
-    console.log(error);
-    res.render("errors/pagenotfound");
-  }
-});
-
 module.exports = router;

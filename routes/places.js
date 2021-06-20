@@ -77,9 +77,11 @@ router.get("/restaurant", async (req, res) => {
       console.log(error);
     });
 
+  const reviews = await Review.find({}).lean();
   res.render("restaurant", {
     user: req.user,
     allEntries,
+    reviews,
     pagedetails,
     helper: require("../helpers/ejs"),
   });

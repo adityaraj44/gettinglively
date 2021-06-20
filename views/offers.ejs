@@ -4,15 +4,14 @@
   <li>
     <a href="/home" class="uk-button uk-button-text noSelect">Back To Home</a>
   </li>
-  <li>
-    <a href="/offers/redeem" class="active uk-button uk-button-text noSelect"
-      >Redeem Offers</a
-    >
-  </li>
 </ul>
 
 <div class="uk-section uk-section-muted uk-section-large borderBottom">
   <div class="uk-container">
+    <p class="uk-text-medium uk-text-center info-text">
+      Voucher codes can be redeemed offline on the venues or online on the
+      merchant's website.
+    </p>
     <div
       class="
         uk-child-width-1-1
@@ -25,32 +24,32 @@
     >
       <% if(offerbyuser.length > 0) { %> <% offerbyuser.forEach((offer)=>{ %>
       <div>
-        <div class="uk-card uk-card-hover uk-card-secondary">
+        <div class="uk-card uk-card-voucher uk-card-hover uk-card-secondary">
           <div class="uk-card-body uk-text-center">
             <p class="uk-text-lead">
               <a href="/places/entries/entry/<%- offer.post._id %>"
                 >Offer from <span><%- offer.post.name %></span></a
               >
             </p>
-            <button class="uk-button uk-button-secondary uk-width-1-1">
+            <p class="uk-button uk-button-secondary uk-width-1-1">
               <%- offer.vouchercode %>
-            </button>
-            <p class="uk-text-bolder"><%- offer.vouchercode %></p>
+            </p>
+            <p class="uk-text-bolder uk-text-meta">
+              <%- helper.formatDate(offer.createdAt, 'MMMM Do YYYY') %>
+            </p>
           </div>
         </div>
       </div>
       <% }) %> <% } else { %>
-      <p
-        class="uk-text-center uk-margin-large-top uk-text-large uk-text-warning"
-      >
-        You don't have any vouchers now.
-      </p>
-      <br />
-      <p class="uk-text-center uk-margin-small-top uk-text-meta">
-        Your purchased offers appear here.
-      </p>
-      <% } %>
     </div>
+    <p class="uk-text-center uk-text-large uk-text-warning">
+      You don't have any vouchers now.
+    </p>
+    <br />
+    <p class="uk-text-center uk-margin-small-top uk-text-meta">
+      Your purchased offers appear here.
+    </p>
+    <% } %>
   </div>
 </div>
 

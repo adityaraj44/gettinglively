@@ -113,26 +113,23 @@
     >
       <% if(pagedetails.length > 0) { %> <% pagedetails.forEach((pagedetail)=> {
       %>
-      <div>
-        <div class="uk-card uk-card-hover">
-          <div class="uk-card-media-top">
-            <img src="<%- pagedetail.image %>" alt="detail image"">
-          </div>
-          <div class="uk-card-body">
-            <h1 class="uk-card-title uk-text-center">
-              <%- pagedetail.title %>
-            </h1>
-            <p class="uk-text-bold uk-text-center uk-text-break">
-              <%- pagedetail.desc %>
-            </p>
-          </div>
+
+      <div class="uk-card uk-card-hover page-details">
+        <div class="uk-card-media-top">
+          <img src="<%- pagedetail.image %>" alt="detail image"">
+        </div>
+        <div class="uk-card-body uk-text-center">
+          <h1 class="uk-card-title uk-text-center"><%- pagedetail.title %></h1>
+          <p class="uk-text-bold uk-text-center uk-text-break">
+            <%- pagedetail.desc %>
+          </p>
         </div>
       </div>
 
       <% }) %> <% } else { %>
-      <p class="uk-text-center uk-text-large uk-text-warning">No Details</p>
-      <% } %>
     </div>
+    <p class="uk-text-center uk-text-large uk-text-warning">No Details</p>
+    <% } %>
   </div>
 </div>
 
@@ -216,6 +213,7 @@
                   "
                   ><%- allEntry.typeOfPlace %></span
                 >
+                <!-- added the review on 21 june -->
                 <span
                   class="
                     uk-label

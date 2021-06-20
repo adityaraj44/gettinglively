@@ -37,6 +37,10 @@ h6 {
   line-height: 85px;
 }
 
+button {
+  border-radius: 5px !important;
+}
+
 nav {
   background-color: #1d1b1b !important;
 }
@@ -95,7 +99,12 @@ nav li a h4 {
 
 .uk-button-custom {
   background: #ec4d37 !important;
+  border-radius: 5px;
   color: white;
+}
+
+.uk-button {
+  border-radius: 5px !important;
 }
 
 .uk-section-black {
@@ -316,6 +325,10 @@ footer p {
   border-radius: 10px !important;
 }
 
+.uk-card-voucher {
+  border-radius: 10px !important;
+}
+
 .ais-SearchBox {
   top: 0;
   left: 0;
@@ -347,4 +360,17 @@ footer p {
   padding: 0;
   width: 100%;
   outline: none;
+}
+
+.info-text {
+  background: #1d1b1b;
+  color: #ec4d37;
+  padding: 30px 15px;
+  border-left: 10px solid #ec4d37;
+  border-radius: 8px;
+}
+
+.page-details {
+  border-bottom: 5px solid #28a745;
+  border-radius: 5px;
 }

@@ -1,6 +1,4 @@
-* create,edit,delete, for business .. different terms and conditions for customer and business
-
-* create  a member area where member create entries, delete and edit their entries and send for review similar view like admin
-
-
-* when users goes to my entries.. they can create offers
+add instruciton for the users after voucher creation
+add website url link in business registration page
+add ratings on all the entries
+add payment for business to create entries and offers
