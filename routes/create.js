@@ -195,7 +195,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     let menu = req.files.menu;
     menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
 
-    if (desc.length < 500) {
+    if (desc.length < 300) {
       errors.push({ msg: "Description must be atleast 500 characters" });
       //   req.flash("warning_msg", "Description must be atleast 500 characters");
       return res.render("admin/createEntry", {
@@ -558,7 +558,7 @@ router.put(
       let menu = req.files.menu;
       menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
 
-      if (desc.length < 500) {
+      if (desc.length < 300) {
         errors.push({ msg: "Description must be atleast 500 characters" });
         //   req.flash("warning_msg", "Description must be atleast 500 characters");
         return res.render("entries/editEntry", {

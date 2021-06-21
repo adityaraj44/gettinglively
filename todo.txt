@@ -1,4 +1,4 @@
-add instruciton for the users after voucher creation
-add website url link in business registration page
-add ratings on all the entries
+add instruciton for the users after voucher creation ->
+add website url link in business registration page ->
+{% comment %} add ratings on all the entries  {% endcomment %}
 add payment for business to create entries and offers

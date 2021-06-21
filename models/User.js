@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema(
     businessName: {
       type: String,
     },
+    websiteurl: {
+      type: String,
+    },
     email: {
       type: String,
       unique: true,

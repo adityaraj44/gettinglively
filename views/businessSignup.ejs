@@ -47,6 +47,16 @@
             </div>
             <div class="uk-form-control">
               <input
+                class="uk-input uk-form-large noSelect"
+                type="url"
+                id="websiteurl"
+                name="websiteurl"
+                placeholder="Your website url"
+                value="<%= typeof websiteurl != 'undefined' ? websiteurl : '' %>"
+              />
+            </div>
+            <div class="uk-form-control">
+              <input
                 required
                 class="uk-input uk-form-large noSelect"
                 type="email"

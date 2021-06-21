@@ -47,7 +47,7 @@
   <div class="uk-container">
     <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      <%- entry.name %>
+        <a class="noSelect uk-text-secondary" href="<%- entry.user.websiteurl %>" target="blank"><%- entry.name %></a>
     </h4>
     <hr />
     <div class="uk-clearfix uk-text-center">
@@ -512,7 +512,7 @@
           </div>
           <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
             <div class="uk-card-body">
-              <h1 class="uk-card-title uk-text-center">Add Offers</h1>
+              <h1 class="uk-card-title uk-text-center">Create offers/e-vouchers for this entry</h1>
               <form action="/admincreate/createoffer/<%- entry._id %>" method="POST">
                 <div class="uk-form-stacked">
                     <div class="uk-margin-small">

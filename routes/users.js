@@ -143,9 +143,9 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
   const verifytoken = jwt.sign({ email: req.body.email }, process.env.SECRET, {
     expiresIn: "1d",
   });
-  const { name, businessName, email, password } = req.body;
+  const { name, websiteurl, businessName, email, password } = req.body;
   let errors = [];
-  if (!name || !email || !password || !businessName) {
+  if (!name || !email || !password || !businessName || !websiteurl) {
     errors.push({ msg: "Please enter all fields" });
   }
 
@@ -156,6 +156,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
     res.render("businessSignup", {
       errors,
       name,
+      websiteurl,
       businessName,
       email,
       password,
@@ -166,6 +167,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
         errors.push({ msg: "Email already exists" });
         res.render("businessSignup", {
           errors,
+          websiteurl,
           businessName,
           name,
           email,
@@ -175,6 +177,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
         const newUser = new User({
           name,
           businessName,
+          websiteurl,
           email,
           password,
           confirmationCode: verifytoken,
