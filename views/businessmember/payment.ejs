@@ -1,4 +1,27 @@
-<%- include('./partials/navbar.ejs'); %>
+<%- include('../partials/businessNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
+  </li>
+  <li>
+    <a href="/business/createentries" class="uk-button uk-button-text noSelect"
+      >Create Entries</a
+    >
+  </li>
+  <li>
+    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
+      >Entries For Review</a
+    >
+  </li>
+  <li>
+    <a
+      href="/business/entries/pendingpayment"
+      class="uk-button uk-button-text noSelect"
+      >Pending Payments</a
+    >
+  </li>
+</ul>
 <style>
   #payment-form {
     max-width: 550px;
@@ -180,26 +203,25 @@
   }
 </style>
 <div class="uk-section uk-section-muted uk-section-large borderBottom">
-  <div class="uk-container" id="card-container-offer">
+  <div class="uk-container" id="card-container-entry">
     <!-- <h4 class="uk-text-capitalize uk-text-center uk-margin-large tagline1">
       Payment page
     </h4>
     <hr /> -->
-    <%- include('./partials/errors.ejs'); %>
+    <%- include('../partials/errors.ejs'); %>
     <div class="uk-card uk-card-hover uk-card-default uk-text-center">
       <div class="uk-card-body uk-text-center">
         <p class="uk-card-title uk-text-center uk-margin-medium-bottom">
-          <%- 'Total Amount' + ' ' + '-' + ' ' + '&#163;' + allOffer.offeramount
-          %>
+          <%- 'Total Amount' + ' ' + '-' + ' ' + '&#163;' + amount %>
         </p>
         <form
-          id="payment-form"
+          id="payment-form-entry"
           method="POST"
-          action="/payment/<%- allOffer._id %>"
+          action="/business/entries/paymentpage/<%- entry._id %>"
         >
-          <div id="card-container"></div>
+          <div class="uk-padding-large" id="card-container"></div>
           <button class="button" id="card-button" type="button">
-            <%- 'Pay' + ' ' + '&#163;'+ allOffer.offeramount %>
+            <%- 'Pay' + ' ' + '&#163;'+ amount %>
           </button>
         </form>
         <div id="payment-status-container"></div>
@@ -210,7 +232,7 @@
 
 <!-- footer -->
 <!-- footer -->
-<%- include('./partials/modals.ejs'); %>
+<%- include('../partials/modals.ejs'); %>
 <footer class="uk-section uk-section-black">
   <div class="uk-text-center@s" uk-grid>
     <div class="uk-width-2-4@s uk-text-center">

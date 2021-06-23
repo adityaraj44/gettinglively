@@ -1,20 +1,27 @@
 <%- include('../partials/businessNavbar.ejs'); %>
 
 <ul class="uk-breadcrumb uk-margin-large-left">
-  <li>
-    <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
-  </li>
-  <li>
-    <a href="/business/createentries" class="uk-button uk-button-text noSelect"
-      >Create Entries</a
-    >
-  </li>
-  <li>
-    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
-      >Entries For Review</a
-    >
-  </li>
-</ul>
+    <li>
+      <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
+    </li>
+    <li>
+      <a href="/business/createentries" class="uk-button uk-button-text noSelect"
+        >Create Entries</a
+      >
+    </li>
+    <li>
+      <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
+        >Entries For Review</a
+      >
+    </li>
+    <li>
+      <a
+        href="/business/entries/pendingpayment"
+        class="uk-button uk-button-text noSelect"
+        >Pending Payments</a
+      >
+    </li>
+  </ul>
 
 <div
   class="
@@ -266,7 +273,8 @@
             </p>
           </li>
           <li>
-            <span
+            <% if(entry.menu) { %> 
+                <span
               class="uk-text-primary"
               uk-icon="icon:  file-pdf; ratio: 2"
             ></span>
@@ -276,6 +284,9 @@
               class="uk-button uk-button-muted"
               ><%- entry.name + " " + "Menu" %></a
             >
+                 <% } else { %>
+                    <p class="uk-text-center uk-text-large uk-text-warning">No Menus</p>
+                    <% } %>
           </li>
           <li><h1 class="uk-card-title uk-text-center">All Offers</h1>
             <div class="
@@ -375,147 +386,152 @@
     uk-margin-large-bottom
   "
   uk-grid>
-        <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
-            <div class="uk-card-body">
-              <h1 class="uk-card-title uk-text-center">Add reviews</h1>
-              <form action="/userreviews/<%- entry._id %>" method="POST">
-                <div class="uk-form-stacked">
-                  <div class="uk-margin-small">
-                    <div class="uk-form-control">
-                      <input
-                        required
-                        type="number"
-                        name="userScore"
-                        min="1"
-                        max="5"
-                        placeholder="Initial score out of 5"
-                        id="rating"
-                        class="uk-input uk-form-large noSelect"
-                      />
-                    </div>
-                    <div class="uk-form-control">
-                      <textarea
-                        required
-                        class="uk-textarea"
-                        name="userComment"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div class="uk-marign-medium uk-text-center">
-                    <div class="uk-form-control">
-                      <button
-                        type="submit"
-                        class="uk-button uk-button-custom noSelect"
-                      >
-                        Post review
-                      </button>
-                    </div>
-                  </div>
+  <div>
+    <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
+        <div class="uk-card-body">
+          <h1 class="uk-card-title uk-text-center">Add reviews</h1>
+          <form action="/userreviews/<%- entry._id %>" method="POST">
+            <div class="uk-form-stacked">
+              <div class="uk-margin-small">
+                <div class="uk-form-control">
+                  <input
+                    required
+                    type="number"
+                    name="userScore"
+                    min="1"
+                    max="5"
+                    placeholder="Initial score out of 5"
+                    id="rating"
+                    class="uk-input uk-form-large noSelect"
+                  />
                 </div>
-              </form>
-              <hr class="uk-divider-icon" />
-              <p class="uk-text-lead uk-text-bold uk-text-center@s">
-                Total Reviews: <%- allReview.length %>
-              </p>
-      
-              <p class="uk-text-headline uk-text-secondary uk-text-center@s">
-                <%- allReview.length != 0 ? 'Total Score:'+ ' ' +  Math.round(totalScore/allReview.length)+ '/'+ '5': 'Total Score:' + ' ' + '0' %>
-              </p>
-              <p class="uk-text-meta uk-text-success uk-text-normal uk-text-center@s">
-                Based on <%- allReview.length%> customer reviews
-              </p>
-              <ul class="uk-comment-list">
-                <% allReview.forEach(review => { %>
-                <li>
-                  <article
-                    class="
-                      uk-comment
-                      uk-visible-toggle
-                      uk-padding-small
-                      uk-box-shadow-small
-                    "
-                    tabindex="-1"
+                <div class="uk-form-control">
+                  <textarea
+                    required
+                    class="uk-textarea"
+                    name="userComment"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="uk-marign-medium uk-text-center">
+                <div class="uk-form-control">
+                  <button
+                    type="submit"
+                    class="uk-button uk-button-custom noSelect"
                   >
-                    <header class="uk-comment-header uk-position-relative">
-                      <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                        <div class="uk-width-expand">
-                          <p class="uk-comment-title uk-margin-remove">
-                            <p class="uk-margin--medium-right"
-                              ><%- review.user.name %></p
-                            >
-                            <span
-                              class="
-                                uk-text-bold uk-text-success uk-marign-medium-left
-                              "
-                              >gave - <%- review.userScore %> / 5</span
-                            >
-                          </p>
-                          <p class="uk-comment-meta uk-margin-remove-top">
-                            <a class="uk-link-reset" href="#"
-                              ><%- helper.formatDate(review.createdAt, 'LL') %></a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </header>
-                    <div class="uk-comment-body">
-                      <p class="uk-text-break"><%- review.userComment %></p>
-                    </div>
-                  </article>
-                </li>
-                <% }) %>
-              </ul>
-            </div>
-          </div>
-          <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
-            <div class="uk-card-body">
-              <h1 class="uk-card-title uk-text-center">Create offers/e-vouchers for this entry</h1>
-              <form action="/business/createoffer/<%- entry._id %>" method="POST">
-                <div class="uk-form-stacked">
-                    <div class="uk-margin-small">
-                        <div class="uk-form-control">
-                            <input class="uk-input uk-form-large noSelect" required type="text" name="offername" 
-                            placeholder="Title of offer"  value="<%= typeof offername != 'undefined' ? offername : '' %>" />
-                        </div>
-                        <div class="uk-form-control uk-margin-small-top">
-                            <label for="desc" class="uk-text-meta"
-                              >Full Description of the offer.</label
-                            >
-                            <textarea
-                              required
-                                
-                              name="offerdesc"
-                              class="uk-textarea"
-                            ></textarea
-                            >
-                          </div>
-                          <div class="uk-form-control">
-                            <input
-                              required
-                              type="number"
-                              name="offeramount"
-                              id="offeramount"
-                              min="1"
-                              placeholder="Enter offer amount in GBP"
-                              class="uk-input uk-form-large noSelect"
-                              value="<%= typeof offeramount != 'undefined' ? offeramount: '' %>"
-                            />
-                          </div>
-                    </div>
-                    <div class="uk-margin-medium uk-text-center">
-                        <div class="uk-form-control">
-                            <button
-                              type="submit"
-                              class="uk-button uk-button-custom noSelect"
-                            >
-                              Post
-                            </button>
-                          </div>
-                    </div>
+                    Post review
+                  </button>
                 </div>
-            </form>
+              </div>
             </div>
-          </div>
+          </form>
+          <hr class="uk-divider-icon" />
+          <p class="uk-text-lead uk-text-bold uk-text-center@s">
+            Total Reviews: <%- allReview.length %>
+          </p>
+  
+          <p class="uk-text-headline uk-text-secondary uk-text-center@s">
+            <%- allReview.length != 0 ? 'Total Score:'+ ' ' +  Math.round(totalScore/allReview.length)+ '/'+ '5': 'Total Score:' + ' ' + '0' %>
+          </p>
+          <p class="uk-text-meta uk-text-success uk-text-normal uk-text-center@s">
+            Based on <%- allReview.length%> customer reviews
+          </p>
+          <ul class="uk-comment-list">
+            <% allReview.forEach(review => { %>
+            <li>
+              <article
+                class="
+                  uk-comment
+                  uk-visible-toggle
+                  uk-padding-small
+                  uk-box-shadow-small
+                "
+                tabindex="-1"
+              >
+                <header class="uk-comment-header uk-position-relative">
+                  <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-expand">
+                      <p class="uk-comment-title uk-margin-remove">
+                        <p class="uk-margin--medium-right"
+                          ><%- review.user.name %></p
+                        >
+                        <span
+                          class="
+                            uk-text-bold uk-text-success uk-marign-medium-left
+                          "
+                          >gave - <%- review.userScore %> / 5</span
+                        >
+                      </p>
+                      <p class="uk-comment-meta uk-margin-remove-top">
+                        <a class="uk-link-reset" href="#"
+                          ><%- helper.formatDate(review.createdAt, 'LL') %></a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </header>
+                <div class="uk-comment-body">
+                  <p class="uk-text-break"><%- review.userComment %></p>
+                </div>
+              </article>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+  </div>
+        <div>
+            <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
+                <div class="uk-card-body">
+                  <h1 class="uk-card-title uk-text-center">Create offers/e-vouchers for this entry</h1>
+                  <form action="/business/createoffer/<%- entry._id %>" method="POST">
+                    <div class="uk-form-stacked">
+                        <div class="uk-margin-small">
+                            <div class="uk-form-control">
+                                <input class="uk-input uk-form-large noSelect" required type="text" name="offername" 
+                                placeholder="Title of offer"  value="<%= typeof offername != 'undefined' ? offername : '' %>" />
+                            </div>
+                            <div class="uk-form-control uk-margin-small-top">
+                                <label for="desc" class="uk-text-meta"
+                                  >Full Description of the offer.</label
+                                >
+                                <textarea
+                                  required
+                                    
+                                  name="offerdesc"
+                                  class="uk-textarea"
+                                ></textarea
+                                >
+                              </div>
+                              <div class="uk-form-control">
+                                <input
+                                  required
+                                  type="number"
+                                  name="offeramount"
+                                  id="offeramount"
+                                  min="1"
+                                  placeholder="Enter offer amount in GBP"
+                                  class="uk-input uk-form-large noSelect"
+                                  value="<%= typeof offeramount != 'undefined' ? offeramount: '' %>"
+                                />
+                              </div>
+                        </div>
+                        <div class="uk-margin-medium uk-text-center">
+                            <div class="uk-form-control">
+                                <button
+                                  type="submit"
+                                  class="uk-button uk-button-custom noSelect"
+                                >
+                                  Post
+                                </button>
+                              </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+              </div>
+        </div>
+         
     </div>
     
   </div>

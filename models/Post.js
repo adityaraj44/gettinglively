@@ -30,6 +30,11 @@ const postSchema = new mongoose.Schema(
       enum: ["inprocess", "reviewed"],
       default: "inprocess",
     },
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid"],
+      default: "pending",
+    },
     typeOfVenue: {
       type: String,
       required: true,

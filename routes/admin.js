@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const Voucher = require("../models/Voucher");
 
 // admin dashboard
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -22,12 +23,14 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
       .lean();
 
     const entries = await Post.find({ reviewStatus: "reviewed" }).lean();
+    const transaction = await Voucher.find({}).lean();
 
     res.render("admin/admindash", {
       layout: "layouts/layout",
       customerMembers,
       businessMembers,
       entries,
+      transaction,
     });
   } catch (error) {
     console.log(error);

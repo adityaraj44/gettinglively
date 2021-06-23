@@ -374,3 +374,8 @@ footer p {
   border-bottom: 5px solid #28a745;
   border-radius: 5px;
 }
+
+.uk-card-admin {
+  border-bottom: 10px solid #ec4d37;
+  border-radius: 8px;
+}
