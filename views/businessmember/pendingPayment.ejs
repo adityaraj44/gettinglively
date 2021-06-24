@@ -31,6 +31,7 @@
   "
 >
   <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
       Pending payment for entries
     </h4>
@@ -109,6 +110,7 @@
               >
               <a
                 href="/business/entries/paymentpage/<%- pendingEntry._id %>"
+                target="blank"
                 class="
                   uk-button uk-button-custom uk-float-right uk-light
                   noSelect

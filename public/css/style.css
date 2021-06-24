@@ -379,3 +379,11 @@ footer p {
   border-bottom: 10px solid #ec4d37;
   border-radius: 8px;
 }
+
+.uk-card-title {
+  margin: 20px 35px;
+  padding: 20px;
+  background-color: #cc0023;
+  border-radius: 5px;
+  color: white !important;
+}

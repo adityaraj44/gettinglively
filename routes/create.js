@@ -407,7 +407,10 @@ router.get(
   ensureAdmin,
   async (req, res) => {
     try {
-      const reviewEntries = await Post.find({ reviewStatus: "inprocess" })
+      const reviewEntries = await Post.find({
+        reviewStatus: "inprocess",
+        paymentStatus: "paid",
+      })
         .populate("user")
 
         .sort({ createdAt: "desc" })

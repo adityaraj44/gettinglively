@@ -24,10 +24,12 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
 
     const entries = await Post.find({ reviewStatus: "reviewed" }).lean();
     const transaction = await Voucher.find({}).lean();
+    const transaction2 = await Post.find({ paymentStatus: "paid" }).lean();
 
     res.render("admin/admindash", {
       layout: "layouts/layout",
       customerMembers,
+      transaction2,
       businessMembers,
       entries,
       transaction,

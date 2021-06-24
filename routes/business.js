@@ -5,6 +5,8 @@ const User = require("../models/User");
 const Review = require("../models/Review");
 const Offer = require("../models/Offer");
 const path = require("path");
+const { paymentsApi, locationsApi } = require("../middlewares/square");
+const { v4: uuidv4 } = require("uuid");
 const { ensureAuthenticated, ensureBusiness } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 const { response } = require("express");
@@ -303,6 +305,7 @@ router.get(
       const reviewEntries = await Post.find({
         user: req.user.id,
         reviewStatus: "inprocess",
+        paymentStatus: "paid",
       })
         .populate("user")
 
@@ -804,6 +807,81 @@ router.get(
     } catch (error) {
       console.log(error);
       res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.post(
+  "/entries/paymentpage/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const verifyPayment = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+
+      if (verifyPayment.paymentStatus == "pending") {
+        const token = req.body.sourceId;
+        const idempotencyKey = uuidv4();
+        // get the currency for the location
+        const locationResponse = await locationsApi.retrieveLocation(
+          process.env.SQUARE_LOCATION_ID
+        );
+        const currency = locationResponse.result.location.currency;
+        // Charge the customer's card
+        const requestBody = {
+          idempotencyKey,
+          sourceId: token,
+          amountMoney: {
+            amount: 100, // $1.00 charge
+            currency,
+          },
+        };
+        try {
+          const {
+            result: { payment },
+          } = await paymentsApi.createPayment(requestBody);
+
+          const result = JSON.stringify(
+            payment,
+            (key, value) => {
+              return typeof value === "bigint" ? parseInt(value) : value;
+            },
+            4
+          );
+
+          if (result) {
+            console.log(result);
+            await Post.findById({ _id: req.params.id }).then((post) => {
+              if (post.paymentStatus == "pending") {
+                post.paymentStatus = "paid";
+              }
+              post.save((err) => {
+                req.flash(
+                  "success_msg",
+                  "Payment successfull. Entry sent for review."
+                );
+              });
+            });
+            res.redirect("/business/entries/pendingpayment");
+          } else {
+            req.flash("error_msg", "Error in payment. Try again");
+            res.redirect("/business/entries/pendingpayment");
+          }
+        } catch (error) {
+          console.log(error);
+          req.flash("error_msg", "Error in payment. Try again");
+          res.redirect("/business/entries/pendingpayment");
+        }
+      } else {
+        req.flash("error_msg", "Already paid!");
+
+        res.redirect("/business/entries/pendingpayment");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
     }
   }
 );
