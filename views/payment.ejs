@@ -185,7 +185,7 @@
       Payment page
     </h4>
     <hr /> -->
-    <%- include('./partials/errors.ejs'); %>
+
     <div class="uk-card uk-card-hover uk-card-default uk-text-center">
       <div class="uk-card-body uk-text-center">
         <p class="uk-card-title uk-text-center uk-margin-medium-bottom">
@@ -198,6 +198,7 @@
           action="/payment/<%- allOffer._id %>"
         >
           <div id="card-container"></div>
+          <%- include('./partials/errors.ejs'); %>
           <button class="button" id="card-button" type="button">
             <%- 'Pay' + ' ' + '&#163;'+ allOffer.offeramount %>
           </button>

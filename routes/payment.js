@@ -86,7 +86,7 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
         newPayment.save().then((resp) => {
           req.flash(
             "success_msg",
-            `Offer purchased successfully. Your code is ${voucher_code[0]}. Voucher code has also been sent on your email.`
+            `Offer purchased successfully. Your code is ${voucher_code[0]}. Voucher code has also been sent on your email. You can now close this window.`
           );
           res.redirect(req.originalUrl);
         });
@@ -112,12 +112,13 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
           .catch((err) => console.log(err));
         console.log("done");
       } else {
-        req.flash("error_msg", "Error in payment. Try again");
+        req.flash("error_msg", "Payment Failed. Try again");
         res.redirect(`/places/entries/entry/${allOffer.post}`);
       }
       console.log(result);
     } catch (error) {
       console.log(error);
+      req.flash("error_msg", "Payment Failed. Try again");
       res.redirect(`/places/entries/entry/${allOffer.post}`);
     }
   } catch (error) {

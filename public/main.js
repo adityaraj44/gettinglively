@@ -204,13 +204,15 @@ if (document.querySelector("#card-container-offer")) {
         cardButton.disabled = true;
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
-        displayPaymentResults("SUCCESS");
+        // displayPaymentResults("SUCCESS");
+        document.location.reload();
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
+        document.location.reload();
       }
     }
 
@@ -327,13 +329,15 @@ if (document.querySelector("#card-container-entry")) {
         cardButton.disabled = true;
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
-        displayPaymentResults("SUCCESS");
+        // displayPaymentResults("SUCCESS");
+        document.location.reload();
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
+        document.location.reload();
       }
     }
 

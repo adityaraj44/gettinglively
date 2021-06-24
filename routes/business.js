@@ -860,19 +860,19 @@ router.post(
               post.save((err) => {
                 req.flash(
                   "success_msg",
-                  "Payment successfull. Entry sent for review."
+                  "Payment successfull. Entry sent for review. You may now close this browser window."
                 );
+                res.redirect(req.originalUrl);
               });
             });
-            res.redirect("/business/entries/pendingpayment");
           } else {
-            req.flash("error_msg", "Error in payment. Try again");
-            res.redirect("/business/entries/pendingpayment");
+            req.flash("error_msg", "Payment Failed. Try again");
+            res.redirect(req.originalUrl);
           }
         } catch (error) {
           console.log(error);
-          req.flash("error_msg", "Error in payment. Try again");
-          res.redirect("/business/entries/pendingpayment");
+          req.flash("error_msg", "Payment Failed. Try again");
+          res.redirect(req.originalUrl);
         }
       } else {
         req.flash("error_msg", "Already paid!");
