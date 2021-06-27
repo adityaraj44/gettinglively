@@ -9,6 +9,11 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    listing: {
+      type: String,
+      enum: ["basic", "premier", "premier advance", "promoted"],
+      default: "basic",
+    },
     userReview: {
       type: String,
     },
@@ -59,6 +64,8 @@ const postSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    planStart: Date,
+    planEnd: Date,
     monopening: { type: String },
     monclose: { type: String },
     tueopening: { type: String },

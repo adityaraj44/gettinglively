@@ -1,0 +1,164 @@
+<%- include('../partials/businessNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
+  </li>
+  <li>
+    <a href="/business/createentries" class="uk-button uk-button-text noSelect"
+      >Create Entries</a
+    >
+  </li>
+  <li>
+    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
+      >Entries For Review</a
+    >
+  </li>
+  <li>
+    <a
+      href="/business/entries/pendingpayment"
+      class="uk-button uk-button-text noSelect"
+      >Pending Payments</a
+    >
+  </li>
+  <li>
+    <a href="/business/managelisting" class="uk-button uk-button-text noSelect"
+      >Manage Listings</a
+    >
+  </li>
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Pricing and Plans
+    </h4>
+    <p class="uk-text-meta uk-text-center uk-text-medium">
+      Promote your listings/entries by selecting pricing and plans.
+    </p>
+    <hr class="uk-divider-icon" />
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default">
+          <div class="uk-card-body uk-text-center">
+            <h1 class="uk-card-title">Premier Listing</h1>
+            <p class="uk-text-center">
+              <span
+                >Pay
+                <span class="uk-text-bold">&#163; <%- amount_premier %> </span
+                >and get listed at the top for a week.</span
+              >
+            </p>
+          </div>
+          <div
+            class="
+              uk-card-footer
+              uk-card-secondary
+              uk-text-left
+              uk-text-default
+              uk-text-bold
+            "
+          >
+            <div class="uk-clearfix">
+              <a
+                href="/business/pricingandplans/premier/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Purchase</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-hover uk-card-secondary">
+          <div class="uk-card-body uk-text-center">
+            <h1 class="uk-card-title">Advanced Premier Listing</h1>
+            <p class="uk-text-center">
+              <span
+                >Pay
+                <span class="uk-text-bold"
+                  >&#163; <%- amount_advancedpremier %> </span
+                >and get listed at the top above the list for a week.</span
+              >
+            </p>
+          </div>
+          <div
+            class="
+              uk-card-footer
+              uk-card-default
+              uk-text-left
+              uk-text-default
+              uk-text-bold
+            "
+          >
+            <div class="uk-clearfix">
+              <a
+                href="/business/pricingandplans/advancepremier/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Purchase</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default">
+          <div class="uk-card-body uk-text-center">
+            <h1 class="uk-card-title">Promoted Premier Spot</h1>
+            <p class="uk-text-center">
+              <span
+                >Pay
+                <span class="uk-text-bold">&#163; <%- amount_promoted %> </span
+                >and get a better page on the webiste with detailed review of
+                your listing.</span
+              >
+            </p>
+          </div>
+          <div
+            class="
+              uk-card-footer
+              uk-card-secondary
+              uk-text-left
+              uk-text-default
+              uk-text-bold
+            "
+          >
+            <div class="uk-clearfix">
+              <a
+                href="/business/pricingandplans/promoted/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Purchase</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -208,7 +208,7 @@
   }
 </style>
 <div class="uk-section uk-section-muted uk-section-large borderBottom">
-  <div class="uk-container" id="card-container-entry">
+  <div class="uk-container" id="card-container-premier">
     <!-- <h4 class="uk-text-capitalize uk-text-center uk-margin-large tagline1">
       Payment page
     </h4>
@@ -223,9 +223,9 @@
           <%- 'Total Amount' + ' ' + '-' + ' ' + '&#163;' + amount %>
         </p>
         <form
-          id="payment-form-entry"
+          id="payment-form-premier"
           method="POST"
-          action="/business/entries/paymentpage/<%- entry._id %>"
+          action="/business/pricingandplans/premier/<%- entry._id %>"
         >
           <div class="uk-padding-large" id="card-container"></div>
           <%- include('../partials/errors.ejs'); %>

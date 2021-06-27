@@ -28,7 +28,6 @@
   </li>
 </ul>
 
-<!-- body -->
 <div
   class="
     uk-section uk-section-muted uk-section-statistics uk-section-large
@@ -38,11 +37,10 @@
   <div class="uk-container">
     <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      Pending payment for entries
+      Your entries
     </h4>
     <p class="uk-text-meta uk-text-center uk-text-medium">
-      Your newly created entries are displayed here. Proceed to pay and make
-      your entries public.
+      Promote your listings/entries by selecting pricing and plans.
     </p>
     <hr class="uk-divider-icon" />
     <div
@@ -55,8 +53,8 @@
       "
       uk-grid
     >
-      <% if(pendingEntries.length > 0) { %> <%
-      pendingEntries.forEach((pendingEntry)=> { %>
+      <% if(allBusinessEntries.length > 0) { %> <%
+      allBusinessEntries.forEach((allBusinessEntry)=> { %>
       <div>
         <div class="uk-card uk-card-hover uk-card-default">
           <div class="uk-card-media-top">
@@ -69,7 +67,7 @@
                   uk-text-medium
                   uk-text-bold
                 "
-                ><%- pendingEntry.typeOfPlace %></span
+                ><%- allBusinessEntry.typeOfPlace %></span
               >
               <span
                 class="
@@ -79,23 +77,12 @@
                   uk-text-medium
                   uk-text-bold
                 "
-                ><%- pendingEntry.bookingStatus %></span
+                ><%- allBusinessEntry.bookingStatus %></span
               >
-
-              <!-- <span
-                  class="
-                    uk-label
-                    uk-float-right
-                    uk-label-success
-                    uk-text-medium
-                    uk-text-bold
-                  "
-                  ></span
-                > -->
             </div>
             <img
-              src="<%- pendingEntry.cover %>"
-              alt="<%- pendingEntry.cover %>"
+              src="<%- allBusinessEntry.cover %>"
+              alt="<%- allBusinessEntry.cover %>"
             />
           </div>
           <div
@@ -109,18 +96,17 @@
           >
             <div class="uk-clearfix">
               <a
-                href="/business/myentries/entry/<%- pendingEntry._id %>"
+                href="/business/myentries/entry/<%- allBusinessEntry._id %>"
                 class="noSelect uk-float-left"
-                ><%- pendingEntry.name %></a
+                ><%- allBusinessEntry.name %></a
               >
               <a
-                href="/business/entries/paymentpage/<%- pendingEntry._id %>"
-                target="blank"
+                href="/business/pricingandplans/<%- allBusinessEntry._id %>"
                 class="
                   uk-button uk-button-custom uk-float-right uk-light
                   noSelect
                 "
-                >Pay</a
+                >View plans</a
               >
             </div>
           </div>
@@ -129,7 +115,7 @@
       <% }) %> <% } else { %>
     </div>
     <p class="uk-text-center uk-text-large info-text uk-text-warning">
-      No Pending Payments
+      No Entries
     </p>
     <% } %>
   </div>

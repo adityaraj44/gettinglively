@@ -9,7 +9,8 @@ const { paymentsApi, locationsApi } = require("../middlewares/square");
 const { v4: uuidv4 } = require("uuid");
 const { ensureAuthenticated, ensureBusiness } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
-const { response } = require("express");
+// const { response } = require("express");
+const cron = require("node-cron");
 
 // get business dash
 router.get("/", ensureAuthenticated, ensureBusiness, async (req, res) => {
@@ -886,6 +887,442 @@ router.post(
         req.flash("error_msg", "Already paid!");
 
         res.redirect("/business/entries/pendingpayment");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// get manage listing page
+//
+router.get(
+  "/managelisting",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const allBusinessEntries = await Post.find({
+        user: req.user.id,
+        reviewStatus: "reviewed",
+      })
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
+      res.render("businessmember/managelisting", {
+        layout: "layouts/layout",
+        allBusinessEntries,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// get pricing and plans page
+router.get(
+  "/pricingandplans/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      const amount_premier = 50;
+      const amount_advancedpremier = 100;
+      const amount_promoted = 200;
+      if (entry) {
+        res.render("businessmember/pricingplans", {
+          entry,
+          amount_premier,
+          amount_advancedpremier,
+          amount_promoted,
+          layout: "layouts/layout",
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// get premier plan payment
+router.get(
+  "/pricingandplans/premier/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      const amount = 50;
+      if (entry) {
+        res.render("businessmember/paymentlisting", {
+          entry,
+          amount,
+          layout: "layouts/layout",
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      } else {
+        res.render("errors/pagenotfound");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// post method payment of premier plan
+router.post(
+  "/pricingandplans/premier/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      if (entry.listing == "basic") {
+        const token = req.body.sourceId;
+        const idempotencyKey = uuidv4();
+        // get the currency for the location
+        const locationResponse = await locationsApi.retrieveLocation(
+          process.env.SQUARE_PROD_LOCATION_ID
+        );
+        const currency = locationResponse.result.location.currency;
+        // Charge the customer's card
+        const requestBody = {
+          idempotencyKey,
+          sourceId: token,
+          amountMoney: {
+            amount: 5000, // $1.00 charge
+            currency,
+          },
+        };
+        try {
+          const {
+            result: { payment },
+          } = await paymentsApi.createPayment(requestBody);
+
+          const result = JSON.stringify(
+            payment,
+            (key, value) => {
+              return typeof value === "bigint" ? parseInt(value) : value;
+            },
+            4
+          );
+
+          if (result) {
+            console.log(result);
+            await Post.findById({ _id: req.params.id }).then((post) => {
+              if (post.listing == "basic") {
+                post.listing = "premier";
+              }
+              post.save((err) => {
+                req.flash(
+                  "success_msg",
+                  "Payment successfull. You have successfully bought out premier plan of 1 week validity."
+                );
+                //   post.planStart = Date.now();
+                //   post.planEnd = post.planStart + 20000;
+                //   post.save();
+                //   cron.schedule("* * * * * *", async function (req, res, next) {
+                //     let current_date = Date.now();
+                //     if (current_date == post.planEnd) {
+                //       post.listing = "basic";
+                //       post.planStart = undefined;
+                //       post.planEnd = undefined;
+                //       post.save((err) => {
+                //         console.log("Expired");
+                //       });
+                //     }
+                //   });
+
+                setTimeout(() => {
+                  post.listing = "basic";
+                  post.save();
+                  console.log("done");
+                }, 604800000);
+                res.redirect(`/business/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else {
+            console.log("error 1");
+            req.flash("error_msg", "Payment Failed. Try again");
+            res.redirect(`/business/pricingandplans/${req.params.id}`);
+          }
+        } catch (error) {
+          console.log(error);
+          console.log("error 2");
+          req.flash("error_msg", "Payment Failed. Try again");
+          res.redirect(`/business/pricingandplans/${req.params.id}`);
+        }
+      } else {
+        req.flash("error_msg", "You've already purchased this plan.");
+        res.redirect(`/business/pricingandplans/${req.params.id}`);
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// get advancepremier plan payment
+router.get(
+  "/pricingandplans/advancepremier/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      const amount = 100;
+      if (entry) {
+        res.render("businessmember/paymentlistingadvance", {
+          entry,
+          amount,
+          layout: "layouts/layout",
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      } else {
+        res.render("errors/pagenotfound");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// post advance plan
+
+router.post(
+  "/pricingandplans/advancepremier/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      if (entry.listing == "basic") {
+        const token = req.body.sourceId;
+        const idempotencyKey = uuidv4();
+        // get the currency for the location
+        const locationResponse = await locationsApi.retrieveLocation(
+          process.env.SQUARE_PROD_LOCATION_ID
+        );
+        const currency = locationResponse.result.location.currency;
+        // Charge the customer's card
+        const requestBody = {
+          idempotencyKey,
+          sourceId: token,
+          amountMoney: {
+            amount: 10000, // $1.00 charge
+            currency,
+          },
+        };
+        try {
+          const {
+            result: { payment },
+          } = await paymentsApi.createPayment(requestBody);
+
+          const result = JSON.stringify(
+            payment,
+            (key, value) => {
+              return typeof value === "bigint" ? parseInt(value) : value;
+            },
+            4
+          );
+
+          if (result) {
+            console.log(result);
+            await Post.findById({ _id: req.params.id }).then((post) => {
+              if (post.listing == "basic") {
+                post.listing = "premier advance";
+              }
+              post.save((err) => {
+                req.flash(
+                  "success_msg",
+                  "Payment successfull. You have successfully bought out advance premier plan of 1 week validity."
+                );
+                //   post.planStart = Date.now();
+                //   post.planEnd = post.planStart + 20000;
+                //   post.save();
+                //   cron.schedule("* * * * * *", async function (req, res, next) {
+                //     let current_date = Date.now();
+                //     if (current_date == post.planEnd) {
+                //       post.listing = "basic";
+                //       post.planStart = undefined;
+                //       post.planEnd = undefined;
+                //       post.save((err) => {
+                //         console.log("Expired");
+                //       });
+                //     }
+                //   });
+
+                setTimeout(() => {
+                  post.listing = "basic";
+                  post.save();
+                  console.log("done");
+                }, 604800000);
+
+                res.redirect(`/business/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else {
+            console.log("error 1");
+            req.flash("error_msg", "Payment Failed. Try again");
+            res.redirect(`/business/pricingandplans/${req.params.id}`);
+          }
+        } catch (error) {
+          console.log(error);
+          console.log("error 2");
+          req.flash("error_msg", "Payment Failed. Try again");
+          res.redirect(`/business/pricingandplans/${req.params.id}`);
+        }
+      } else {
+        req.flash("error_msg", "You've already purchased this plan.");
+        res.redirect(`/business/pricingandplans/${req.params.id}`);
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// get promoted plan payment
+router.get(
+  "/pricingandplans/promoted/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      const amount = 200;
+      if (entry) {
+        res.render("businessmember/paymentlistingpromoted", {
+          entry,
+          amount,
+          layout: "layouts/layout",
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      } else {
+        res.render("errors/pagenotfound");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// payment promoted
+router.post(
+  "/pricingandplans/promoted/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      if (entry.listing == "basic") {
+        const token = req.body.sourceId;
+        const idempotencyKey = uuidv4();
+        // get the currency for the location
+        const locationResponse = await locationsApi.retrieveLocation(
+          process.env.SQUARE_PROD_LOCATION_ID
+        );
+        const currency = locationResponse.result.location.currency;
+        // Charge the customer's card
+        const requestBody = {
+          idempotencyKey,
+          sourceId: token,
+          amountMoney: {
+            amount: 20000, // $1.00 charge
+            currency,
+          },
+        };
+        try {
+          const {
+            result: { payment },
+          } = await paymentsApi.createPayment(requestBody);
+
+          const result = JSON.stringify(
+            payment,
+            (key, value) => {
+              return typeof value === "bigint" ? parseInt(value) : value;
+            },
+            4
+          );
+
+          if (result) {
+            console.log(result);
+            await Post.findById({ _id: req.params.id }).then((post) => {
+              if (post.listing == "basic") {
+                post.listing = "promoted";
+              }
+              post.save((err) => {
+                req.flash(
+                  "success_msg",
+                  "Payment successfull. You have successfully bought out promoted premier plan of 1 week validity."
+                );
+                //   post.planStart = Date.now();
+                //   post.planEnd = post.planStart + 20000;
+                //   post.save();
+                //   cron.schedule("* * * * * *", async function (req, res, next) {
+                //     let current_date = Date.now();
+                //     if (current_date == post.planEnd) {
+                //       post.listing = "basic";
+                //       post.planStart = undefined;
+                //       post.planEnd = undefined;
+                //       post.save((err) => {
+                //         console.log("Expired");
+                //       });
+                //     }
+                //   });
+
+                setTimeout(() => {
+                  post.listing = "basic";
+                  post.save();
+                  console.log("done");
+                }, 604800000);
+
+                res.redirect(`/business/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else {
+            console.log("error 1");
+            req.flash("error_msg", "Payment Failed. Try again");
+            res.redirect(`/business/pricingandplans/${req.params.id}`);
+          }
+        } catch (error) {
+          console.log(error);
+          console.log("error 2");
+          req.flash("error_msg", "Payment Failed. Try again");
+          res.redirect(`/business/pricingandplans/${req.params.id}`);
+        }
+      } else {
+        req.flash("error_msg", "You've already purchased this plan.");
+        res.redirect(`/business/pricingandplans/${req.params.id}`);
       }
     } catch (error) {
       console.log(error);
