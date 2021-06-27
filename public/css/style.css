@@ -298,6 +298,11 @@ footer p {
     font-size: 25px !important;
     line-height: 50px;
   }
+
+  .uk-section-bar h4 {
+    font-size: 45px !important;
+    line-height: 50px;
+  }
 }
 
 .uk-section-bar {
@@ -381,9 +386,13 @@ footer p {
 }
 
 .uk-card-title {
-  margin: 20px 35px;
-  padding: 15px;
+  margin: 2px 4px;
+  padding: 10px;
   background-color: #ec4d37;
   border-radius: 5px;
   color: white !important;
+}
+
+.uk-letter-spacing {
+  letter-spacing: 2px;
 }

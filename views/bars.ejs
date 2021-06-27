@@ -128,19 +128,18 @@
           </div>
         </div>
       </div>
-
       <% }) %> <% } else { %>
+      <p class="uk-text-center uk-text-large info-text uk-text-warning">
+        No Details
+      </p>
+      <% } %>
     </div>
-    <p class="uk-text-center uk-text-large info-text uk-text-warning">
-      No Details
-    </p>
-    <% } %>
   </div>
 </div>
 
 <!--  search for bars -->
 <!-- search -->
-<div class="uk-section uk-section-large uk-section-auto borderBottom uk-dark">
+<div class="uk-section uk-section-auto borderBottom uk-dark">
   <div class="uk-container search-container">
     <h4
       class="
@@ -248,16 +247,12 @@
       </div>
 
       <% }) %> <% } else { %>
-      <p class="uk-text-center uk-text-large info-text uk-text-warning">
-        No Entries
-      </p>
+      <p class="uk-text-center uk-text-large uk-text-warning">No Entries</p>
       <% } %>
     </div>
   </div>
 </div>
 
-<!-- footer -->
-<!-- footer -->
 <!-- footer -->
 <%- include('./partials/modals.ejs'); %>
 <footer class="uk-section uk-section-black">

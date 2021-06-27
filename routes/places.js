@@ -205,9 +205,7 @@ router.get("/entries/entry/:id", async (req, res) => {
     })
       .populate("user")
       .lean();
-    if (!entry) {
-      res.render("errors/404");
-    }
+
     const allOffers = await Offer.find({ post: req.params.id })
       .populate("post")
       .populate("user")
@@ -222,7 +220,9 @@ router.get("/entries/entry/:id", async (req, res) => {
     for (i = 0; i < allReview.length; i++) {
       totalScore = totalScore + allReview[i].userScore;
     }
-
+    if (!entry) {
+      res.render("errors/404");
+    }
     res.render("singleEntry", {
       layout: "layouts/layout",
       entry,

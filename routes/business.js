@@ -643,7 +643,7 @@ router.post(
           post: req.params.id,
         }).then((data) => {
           req.flash("success_msg", "Offer created successfully!");
-          res.redirect(`/business/myentries/entry/${req.params.id}`);
+          //   res.redirect(`/business/myentries/entry/${req.params.id}`);
         });
         await Post.findById({ _id: req.params.id }).then((post) => {
           if (post.reviewStatus == "reviewed") {
@@ -1053,23 +1053,23 @@ router.post(
                   post.save();
                   console.log("done");
                 }, 604800000);
-                res.redirect(`/business/pricingandplans/${req.params.id}`);
+                res.redirect(req.originalUrl);
               });
             });
           } else {
             console.log("error 1");
             req.flash("error_msg", "Payment Failed. Try again");
-            res.redirect(`/business/pricingandplans/${req.params.id}`);
+            res.redirect(req.originalUrl);
           }
         } catch (error) {
           console.log(error);
           console.log("error 2");
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(`/business/pricingandplans/${req.params.id}`);
+          res.redirect(req.originalUrl);
         }
       } else {
         req.flash("error_msg", "You've already purchased this plan.");
-        res.redirect(`/business/pricingandplans/${req.params.id}`);
+        res.redirect(req.originalUrl);
       }
     } catch (error) {
       console.log(error);
@@ -1180,23 +1180,23 @@ router.post(
                   console.log("done");
                 }, 604800000);
 
-                res.redirect(`/business/pricingandplans/${req.params.id}`);
+                res.redirect(req.originalUrl);
               });
             });
           } else {
             console.log("error 1");
             req.flash("error_msg", "Payment Failed. Try again");
-            res.redirect(`/business/pricingandplans/${req.params.id}`);
+            res.redirect(req.originalUrl);
           }
         } catch (error) {
           console.log(error);
           console.log("error 2");
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(`/business/pricingandplans/${req.params.id}`);
+          res.redirect(req.originalUrl);
         }
       } else {
         req.flash("error_msg", "You've already purchased this plan.");
-        res.redirect(`/business/pricingandplans/${req.params.id}`);
+        res.redirect(req.originalUrl);
       }
     } catch (error) {
       console.log(error);
@@ -1306,7 +1306,7 @@ router.post(
                   console.log("done");
                 }, 604800000);
 
-                res.redirect(`/business/pricingandplans/${req.params.id}`);
+                res.redirect(req.originalUrl);
               });
             });
           } else {
@@ -1318,11 +1318,11 @@ router.post(
           console.log(error);
           console.log("error 2");
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(`/business/pricingandplans/${req.params.id}`);
+          res.redirect(req.originalUrl);
         }
       } else {
         req.flash("error_msg", "You've already purchased this plan.");
-        res.redirect(`/business/pricingandplans/${req.params.id}`);
+        res.redirect(req.originalUrl);
       }
     } catch (error) {
       console.log(error);

@@ -47,7 +47,12 @@
   <div class="uk-container">
     <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-        <a class="noSelect uk-text-secondary" href="<%- entry.user.websiteurl %>" target="blank"><%- entry.name %></a>
+      <a
+        class="noSelect uk-text-secondary"
+        href="<%- entry.user.websiteurl %>"
+        target="blank"
+        ><%- entry.name %></a
+      >
     </h4>
     <hr />
     <div class="uk-clearfix uk-text-center">
@@ -67,7 +72,8 @@
         class="
           uk-label uk-float-center uk-label-success uk-text-medium uk-text-bold
         "
-        ><%- allReview.length != 0 ? 'User reviews' + ' ' + '-' + ' ' +  Math.round(totalScore/allReview.length) + '/' + '5' : 'No reviews' %>
+        ><%- allReview.length != 0 ? 'User reviews' + ' ' + '-' + ' ' +
+        Math.round(totalScore/allReview.length) + '/' + '5' : 'No reviews' %>
       </span>
     </div>
     <hr class="uk-divider-icon" />
@@ -146,59 +152,62 @@
         <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
       </div>
     </div>
-    
+
     <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
       <div class="uk-card-body">
-        <%- helper.getEntryUser(user,entry.user) %>
-        <%- helper.getReviewStatus(entry) %>
+        <%- helper.getEntryUser(user,entry.user) %> <%-
+        helper.getReviewStatus(entry) %>
         <!-- edit -->
         <div id="editEntryAdmin" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-              <h2 class="uk-modal-title">Are you sure?</h2>
-              <p>Go to the edit page</p>
-              <span>
-                <button
-                  class="uk-button uk-button-default uk-modal-close noSelect"
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </span>
-              <span
-                ><a
+          <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Are you sure?</h2>
+            <p>Go to the edit page</p>
+            <span>
+              <button
+                class="uk-button uk-button-default uk-modal-close noSelect"
+                type="button"
+              >
+                Cancel
+              </button>
+            </span>
+            <span
+              ><a
                 href="/admincreate/myentries/entry/edit/<%- entry._id %>"
-                class="uk-button uk-button-default  noSelect"
+                class="uk-button uk-button-default noSelect"
                 type="button"
               >
                 Edit
               </a></span
-              >
-            </div>
+            >
           </div>
-          <!-- mark as reviewed -->
-          <div id="markasreviewed" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-              <h2 class="uk-modal-title">Are you sure?</h2>
-              <p>Mark this entry as reviewd. This entry will now be visible to everyone</p>
-              <span>
-                <button
-                  class="uk-button uk-button-default uk-modal-close noSelect"
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </span>
-              <span
-                ><a
+        </div>
+        <!-- mark as reviewed -->
+        <div id="markasreviewed" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body">
+            <h2 class="uk-modal-title">Are you sure?</h2>
+            <p>
+              Mark this entry as reviewd. This entry will now be visible to
+              everyone
+            </p>
+            <span>
+              <button
+                class="uk-button uk-button-default uk-modal-close noSelect"
+                type="button"
+              >
+                Cancel
+              </button>
+            </span>
+            <span
+              ><a
                 href="/admincreate/myentries/entry/review/<%- entry._id %>"
-                class="uk-button uk-button-default  noSelect"
+                class="uk-button uk-button-default noSelect"
                 type="button"
               >
                 Done
               </a></span
-              >
-            </div>
+            >
           </div>
+        </div>
         <!-- logout modal -->
         <div id="deleteEntryAdmin" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
@@ -305,13 +314,13 @@
                 class="uk-margin-medium-right uk-text-success"
                 uk-icon="icon: location; ratio: 2"
               ></span
-              ><%- entry.location + ' ' + entry.postcode %>
+              ><%- entry.location + ',' + ' ' + entry.city + ',' + ' ' +
+              entry.postcode %>
             </p>
-            
           </li>
           <li>
-            <% if(entry.menu) { %> 
-                <span
+            <% if(entry.menu) { %>
+            <span
               class="uk-text-primary"
               uk-icon="icon:  file-pdf; ratio: 2"
             ></span>
@@ -321,253 +330,284 @@
               class="uk-button uk-button-muted"
               ><%- entry.name + " " + "Menu" %></a
             >
-                 <% } else { %>
-                    <p class="uk-text-center uk-text-large uk-text-warning">No Menus</p>
-                    <% } %>
+            <% } else { %>
+            <p class="uk-text-center uk-text-large uk-text-warning">No Menus</p>
+            <% } %>
           </li>
-          <li><h1 class="uk-card-title uk-text-center">All Offers</h1>
-            <div class="
-            uk-child-width-1-1
-            uk-child-width-1-3@s
-            uk-grid-small
-           
-            uk-margin-large-top
-            uk-margin-large-bottom
-          "
-          uk-grid>
-          <% if(allOffers.length > 0) { %> <%
-            allOffers.forEach((allOffer)=> { %>
-                <div class="uk-card uk-card-hover uk-card-secondary uk-light">
-                    <div class="uk-card-body">
-                        <h1 class="uk-card-title"><%- allOffer.offername %></h1>
-                        <p class="uk-text-break"><%- allOffer.offerdesc %></p>
-                        <p><%- 'Offer price:' + ' ' + '$ ' + allOffer.offeramount %></p>
-                    </div>
-                    <div class="uk-margin-bottom"><%- helper.getBusinessOfferUser(user,allOffer.user) %></div>
-                   <!-- edit and delete modals -->
-    <!-- edit -->
-    <div id="editOffer" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-          <h2 class="uk-modal-title">Are you sure?</h2>
-          <p>Go to the edit page</p>
-          <span>
-            <button
-              class="uk-button uk-button-default uk-modal-close noSelect"
-              type="button"
+          <li>
+            <h1 class="uk-card-title uk-text-center">All Offers</h1>
+            <div
+              class="
+                uk-child-width-1-1
+                uk-child-width-1-2@s
+                uk-grid-small
+                uk-margin-large-top
+                uk-margin-large-bottom
+              "
+              uk-grid
             >
-              Cancel
-            </button>
-          </span>
-          <span
-            ><a
-            href="/admincreate/myentries/offer/edit/<%- allOffer._id %>"
-            class="uk-button uk-button-default  noSelect"
-            type="button"
-          >
-            Edit
-          </a></span
-          >
-        </div>
-      </div>
-      <!-- delete modal -->
-      <div id="deleteOffer" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-          <h2 class="uk-modal-title">Are you sure?</h2>
-          <p>This offer will be deleted permanently!</p>
-          <span>
-            <button
-              class="uk-button uk-button-default uk-modal-close noSelect"
-              type="button"
-            >
-              Cancel
-            </button>
-          </span>
-          <span
-            ><form
-              class="uk-float-right"
-              action="/admincreate/myentries/offer/delete/<%- allOffer._id %>"
-              method="POST"
-            >
-              <input type="hidden" name="_method" value="DELETE" />
-              <button
-                type="submit"
-                class="
-                  uk-button uk-button-danger
-                  noSelect
-                  uk-margin-small-left
-                "
-              >
-                Delete
-              </button>
-            </form></span
-          >
-        </div>
-      </div>
+              <% if(allOffers.length > 0) { %> <% allOffers.forEach((allOffer)=>
+              { %>
 
+              <div class="uk-card uk-card-hover uk-card-secondary uk-light">
+                <div class="uk-card-body">
+                  <h1 class="uk-card-title uk-text-center">
+                    <%- allOffer.offername %>
+                  </h1>
+                  <p class="uk-text-break"><%- allOffer.offerdesc %></p>
+                  <p>
+                    <%- 'Offer price:' + ' ' + '$ ' + allOffer.offeramount %>
+                  </p>
                 </div>
-                <% }) %> <% } else { %>
-                    <p class="uk-text-center uk-text-large uk-text-warning">No Offers</p>
-                    <% } %>
-            </div></li>
+                <div class="uk-margin-bottom">
+                  <%- helper.getBusinessOfferUser(user,allOffer.user) %>
+                </div>
+                <!-- edit and delete modals -->
+                <!-- edit -->
+                <div id="editOffer" uk-modal>
+                  <div class="uk-modal-dialog uk-modal-body">
+                    <h2 class="uk-modal-title">Are you sure?</h2>
+                    <p>Go to the edit page</p>
+                    <span>
+                      <button
+                        class="
+                          uk-button uk-button-default uk-modal-close
+                          noSelect
+                        "
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                    </span>
+                    <span
+                      ><a
+                        href="/admincreate/myentries/offer/edit/<%- allOffer._id %>"
+                        class="uk-button uk-button-default noSelect"
+                        type="button"
+                      >
+                        Edit
+                      </a></span
+                    >
+                  </div>
+                </div>
+                <!-- delete modal -->
+                <div id="deleteOffer" uk-modal>
+                  <div class="uk-modal-dialog uk-modal-body">
+                    <h2 class="uk-modal-title">Are you sure?</h2>
+                    <p>This offer will be deleted permanently!</p>
+                    <span>
+                      <button
+                        class="
+                          uk-button uk-button-default uk-modal-close
+                          noSelect
+                        "
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                    </span>
+                    <span
+                      ><form
+                        class="uk-float-right"
+                        action="/admincreate/myentries/offer/delete/<%- allOffer._id %>"
+                        method="POST"
+                      >
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button
+                          type="submit"
+                          class="
+                            uk-button uk-button-danger
+                            noSelect
+                            uk-margin-small-left
+                          "
+                        >
+                          Delete
+                        </button>
+                      </form></span
+                    >
+                  </div>
+                </div>
+              </div>
+              <% }) %> <% } else { %>
+              <p class="uk-text-center uk-text-large uk-text-warning">
+                No Offers
+              </p>
+              <% } %>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
 
     <!-- form -->
-    <div class="
-    uk-child-width-1-1
-    uk-child-width-1-2@s
-    uk-grid-small
-    uk-margin-large-top
-    uk-margin-large-bottom
-  "
-  uk-grid>
-  <div>
+    <div
+      class="
+        uk-child-width-1-1
+        uk-child-width-1-2@s
+        uk-grid-small
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
         <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
-            <div class="uk-card-body">
-              <h1 class="uk-card-title uk-text-center">Add reviews</h1>
-              <form action="/userreviews/<%- entry._id %>" method="POST">
-                <div class="uk-form-stacked">
-                  <div class="uk-margin-small">
-                    <div class="uk-form-control">
-                      <input
-                        required
-                        type="number"
-                        name="userScore"
-                        min="1"
-                        max="5"
-                        placeholder="Initial score out of 5"
-                        id="rating"
-                        class="uk-input uk-form-large noSelect"
-                      />
-                    </div>
-                    <div class="uk-form-control">
-                      <textarea
-                        required
-                        class="uk-textarea"
-                        name="userComment"
-                      ></textarea>
-                    </div>
+          <div class="uk-card-body">
+            <h1 class="uk-card-title uk-text-center">Add reviews</h1>
+            <form action="/userreviews/<%- entry._id %>" method="POST">
+              <div class="uk-form-stacked">
+                <div class="uk-margin-small">
+                  <div class="uk-form-control">
+                    <input
+                      required
+                      type="number"
+                      name="userScore"
+                      min="1"
+                      max="5"
+                      placeholder="Initial score out of 5"
+                      id="rating"
+                      class="uk-input uk-form-large noSelect"
+                    />
                   </div>
-                  <div class="uk-marign-medium uk-text-center">
-                    <div class="uk-form-control">
-                      <button
-                        type="submit"
-                        class="uk-button uk-button-custom noSelect"
-                      >
-                        Post review
-                      </button>
-                    </div>
+                  <div class="uk-form-control">
+                    <textarea
+                      required
+                      class="uk-textarea"
+                      name="userComment"
+                    ></textarea>
                   </div>
                 </div>
-              </form>
-              <hr class="uk-divider-icon" />
-              <p class="uk-text-lead uk-text-bold uk-text-center@s">
-                Total Reviews: <%- allReview.length %>
-              </p>
-      
-              <p class="uk-text-headline uk-text-secondary uk-text-center@s">
-                <%- allReview.length != 0 ? 'Total Score:'+ ' ' +  Math.round(totalScore/allReview.length)+ '/'+ '5': 'Total Score:' + ' ' + '0' %>
-              </p>
-              <p class="uk-text-meta uk-text-success uk-text-normal uk-text-center@s">
-                Based on <%- allReview.length%> customer reviews
-              </p>
-              <ul class="uk-comment-list">
-                <% allReview.forEach(review => { %>
-                <li>
-                  <article
-                    class="
-                      uk-comment
-                      uk-visible-toggle
-                      uk-padding-small
-                      uk-box-shadow-small
-                    "
-                    tabindex="-1"
-                  >
-                    <header class="uk-comment-header uk-position-relative">
-                      <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                        <div class="uk-width-expand">
-                          <p class="uk-comment-title uk-margin-remove">
-                            <p class="uk-margin--medium-right"
-                              ><%- review.user.name %></p
-                            >
-                            <span
-                              class="
-                                uk-text-bold uk-text-success uk-marign-medium-left
-                              "
-                              >gave - <%- review.userScore %> / 5</span
-                            >
-                          </p>
-                          <p class="uk-comment-meta uk-margin-remove-top">
-                            <a class="uk-link-reset" href="#"
-                              ><%- helper.formatDate(review.createdAt, 'LL') %></a
-                            >
-                          </p>
-                        </div>
-                      </div>
-                    </header>
-                    <div class="uk-comment-body">
-                      <p class="uk-text-break"><%- review.userComment %></p>
-                    </div>
-                  </article>
-                </li>
-                <% }) %>
-              </ul>
-            </div>
-          </div>
-          </div>
-          <div>
-            <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
-                <div class="uk-card-body">
-                  <h1 class="uk-card-title uk-text-center">Create offers/e-vouchers for this entry</h1>
-                  <form action="/admincreate/createoffer/<%- entry._id %>" method="POST">
-                    <div class="uk-form-stacked">
-                        <div class="uk-margin-small">
-                            <div class="uk-form-control">
-                                <input class="uk-input uk-form-large noSelect" required type="text" name="offername" 
-                                placeholder="Title of offer"  value="<%= typeof offername != 'undefined' ? offername : '' %>" />
-                            </div>
-                            <div class="uk-form-control uk-margin-small-top">
-                                <label for="desc" class="uk-text-meta"
-                                  >Full Description of the offer.</label
-                                >
-                                <textarea
-                                  required
-                                    
-                                  name="offerdesc"
-                                  class="uk-textarea"
-                                ></textarea
-                                >
-                              </div>
-                              <div class="uk-form-control">
-                                <input
-                                  required
-                                  type="number"
-                                  name="offeramount"
-                                  id="offeramount"
-                                  min="1"
-                                  placeholder="Enter offer amount in GBP"
-                                  class="uk-input uk-form-large noSelect"
-                                  value="<%= typeof offeramount != 'undefined' ? offeramount: '' %>"
-                                />
-                              </div>
-                        </div>
-                        <div class="uk-margin-medium uk-text-center">
-                            <div class="uk-form-control">
-                                <button
-                                  type="submit"
-                                  class="uk-button uk-button-custom noSelect"
-                                >
-                                  Post
-                                </button>
-                              </div>
-                        </div>
-                    </div>
-                </form>
+                <div class="uk-marign-medium uk-text-center">
+                  <div class="uk-form-control">
+                    <button
+                      type="submit"
+                      class="uk-button uk-button-custom noSelect"
+                    >
+                      Post review
+                    </button>
+                  </div>
                 </div>
               </div>
+            </form>
+            <hr class="uk-divider-icon" />
+            <p class="uk-text-lead uk-text-bold uk-text-center@s">
+              Total Reviews: <%- allReview.length %>
+            </p>
+
+            <p class="uk-text-headline uk-text-secondary uk-text-center@s">
+              <%- allReview.length != 0 ? 'Total Score:'+ ' ' +
+              Math.round(totalScore/allReview.length)+ '/'+ '5': 'Total Score:'
+              + ' ' + '0' %>
+            </p>
+            <p
+              class="
+                uk-text-meta uk-text-success uk-text-normal uk-text-center@s
+              "
+            >
+              Based on <%- allReview.length%> customer reviews
+            </p>
+            <ul class="uk-comment-list">
+              <% allReview.forEach(review => { %>
+              <li>
+                <article
+                  class="
+                    uk-comment
+                    uk-visible-toggle
+                    uk-padding-small
+                    uk-box-shadow-small
+                  "
+                  tabindex="-1"
+                >
+                  <header class="uk-comment-header uk-position-relative">
+                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                      <div class="uk-width-expand">
+                        <p class="uk-comment-title uk-margin-remove">
+                          <%- review.user.name %>
+                          <span
+                            class="
+                              uk-text-bold uk-text-success uk-marign-medium-left
+                            "
+                            >gave - <%- review.userScore %> / 5</span
+                          >
+                        </p>
+                        <p class="uk-comment-meta uk-margin-remove-top">
+                          <a class="uk-link-reset" href="#"
+                            ><%- helper.formatDate(review.createdAt, 'LL') %></a
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </header>
+                  <div class="uk-comment-body">
+                    <p class="uk-text-break"><%- review.userComment %></p>
+                  </div>
+                </article>
+              </li>
+              <% }) %>
+            </ul>
           </div>
-          
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
+          <div class="uk-card-body">
+            <h1 class="uk-card-title uk-text-center">
+              Create offers/e-vouchers for this entry
+            </h1>
+            <form
+              action="/admincreate/createoffer/<%- entry._id %>"
+              method="POST"
+            >
+              <div class="uk-form-stacked">
+                <div class="uk-margin-small">
+                  <div class="uk-form-control">
+                    <input
+                      class="uk-input uk-form-large noSelect"
+                      required
+                      type="text"
+                      name="offername"
+                      placeholder="Title of offer"
+                      value="<%= typeof offername != 'undefined' ? offername : '' %>"
+                    />
+                  </div>
+                  <div class="uk-form-control uk-margin-small-top">
+                    <label for="desc" class="uk-text-meta"
+                      >Full Description of the offer.</label
+                    >
+                    <textarea
+                      required
+                      name="offerdesc"
+                      class="uk-textarea"
+                    ></textarea>
+                  </div>
+                  <div class="uk-form-control">
+                    <input
+                      required
+                      type="number"
+                      name="offeramount"
+                      id="offeramount"
+                      min="1"
+                      placeholder="Enter offer amount in GBP"
+                      class="uk-input uk-form-large noSelect"
+                      value="<%= typeof offeramount != 'undefined' ? offeramount: '' %>"
+                    />
+                  </div>
+                </div>
+                <div class="uk-margin-medium uk-text-center">
+                  <div class="uk-form-control">
+                    <button
+                      type="submit"
+                      class="uk-button uk-button-custom noSelect"
+                    >
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

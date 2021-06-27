@@ -189,7 +189,7 @@
                 class="uk-margin-medium-right uk-text-success"
                 uk-icon="icon: location; ratio: 2"
               ></span
-              ><%- entry.location + ' ' + entry.postcode %>
+              ><%- entry.location + ',' + ' ' + entry.city + ',' + ' ' + entry.postcode %>
             </p>
           </li>
           <li>
@@ -222,7 +222,7 @@
             allOffers.forEach((allOffer)=> { %>
                 <div class="uk-card uk-card-hover uk-card-secondary uk-light">
                     <div class="uk-card-body">
-                        <h1 class="uk-card-title"><%- allOffer.offername %></h1>
+                        <h1 class="uk-card-title uk-text-center"><%- allOffer.offername %></h1>
                         <p class="uk-text-break"><%- allOffer.offerdesc %></p>
                         <p><%- 'Offer price:' + ' ' + '&#163; ' + allOffer.offeramount %></p>
                         <a href="/payment/<%- allOffer._id %>" target="_blank"  id="purchase" class="uk-button uk-button-custom noSelect">Purchase</a>
@@ -233,6 +233,7 @@
       
 
                 </div>
+                
                 <% }) %> <% } else { %>
                     <p class="uk-text-center uk-text-large uk-text-warning">No Offers</p>
                     <% } %>
