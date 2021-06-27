@@ -5,8 +5,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const config = {
-  environment: "sandbox",
-  accessToken: process.env.SQUARE_ACCESS_TOKEN,
+  environment: "production",
+  accessToken: process.env.SQUARE_PROD_ACCESS_TOKEN,
 };
 
 const defaultClient = new Client(config);
