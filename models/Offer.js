@@ -10,6 +10,11 @@ const offerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    offerStatus: {
+      type: String,
+      default: "pending",
+      enum: ["pending", "paid"],
+    },
     offeramount: {
       type: Number,
       required: true,

@@ -206,7 +206,10 @@ router.get("/entries/entry/:id", async (req, res) => {
       .populate("user")
       .lean();
 
-    const allOffers = await Offer.find({ post: req.params.id })
+    const allOffers = await Offer.find({
+      post: req.params.id,
+      offerStatus: "paid",
+    })
       .populate("post")
       .populate("user")
       .sort({ createdAt: "desc" })

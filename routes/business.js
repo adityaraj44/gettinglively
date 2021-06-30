@@ -342,7 +342,10 @@ router.get(
       })
         .populate("user")
         .lean();
-      const allOffers = await Offer.find({ post: req.params.id })
+      const allOffers = await Offer.find({
+        post: req.params.id,
+        offerStatus: "paid",
+      })
         .populate("post")
         .populate("user")
         .sort({ createdAt: "desc" })
@@ -650,7 +653,7 @@ router.post(
             post.reviewStatus = "inprocess";
           }
           post.save((err) => {
-            req.flash("success_msg", "Offer edited successfully");
+            // req.flash("success_msg", "Offer edited successfully");
             res.redirect(`/business/myentries/entry/${req.params.id}`);
           });
         });
@@ -782,9 +785,15 @@ router.get(
         paymentStatus: "pending",
         user: req.user.id,
       }).lean();
+
+      const pendingOffers = await Offer.find({
+        offerStatus: "pending",
+        user: req.user.id,
+      }).lean();
       res.render("businessmember/pendingPayment", {
         layout: "layouts/layout",
         pendingEntries,
+        pendingOffers,
         helper: require("../helpers/ejs"),
       });
     } catch (error) {
@@ -816,6 +825,111 @@ router.get(
     } catch (error) {
       console.log(error);
       res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// get offer payment page
+router.get(
+  "/offers/paymentpage/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const offer = await Offer.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+      const amount = 1;
+      if (offer) {
+        res.render("businessmember/paymentOffer", {
+          offer,
+          amount,
+          layout: "layouts/layout",
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      } else {
+        res.render("errors/404");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// post method of payment of offer
+router.post(
+  "/offers/paymentpage/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const verifyPayment = await Offer.findById({ _id: req.params.id })
+        .populate("user")
+        .lean();
+
+      if (verifyPayment.offerStatus == "pending") {
+        const token = req.body.sourceId;
+        const idempotencyKey = uuidv4();
+        // get the currency for the location
+        const locationResponse = await locationsApi.retrieveLocation(
+          process.env.SQUARE_PROD_LOCATION_ID
+        );
+        const currency = locationResponse.result.location.currency;
+        // Charge the customer's card
+        const requestBody = {
+          idempotencyKey,
+          sourceId: token,
+          amountMoney: {
+            amount: 100, // $1.00 charge
+            currency,
+          },
+        };
+        try {
+          const {
+            result: { payment },
+          } = await paymentsApi.createPayment(requestBody);
+
+          const result = JSON.stringify(
+            payment,
+            (key, value) => {
+              return typeof value === "bigint" ? parseInt(value) : value;
+            },
+            4
+          );
+
+          if (result) {
+            console.log(result);
+            await Offer.findById({ _id: req.params.id }).then((offer) => {
+              if (offer.offerStatus == "pending") {
+                offer.offerStatus = "paid";
+              }
+              offer.save((err) => {
+                req.flash(
+                  "success_msg",
+                  "Payment successfull. Offer sent for review. You may now close this browser window."
+                );
+                res.redirect(req.originalUrl);
+              });
+            });
+          } else {
+            req.flash("error_msg", "Payment Failed. Try again");
+            res.redirect(req.originalUrl);
+          }
+        } catch (error) {
+          console.log(error);
+          req.flash("error_msg", "Payment Failed. Try again");
+          res.redirect(req.originalUrl);
+        }
+      } else {
+        req.flash("error_msg", "Offer Already Activated!");
+
+        res.redirect("/business/entries/pendingpayment");
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
     }
   }
 );
