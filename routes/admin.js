@@ -4,6 +4,7 @@ const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const User = require("../models/User");
 const Post = require("../models/Post");
 const Voucher = require("../models/Voucher");
+const Offer = require("../models/Offer");
 
 // admin dashboard
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -25,6 +26,10 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
     const entries = await Post.find({ reviewStatus: "reviewed" }).lean();
     const transaction = await Voucher.find({}).lean();
     const transaction2 = await Post.find({ paymentStatus: "paid" }).lean();
+    const offerTransaction = await Offer.find({ offerStatus: "paid" }).lean();
+    const planTransaction = await Post.find({ listing: "premier" });
+    const planTransaction2 = await Post.find({ listing: "premier advance" });
+    const planTransaction3 = await Post.find({ listing: "promoted" });
 
     res.render("admin/admindash", {
       layout: "layouts/layout",
@@ -33,6 +38,10 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
       businessMembers,
       entries,
       transaction,
+      offerTransaction,
+      planTransaction,
+      planTransaction2,
+      planTransaction3,
     });
   } catch (error) {
     console.log(error);
