@@ -17,6 +17,22 @@ router.get("/bars", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+  const topPicks = await Post.find({
+    listing: "premier",
+    typeOfPlace: "bar",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicksadv = await Post.find({
+    listing: "premier advance",
+    typeOfPlace: "bar",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
   const pagedetails = await PageDetail.find({
     typeOfPlace: "bar",
   })
@@ -41,7 +57,8 @@ router.get("/bars", async (req, res) => {
     user: req.user,
     pagedetails,
     allEntries,
-
+    topPicks,
+    topPicksadv,
     helper: require("../helpers/ejs"),
   });
 });
@@ -50,6 +67,22 @@ router.get("/bars", async (req, res) => {
 router.get("/restaurant", async (req, res) => {
   const allEntries = await Post.find({
     reviewStatus: "reviewed",
+    typeOfPlace: "restaurant",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicks = await Post.find({
+    listing: "premier",
+    typeOfPlace: "restaurant",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicksadv = await Post.find({
+    listing: "premier advance",
     typeOfPlace: "restaurant",
   })
     .populate("user")
@@ -81,6 +114,8 @@ router.get("/restaurant", async (req, res) => {
   res.render("restaurant", {
     user: req.user,
     allEntries,
+    topPicks,
+    topPicksadv,
     reviews,
     pagedetails,
     helper: require("../helpers/ejs"),
@@ -91,6 +126,22 @@ router.get("/restaurant", async (req, res) => {
 router.get("/club", async (req, res) => {
   const allEntries = await Post.find({
     reviewStatus: "reviewed",
+    typeOfPlace: "club",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicks = await Post.find({
+    listing: "premier",
+    typeOfPlace: "club",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicksadv = await Post.find({
+    listing: "premier advance",
     typeOfPlace: "club",
   })
     .populate("user")
@@ -119,6 +170,8 @@ router.get("/club", async (req, res) => {
   res.render("club", {
     user: req.user,
     allEntries,
+    topPicks,
+    topPicksadv,
     pagedetails,
     helper: require("../helpers/ejs"),
   });
@@ -128,6 +181,21 @@ router.get("/club", async (req, res) => {
 router.get("/pubs", async (req, res) => {
   const allEntries = await Post.find({
     reviewStatus: "reviewed",
+    typeOfPlace: "pub",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+  const topPicks = await Post.find({
+    listing: "premier",
+    typeOfPlace: "pub",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicksadv = await Post.find({
+    listing: "premier advance",
     typeOfPlace: "pub",
   })
     .populate("user")
@@ -155,6 +223,8 @@ router.get("/pubs", async (req, res) => {
   res.render("pub", {
     user: req.user,
     pagedetails,
+    topPicks,
+    topPicksadv,
     allEntries,
     helper: require("../helpers/ejs"),
   });
@@ -169,6 +239,23 @@ router.get("/venue", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+
+  const topPicks = await Post.find({
+    listing: "premier",
+    typeOfPlace: "venue",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const topPicksadv = await Post.find({
+    listing: "premier advance",
+    typeOfPlace: "venue",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
   const pagedetails = await PageDetail.find({
     typeOfPlace: "venue",
   })
@@ -191,6 +278,8 @@ router.get("/venue", async (req, res) => {
   res.render("venue", {
     user: req.user,
     allEntries,
+    topPicks,
+    topPicksadv,
     pagedetails,
     helper: require("../helpers/ejs"),
   });

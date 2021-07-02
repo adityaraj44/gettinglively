@@ -181,6 +181,149 @@
   </div>
 </div>
 <!-- search section ends here -->
+<!-- What we recommend -->
+<% if(topPicksadv.length > 0) { %>
+<div
+  class="
+    uk-section uk-bar-section uk-section-large uk-section-muted uk-section-auto
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <h1 class="uk-text-center@s">WHAT WE RECOMMEND</h1>
+    <hr class="uk-divider-icon" />
+    <div
+      class="
+        uk-child-width-1-1
+        uk-child-width-1-3@s
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <% topPicksadv.forEach((allEntry)=> { %>
+      <div>
+        <a href="/places/entries/entry/<%- allEntry._id %>" class="noSelect"
+          ><div class="uk-card uk-card-hover uk-card-default">
+            <div class="uk-card-media-top">
+              <div class="uk-clearfix uk-position-absolute">
+                <span
+                  class="
+                    uk-label
+                    uk-float-left
+                    uk-label-danger
+                    uk-text-medium
+                    uk-text-bold
+                  "
+                  ><%- allEntry.typeOfPlace %></span
+                >
+                <!-- added the review on 21 june -->
+                <span
+                  class="
+                    uk-label
+                    uk-float-left
+                    uk-label-primary
+                    uk-text-medium
+                    uk-text-bold
+                  "
+                  ><%- allEntry.bookingStatus %></span
+                >
+              </div>
+              <img src="<%- allEntry.cover %>" alt="<%- allEntry.cover %>" />
+            </div>
+            <div
+              class="
+                uk-card-footer
+                uk-card-secondary
+                uk-text-left
+                uk-text-default
+                uk-text-bold
+              "
+            >
+              <%- allEntry.name %>
+            </div>
+          </div></a
+        >
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<% } %>
+<!-- top picks -->
+<% if(topPicks.length > 0) { %>
+<div
+  class="
+    uk-section uk-bar-section uk-section-large uk-section-muted uk-section-auto
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <h1 class="uk-text-center@s">OUR TOP PICKS</h1>
+    <hr class="uk-divider-icon" />
+    <div
+      class="
+        uk-child-width-1-1
+        uk-child-width-1-3@s
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <% topPicks.forEach((allEntry)=> { %>
+      <div>
+        <a href="/places/entries/entry/<%- allEntry._id %>" class="noSelect"
+          ><div class="uk-card uk-card-hover uk-card-default">
+            <div class="uk-card-media-top">
+              <div class="uk-clearfix uk-position-absolute">
+                <span
+                  class="
+                    uk-label
+                    uk-float-left
+                    uk-label-danger
+                    uk-text-medium
+                    uk-text-bold
+                  "
+                  ><%- allEntry.typeOfPlace %></span
+                >
+                <!-- added the review on 21 june -->
+                <span
+                  class="
+                    uk-label
+                    uk-float-left
+                    uk-label-primary
+                    uk-text-medium
+                    uk-text-bold
+                  "
+                  ><%- allEntry.bookingStatus %></span
+                >
+              </div>
+              <img src="<%- allEntry.cover %>" alt="<%- allEntry.cover %>" />
+            </div>
+            <div
+              class="
+                uk-card-footer
+                uk-card-secondary
+                uk-text-left
+                uk-text-default
+                uk-text-bold
+              "
+            >
+              <%- allEntry.name %>
+            </div>
+          </div></a
+        >
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<% } %>
+<!-- top picks ends -->
 <div
   class="
     uk-section uk-bar-section uk-section-large uk-section-muted uk-section-auto
