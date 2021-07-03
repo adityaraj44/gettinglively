@@ -396,3 +396,9 @@ footer p {
 .uk-letter-spacing {
   letter-spacing: 2px;
 }
+
+.homepageslider img {
+  width: 400px;
+  height: 250px;
+  background-size: cover;
+}

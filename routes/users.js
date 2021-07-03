@@ -74,8 +74,9 @@ router.post("/register", ensureGuest, async (req, res) => {
         newUser.save().then(async (user) => {
           req.flash(
             "success_msg",
-            "You are now registered! Please check your email for verification"
+            "You are now registered! Please check your inbox or scam emails for the verification of your account."
           );
+
           req.flash(
             "error_msg",
             "You can not login without verifying your email!"
@@ -89,8 +90,8 @@ router.post("/register", ensureGuest, async (req, res) => {
   var smtpTransport = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "gettinglivelytest@gmail.com",
-      pass: "sahilkumar@123",
+      user: process.env.ID,
+      pass: process.env.PASS,
     },
   });
   var mailOptions = {
@@ -199,8 +200,8 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
+            user: process.env.ID,
+            pass: process.env.PASS,
           },
         });
         var mailOptions = {
@@ -304,8 +305,8 @@ router.post("/forgot", ensureGuest, (req, res) => {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
+            user: process.env.ID,
+            pass: process.env.PASS,
           },
         });
         var mailOptions = {
@@ -403,13 +404,13 @@ router.post("/reset/:token", ensureGuest, function (req, res) {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
+            user: process.env.ID,
+            pass: process.env.PASS,
           },
         });
         var mailOptions = {
           to: user.email,
-          from: "passwordreset@demo.com",
+          from: "GettingLively.com",
           subject: "Your password has been changed",
           text:
             "Hello,\n\n" +

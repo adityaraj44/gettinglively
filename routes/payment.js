@@ -94,8 +94,8 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
+            user: process.env.ID,
+            pass: process.env.PASS,
           },
         });
         var mailOptions = {

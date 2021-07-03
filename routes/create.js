@@ -45,8 +45,8 @@ router.post(
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
+            user: process.env.ID,
+            pass: process.env.PASS,
           },
         });
         users.forEach((user) => {
@@ -266,8 +266,8 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       var smtpTransport = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "gettinglivelytest@gmail.com",
-          pass: "sahilkumar@123",
+          user: process.env.ID,
+          pass: process.env.PASS,
         },
       });
 
@@ -352,8 +352,8 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       var smtpTransport = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "gettinglivelytest@gmail.com",
-          pass: "sahilkumar@123",
+          user: process.env.ID,
+          pass: process.env.PASS,
         },
       });
 
