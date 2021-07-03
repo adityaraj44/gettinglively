@@ -268,7 +268,7 @@ router.post(
           image8: "/img/" + image8.name,
           image9: "/img/" + image9.name,
         }).then((post) => {
-          req.flash("success_msg", "Entry created and sent for verification.");
+          req.flash("success_msg", "Success!");
         });
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",

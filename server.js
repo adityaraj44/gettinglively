@@ -104,6 +104,7 @@ app.use("/admin", require("./routes/admin"));
 app.use("/admincreate", require("./routes/create"));
 app.use("/userreviews", require("./routes/reviews"));
 app.use("/business", require("./routes/business"));
+app.use("/edit", require("./routes/edit"));
 app.use("/places", require("./routes/places"));
 app.use("/payment", require("./routes/payment"));
 app.use("/offers", require("./routes/offers"));

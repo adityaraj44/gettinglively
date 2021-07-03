@@ -170,6 +170,17 @@
                 Cancel
               </button>
             </span>
+            <% if(entry.user.role == "business") { %>
+            <span
+              ><a
+                href="/edit/entries/<%- entry._id %>"
+                class="uk-button uk-button-default noSelect"
+                type="button"
+              >
+                Edit
+              </a></span
+            >
+            <% } else { %>
             <span
               ><a
                 href="/admincreate/myentries/entry/edit/<%- entry._id %>"
@@ -179,6 +190,7 @@
                 Edit
               </a></span
             >
+            <% } %>
           </div>
         </div>
         <!-- mark as reviewed -->

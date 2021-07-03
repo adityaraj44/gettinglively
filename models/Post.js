@@ -61,7 +61,7 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     postcode: {
-      type: Number,
+      type: String,
       required: true,
     },
     planStart: Date,
