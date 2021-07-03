@@ -874,7 +874,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_PROD_LOCATION_ID
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -949,7 +949,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_PROD_LOCATION_ID
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1111,7 +1111,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_PROD_LOCATION_ID
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1237,7 +1237,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_PROD_LOCATION_ID
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1363,7 +1363,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_PROD_LOCATION_ID
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
