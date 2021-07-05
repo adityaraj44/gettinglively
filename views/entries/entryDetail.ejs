@@ -465,7 +465,7 @@
       <div>
         <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
           <div class="uk-card-body">
-            <% if(user._id.toString != entry.user._id.toString) { %>
+            <% if(user._id.toString() != entry.user._id.toString()) { %>
             <h1 class="uk-card-title uk-text-center">Add reviews</h1>
             <form action="/userreviews/<%- entry._id %>" method="POST">
               <div class="uk-form-stacked">
