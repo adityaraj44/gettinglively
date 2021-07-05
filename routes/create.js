@@ -45,8 +45,8 @@ router.post(
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
-            user: "gettinglivelytest@gmail.com",
-            pass: "wrzkqvbnfedtvqad",
+            user: process.env.ID,
+            pass: process.env.PASS,
           },
         });
         users.forEach((user) => {
