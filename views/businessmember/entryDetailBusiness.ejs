@@ -236,38 +236,38 @@
               <tbody>
                 <tr>
                   <th>Monday</th>
-                  <td><%- entry.monopening ? entry.monopening : "-" %></td>
-                  <td><%- entry.monclose ? entry.monclose : "-" %></td>
+                  <td><%- entry.monopening ? entry.monopening : "Closed" %></td>
+                  <td><%- entry.monclose ? entry.monclose : "Closed" %></td>
                 </tr>
                 <tr>
                   <th>Tuesday</th>
-                  <td><%- entry.tueopening ? entry.tueopening : "-" %></td>
-                  <td><%- entry.tueclose ? entry.tueclose : "-" %></td>
+                  <td><%- entry.tueopening ? entry.tueopening : "Closed" %></td>
+                  <td><%- entry.tueclose ? entry.tueclose : "Closed" %></td>
                 </tr>
                 <tr>
                   <th>Wednesday</th>
-                  <td><%- entry.wedopening ? entry.wedopening : "-" %></td>
-                  <td><%- entry.wedclose ? entry.wedclose : "-" %></td>
+                  <td><%- entry.wedopening ? entry.wedopening : "Closed" %></td>
+                  <td><%- entry.wedclose ? entry.wedclose : "Closed" %></td>
                 </tr>
                 <tr>
                   <th>Thursday</th>
-                  <td><%- entry.thuopening ? entry.thuopening : "-" %></td>
-                  <td><%- entry.thuclose ? entry.thuclose : "-" %></td>
+                  <td><%- entry.thuopening ? entry.thuopening : "Closed" %></td>
+                  <td><%- entry.thuclose ? entry.thuclose : "Closed" %></td>
                 </tr>
                 <tr>
                   <th>Friday</th>
-                  <td><%- entry.friopening ? entry.friopening : "-" %></td>
-                  <td><%- entry.friclose ? entry.friclose : "-" %></td>
+                  <td><%- entry.friopening ? entry.friopening : "Closed" %></td>
+                  <td><%- entry.friclose ? entry.friclose : "Closed" %></td>
                 </tr>
                 <tr>
                   <th>Saturday</th>
-                  <td><%- entry.satopening ? entry.satopening : "-" %></td>
-                  <td><%- entry.satclose ? entry.satclose : "-" %></td>
+                  <td><%- entry.satopening ? entry.satopening : "Closed" %></td>
+                  <td><%- entry.satclose ? entry.satclose : "Closed" %></td>
                 </tr>
                 <tr>
                   <th>Sunday</th>
-                  <td><%- entry.sunopening ? entry.sunopening : "-" %></td>
-                  <td><%- entry.sunclose ? entry.sunclose : "-" %></td>
+                  <td><%- entry.sunopening ? entry.sunopening : "Closed" %></td>
+                  <td><%- entry.sunclose ? entry.sunclose : "Closed" %></td>
                 </tr>
               </tbody>
             </table>
@@ -420,6 +420,7 @@
       <div>
         <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
           <div class="uk-card-body">
+            <% if(user._id.toString != entry.user._id.toString) { %>
             <h1 class="uk-card-title uk-text-center">Add reviews</h1>
             <form action="/userreviews/<%- entry._id %>" method="POST">
               <div class="uk-form-stacked">
@@ -457,6 +458,7 @@
               </div>
             </form>
             <hr class="uk-divider-icon" />
+            <% } %>
             <p class="uk-text-lead uk-text-bold uk-text-center@s">
               Total Reviews: <%- allReview.length %>
             </p>
@@ -515,6 +517,7 @@
           </div>
         </div>
       </div>
+
       <div>
         <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
           <div class="uk-card-body">
