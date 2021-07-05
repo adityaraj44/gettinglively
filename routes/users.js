@@ -336,7 +336,6 @@ router.post("/forgot", ensureGuest, (req, res) => {
       },
     ],
     function (err) {
-      if (err) return next(err);
       res.redirect("/users/forgot");
     }
   );
