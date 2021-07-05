@@ -304,6 +304,7 @@ router.post("/forgot", ensureGuest, (req, res) => {
       function (token, user, done) {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
+          port: 465,
           auth: {
             user: process.env.ID,
             pass: process.env.PASS,
@@ -403,6 +404,7 @@ router.post("/reset/:token", ensureGuest, function (req, res) {
       function (user, done) {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
+
           auth: {
             user: process.env.ID,
             pass: process.env.PASS,
