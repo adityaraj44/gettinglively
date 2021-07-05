@@ -46,7 +46,7 @@ router.post(
           service: "gmail",
           auth: {
             user: "gettinglivelytest@gmail.com",
-            pass: "sahilkumar@123",
+            pass: "wrzkqvbnfedtvqad",
           },
         });
         users.forEach((user) => {
