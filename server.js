@@ -67,12 +67,10 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // body parser
+app.use(express.json({ limit: "50mb" }));
 app.use(
-  express.urlencoded({
-    extended: false,
-  })
+  express.urlencoded({ limit: "50mb", extended: true, parameterLimit: "50000" })
 );
-app.use(express.json());
 
 // method overrride
 app.use(
