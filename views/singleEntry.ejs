@@ -245,7 +245,7 @@
     <!-- form -->
     <div class="uk-card uk-card-hover uk-card-default uk-margin-top">
       <div class="uk-card-body">
-    
+        <% if(user && user.role == 'customer') { %>
         <h1 class="uk-card-title uk-text-center">Add reviews</h1>
         <form action="/places/userreviews/<%- entry._id %>" method="POST">
           <div class="uk-form-stacked">
@@ -283,7 +283,7 @@
           </div>
         </form>
         <hr class="uk-divider-icon" />
-      
+      <% } %>
         <p class="uk-text-lead uk-text-bold uk-text-center@s">
           Total Reviews: <%- allReview.length %>
         </p>
