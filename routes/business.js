@@ -1106,7 +1106,7 @@ router.post(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      if (entry.listing == "basic") {
+      if (entry.listing == "basic" || entry.listing == "renew") {
         const token = req.body.sourceId;
         const idempotencyKey = uuidv4();
         // get the currency for the location
@@ -1119,7 +1119,7 @@ router.post(
           idempotencyKey,
           sourceId: token,
           amountMoney: {
-            amount: 5000, // $1.00 charge
+            amount: 5000,
             currency,
           },
         };
@@ -1163,8 +1163,28 @@ router.post(
                 //   });
 
                 setTimeout(() => {
-                  post.listing = "basic";
+                  post.listing = "renew";
                   post.save();
+                  var smtpTransport = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                      user: process.env.ID,
+                      pass: process.env.PASS,
+                    },
+                  });
+
+                  var mailOptions = {
+                    to: req.user.email,
+                    from: "GettingLively.com",
+                    subject: "Renew your plan",
+                    text: "Your current promotion plan has been expired. Visit our website to renew the plan or buy another.",
+                    // text: body,
+                  };
+                  smtpTransport
+                    .sendMail(mailOptions)
+
+                    .catch((err) => console.log(err));
+
                   console.log("done");
                 }, 604800000);
                 res.redirect(req.originalUrl);
@@ -1232,7 +1252,7 @@ router.post(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      if (entry.listing == "basic") {
+      if (entry.listing == "basic" || entry.listing == "renew") {
         const token = req.body.sourceId;
         const idempotencyKey = uuidv4();
         // get the currency for the location
@@ -1291,6 +1311,25 @@ router.post(
                 setTimeout(() => {
                   post.listing = "basic";
                   post.save();
+                  var smtpTransport = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                      user: process.env.ID,
+                      pass: process.env.PASS,
+                    },
+                  });
+
+                  var mailOptions = {
+                    to: req.user.email,
+                    from: "GettingLively.com",
+                    subject: "Renew your plan",
+                    text: "Your current promotion plan has been expired. Visit our website to renew the plan or buy another.",
+                    // text: body,
+                  };
+                  smtpTransport
+                    .sendMail(mailOptions)
+
+                    .catch((err) => console.log(err));
                   console.log("done");
                 }, 604800000);
 
@@ -1358,7 +1397,7 @@ router.post(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      if (entry.listing == "basic") {
+      if (entry.listing == "basic" || entry.listing == "renew") {
         const token = req.body.sourceId;
         const idempotencyKey = uuidv4();
         // get the currency for the location
@@ -1417,6 +1456,25 @@ router.post(
                 setTimeout(() => {
                   post.listing = "basic";
                   post.save();
+                  var smtpTransport = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                      user: process.env.ID,
+                      pass: process.env.PASS,
+                    },
+                  });
+
+                  var mailOptions = {
+                    to: req.user.email,
+                    from: "GettingLively.com",
+                    subject: "Renew your plan",
+                    text: "Your current promotion plan has been expired. Visit our website to renew the plan or buy another.",
+                    // text: body,
+                  };
+                  smtpTransport
+                    .sendMail(mailOptions)
+
+                    .catch((err) => console.log(err));
                   console.log("done");
                 }, 604800000);
 

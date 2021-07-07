@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema(
     },
     listing: {
       type: String,
-      enum: ["basic", "premier", "premier advance", "promoted"],
+      enum: ["basic", "premier", "premier advance", "promoted", "renew"],
       default: "basic",
     },
     userReview: {

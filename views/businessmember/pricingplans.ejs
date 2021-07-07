@@ -74,6 +74,7 @@
             "
           >
             <div class="uk-clearfix">
+              <% if(entry.listing == "basic") { %>
               <a
                 href="/business/pricingandplans/premier/<%- entry._id %>"
                 target="blank"
@@ -83,6 +84,27 @@
                 "
                 >Purchase</a
               >
+              <% } else if(entry.listing == "renew") { %>
+              <a
+                href="/business/pricingandplans/premier/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Renew</a
+              >
+              <% } else { %>
+              <a
+                href="/business/pricingandplans/premier/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Purchase</a
+              >
+              <% } %>
             </div>
           </div>
         </div>
@@ -110,6 +132,7 @@
             "
           >
             <div class="uk-clearfix">
+              <% if(entry.listing == "basic") { %>
               <a
                 href="/business/pricingandplans/advancepremier/<%- entry._id %>"
                 target="blank"
@@ -119,6 +142,27 @@
                 "
                 >Purchase</a
               >
+              <% } else if(entry.listing == "renew") { %>
+              <a
+                href="/business/pricingandplans/advancepremier/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Renew</a
+              >
+              <% } else { %>
+              <a
+                href="/business/pricingandplans/advancepremier/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Purchase</a
+              >
+              <% } %>
             </div>
           </div>
         </div>
@@ -146,6 +190,7 @@
             "
           >
             <div class="uk-clearfix">
+              <% if(entry.listing == "basic") { %>
               <a
                 href="/business/pricingandplans/promoted/<%- entry._id %>"
                 target="blank"
@@ -155,6 +200,27 @@
                 "
                 >Purchase</a
               >
+              <% } else if(entry.listing == "renew") { %>
+              <a
+                href="/business/pricingandplans/promoted/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Renew</a
+              >
+              <% } else { %>
+              <a
+                href="/business/pricingandplans/promoted/<%- entry._id %>"
+                target="blank"
+                class="
+                  uk-button uk-button-custom uk-float-right uk-light
+                  noSelect
+                "
+                >Purchase</a
+              >
+              <% } %>
             </div>
           </div>
         </div>
