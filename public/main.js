@@ -1,3 +1,81 @@
+//map
+if (document.querySelector("#map-canvas")) {
+  var geocoder;
+  var map;
+  var fulladdress = document.getElementById("address");
+  //   var address = "Kumhrar Chanakya Nagar, Patna";
+  var address = fulladdress.innerText;
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(25.596, 85.1839);
+    var myOptions = {
+      zoom: 16,
+      center: latlng,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+      },
+      navigationControl: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+    map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+    if (geocoder) {
+      geocoder.geocode(
+        {
+          address: address,
+        },
+        function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+              map.setCenter(results[0].geometry.location);
+
+              var infowindow = new google.maps.InfoWindow({
+                content: "<b>" + address + "</b>",
+                size: new google.maps.Size(150, 50),
+              });
+
+              var marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+                map: map,
+                title: address,
+                // icon: "https://img.icons8.com/color/48/000000/map-pin.png",
+              });
+              google.maps.event.addListener(marker, "click", function () {
+                infowindow.open(map, marker);
+              });
+            } else {
+              alert("No results found");
+            }
+          } else {
+            alert(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
+        }
+      );
+    }
+  }
+  google.maps.event.addDomListener(window, "load", initialize);
+}
+
+// function initMap() {
+//   // The location of Uluru
+//   const uluru = { lat: 25.5941, lng: 85.1376 };
+//   // The map, centered at Uluru
+//   const map = new google.maps.Map(document.getElementById("map-canvas"), {
+//     zoom: 16,
+//     center: uluru,
+//   });
+//   // The marker, positioned at Uluru
+//   const marker = new google.maps.Marker({
+//     position: uluru,
+//     map: map,
+//   });
+// }
+
+// google.maps.event.addDomListener(window, "load", initMap);
+
 // scroll reveal lib
 if (
   document.querySelector(".tagline1") ||

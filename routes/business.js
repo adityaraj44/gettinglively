@@ -1139,7 +1139,7 @@ router.post(
           if (result) {
             console.log(result);
             await Post.findById({ _id: req.params.id }).then((post) => {
-              if (post.listing == "basic") {
+              if (post.listing == "basic" || post.listing == "renew") {
                 post.listing = "premier";
               }
               post.save((err) => {
@@ -1285,7 +1285,7 @@ router.post(
           if (result) {
             console.log(result);
             await Post.findById({ _id: req.params.id }).then((post) => {
-              if (post.listing == "basic") {
+              if (post.listing == "basic" || post.listing == "renew") {
                 post.listing = "premier advance";
               }
               post.save((err) => {
@@ -1309,7 +1309,7 @@ router.post(
                 //   });
 
                 setTimeout(() => {
-                  post.listing = "basic";
+                  post.listing = "renew";
                   post.save();
                   var smtpTransport = nodemailer.createTransport({
                     service: "gmail",
@@ -1430,7 +1430,7 @@ router.post(
           if (result) {
             console.log(result);
             await Post.findById({ _id: req.params.id }).then((post) => {
-              if (post.listing == "basic") {
+              if (post.listing == "basic" || post.listing == "renew") {
                 post.listing = "promoted";
               }
               post.save((err) => {
@@ -1454,7 +1454,7 @@ router.post(
                 //   });
 
                 setTimeout(() => {
-                  post.listing = "basic";
+                  post.listing = "renew";
                   post.save();
                   var smtpTransport = nodemailer.createTransport({
                     service: "gmail",
@@ -1499,6 +1499,24 @@ router.post(
     } catch (error) {
       console.log(error);
       res.render("errors/500");
+    }
+  }
+);
+
+router.get(
+  "/mypayments",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      res.render("businessmember/mypayments", {
+        layout: "layouts/layout",
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
     }
   }
 );

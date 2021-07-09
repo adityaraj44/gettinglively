@@ -26,6 +26,11 @@
       >Manage Listings</a
     >
   </li>
+  <li>
+    <a href="/business/mypayments" class="uk-button uk-button-text noSelect"
+      >My Payments</a
+    >
+  </li>
 </ul>
 
 <div
@@ -274,7 +279,7 @@
           </li>
           <li>
             <h1 class="uk-card-title">Address</h1>
-            <p class="uk-text-break uk-margin">
+            <p class="uk-text-break uk-margin" id="address">
               <span
                 class="uk-margin-medium-right uk-text-success"
                 uk-icon="icon: location; ratio: 2"
@@ -282,6 +287,7 @@
               ><%- entry.location + ',' + ' ' + entry.city + ',' + ' ' +
               entry.postcode %>
             </p>
+            <div id="map-canvas" style="width: 100%; height: 400px"></div>
           </li>
           <li>
             <% if(entry.menu) { %>
