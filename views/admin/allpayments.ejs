@@ -1,0 +1,235 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin/customers" class="active uk-button uk-button-text noSelect"
+      >Customers</a
+    >
+  </li>
+  <li>
+    <a href="/admin/business" class="active uk-button uk-button-text noSelect"
+      >Business Members</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate" class="active uk-button uk-button-text noSelect"
+      >Create</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admin/allpayments"
+      class="active uk-button uk-button-text noSelect"
+      >All Payments</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admin/allvouchers"
+      class="active uk-button uk-button-text noSelect"
+      >All Vouchers</a
+    >
+  </li>
+  <li>
+    <a
+      href="/users/logout"
+      class="uk-button active uk-button-text noSelect"
+      uk-toggle="target: #userslogout"
+      ><span class="noSelect"></span>Logout</a
+    >
+  </li>
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Entry Creation Payments
+    </h4>
+    <p class="uk-text-meta uk-text-center uk-text-medium">
+      All payments are displayed here.
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Payment type</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(entryPayments.length > 0) { %> <%
+          entryPayments.forEach((entryPayment)=> { %>
+          <tr>
+            <td><%- entryPayment.name %></td>
+            <td>Entry Creation</td>
+            <td>&#163; 1</td>
+            <td><%-entryPayment.entrypaymentCreationDate %></td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/mypayments/carddetails/entry/<%- entryPayment._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- offer creation -->
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Offer Creation Payments
+    </h4>
+    <p class="uk-text-meta uk-text-center uk-text-medium">
+      All payments are displayed here.
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Payment type</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(offerPayments.length > 0) { %> <%
+          offerPayments.forEach((offerPayment)=> { %>
+          <tr>
+            <td><%- offerPayment.offername %></td>
+            <td>Offers/e-vouchers Creation</td>
+            <td>&#163; <%- offerPayment.offeramount %></td>
+            <td><%- offerPayment.offerPaymentCreationDate %></td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/mypayments/carddetails/offer/<%- offerPayment._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- plan -->
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Plan Payments
+    </h4>
+    <p class="uk-text-meta uk-text-center uk-text-medium">
+      All payments are displayed here.
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Plan type</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(entryPayments.length > 0) { %> <%
+          entryPayments.forEach((entryPayment)=> { %> <% if(entryPayment.listing
+          != 'basic') { %>
+          <tr>
+            <td><%- entryPayment.name %></td>
+            <td><%- entryPayment.listing.toUpperCase() %></td>
+            <td>
+              <% if(entryPayment.listing == 'premier') { %> &#163; 50 <% } else
+              if(entryPayment.listing == 'premier advance') { %> &#163; 100 <% }
+              else if(entryPayment.listing == 'promoted') { %> &#163; 200 <% }
+              %>
+            </td>
+            <td><%- (entryPayment.planpaymentCreationDate) %></td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/mypayments/carddetails/plan/<%- entryPayment._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% } %> <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

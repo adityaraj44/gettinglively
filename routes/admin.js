@@ -170,4 +170,210 @@ router.delete(
   }
 );
 
+router.get(
+  "/allpayments",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entryPayments = await Post.find({
+        paymentStatus: "paid",
+      }).lean();
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   }).lean();
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   }).lean();
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "",
+      //   }).lean();
+      //   console.log(planPaymentPromoted.length);
+      const offerPayments = await Offer.find({
+        offerStatus: "paid",
+      }).lean();
+      res.render("admin/allpayments", {
+        layout: "layouts/layout",
+        entryPayments,
+        offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/entry/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      //   const offerPayments = await Offer.findById({
+      //     _id: req.params.id,
+      //   });
+      res.render("admin/carddetailsEntry", {
+        layout: "layouts/layout",
+        entryPayment,
+        // offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/offer/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const offerPayment = await Offer.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      // const offerPayments = await Offer.findById({
+      //   _id: req.params.id,
+      // });
+      res.render("admin/carddetailsOffer", {
+        layout: "layouts/layout",
+        offerPayment,
+        //   offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/plan/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      const offerPayments = await Offer.findById({
+        _id: req.params.id,
+      });
+      res.render("admin/carddetailsEntry", {
+        layout: "layouts/layout",
+        entryPayment,
+        offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/allvouchers",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      //   const allBusinessEntries = await Post.find({
+      //     user: req.user.id,
+      //     reviewStatus: "reviewed",
+      //   })
+      //     .populate("user")
+      //     .sort({ createdAt: "desc" })
+      //     .lean();
+
+      const allVouchers = await Voucher.find({})
+        .populate("post")
+        .populate("user")
+        .populate("offer")
+        .sort({ createdAt: "desc" })
+        .lean();
+
+      res.render("admin/allvouchers", {
+        layout: "layouts/layout",
+        // allBusinessEntries,
+        allVouchers,
+        user: req.user,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
 module.exports = router;

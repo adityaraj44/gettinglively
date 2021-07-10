@@ -1,0 +1,133 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a href="/admin/customers" class="active uk-button uk-button-text noSelect"
+      >Customers</a
+    >
+  </li>
+  <li>
+    <a href="/admin/business" class="active uk-button uk-button-text noSelect"
+      >Business Members</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate" class="active uk-button uk-button-text noSelect"
+      >Create</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admin/allpayments"
+      class="active uk-button uk-button-text noSelect"
+      >All Payments</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admin/allvouchers"
+      class="active uk-button uk-button-text noSelect"
+      >All Vouchers</a
+    >
+  </li>
+  <li>
+    <a
+      href="/users/logout"
+      class="uk-button active uk-button-text noSelect"
+      uk-toggle="target: #userslogout"
+      ><span class="noSelect"></span>Logout</a
+    >
+  </li>
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Details
+    </h4>
+
+    <hr class="uk-divider-icon" />
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div class="uk-card uk-card-custom uk-card-hover uk-card-secondary">
+          <div class="uk-card-header">
+            <h3 class="uk-card-title uk-text-center">
+              <%- offerPayment.offername %>
+            </h3>
+          </div>
+          <div class="uk-card-body">
+            <ul uk-accordion="collapsible: false">
+              <li>
+                <a class="uk-accordion-title" href="#">Order ID</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- offerPayment.offerId %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Card Brand</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- offerPayment.offerCreationCardBrand %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Last 4 Digits</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- offerPayment.offerCreationCardLast4 %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Expiry Month</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- offerPayment.offerCreationCardExpMon %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Expiry Year</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- offerPayment.offerCreationCardExpYear %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Card Type</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- offerPayment.offerCreationCardType %>
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <!-- <p class="uk-text-success uk-text-bolder">Joined on</p>
+            <p class="uk-text-meta uk-margin-remove-top">
+              <%- helper.formatDate(user.createdAt, 'MMMM Do YYYY')%>
+            </p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
