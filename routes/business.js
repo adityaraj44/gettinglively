@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const Review = require("../models/Review");
 const Offer = require("../models/Offer");
+const Voucher = require("../models/Voucher");
 const path = require("path");
 const { paymentsApi, locationsApi } = require("../middlewares/square");
 const { v4: uuidv4 } = require("uuid");
@@ -904,6 +905,16 @@ router.post(
             await Offer.findById({ _id: req.params.id }).then((offer) => {
               if (offer.offerStatus == "pending") {
                 offer.offerStatus = "paid";
+                offer.offerId = payment.orderId;
+                offer.offerCreationCardBrand =
+                  payment.cardDetails.card.cardBrand;
+                offer.offerCreationCardLast4 = payment.cardDetails.card.last4;
+                offer.offerCreationCardExpMon =
+                  payment.cardDetails.card.expMonth;
+                offer.offerCreationCardExpYear =
+                  payment.cardDetails.card.expYear;
+                offer.offerCreationCardType = payment.cardDetails.card.cardType;
+                offer.offerpaymentCreationDate = payment.createdAt;
               }
               offer.save((err) => {
                 req.flash(
@@ -975,10 +986,20 @@ router.post(
           );
 
           if (result) {
-            console.log(result);
+            console.log(payment);
             await Post.findById({ _id: req.params.id }).then((post) => {
               if (post.paymentStatus == "pending") {
                 post.paymentStatus = "paid";
+                post.entryId = payment.orderId;
+                post.entryCreationCardBrand =
+                  payment.cardDetails.card.cardBrand;
+                post.entryCreationCardLast4 = payment.cardDetails.card.last4;
+                post.entryCreationCardExpMon =
+                  payment.cardDetails.card.expMonth;
+                post.entryCreationCardExpYear =
+                  payment.cardDetails.card.expYear;
+                post.entryCreationCardType = payment.cardDetails.card.cardType;
+                post.entrypaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 req.flash(
@@ -1024,9 +1045,19 @@ router.get(
         .populate("user")
         .sort({ createdAt: "desc" })
         .lean();
+
+      const allVouchers = await Voucher.find({})
+        .populate("post")
+        .populate("user")
+        .populate("offer")
+        .sort({ createdAt: "desc" })
+        .lean();
+
       res.render("businessmember/managelisting", {
         layout: "layouts/layout",
         allBusinessEntries,
+        allVouchers,
+        user: req.user,
         helper: require("../helpers/ejs"),
       });
     } catch (error) {
@@ -1141,6 +1172,13 @@ router.post(
             await Post.findById({ _id: req.params.id }).then((post) => {
               if (post.listing == "basic" || post.listing == "renew") {
                 post.listing = "premier";
+                post.planId = payment.orderId;
+                post.planCreationCardBrand = payment.cardDetails.card.cardBrand;
+                post.planCreationCardLast4 = payment.cardDetails.card.last4;
+                post.planCreationCardExpMon = payment.cardDetails.card.expMonth;
+                post.planCreationCardExpYear = payment.cardDetails.card.expYear;
+                post.planCreationCardType = payment.cardDetails.card.cardType;
+                post.planpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 req.flash(
@@ -1287,6 +1325,13 @@ router.post(
             await Post.findById({ _id: req.params.id }).then((post) => {
               if (post.listing == "basic" || post.listing == "renew") {
                 post.listing = "premier advance";
+                post.planId = payment.orderId;
+                post.planCreationCardBrand = payment.cardDetails.card.cardBrand;
+                post.planCreationCardLast4 = payment.cardDetails.card.last4;
+                post.planCreationCardExpMon = payment.cardDetails.card.expMonth;
+                post.planCreationCardExpYear = payment.cardDetails.card.expYear;
+                post.planCreationCardType = payment.cardDetails.card.cardType;
+                post.planpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 req.flash(
@@ -1432,6 +1477,13 @@ router.post(
             await Post.findById({ _id: req.params.id }).then((post) => {
               if (post.listing == "basic" || post.listing == "renew") {
                 post.listing = "promoted";
+                post.planId = payment.orderId;
+                post.planCreationCardBrand = payment.cardDetails.card.cardBrand;
+                post.planCreationCardLast4 = payment.cardDetails.card.last4;
+                post.planCreationCardExpMon = payment.cardDetails.card.expMonth;
+                post.planCreationCardExpYear = payment.cardDetails.card.expYear;
+                post.planCreationCardType = payment.cardDetails.card.cardType;
+                post.planpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 req.flash(
@@ -1509,8 +1561,163 @@ router.get(
   ensureBusiness,
   async (req, res) => {
     try {
+      const entryPayments = await Post.find({
+        user: req.user.id,
+        paymentStatus: "paid",
+      }).lean();
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   }).lean();
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   }).lean();
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "",
+      //   }).lean();
+      //   console.log(planPaymentPromoted.length);
+      const offerPayments = await Offer.find({
+        user: req.user.id,
+        offerStatus: "paid",
+      }).lean();
       res.render("businessmember/mypayments", {
         layout: "layouts/layout",
+        entryPayments,
+        offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/entry/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      //   const offerPayments = await Offer.findById({
+      //     _id: req.params.id,
+      //   });
+      res.render("businessmember/carddetailsEntry", {
+        layout: "layouts/layout",
+        entryPayment,
+        // offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/offer/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const offerPayment = await Offer.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      // const offerPayments = await Offer.findById({
+      //   _id: req.params.id,
+      // });
+      res.render("businessmember/carddetailsOffer", {
+        layout: "layouts/layout",
+        offerPayment,
+        //   offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/plan/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      const offerPayments = await Offer.findById({
+        _id: req.params.id,
+      });
+      res.render("businessmember/carddetailsEntry", {
+        layout: "layouts/layout",
+        entryPayment,
+        offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
         helper: require("../helpers/ejs"),
         user: req.user,
       });

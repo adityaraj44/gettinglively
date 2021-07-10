@@ -184,13 +184,14 @@
           </li>
           <li>
             <h1 class="uk-card-title">Address</h1>
-            <p class="uk-text-break uk-margin">
+            <p class="uk-text-break uk-margin" id="address">
               <span
                 class="uk-margin-medium-right uk-text-success"
                 uk-icon="icon: location; ratio: 2"
               ></span
               ><%- entry.location + ',' + ' ' + entry.city + ',' + ' ' + entry.postcode %>
             </p>
+            <div id="map-canvas" style="width: 100%; height: 400px"></div>
           </li>
           <li>
             <% if(entry.menu) { %> 

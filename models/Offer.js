@@ -27,6 +27,13 @@ const offerSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
     },
+    offerPaymentCreationDate: String,
+    offerCreationCardBrand: String,
+    offerId: String,
+    offerCreationCardLast4: String,
+    offerCreationCardExpMon: String,
+    offerCreationCardExpYear: String,
+    offerCreationCardType: String,
   },
   { timestamps: true }
 );

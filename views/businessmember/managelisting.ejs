@@ -125,3 +125,67 @@
     <% } %>
   </div>
 </div>
+
+<!-- customers who bought services -->
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-statistics uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
+      Customers purchases
+    </h4>
+    <p class="uk-text-meta uk-text-center uk-text-medium">
+      Details of customers who purchased your offer is displayed here.
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name of customer</th>
+            <th class="uk-width-small">Name of place</th>
+            <th>Offer Name</th>
+            <th>Amount</th>
+            <th>Voucher code</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(allVouchers.length > 0) { %> <%
+          allVouchers.forEach((allVoucher)=> { %> <%
+          if(allVoucher.post.user._id.toString() == user._id.toString()) { %>
+          <tr>
+            <td><%- allVoucher.user.name %></td>
+            <td><%- allVoucher.post.name %></td>
+            <td><%- allVoucher.offer.offername %></td>
+            <td><%- allVoucher.offer.offeramount %></td>
+            <td><%- allVoucher.vouchercode %></td>
+            <td>
+              <%- helper.formatDate(allVoucher.createdAt, 'MMMM Do YYYY') %>
+            </td>
+          </tr>
+          <% } %> <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

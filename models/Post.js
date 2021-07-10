@@ -92,6 +92,22 @@ const postSchema = new mongoose.Schema(
     image9: String,
 
     menu: String,
+    entrypaymentCreationDate: Date,
+    entryCreationCardBrand: String,
+    entryCreationCardLast4: String,
+    entryCreationCardExpMon: String,
+    entryCreationCardExpYear: String,
+    entryCreationCardType: String,
+    entryId: String,
+    planpaymentCreationDate: {
+      type: Date,
+    },
+    planCreationCardBrand: String,
+    planId: String,
+    planCreationCardLast4: String,
+    planCreationCardExpMon: String,
+    planCreationCardExpYear: String,
+    planCreationCardType: String,
   },
   { timestamps: true }
 );
