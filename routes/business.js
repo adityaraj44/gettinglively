@@ -785,7 +785,9 @@ router.get(
       const pendingEntries = await Post.find({
         paymentStatus: "pending",
         user: req.user.id,
-      }).lean();
+      })
+        .sort({ createdAt: "desc" })
+        .lean();
 
       const pendingOffers = await Offer.find({
         offerStatus: "pending",
@@ -875,7 +877,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          "WDX1WFYN7TBWD"
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -960,7 +962,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          "WDX1WFYN7TBWD"
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1142,7 +1144,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          "WDX1WFYN7TBWD"
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1295,7 +1297,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          "WDX1WFYN7TBWD"
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1447,7 +1449,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          "WDX1WFYN7TBWD"
+          process.env.SQUARE_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card

@@ -51,7 +51,7 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
     const idempotencyKey = uuidv4();
     // get the currency for the location
     const locationResponse = await locationsApi.retrieveLocation(
-      "WDX1WFYN7TBWD"
+      process.env.SQUARE_LOCATION_ID
     );
     const currency = locationResponse.result.location.currency;
     // Charge the customer's card
