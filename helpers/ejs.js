@@ -31,7 +31,11 @@ module.exports = {
         >Edit</a
       ></span
     >
-
+    <span
+    ><a href="#editEntryAdminAttach" uk-toggle class="uk-button uk-button-secondary noSelect"
+      >Edit/Add images and menu</a
+    ></span
+  >
     <span
       ><a
         href="#deleteEntryAdmin" uk-toggle
@@ -50,7 +54,11 @@ module.exports = {
         >Edit</a
       ></span
     >
-
+    <span
+    ><a href="#editBusinessEntryAttach"  uk-toggle  class="uk-button uk-button-secondary noSelect"
+      >Edit/Add images and menu</a
+    ></span
+  >
     <span
       ><a
         href="#deleteBusinessEntry" uk-toggle

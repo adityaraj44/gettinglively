@@ -89,70 +89,18 @@ router.post(
 
       let cover = req.files.cover;
       cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
-      let image1 = req.files.image1;
-      image1.mv(path.resolve(__dirname, "..", "public/img", image1.name));
-      let image2 = req.files.image2;
-      image2.mv(path.resolve(__dirname, "..", "public/img", image2.name));
-      let image3 = req.files.image3;
-      image3.mv(path.resolve(__dirname, "..", "public/img", image3.name));
-      let image4 = req.files.image4;
-      image4.mv(path.resolve(__dirname, "..", "public/img", image4.name));
-      let image5 = req.files.image5;
-      image5.mv(path.resolve(__dirname, "..", "public/img", image5.name));
-      let image6 = req.files.image6;
-      image6.mv(path.resolve(__dirname, "..", "public/img", image6.name));
-      let image7 = req.files.image7;
-      image7.mv(path.resolve(__dirname, "..", "public/img", image7.name));
-      let image8 = req.files.image8;
-      image8.mv(path.resolve(__dirname, "..", "public/img", image8.name));
 
-      let image9 = req.files.image9;
-      image9.mv(path.resolve(__dirname, "..", "public/img", image9.name));
-
-      if (req.files.menu) {
-        let menu = req.files.menu;
-        menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
-
-        if (desc.length < 300) {
-          errors.push({ msg: "Description must be atleast 300 characters" });
-          //   req.flash("warning_msg", "Description must be atleast 500 characters");
-          return res.render("businessmember/createBusinessEntry", {
-            layout: "layouts/layout",
-            name,
-            location,
-            desc: desc.replace(/(<([^>]+)>)/gi, ""),
-            typeOfVenue,
-            city,
-            postcode,
-            monopening,
-            monclose,
-            tueopening,
-            tueclose,
-            wedopening,
-            wedclose,
-            thuopening,
-            thuclose,
-            friopening,
-            friclose,
-            satopening,
-            satclose,
-            sunopening,
-            sunclose,
-            errors,
-          });
-        }
-
-        //   payment login will be written here
-
-        await Post.create({
+      if (desc.length < 300) {
+        errors.push({ msg: "Description must be atleast 300 characters" });
+        //   req.flash("warning_msg", "Description must be atleast 500 characters");
+        return res.render("businessmember/createBusinessEntry", {
+          layout: "layouts/layout",
           name,
-          desc,
-          typeOfPlace,
           location,
+          desc: desc.replace(/(<([^>]+)>)/gi, ""),
+          typeOfVenue,
           city,
           postcode,
-          typeOfVenue,
-          bookingStatus,
           monopening,
           monclose,
           tueopening,
@@ -167,135 +115,61 @@ router.post(
           satclose,
           sunopening,
           sunclose,
-          user: req.user.id,
-          cover: "/img/" + cover.name,
-          image1: "/img/" + image1.name,
-          image2: "/img/" + image2.name,
-          image3: "/img/" + image3.name,
-          image4: "/img/" + image4.name,
-          image5: "/img/" + image5.name,
-          image6: "/img/" + image6.name,
-          image7: "/img/" + image7.name,
-          image8: "/img/" + image8.name,
-          image9: "/img/" + image9.name,
-          menu: "/docs/" + menu.name,
-        }).then((post) => {
-          req.flash("upload_msg", "Entry created and sent for verification.");
+          errors,
         });
-        var smtpTransport = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.ID,
-            pass: process.env.PASS,
-          },
-        });
-
-        var mailOptions = {
-          to: req.user.email,
-          from: "GettingLively.com",
-          subject: "Entry Created",
-          text: "Your entry has been created. Please proceed with payment to make your entry public.",
-          // text: body,
-        };
-        smtpTransport
-          .sendMail(mailOptions)
-
-          .catch((err) => console.log(err));
-        res.redirect("/business");
-      } else {
-        if (desc.length < 300) {
-          errors.push({ msg: "Description must be atleast 500 characters" });
-          //   req.flash("warning_msg", "Description must be atleast 500 characters");
-          return res.render("businessmember/createBusinessEntry", {
-            layout: "layouts/layout",
-            name,
-            location,
-            desc: desc.replace(/(<([^>]+)>)/gi, ""),
-            typeOfVenue,
-            postcode,
-            city,
-            monopening,
-            monclose,
-            tueopening,
-            tueclose,
-            wedopening,
-            wedclose,
-            thuopening,
-            thuclose,
-            friopening,
-            friclose,
-            satopening,
-            satclose,
-            sunopening,
-            sunclose,
-            errors,
-          });
-        }
-
-        //   payment login will be written here
-
-        await Post.create({
-          name,
-          desc,
-          city,
-          typeOfPlace,
-          location,
-          postcode,
-          typeOfVenue,
-          bookingStatus,
-          monopening,
-          monclose,
-          tueopening,
-          tueclose,
-          wedopening,
-          wedclose,
-          thuopening,
-          thuclose,
-          friopening,
-          friclose,
-          satopening,
-          satclose,
-          sunopening,
-          sunclose,
-          user: req.user.id,
-          cover: "/img/" + cover.name,
-          image1: "/img/" + image1.name,
-          image2: "/img/" + image2.name,
-          image3: "/img/" + image3.name,
-          image4: "/img/" + image4.name,
-          image5: "/img/" + image5.name,
-          image6: "/img/" + image6.name,
-          image7: "/img/" + image7.name,
-          image8: "/img/" + image8.name,
-          image9: "/img/" + image9.name,
-        }).then((post) => {
-          req.flash("success_msg", "Success!");
-        });
-        var smtpTransport = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.ID,
-            pass: process.env.PASS,
-          },
-        });
-
-        var mailOptions = {
-          to: req.user.email,
-          from: "GettingLively.com",
-          subject: "Entry Created",
-          text: "Your entry has been created. Please process with payment to make your entry public.",
-          // text: body,
-        };
-        smtpTransport
-          .sendMail(mailOptions)
-
-          .catch((err) => console.log(err));
-        req.flash(
-          "success_msg",
-          "Entry created and sent for verification. Please proceed with payment to make your entry public."
-        );
-        res.redirect("/business");
       }
+
+      //   payment login will be written here
+
+      await Post.create({
+        name,
+        desc,
+        typeOfPlace,
+        location,
+        city,
+        postcode,
+        typeOfVenue,
+        bookingStatus,
+        monopening,
+        monclose,
+        tueopening,
+        tueclose,
+        wedopening,
+        wedclose,
+        thuopening,
+        thuclose,
+        friopening,
+        friclose,
+        satopening,
+        satclose,
+        sunopening,
+        sunclose,
+        user: req.user.id,
+        cover: "/img/" + cover.name,
+      }).then((post) => {
+        req.flash("upload_msg", "Entry created and sent for verification.");
+      });
+      var smtpTransport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.ID,
+          pass: process.env.PASS,
+        },
+      });
+
+      var mailOptions = {
+        to: req.user.email,
+        from: "GettingLively.com",
+        subject: "Entry Created",
+        text: "Your entry has been created. Please proceed with payment to make your entry public.",
+        // text: body,
+      };
+      smtpTransport
+        .sendMail(mailOptions)
+
+        .catch((err) => console.log(err));
+      req.flash("upload_msg", "Entry created and sent for verification.");
+      res.redirect("/business");
     } catch (error) {
       console.log(error);
       res.render("errors/500");
@@ -483,16 +357,18 @@ router.put(
       //   if (req.files.menu) {
       //     let menu = req.files.menu;
       //     menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
+      let entry = await Post.findById(req.params.id).lean();
 
       if (desc.length < 300) {
-        errors.push({ msg: "Description must be atleast 500 characters" });
+        errors.push({ msg: "Description must be atleast 300 characters" });
         //   req.flash("warning_msg", "Description must be atleast 500 characters");
         return res.render("businessmember/editBusinessEntry", {
           layout: "layouts/layout",
+          entry,
           errors,
         });
       }
-      let entry = await Post.findById(req.params.id).lean();
+      //   let entry = await Post.findById(req.params.id).lean();
       if (!entry) {
         return res.render("error/404");
       }
@@ -624,6 +500,387 @@ router.put(
     } catch (error) {
       console.log(error);
       return res.render("errors/404");
+    }
+  }
+);
+
+// edit images and menu page
+router.get(
+  "/myentries/entry/editattach/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entry = await Post.findOne({ _id: req.params.id }).lean();
+
+      if (!entry) {
+        return res.render("error/404");
+      } else {
+        res.render("businessmember/editAttach", {
+          layout: "layouts/layout",
+          entry,
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+router.put(
+  "/myentries/entry/editattach/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      if (req.files.cover) {
+        let cover = req.files.cover;
+        cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              cover: "/img/" + cover.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image1) {
+        let image1 = req.files.image1;
+        image1.mv(path.resolve(__dirname, "..", "public/img", image1.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image1: "/img/" + image1.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image2) {
+        let image2 = req.files.image2;
+        image2.mv(path.resolve(__dirname, "..", "public/img", image2.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image2: "/img/" + image2.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image3) {
+        let image3 = req.files.image3;
+        image3.mv(path.resolve(__dirname, "..", "public/img", image3.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image3: "/img/" + image3.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image4) {
+        let image4 = req.files.image4;
+        image4.mv(path.resolve(__dirname, "..", "public/img", image4.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image4: "/img/" + image4.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image5) {
+        let image5 = req.files.image5;
+        image5.mv(path.resolve(__dirname, "..", "public/img", image5.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image5: "/img/" + image5.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image6) {
+        let image6 = req.files.image6;
+        image6.mv(path.resolve(__dirname, "..", "public/img", image6.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image6: "/img/" + image6.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image7) {
+        let image7 = req.files.image7;
+        image7.mv(path.resolve(__dirname, "..", "public/img", image7.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image7: "/img/" + image7.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image8) {
+        let image8 = req.files.image8;
+        image8.mv(path.resolve(__dirname, "..", "public/img", image8.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image8: "/img/" + image8.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.image9) {
+        let image9 = req.files.image9;
+        image9.mv(path.resolve(__dirname, "..", "public/img", image9.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              image9: "/img/" + image9.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Image uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      } else if (req.files.menu) {
+        let menu = req.files.menu;
+        menu.mv(path.resolve(__dirname, "..", "public/docs", menu.name));
+        let entry = await Post.findById(req.params.id).lean();
+        if (!entry) {
+          return res.render("error/404");
+        }
+        if (entry.user != req.user.id) {
+          req.flash("error_msg", "You can not edit this entry. Try again!");
+          res.redirect(req.originalUrl);
+        } else {
+          entry = await Post.findOneAndUpdate(
+            {
+              _id: req.params.id,
+            },
+            {
+              reviewStatus: "inprocess",
+
+              menu: "/docs/" + menu.name,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          entry.reviewStatus = "inprocess";
+          entry.save().then((go) => {
+            req.flash("success_msg", "Menu uploaded successfully!");
+            res.redirect(req.originalUrl);
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
     }
   }
 );
