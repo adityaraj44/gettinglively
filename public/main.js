@@ -129,7 +129,7 @@ if (document.querySelector("#barsearch")) {
         <div>
         <a href="/places/entries/entry/{{entry._id}}" class="noSelect"
         ><div class="uk-card uk-card-hover uk-card-default">
-          <div class="uk-card-media-top">
+          <div class="uk-card-media-top entryimg">
             <div class="uk-clearfix uk-position-absolute">
               <span
                 class="
@@ -283,14 +283,18 @@ if (document.querySelector("#card-container-voucher")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       }
     }
 
@@ -408,14 +412,19 @@ if (document.querySelector("#card-container-entry")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+          //   displayPaymentResults("SUCCESS");
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       }
     }
 
@@ -530,14 +539,18 @@ if (document.querySelector("#card-container-premier")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       }
     }
 
@@ -652,14 +665,18 @@ if (document.querySelector("#card-container-advance")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       }
     }
 
@@ -774,14 +791,18 @@ if (document.querySelector("#card-container-promoted")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       }
     }
 
@@ -897,14 +918,18 @@ if (document.querySelector("#card-container-offer")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       }
     }
 

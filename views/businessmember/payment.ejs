@@ -227,13 +227,14 @@
         <p class="uk-card-title uk-text-center uk-margin-medium-bottom">
           <%- 'Total Amount' + ' ' + '-' + ' ' + '&#163;' + amount %>
         </p>
+        <%- include('../partials/errors.ejs'); %>
         <form
           id="payment-form-entry"
           method="POST"
           action="/business/entries/paymentpage/<%- entry._id %>"
         >
           <div class="uk-padding-large" id="card-container"></div>
-          <%- include('../partials/errors.ejs'); %>
+          <!-- <%- include('../partials/errors.ejs'); %> -->
           <button class="button" id="card-button" type="button">
             <%- 'Pay' + ' ' + '&#163;'+ amount %>
           </button>

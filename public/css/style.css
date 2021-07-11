@@ -402,3 +402,24 @@ footer p {
   height: 250px;
   background-size: cover;
 }
+
+/* .entryslider img {
+  width: 100%;
+  height: 300px;
+  background-size: contain;
+  object-fit: contain;
+} */
+
+.entryslider img {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  object-fit: cover;
+}
+
+.entryimg img {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  object-fit: cover;
+}

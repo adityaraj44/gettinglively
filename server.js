@@ -29,6 +29,9 @@ const app = express();
 // file upload
 app.use(fileUpload());
 
+// flash message
+app.use(flash());
+
 // express session
 // express session
 app.use(
@@ -40,9 +43,6 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-
-// flash message
-app.use(flash());
 
 // global var
 app.use((req, res, next) => {
