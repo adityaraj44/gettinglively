@@ -78,7 +78,8 @@
         </thead>
         <tbody>
           <% if(allVouchers.length > 0) { %> <%
-          allVouchers.forEach((allVoucher)=> { %>
+          allVouchers.forEach((allVoucher)=> { %> <% if(allVoucher.post != null)
+          { %>
           <tr>
             <td><%- allVoucher.user.name %></td>
             <td><%- allVoucher.post.name %></td>
@@ -89,7 +90,11 @@
               <%- helper.formatDate(allVoucher.createdAt, 'MMMM Do YYYY') %>
             </td>
           </tr>
-          <% }) %> <% } else { %>
+          <% } else { %>
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+          <% } %> <% }) %> <% } else { %>
 
           <p class="uk-text-center uk-text-large info-text uk-text-warning">
             No Payments

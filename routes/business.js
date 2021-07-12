@@ -1195,7 +1195,7 @@ router.post(
       } else {
         req.flash("error_msg", "Offer Already Activated!");
 
-        res.redirect("/business/entries/pendingpayment");
+        res.redirect(req.originalUrl);
       }
     } catch (error) {
       console.log(error);
@@ -1280,7 +1280,7 @@ router.post(
       } else {
         req.flash("error_msg", "Already paid!");
 
-        res.redirect("/business/entries/pendingpayment");
+        res.redirect(req.originalUrl);
       }
     } catch (error) {
       console.log(error);
@@ -1311,6 +1311,7 @@ router.get(
         .populate("offer")
         .sort({ createdAt: "desc" })
         .lean();
+      console.log(allVouchers);
 
       res.render("businessmember/managelisting", {
         layout: "layouts/layout",

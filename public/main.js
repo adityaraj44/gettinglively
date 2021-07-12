@@ -285,7 +285,7 @@ if (document.querySelector("#card-container-voucher")) {
         // displayPaymentResults("SUCCESS");
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -294,7 +294,7 @@ if (document.querySelector("#card-container-voucher")) {
         console.error(e.message);
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
       }
     }
 
@@ -415,7 +415,7 @@ if (document.querySelector("#card-container-entry")) {
         setTimeout(() => {
           document.location.reload();
           //   displayPaymentResults("SUCCESS");
-        }, 5000);
+        }, 2000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -424,7 +424,7 @@ if (document.querySelector("#card-container-entry")) {
         console.error(e.message);
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
       }
     }
 
@@ -541,7 +541,7 @@ if (document.querySelector("#card-container-premier")) {
         // displayPaymentResults("SUCCESS");
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -550,7 +550,7 @@ if (document.querySelector("#card-container-premier")) {
         console.error(e.message);
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
       }
     }
 
@@ -667,7 +667,7 @@ if (document.querySelector("#card-container-advance")) {
         // displayPaymentResults("SUCCESS");
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -676,7 +676,7 @@ if (document.querySelector("#card-container-advance")) {
         console.error(e.message);
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
       }
     }
 
@@ -793,7 +793,7 @@ if (document.querySelector("#card-container-promoted")) {
         // displayPaymentResults("SUCCESS");
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -802,7 +802,7 @@ if (document.querySelector("#card-container-promoted")) {
         console.error(e.message);
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
       }
     }
 
@@ -920,7 +920,7 @@ if (document.querySelector("#card-container-offer")) {
         // displayPaymentResults("SUCCESS");
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -929,7 +929,7 @@ if (document.querySelector("#card-container-offer")) {
         console.error(e.message);
         setTimeout(() => {
           document.location.reload();
-        }, 5000);
+        }, 2000);
       }
     }
 

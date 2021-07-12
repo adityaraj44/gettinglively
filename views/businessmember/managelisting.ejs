@@ -165,8 +165,8 @@
         </thead>
         <tbody>
           <% if(allVouchers.length > 0) { %> <%
-          allVouchers.forEach((allVoucher)=> { %> <%
-          if(allVoucher.post.user._id.toString() == user._id.toString()) { %>
+          allVouchers.forEach((allVoucher)=> { %> <% if(allVoucher.post != null
+          && allVoucher.post.user._id.toString() == user._id.toString()) { %>
           <tr>
             <td><%- allVoucher.user.name %></td>
             <td><%- allVoucher.post.name %></td>
@@ -177,6 +177,10 @@
               <%- helper.formatDate(allVoucher.createdAt, 'MMMM Do YYYY') %>
             </td>
           </tr>
+          <% } else { %>
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
           <% } %> <% }) %> <% } else { %>
 
           <p class="uk-text-center uk-text-large info-text uk-text-warning">
