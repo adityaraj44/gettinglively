@@ -47,56 +47,67 @@
           tabindex="-1"
         >
           <ul class="uk-slider-items uk-child-width-1-1 uk-grid">
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.cover %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image1 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image2 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image3 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image4 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image5 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image6 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image7 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image8 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
-            <li class="entryslider">
-              <div class="uk-card-media-top">
-                <img src="<%- entry.image9 %>" alt="<%- entry.cover %>" />
-              </div>
-            </li>
+            <% if(entry.cover != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.cover %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image1 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image1 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image2 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image2 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image3 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image3 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image4 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image4 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image5 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image5 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image6 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image6 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image7 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image7 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image8 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image8 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %> <% if(entry.image9 != undefined) { %>
+                <li class="entryslider">
+                  <div class="uk-card-media-top">
+                    <img src="<%- entry.image9 %>" alt="<%- entry.cover %>" />
+                  </div>
+                </li>
+                <% } %>
           </ul>
           <a
             class="uk-position-center-left uk-position-small uk-hidden-hover"
