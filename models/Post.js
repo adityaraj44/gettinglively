@@ -69,7 +69,9 @@ const postSchema = new mongoose.Schema(
     },
     lat: Number,
     long: Number,
-
+    nearCodes: {
+      type: String,
+    },
     planStart: Date,
     planEnd: Date,
     monopening: { type: String },

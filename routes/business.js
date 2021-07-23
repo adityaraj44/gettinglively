@@ -12,6 +12,8 @@ const { ensureAuthenticated, ensureBusiness } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 // const { response } = require("express");
 const cron = require("node-cron");
+const NodeGeocoder = require("node-geocoder");
+const fetch = require("node-fetch");
 
 // get business dash
 router.get("/", ensureAuthenticated, ensureBusiness, async (req, res) => {
@@ -90,6 +92,34 @@ router.post(
       let cover = req.files.cover;
       cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
 
+      const options = {
+        provider: "google",
+        apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
+      };
+
+      const geocoder = NodeGeocoder(options);
+      const address = `${req.body.location}, ${req.body.city}, ${req.body.postcode}`;
+      // Using callback
+      const resp = await geocoder.geocode(address);
+      let nearcodes = [];
+      let finalCodes;
+      await fetch(`https://api.postcodes.io/postcodes?lon=${resp[0].longitude}&lat=${resp[0].latitude}&limit=100&radius=2000
+      `)
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json.result.length),
+            json.result.forEach((elem) => {
+              // console.log(elem.postcode);
+              nearcodes.push(elem.postcode);
+            });
+          console.log(nearcodes);
+        });
+
+      finalCodes = nearcodes.toString();
+      console.log(finalCodes);
+
+      const shortPost = req.body.postcode.split(" ")[0];
+
       if (desc.length < 300) {
         errors.push({ msg: "Description must be atleast 300 characters" });
         //   req.flash("warning_msg", "Description must be atleast 500 characters");
@@ -126,7 +156,9 @@ router.post(
         desc,
         typeOfPlace,
         location,
+        shortPost: shortPost,
         city,
+        nearCodes: finalCodes,
         postcode,
         typeOfVenue,
         bookingStatus,

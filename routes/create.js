@@ -10,6 +10,7 @@ const nodemailer = require("nodemailer");
 const PageDetail = require("../models/PageDetail");
 const algoliasearch = require("algoliasearch");
 const NodeGeocoder = require("node-geocoder");
+const fetch = require("node-fetch");
 // get request to the /admincreate
 
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -177,19 +178,31 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     let cover = req.files.cover;
     cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
 
-    const address = `${req.body.location} ${req.body.city}, ${req.body.postcode}`;
-
     const options = {
       provider: "google",
       apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
     };
 
     const geocoder = NodeGeocoder(options);
-
+    const address = `${req.body.location}, ${req.body.city}, ${req.body.postcode}`;
     // Using callback
     const resp = await geocoder.geocode(address);
-    let longitude = resp[0].longitude;
-    let latitude = resp[0].latitude;
+    let nearcodes = [];
+    let finalCodes;
+    await fetch(`https://api.postcodes.io/postcodes?lon=${resp[0].longitude}&lat=${resp[0].latitude}&limit=100&radius=2000
+    `)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json.result.length),
+          json.result.forEach((elem) => {
+            // console.log(elem.postcode);
+            nearcodes.push(elem.postcode);
+          });
+        console.log(nearcodes);
+      });
+
+    finalCodes = nearcodes.toString();
+    console.log(finalCodes);
 
     const shortPost = req.body.postcode.split(" ")[0];
 
@@ -229,9 +242,9 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       location,
       postcode,
       shortPost: shortPost,
-      lat: latitude,
-      long: longitude,
+
       typeOfVenue,
+      nearCodes: finalCodes,
       bookingStatus,
       monopening,
       monclose,

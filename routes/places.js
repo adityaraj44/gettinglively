@@ -8,6 +8,8 @@ const PageDetail = require("../models/PageDetail");
 const Review = require("../models/Review");
 const algoliasearch = require("algoliasearch");
 const squareConnect = require("square-connect");
+const NodeGeocoder = require("node-geocoder");
+const fetch = require("node-fetch");
 
 router.get("/bars", async (req, res) => {
   const allEntries = await Post.find({
@@ -308,6 +310,40 @@ router.get("/entries/entry/:id", async (req, res) => {
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean();
+
+    //   custom
+    // const options = {
+    //   provider: "google",
+    //   apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
+    // };
+    // const address = `${entry.location}, ${entry.city}, ${entry.postcode}`;
+    // const geocoder = NodeGeocoder(options);
+    // console.log(entry.postcode);
+    // const resp = await geocoder.geocode(address);
+    // console.log(resp);
+    // // // const respr = await geocoder.reverse({
+    // //   lat: resp[0].latitude,
+    // //   lon: resp[0].longitude,
+    // // });
+    // // console.log(respr);
+    // let nearcodes = [];
+    // let finalCodes;
+    // await fetch(`https://api.postcodes.io/postcodes?lon=${resp[0].longitude}&lat=${resp[0].latitude}&limit=100&radius=2000
+    // `)
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     console.log(json.result.length),
+    //       json.result.forEach((elem) => {
+    //         // console.log(elem.postcode);
+    //         nearcodes.push(elem.postcode);
+    //       });
+    //     console.log(nearcodes);
+    //   });
+
+    // finalCodes = nearcodes.toString();
+    // console.log(finalCodes);
+    // // geocodes
+
     let totalScore = 0;
     for (i = 0; i < allReview.length; i++) {
       totalScore = totalScore + allReview[i].userScore;

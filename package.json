@@ -43,6 +43,7 @@
     "multer-gridfs-storage": "^4.2.0",
     "nanoid": "^3.1.23",
     "node-cron": "^3.0.0",
+    "node-fetch": "^2.6.1",
     "node-geocoder": "^3.27.0",
     "node-postcodes.io": "^1.0.3",
     "nodemailer": "^6.6.0",
