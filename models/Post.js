@@ -64,6 +64,12 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    shortPost: {
+      type: String,
+    },
+    lat: Number,
+    long: Number,
+
     planStart: Date,
     planEnd: Date,
     monopening: { type: String },

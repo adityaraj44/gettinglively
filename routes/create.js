@@ -9,6 +9,7 @@ const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 const PageDetail = require("../models/PageDetail");
 const algoliasearch = require("algoliasearch");
+const NodeGeocoder = require("node-geocoder");
 // get request to the /admincreate
 
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -176,6 +177,22 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     let cover = req.files.cover;
     cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
 
+    const address = `${req.body.location} ${req.body.city}, ${req.body.postcode}`;
+
+    const options = {
+      provider: "google",
+      apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
+    };
+
+    const geocoder = NodeGeocoder(options);
+
+    // Using callback
+    const resp = await geocoder.geocode(address);
+    let longitude = resp[0].longitude;
+    let latitude = resp[0].latitude;
+
+    const shortPost = req.body.postcode.split(" ")[0];
+
     if (desc.length < 300) {
       errors.push({ msg: "Description must be atleast 300 characters" });
       //   req.flash("warning_msg", "Description must be atleast 500 characters");
@@ -211,6 +228,9 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       typeOfPlace,
       location,
       postcode,
+      shortPost: shortPost,
+      lat: latitude,
+      long: longitude,
       typeOfVenue,
       bookingStatus,
       monopening,
@@ -227,6 +247,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       satclose,
       sunopening,
       sunclose,
+      paymentStatus: "paid",
       user: req.user.id,
       cover: "/img/" + cover.name,
     }).then((post) => {

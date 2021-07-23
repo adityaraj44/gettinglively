@@ -1,3 +1,5 @@
+// import algoliasearch from "algoliasearch";
+
 //map
 if (document.querySelector("#map-canvas")) {
   var geocoder;
@@ -108,6 +110,22 @@ if (document.querySelector("#desc")) {
 }
 
 if (document.querySelector("#barsearch")) {
+  // get current latlong
+
+  //     const client = algoliasearch(
+  //       "5XADSF6L2U",
+  //       "e6d714070ce02fc5eedd1d79330eec5e"
+  //     );
+  //     const index = client.initIndex("dev_BARS");
+
+  //     index
+  //       .search("", {
+  //         aroundLatLng: `${latitude},${longitude}`,
+  //       })
+  //       .then(({ hits }) => {
+  //         console.log(hits);
+  //       });
+  //   });
   // algolia
   const search = instantsearch({
     indexName: "dev_BARS",
