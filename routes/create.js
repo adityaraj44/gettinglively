@@ -54,7 +54,7 @@ router.post(
         users.forEach((user) => {
           var mailOptions = {
             to: user.email,
-            from: "GettingLively.com",
+            from: "Getting Lively",
             subject: subject,
             html: body,
             // text: body,
@@ -184,7 +184,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     };
 
     const geocoder = NodeGeocoder(options);
-    const address = `${req.body.location}, ${req.body.city}, ${req.body.postcode}`;
+    const address = `${req.body.city}, ${req.body.postcode}`;
     // Using callback
     const resp = await geocoder.geocode(address);
     let nearcodes = [];
@@ -204,7 +204,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     finalCodes = nearcodes.toString();
     console.log(finalCodes);
 
-    const shortPost = req.body.postcode.split(" ")[0];
+    const shortpost = req.body.postcode.split(" ")[0];
 
     if (desc.length < 300) {
       errors.push({ msg: "Description must be atleast 300 characters" });
@@ -241,7 +241,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
       typeOfPlace,
       location,
       postcode,
-      shortPost: shortPost,
+      shortPost: shortpost,
 
       typeOfVenue,
       nearCodes: finalCodes,
@@ -276,7 +276,7 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
 
     var mailOptions = {
       to: req.user.email,
-      from: "GettingLively.com",
+      from: "Getting Lively",
       subject: "Entry Created",
       text: "Your entry has been created. Please add images and menu to publish your entry.",
       // text: body,

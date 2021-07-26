@@ -311,16 +311,16 @@ router.get("/entries/entry/:id", async (req, res) => {
       .sort({ createdAt: "desc" })
       .lean();
 
-    //   custom
+    // //   custom
     // const options = {
     //   provider: "google",
     //   apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
     // };
-    // const address = `${entry.location}, ${entry.city}, ${entry.postcode}`;
+    // const address = `${entry.city}, ${entry.postcode}`;
     // const geocoder = NodeGeocoder(options);
-    // console.log(entry.postcode);
+    // // console.log(entry.postcode);
     // const resp = await geocoder.geocode(address);
-    // console.log(resp);
+    // // console.log(resp);
     // // // const respr = await geocoder.reverse({
     // //   lat: resp[0].latitude,
     // //   lon: resp[0].longitude,
@@ -328,7 +328,7 @@ router.get("/entries/entry/:id", async (req, res) => {
     // // console.log(respr);
     // let nearcodes = [];
     // let finalCodes;
-    // await fetch(`https://api.postcodes.io/postcodes?lon=${resp[0].longitude}&lat=${resp[0].latitude}&limit=100&radius=2000
+    // await fetch(`https://api.postcodes.io/postcodes?lon=${resp[0].longitude}&lat=${resp[0].latitude}&radius=2000&limit=100
     // `)
     //   .then((res) => res.json())
     //   .then((json) => {

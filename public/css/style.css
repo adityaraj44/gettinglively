@@ -423,3 +423,55 @@ footer p {
   background-size: cover;
   object-fit: cover;
 }
+
+.pageimg img {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  object-fit: cover;
+}
+
+.search-dialog {
+  background-image: url("/img/search.jpg");
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.408);
+  background-blend-mode: overlay;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.searchtext {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.ais-Hits-item {
+  border: none;
+  box-shadow: none;
+}
+
+.ais-Hits--empty {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ais-SearchBox-input {
+  background: rgba(255, 255, 255, 0.775);
+}
+
+.uk-modal-close-full {
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.uk-modal-close-full:hover {
+  color: #ec4d37;
+  font-weight: bolder;
+}
+
+input.ais-SearchBox-input {
+  color: rgb(0, 0, 0) !important;
+}

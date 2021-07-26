@@ -100,7 +100,7 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
         });
         var mailOptions = {
           to: req.user.email,
-          from: "GettingLively.com",
+          from: "Getting Lively",
           subject: "Voucher Purchased",
           text: `Voucher purchased successfully. Your code: ${voucher_code[0]}.  Voucher codes can be redeemed offline on the venues or online on the
           merchant's website.`,

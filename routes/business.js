@@ -98,7 +98,7 @@ router.post(
       };
 
       const geocoder = NodeGeocoder(options);
-      const address = `${req.body.location}, ${req.body.city}, ${req.body.postcode}`;
+      const address = `${req.body.city}, ${req.body.postcode}`;
       // Using callback
       const resp = await geocoder.geocode(address);
       let nearcodes = [];
@@ -118,7 +118,7 @@ router.post(
       finalCodes = nearcodes.toString();
       console.log(finalCodes);
 
-      const shortPost = req.body.postcode.split(" ")[0];
+      const shortpost = req.body.postcode.split(" ")[0];
 
       if (desc.length < 300) {
         errors.push({ msg: "Description must be atleast 300 characters" });
@@ -156,7 +156,7 @@ router.post(
         desc,
         typeOfPlace,
         location,
-        shortPost: shortPost,
+        shortPost: shortpost,
         city,
         nearCodes: finalCodes,
         postcode,
@@ -191,7 +191,7 @@ router.post(
 
       var mailOptions = {
         to: req.user.email,
-        from: "GettingLively.com",
+        from: "Getting Lively",
         subject: "Entry Created",
         text: "Your entry has been created. Please proceed with payment to make your entry public.",
         // text: body,
@@ -1505,7 +1505,7 @@ router.post(
 
                   var mailOptions = {
                     to: req.user.email,
-                    from: "GettingLively.com",
+                    from: "Getting Lively",
                     subject: "Renew your plan",
                     text: "Your current promotion plan has been expired. Visit our website to renew the plan or buy another.",
                     // text: body,
@@ -1658,7 +1658,7 @@ router.post(
 
                   var mailOptions = {
                     to: req.user.email,
-                    from: "GettingLively.com",
+                    from: "Getting Lively",
                     subject: "Renew your plan",
                     text: "Your current promotion plan has been expired. Visit our website to renew the plan or buy another.",
                     // text: body,
@@ -1810,7 +1810,7 @@ router.post(
 
                   var mailOptions = {
                     to: req.user.email,
-                    from: "GettingLively.com",
+                    from: "Getting Lively",
                     subject: "Renew your plan",
                     text: "Your current promotion plan has been expired. Visit our website to renew the plan or buy another.",
                     // text: body,

@@ -96,7 +96,7 @@ router.post("/register", ensureGuest, async (req, res) => {
   });
   var mailOptions = {
     to: email,
-    from: "GettingLively.com",
+    from: "Getting Lively",
     subject: "Getting Lively Email Verification",
     text:
       "You are receiving this because you need to verify your email.\n\n" +
@@ -206,7 +206,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
         });
         var mailOptions = {
           to: email,
-          from: "GettingLively.com",
+          from: "Getting Lively",
           subject: "Getting Lively Email Verification",
           text:
             "You are receiving this because you need to verify your email.\n\n" +
@@ -304,14 +304,19 @@ router.post("/forgot", ensureGuest, (req, res) => {
       function (token, user, done) {
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
+          //   port: 465,
+          //   secure: true,
           auth: {
             user: process.env.ID,
             pass: process.env.PASS,
           },
+          //   tls: {
+          //     rejectUnauthorized: false,
+          //   },
         });
         var mailOptions = {
           to: user.email,
-          from: "GettingLively.com",
+          from: "Getting Lively",
           subject: "Getting Lively Password Reset",
           text:
             "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
@@ -410,7 +415,7 @@ router.post("/reset/:token", ensureGuest, function (req, res) {
         });
         var mailOptions = {
           to: user.email,
-          from: "GettingLively.com",
+          from: "Getting Lively",
           subject: "Your password has been changed",
           text:
             "Hello,\n\n" +
