@@ -24,6 +24,14 @@ body {
   background: #1d1b1b;
 }
 
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+textarea {
+  -webkit-user-select: text;
+}
+
 h1,
 h2,
 h3,
@@ -463,8 +471,8 @@ footer p {
 }
 
 .uk-modal-close-full {
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 0, 0);
+  background: rgba(0, 0, 0, 0);
 }
 
 .uk-modal-close-full:hover {

@@ -1,5 +1,17 @@
 <%- include('./partials/navbar.ejs'); %>
-
+<nav class="uk-navbar-container" uk-navbar>
+  <div class="uk-navbar-right uk-light">
+    <ul class="uk-navbar-nav">
+      <li>
+        <a
+          href="/users/businessregister"
+          class="uk-button-text noSelect uk-margin-medium-right"
+          ><span class="noSelect"></span> Sign Up for free</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="uk-section uk-section-bar uk-section-muted uk-section-auto">
   <div class="uk-container">
     <ul class="uk-breadcrumb">
@@ -200,9 +212,40 @@
           uk-text-lowercase
           uk-text-large
         "
-        href="mailto:contact@gettinglively.com"
+        href="mailto:contact@gettinglively.co.uk"
         target="blank"
-        >contact@gettinglively.com</a
+        >contact@gettinglively.co.uk</a
+      >
+    </p>
+  </div>
+</div>
+<!-- join us -->
+<div class="uk-section uk-section-primary uk-light uk-section-auto">
+  <div class="uk-container">
+    <p
+      class="
+        uk-text-lead uk-text-bold uk-text-large uk-text-center uk-letter-spacing
+      "
+    >
+      JOIN NOW
+    </p>
+    <hr class="uk-divider-icon" />
+    <p class="uk-text-meta uk-text-large uk-text-center">
+      Sign Up here, it is free to join.
+    </p>
+    <p class="uk-text-center uk-text-large">
+      <a
+        class="
+          uk-text-center
+          uk-button
+          uk-button-danger
+          uk-button-large
+          uk-width-1-2
+          uk-text-capitalize
+          uk-text-large
+        "
+        href="/users/businessregister"
+        >Sign Up</a
       >
     </p>
   </div>
