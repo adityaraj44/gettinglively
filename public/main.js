@@ -305,7 +305,6 @@ if (document.querySelector("#card-container-voucher")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
 
@@ -318,7 +317,6 @@ if (document.querySelector("#card-container-voucher")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
       }
@@ -442,15 +440,10 @@ if (document.querySelector("#card-container-entry")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/reviewentries";
-        UIkit.notification({
-          message: "Payment Successfull...",
-          pos: "top-right",
-          status: "success",
-        });
+
         //   displayPaymentResults("SUCCESS");
 
         console.debug("Payment Success", paymentResults);
@@ -462,15 +455,9 @@ if (document.querySelector("#card-container-entry")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/reviewentries";
-        UIkit.notification({
-          message: "Payment Successfull...",
-          pos: "top-right",
-          status: "success",
-        });
       }
     }
 
@@ -589,15 +576,9 @@ if (document.querySelector("#card-container-premier")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
-        UIkit.notification({
-          message: "Payment Successfull...",
-          pos: "top-right",
-          status: "success",
-        });
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -608,15 +589,9 @@ if (document.querySelector("#card-container-premier")) {
           message: "Payment Failed...",
           pos: "top-right",
           status: "danger",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
-        UIkit.notification({
-          message: "Payment Successfull...",
-          pos: "top-right",
-          status: "success",
-        });
       }
     }
 
@@ -736,15 +711,9 @@ if (document.querySelector("#card-container-advance")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
-        UIkit.notification({
-          message: "Payment Successfull...",
-          pos: "top-right",
-          status: "success",
-        });
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -756,15 +725,9 @@ if (document.querySelector("#card-container-advance")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
-        UIkit.notification({
-          message: "Payment Successfull...",
-          pos: "top-right",
-          status: "success",
-        });
       }
     }
 
@@ -884,17 +847,9 @@ if (document.querySelector("#card-container-promoted")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
-        setTimeout(() => {
-          UIkit.notification({
-            message: "Payment Successfull...",
-            pos: "top-right",
-            status: "success",
-          });
-        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -906,17 +861,9 @@ if (document.querySelector("#card-container-promoted")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
-        setTimeout(() => {
-          UIkit.notification({
-            message: "Payment Successfull...",
-            pos: "top-right",
-            status: "success",
-          });
-        }, 5000);
       }
     }
 
@@ -1037,17 +984,9 @@ if (document.querySelector("#card-container-offer")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/entries/pendingpayment";
-        setTimeout(() => {
-          UIkit.notification({
-            message: "Payment Successfull...",
-            pos: "top-right",
-            status: "success",
-          });
-        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
@@ -1059,17 +998,9 @@ if (document.querySelector("#card-container-offer")) {
           message: "Payment Successfull...",
           pos: "top-right",
           status: "success",
-          timeout: 10000,
         });
         document.location.reload();
         window.location.href = "/business/entries/pendingpayment";
-        setTimeout(() => {
-          UIkit.notification({
-            message: "Payment Successfull...",
-            pos: "top-right",
-            status: "success",
-          });
-        }, 5000);
       }
     }
 

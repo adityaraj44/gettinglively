@@ -178,7 +178,9 @@ router.get(
     try {
       const entryPayments = await Post.find({
         paymentStatus: "paid",
-      }).lean();
+      })
+        .sort({ createdAt: "desc" })
+        .lean();
       //   const planPaymentPremier = await Post.find({
       //     user: req.user.id,
       //     listing: "premier",
@@ -544,6 +546,52 @@ router.get(
 );
 
 // get premier
+router.get(
+  "/pricingandplans/premier/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      await Post.findById({ _id: req.params.id })
+        .lean()
+        .then((entry) => {
+          if (entry.premier == "basic" || entry.premier == "renew") {
+            entry.premier = "valid";
+            entry.save((err) => {
+              req.flash("success_msg", "Listing plan changed successfully!");
+              req.session.save(function () {
+                res.redirect(req.originalUrl);
+              });
+            });
+          } else if (entry.premier == "valid") {
+            entry.premier = "basic";
+
+            entry.save((err) => {
+              req.flash("success_msg", "Listing plan changed successfully!");
+              req.session.save(function () {
+                res.redirect(req.originalUrl);
+              });
+            });
+          } else {
+            req.flash("error_msg", "Listing plan was not changed");
+            req.session.save(function () {
+              res.redirect(req.originalUrl);
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          req.flash("error_msg", "Listing plan was not changed");
+          req.session.save(function () {
+            res.redirect(req.originalUrl);
+          });
+        });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
 // get advance
 // get promoted
 

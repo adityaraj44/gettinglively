@@ -286,8 +286,8 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
     cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
 
     const options = {
-      provider: "google",
-      apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
+      provider: "openstreetmap",
+      //   apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
     };
 
     const geocoder = NodeGeocoder(options);

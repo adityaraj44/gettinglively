@@ -93,8 +93,8 @@ router.post(
       cover.mv(path.resolve(__dirname, "..", "public/img", cover.name));
 
       const options = {
-        provider: "google",
-        apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
+        provider: "openstreetmap",
+        // apiKey: "AIzaSyCnlwozEPLpM58UqIkb2OKfhVEkTP3aGUQ",
       };
 
       const geocoder = NodeGeocoder(options);
@@ -203,7 +203,7 @@ router.post(
         .sendMail(mailOptions)
 
         .catch((err) => console.log(err));
-      req.flash("upload_msg", "Entry created and sent for verification.");
+      req.flash("success_msg", "Entry created and sent for verification.");
       res.redirect("/business");
     } catch (error) {
       console.log(error);
@@ -1351,7 +1351,7 @@ router.post(
                     .catch((err) => console.log(err));
 
                   console.log("done");
-                }, 2419200000);
+                }, 2147483647);
                 res.redirect(req.originalUrl);
               });
             });
@@ -2054,7 +2054,9 @@ router.get(
       const entryPayments = await Post.find({
         user: req.user.id,
         paymentStatus: "paid",
-      }).lean();
+      })
+        .sort({ createdAt: "desc" })
+        .lean();
       //   const planPaymentPremier = await Post.find({
       //     user: req.user.id,
       //     listing: "premier",

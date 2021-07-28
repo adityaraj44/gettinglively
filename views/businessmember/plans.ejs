@@ -110,12 +110,12 @@
           >
             <div class="uk-clearfix">
               <a
-                href="/admincreate/myentries/entry/<%- allBusinessEntry._id %>"
+                href="/business/myentries/entry/<%- allBusinessEntry._id %>"
                 class="noSelect uk-float-left"
                 ><%- allBusinessEntry.name %></a
               >
               <a
-                href="/admin/pricingandplans/<%- allBusinessEntry._id %>"
+                href="/business/pricingandplans/<%- allBusinessEntry._id %>"
                 class="
                   uk-button uk-button-custom uk-float-right uk-light
                   noSelect
@@ -155,8 +155,8 @@
       "
       uk-grid
     >
-      <% if(allEntries.length > 0) { %> <%
-      allEntries.forEach((allBusinessEntry)=> { %> <%
+      <% if(allBusinessEntries.length > 0) { %> <%
+      allBusinessEntries.forEach((allBusinessEntry)=> { %> <%
       if(allBusinessEntry.advance == 'valid') { %>
       <div>
         <div class="uk-card uk-card-hover uk-card-default">
@@ -200,12 +200,12 @@
           >
             <div class="uk-clearfix">
               <a
-                href="/admincreate/myentries/entry/<%- allBusinessEntry._id %>"
+                href="/business/myentries/entry/<%- allBusinessEntry._id %>"
                 class="noSelect uk-float-left"
                 ><%- allBusinessEntry.name %></a
               >
               <a
-                href="/admin/pricingandplans/<%- allBusinessEntry._id %>"
+                href="/business/pricingandplans/<%- allBusinessEntry._id %>"
                 class="
                   uk-button uk-button-custom uk-float-right uk-light
                   noSelect
@@ -245,8 +245,8 @@
       "
       uk-grid
     >
-      <% if(allEntries.length > 0) { %> <%
-      allEntries.forEach((allBusinessEntry)=> { %> <%
+      <% if(allBusinessEntries.length > 0) { %> <%
+      allBusinessEntries.forEach((allBusinessEntry)=> { %> <%
       if(allBusinessEntry.promoted == 'valid') { %>
       <div>
         <div class="uk-card uk-card-hover uk-card-default">
