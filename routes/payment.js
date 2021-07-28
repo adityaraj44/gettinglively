@@ -88,7 +88,10 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
             "success_msg",
             `Offer purchased successfully. Your code is ${voucher_code[0]}. Voucher code has also been sent on your email. You can now close this window.`
           );
-          res.redirect(req.originalUrl);
+
+          req.session.save(function () {
+            res.redirect(req.originalUrl);
+          });
         });
 
         var smtpTransport = nodemailer.createTransport({

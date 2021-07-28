@@ -1212,22 +1212,30 @@ router.post(
                   "success_msg",
                   "Payment successfull. Offer sent for review. You may now close this browser window."
                 );
-                res.redirect(req.originalUrl);
+                req.session.save(function () {
+                  res.redirect(req.originalUrl);
+                });
               });
             });
           } else {
             req.flash("error_msg", "Payment Failed. Try again");
-            res.redirect(req.originalUrl);
+            req.session.save(function () {
+              res.redirect(req.originalUrl);
+            });
           }
         } catch (error) {
           console.log(error);
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(req.originalUrl);
+          req.session.save(function () {
+            res.redirect(req.originalUrl);
+          });
         }
       } else {
         req.flash("error_msg", "Offer Already Activated!");
 
-        res.redirect(req.originalUrl);
+        req.session.save(function () {
+          res.redirect(req.originalUrl);
+        });
       }
     } catch (error) {
       console.log(error);
@@ -1297,6 +1305,50 @@ router.post(
                   "success_msg",
                   "Payment successfull. Entry sent for review. You may now close this browser window."
                 );
+                var smtpTransport = nodemailer.createTransport({
+                  service: "gmail",
+                  auth: {
+                    user: process.env.ID,
+                    pass: process.env.PASS,
+                  },
+                });
+
+                var mailOptions = {
+                  to: req.user.email,
+                  from: "Getting Lively",
+                  subject: "Entry Activated",
+                  text: "You've successfully activated your entry. Entry is now sent for approval.",
+                  // text: body,
+                };
+                smtpTransport
+                  .sendMail(mailOptions)
+
+                  .catch((err) => console.log(err));
+                setTimeout(() => {
+                  post.paymentStatus = "pending";
+                  post.save();
+                  var smtpTransport = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                      user: process.env.ID,
+                      pass: process.env.PASS,
+                    },
+                  });
+
+                  var mailOptions = {
+                    to: req.user.email,
+                    from: "Getting Lively",
+                    subject: "Entry Expired",
+                    text: `Your entry ${post.name} has expired. Visit out website and renew today.`,
+                    // text: body,
+                  };
+                  smtpTransport
+                    .sendMail(mailOptions)
+
+                    .catch((err) => console.log(err));
+
+                  console.log("done");
+                }, 2419200000);
                 res.redirect(req.originalUrl);
               });
             });
@@ -1410,7 +1462,11 @@ router.get(
           helper: require("../helpers/ejs"),
         });
       } else {
-        res.render("errors/pagenotfound");
+        req.flash("error_msg", "Cannot proceed with payment.");
+        req.session.save(function () {
+          res.redirect(`/business/pricingandplans/${req.params.id}`);
+        });
+        // res.redirect(`/business/pricingandplans/${req.params.id}`);
       }
     } catch (error) {
       console.log(error);
@@ -1477,6 +1533,25 @@ router.post(
                   "success_msg",
                   "Payment successfull. You have successfully bought out premier plan of 1 week validity."
                 );
+                var smtpTransport = nodemailer.createTransport({
+                  service: "gmail",
+                  auth: {
+                    user: process.env.ID,
+                    pass: process.env.PASS,
+                  },
+                });
+
+                var mailOptions = {
+                  to: req.user.email,
+                  from: "Getting Lively",
+                  subject: "Plan Purchased",
+                  text: "You've bought our Premier listing plan. Plan expires in 7 days. Visit our website to renew the plan or buy another.",
+                  // text: body,
+                };
+                smtpTransport
+                  .sendMail(mailOptions)
+
+                  .catch((err) => console.log(err));
                 //   post.planStart = Date.now();
                 //   post.planEnd = post.planStart + 20000;
                 //   post.save();
@@ -1517,23 +1592,34 @@ router.post(
 
                   console.log("done");
                 }, 604800000);
-                res.redirect(req.originalUrl);
+                req.session.save(function () {
+                  res.redirect(`/business/managelisting`);
+                });
+                // res.redirect(req.originalUrl);
               });
             });
           } else {
-            console.log("error 1");
             req.flash("error_msg", "Payment Failed. Try again");
-            res.redirect(req.originalUrl);
+            req.session.save(function () {
+              res.redirect(`/business/managelisting`);
+            });
+            // res.redirect(req.originalUrl);
           }
         } catch (error) {
           console.log(error);
-          console.log("error 2");
+
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(req.originalUrl);
+          req.session.save(function () {
+            res.redirect(`/business/managelisting`);
+          });
+          //   res.redirect(req.originalUrl);
         }
       } else {
         req.flash("error_msg", "You've already purchased this plan.");
-        res.redirect(req.originalUrl);
+        req.session.save(function () {
+          res.redirect(`/business/managelisting`);
+        });
+        // res.redirect(req.originalUrl);
       }
     } catch (error) {
       console.log(error);
@@ -1562,7 +1648,8 @@ router.get(
           helper: require("../helpers/ejs"),
         });
       } else {
-        res.render("errors/pagenotfound");
+        req.flash("error_msg", "Cannot proceed with payment.");
+        res.redirect(`/business/pricingandplans/${req.params.id}`);
       }
     } catch (error) {
       console.log(error);
@@ -1630,6 +1717,25 @@ router.post(
                   "success_msg",
                   "Payment successfull. You have successfully bought out advance premier plan of 1 week validity."
                 );
+                var smtpTransport = nodemailer.createTransport({
+                  service: "gmail",
+                  auth: {
+                    user: process.env.ID,
+                    pass: process.env.PASS,
+                  },
+                });
+
+                var mailOptions = {
+                  to: req.user.email,
+                  from: "Getting Lively",
+                  subject: "Plan Purchased",
+                  text: "You've bought our Advance Premier listing plan. Plan expires in 7 days. Visit our website to renew the plan or buy another.",
+                  // text: body,
+                };
+                smtpTransport
+                  .sendMail(mailOptions)
+
+                  .catch((err) => console.log(err));
                 //   post.planStart = Date.now();
                 //   post.planEnd = post.planStart + 20000;
                 //   post.save();
@@ -1670,23 +1776,31 @@ router.post(
                   console.log("done");
                 }, 604800000);
 
-                res.redirect(req.originalUrl);
+                req.session.save(function () {
+                  res.redirect(`/business/managelisting`);
+                });
               });
             });
           } else {
             console.log("error 1");
             req.flash("error_msg", "Payment Failed. Try again");
-            res.redirect(req.originalUrl);
+            req.session.save(function () {
+              res.redirect(`/business/managelisting`);
+            });
           }
         } catch (error) {
           console.log(error);
           console.log("error 2");
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(req.originalUrl);
+          req.session.save(function () {
+            res.redirect(`/business/managelisting`);
+          });
         }
       } else {
         req.flash("error_msg", "You've already purchased this plan.");
-        res.redirect(req.originalUrl);
+        req.session.save(function () {
+          res.redirect(`/business/managelisting`);
+        });
       }
     } catch (error) {
       console.log(error);
@@ -1715,7 +1829,11 @@ router.get(
           helper: require("../helpers/ejs"),
         });
       } else {
-        res.render("errors/pagenotfound");
+        req.flash("error_msg", "Cannot proceed with payment.");
+        req.session.save(function () {
+          // res.redirect(req.originalUrl);
+          res.redirect(`/business/pricingandplans/${req.params.id}`);
+        });
       }
     } catch (error) {
       console.log(error);
@@ -1778,10 +1896,25 @@ router.post(
                 post.planpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
-                req.flash(
-                  "success_msg",
-                  "Payment successfull. You have successfully bought out promoted premier plan of 1 week validity."
-                );
+                var smtpTransport = nodemailer.createTransport({
+                  service: "gmail",
+                  auth: {
+                    user: process.env.ID,
+                    pass: process.env.PASS,
+                  },
+                });
+
+                var mailOptions = {
+                  to: req.user.email,
+                  from: "Getting Lively",
+                  subject: "Plan Purchased",
+                  text: "You've bought our Promoted premier spot listing plan. Plan expires in 7 days. Visit our website to renew the plan or buy another.",
+                  // text: body,
+                };
+                smtpTransport
+                  .sendMail(mailOptions)
+
+                  .catch((err) => console.log(err));
                 //   post.planStart = Date.now();
                 //   post.planEnd = post.planStart + 20000;
                 //   post.save();
@@ -1821,24 +1954,35 @@ router.post(
                     .catch((err) => console.log(err));
                   console.log("done");
                 }, 604800000);
-
-                res.redirect(req.originalUrl);
+                req.flash(
+                  "success_msg",
+                  "Payment successfull. You have successfully bought out promoted premier plan of 1 week validity."
+                );
+                req.session.save(function () {
+                  res.redirect(`/business/managelisting`);
+                });
               });
             });
           } else {
             console.log("error 1");
             req.flash("error_msg", "Payment Failed. Try again");
-            res.redirect(`/business/pricingandplans/${req.params.id}`);
+            req.session.save(function () {
+              res.redirect(req.originalUrl);
+            });
           }
         } catch (error) {
           console.log(error);
           console.log("error 2");
           req.flash("error_msg", "Payment Failed. Try again");
-          res.redirect(req.originalUrl);
+          req.session.save(function () {
+            res.redirect(`/business/managelisting`);
+          });
         }
       } else {
         req.flash("error_msg", "You've already purchased this plan.");
-        res.redirect(req.originalUrl);
+        req.session.save(function () {
+          res.redirect(`/business/managelisting`);
+        });
       }
     } catch (error) {
       console.log(error);

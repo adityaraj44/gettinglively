@@ -9,16 +9,17 @@
       >Create Entries</a
     >
   </li>
-  <li>
-    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
-      >Entries For Review</a
-    >
-  </li>
+
   <li>
     <a
       href="/business/entries/pendingpayment"
       class="uk-button uk-button-text noSelect"
       >Pending Payments</a
+    >
+  </li>
+  <li>
+    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
+      >Entries Awaiting Approval</a
     >
   </li>
   <li>
@@ -227,13 +228,14 @@
         <p class="uk-card-title uk-text-center uk-margin-medium-bottom">
           <%- 'Total Amount' + ' ' + '-' + ' ' + '&#163;' + amount %>
         </p>
+        <%- include('../partials/errors.ejs'); %>
         <form
           id="payment-form-premier"
           method="POST"
           action="/business/pricingandplans/premier/<%- entry._id %>"
         >
           <div class="uk-padding-large" id="card-container"></div>
-          <%- include('../partials/errors.ejs'); %>
+
           <button class="button" id="card-button" type="button">
             <%- 'Pay' + ' ' + '&#163;'+ amount %>
           </button>

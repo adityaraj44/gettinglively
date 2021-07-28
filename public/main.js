@@ -301,18 +301,26 @@ if (document.querySelector("#card-container-voucher")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
       }
     }
 
@@ -430,19 +438,39 @@ if (document.querySelector("#card-container-entry")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        setTimeout(() => {
-          document.location.reload();
-          //   displayPaymentResults("SUCCESS");
-        }, 2000);
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/reviewentries";
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+        });
+        //   displayPaymentResults("SUCCESS");
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/reviewentries";
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+        });
       }
     }
 
@@ -557,18 +585,38 @@ if (document.querySelector("#card-container-premier")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/managelisting";
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+        });
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+        UIkit.notification({
+          message: "Payment Failed...",
+          pos: "top-right",
+          status: "danger",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/managelisting";
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+        });
       }
     }
 
@@ -683,18 +731,40 @@ if (document.querySelector("#card-container-advance")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/managelisting";
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+        });
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-        setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/managelisting";
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+        });
       }
     }
 
@@ -809,18 +879,44 @@ if (document.querySelector("#card-container-promoted")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
+
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/managelisting";
         setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+          UIkit.notification({
+            message: "Payment Successfull...",
+            pos: "top-right",
+            status: "success",
+          });
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
+
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/managelisting";
         setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+          UIkit.notification({
+            message: "Payment Successfull...",
+            pos: "top-right",
+            status: "success",
+          });
+        }, 5000);
       }
     }
 
@@ -936,18 +1032,44 @@ if (document.querySelector("#card-container-offer")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
+
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/entries/pendingpayment";
         setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+          UIkit.notification({
+            message: "Payment Successfull...",
+            pos: "top-right",
+            status: "success",
+          });
+        }, 5000);
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
+
+        UIkit.notification({
+          message: "Payment Successfull...",
+          pos: "top-right",
+          status: "success",
+          timeout: 10000,
+        });
+        document.location.reload();
+        window.location.href = "/business/entries/pendingpayment";
         setTimeout(() => {
-          document.location.reload();
-        }, 2000);
+          UIkit.notification({
+            message: "Payment Successfull...",
+            pos: "top-right",
+            status: "success",
+          });
+        }, 5000);
       }
     }
 

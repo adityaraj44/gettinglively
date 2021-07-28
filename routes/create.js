@@ -134,6 +134,12 @@ router.post(
   }
 );
 
+// edit page detail image
+
+// edit page detail
+
+// delete page detail
+
 router.get("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
     res.render("admin/createEntry", {

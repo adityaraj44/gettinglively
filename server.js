@@ -26,19 +26,22 @@ connectDB();
 
 const app = express();
 
-// file upload
-app.use(fileUpload());
-
 // flash message
 app.use(flash());
+
+// file upload
+app.use(fileUpload());
 
 // express session
 // express session
 app.use(
   session({
     secret: "memyself",
+    cookie: {
+      maxAge: 1000 * 36000,
+    },
+    saveUninitialized: true,
     resave: false,
-    saveUninitialized: false,
 
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
