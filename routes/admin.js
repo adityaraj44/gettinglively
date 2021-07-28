@@ -27,9 +27,9 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
     const transaction = await Voucher.find({}).lean();
     const transaction2 = await Post.find({ paymentStatus: "paid" }).lean();
     const offerTransaction = await Offer.find({ offerStatus: "paid" }).lean();
-    const planTransaction = await Post.find({ listing: "premier" });
-    const planTransaction2 = await Post.find({ listing: "premier advance" });
-    const planTransaction3 = await Post.find({ listing: "promoted" });
+    const planTransaction = await Post.find({ premier: "valid" });
+    const planTransaction2 = await Post.find({ advance: "valid" });
+    const planTransaction3 = await Post.find({ promoted: "valid" });
 
     res.render("admin/admindash", {
       layout: "layouts/layout",
@@ -299,7 +299,7 @@ router.get(
 );
 
 router.get(
-  "/mypayments/carddetails/plan/:id",
+  "/mypayments/carddetails/premier/:id",
   ensureAuthenticated,
   ensureAdmin,
   async (req, res) => {
@@ -320,13 +320,97 @@ router.get(
       //     user: req.user.id,
       //     listing: "promoted",
       //   });
-      const offerPayments = await Offer.findById({
-        _id: req.params.id,
-      });
-      res.render("admin/carddetailsEntry", {
+      //   const offerPayments = await Offer.findById({
+      //     _id: req.params.id,
+      //   });
+      res.render("admin/carddetailPlan", {
         layout: "layouts/layout",
         entryPayment,
-        offerPayments,
+        // offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+router.get(
+  "/mypayments/carddetails/advance/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      // const offerPayments = await Offer.findById({
+      //   _id: req.params.id,
+      // });
+      res.render("admin/carddetailadvance", {
+        layout: "layouts/layout",
+        entryPayment,
+        //   offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+router.get(
+  "/mypayments/carddetails/promoted/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      // const offerPayments = await Offer.findById({
+      //   _id: req.params.id,
+      // });
+      res.render("admin/carddetailpromoted", {
+        layout: "layouts/layout",
+        entryPayment,
+        //   offerPayments,
         // offerPayments,
         // planPaymentPremier,
         // planPaymentAdvance,
@@ -375,5 +459,92 @@ router.get(
     }
   }
 );
+
+router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
+  try {
+    const allEntries = await Post.find({
+      reviewStatus: "reviewed",
+    })
+      .sort({ createdAt: "desc" })
+      .lean();
+
+    // const allVouchers = await Voucher.find({})
+    //   .populate("post")
+    //   .populate("user")
+    //   .populate("offer")
+    //   .sort({ createdAt: "desc" })
+    //   .lean();
+    // console.log(allVouchers);
+
+    res.render("admin/allPlans", {
+      layout: "layouts/layout",
+      allEntries,
+      // allVouchers,
+
+      helper: require("../helpers/ejs"),
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("errors/pagenotfound");
+  }
+});
+
+router.get(
+  "/managelistings",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const allEntries = await Post.find({
+        reviewStatus: "reviewed",
+      })
+
+        .sort({ createdAt: "desc" })
+        .lean();
+
+      res.render("admin/manageListing", {
+        layout: "layouts/layout",
+        allEntries,
+
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/pricingandplans/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id }).lean();
+      const amount_premier = 50;
+      const amount_advancedpremier = 100;
+      const amount_promoted = 200;
+      if (entry) {
+        res.render("admin/pricingplans", {
+          entry,
+          amount_premier,
+          amount_advancedpremier,
+          amount_promoted,
+          layout: "layouts/layout",
+
+          helper: require("../helpers/ejs"),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// get premier
+// get advance
+// get promoted
 
 module.exports = router;

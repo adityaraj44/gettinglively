@@ -27,7 +27,6 @@
       >Manage Listings</a
     >
   </li>
-
   <li>
     <a
       href="/business/entrieswithplans"
@@ -51,74 +50,86 @@
   <div class="uk-container">
     <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      My Entries
+      Details
     </h4>
+
     <hr class="uk-divider-icon" />
     <div
       class="
         uk-child-width-1-1
-        uk-child-width-1-1@s
         uk-grid-small
+        uk-grid-match
         uk-margin-large-top
         uk-margin-large-bottom
       "
       uk-grid
     >
-      <% if(allBusinessEntries.length > 0) { %> <%
-      allBusinessEntries.forEach((allBusinessEntry)=> { %>
       <div>
-        <a
-          href="/business/myentries/entry/<%- allBusinessEntry._id %>"
-          class="noSelect"
-          ><div class="uk-card uk-card-hover uk-card-default">
-            <div class="uk-card-media-top singleentry">
-              <div class="uk-clearfix uk-position-absolute">
-                <span
-                  class="
-                    uk-label
-                    uk-float-left
-                    uk-label-danger
-                    uk-text-medium
-                    uk-text-bold
-                  "
-                  ><%- allBusinessEntry.typeOfPlace %></span
-                >
-                <span
-                  class="
-                    uk-label
-                    uk-float-left
-                    uk-label-primary
-                    uk-text-medium
-                    uk-text-bold
-                  "
-                  ><%- allBusinessEntry.bookingStatus %></span
-                >
-              </div>
-              <img
-                src="<%- allBusinessEntry.cover %>"
-                alt="<%- allBusinessEntry.cover %>"
-              />
-            </div>
-            <div
-              class="
-                uk-card-footer
-                uk-card-secondary
-                uk-text-left
-                uk-text-default
-                uk-text-bold
-              "
-            >
-              <%- allBusinessEntry.name %>
-            </div>
-          </div></a
-        >
+        <div class="uk-card uk-card-custom uk-card-hover uk-card-secondary">
+          <div class="uk-card-header">
+            <h3 class="uk-card-title uk-text-center">
+              <%- entryPayment.name %>
+            </h3>
+          </div>
+          <div class="uk-card-body">
+            <ul uk-accordion="collapsible: false">
+              <li>
+                <a class="uk-accordion-title" href="#">Order ID</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- entryPayment.advanceplanId %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Card Brand</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- entryPayment.advanceplanCreationCardBrand %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Last 4 Digits</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- entryPayment.advanceplanCreationCardLast4 %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Expiry Month</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- entryPayment.advanceplanCreationCardExpMon %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Expiry Year</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- entryPayment.advanceplanCreationCardExpYear %>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Card Type</a>
+                <div class="uk-accordion-content">
+                  <p class="uk-text-uppercase uk-text-success">
+                    <%- entryPayment.advanceplanCreationCardType %>
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <!-- <p class="uk-text-success uk-text-bolder">Joined on</p>
+            <p class="uk-text-meta uk-margin-remove-top">
+              <%- helper.formatDate(user.createdAt, 'MMMM Do YYYY')%>
+            </p> -->
+          </div>
+        </div>
       </div>
-      <% }) %> <% } else { %>
     </div>
-    <p class="uk-text-center uk-text-large info-text uk-text-warning">
-      No Entries
-    </p>
-    <% } %>
   </div>
 </div>
 <!-- footer -->
@@ -176,3 +187,4 @@
     </p>
   </div>
 </footer>
+advance

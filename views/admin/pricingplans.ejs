@@ -1,42 +1,53 @@
-<%- include('../partials/businessNavbar.ejs'); %>
+<%- include('../partials/adminNavbar.ejs'); %>
 
 <ul class="uk-breadcrumb uk-margin-large-left">
   <li>
-    <a href="/business" class="uk-button uk-button-text noSelect">My Entries</a>
-  </li>
-  <li>
-    <a href="/business/createentries" class="uk-button uk-button-text noSelect"
-      >Create Entries</a
+    <a href="/admin/customers" class="active uk-button uk-button-text noSelect"
+      >Customers</a
     >
   </li>
-
+  <li>
+    <a href="/admin/business" class="active uk-button uk-button-text noSelect"
+      >Business Members</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate" class="active uk-button uk-button-text noSelect"
+      >Create</a
+    >
+  </li>
   <li>
     <a
-      href="/business/entries/pendingpayment"
-      class="uk-button uk-button-text noSelect"
-      >Pending Payments</a
-    >
-  </li>
-  <li>
-    <a href="/business/reviewentries" class="uk-button uk-button-text noSelect"
-      >Entries Awaiting Approval</a
-    >
-  </li>
-  <li>
-    <a href="/business/managelisting" class="uk-button uk-button-text noSelect"
+      href="/admin/managelistings"
+      class="active uk-button uk-button-text noSelect"
       >Manage Listings</a
     >
   </li>
   <li>
-    <a
-      href="/business/entrieswithplans"
-      class="uk-button uk-button-text noSelect"
-      >Plans</a
+    <a href="/admin/allplans" class="active uk-button uk-button-text noSelect"
+      >All Plans</a
     >
   </li>
   <li>
-    <a href="/business/mypayments" class="uk-button uk-button-text noSelect"
-      >My Payments</a
+    <a
+      href="/admin/allpayments"
+      class="active uk-button uk-button-text noSelect"
+      >All Payments</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admin/allvouchers"
+      class="active uk-button uk-button-text noSelect"
+      >All Vouchers</a
+    >
+  </li>
+  <li>
+    <a
+      href="/users/logout"
+      class="uk-button active uk-button-text noSelect"
+      uk-toggle="target: #userslogout"
+      ><span class="noSelect"></span>Logout</a
     >
   </li>
 </ul>
@@ -84,33 +95,37 @@
             <div class="uk-clearfix">
               <% if(entry.premier == "basic") { %>
               <a
-                href="/business/pricingandplans/premier/<%- entry._id %>"
+                href="/admin/pricingandplans/premier/<%- entry._id %>"
                 class="
                   uk-button uk-button-custom
                   paylink
                   uk-float-right
                   noSelect
                 "
-                >Purchase</a
+                >Activate</a
               >
               <% } else if(entry.premier == "renew") { %>
               <a
-                href="/business/pricingandplans/premier/<%- entry._id %>"
+                href="/admin/pricingandplans/premier/<%- entry._id %>"
                 class="
                   uk-button uk-button-custom
                   paylink
                   uk-float-right
                   noSelect
                 "
-                >Renew</a
+                >Activate</a
               >
               <% } else { %>
-              <button
-                class="uk-button uk-button-default uk-float-right noSelect"
-                disabled
+              <a
+                href="/admin/pricingandplans/premier/<%- entry._id %>"
+                class="
+                  uk-button uk-button-custom
+                  paylink
+                  uk-float-right
+                  noSelect
+                "
+                >Deactivate</a
               >
-                Plan Already Exists
-              </button>
               <% } %>
             </div>
           </div>
@@ -141,33 +156,37 @@
             <div class="uk-clearfix">
               <% if(entry.advance == "basic") { %>
               <a
-                href="/business/pricingandplans/advancepremier/<%- entry._id %>"
+                href="/admin/pricingandplans/advancepremier/<%- entry._id %>"
                 class="
                   uk-button uk-button-custom
                   paylink
                   uk-float-right
                   noSelect
                 "
-                >Purchase</a
+                >Activate</a
               >
               <% } else if(entry.advance == "renew") { %>
               <a
-                href="/business/pricingandplans/advancepremier/<%- entry._id %>"
+                href="/admin/pricingandplans/advancepremier/<%- entry._id %>"
                 class="
                   uk-button uk-button-custom
                   paylink
                   uk-float-right
                   noSelect
                 "
-                >Renew</a
+                >Activate</a
               >
               <% } else { %>
-              <button
-                class="uk-button uk-button-default uk-float-right noSelect"
-                disabled
+              <a
+                href="/admin/pricingandplans/advancepremier/<%- entry._id %>"
+                class="
+                  uk-button uk-button-custom
+                  paylink
+                  uk-float-right
+                  noSelect
+                "
+                >Deactivate</a
               >
-                Plan Already Exists
-              </button>
               <% } %>
             </div>
           </div>
@@ -198,33 +217,37 @@
             <div class="uk-clearfix">
               <% if(entry.promoted == "basic") { %>
               <a
-                href="/business/pricingandplans/promoted/<%- entry._id %>"
+                href="/admin/pricingandplans/promoted/<%- entry._id %>"
                 class="
                   uk-button uk-button-custom
                   paylink
                   uk-float-right
                   noSelect
                 "
-                >Purchase</a
+                >Activate</a
               >
               <% } else if(entry.promoted == "renew") { %>
               <a
-                href="/business/pricingandplans/promoted/<%- entry._id %>"
+                href="/admin/pricingandplans/promoted/<%- entry._id %>"
                 class="
                   uk-button uk-button-custom
                   paylink
                   uk-float-right
                   noSelect
                 "
-                >Renew</a
+                >Activate</a
               >
               <% } else { %>
-              <button
-                class="uk-button uk-button-default uk-float-right noSelect"
-                disabled
+              <a
+                href="/admin/pricingandplans/promoted/<%- entry._id %>"
+                class="
+                  uk-button uk-button-custom
+                  paylink
+                  uk-float-right
+                  noSelect
+                "
+                >Deactivate</a
               >
-                Plan Already Exists
-              </button>
               <% } %>
             </div>
           </div>
@@ -233,58 +256,3 @@
     </div>
   </div>
 </div>
-<!-- footer -->
-<%- include('../partials/modals.ejs'); %>
-<footer class="uk-section uk-section-black">
-  <div class="uk-text-center@s" uk-grid>
-    <div class="uk-width-2-4@s uk-text-center">
-      <img
-        class="uk-border-circle"
-        width="200"
-        height="200"
-        src="/img/livelybrand.png"
-      />
-    </div>
-    <div class="uk-width-2-4@s uk-light uk-text-center@s uk-margin-small-left">
-      <a
-        href="/docs/termsandconditions.html"
-        target="blank"
-        class="uk-button uk-button-text uk-margin-medium-right noSelect"
-        >Terms and Conditions</a
-      >
-
-      <a
-        href="/docs/privacypolicy.html"
-        target="blank"
-        class="uk-button-text uk-button noSelect uk-margin-medium-right"
-        >Privacy Policy</a
-      >
-      <a
-        href="/docs/termsofuse.html"
-        target="blank"
-        class="uk-button-text uk-button noSelect uk-margin-medium-right"
-        >Terms Of Use</a
-      >
-    </div>
-
-    <div class="uk-width-4-4@s uk-text-center uk-light uk-text-center@s">
-      <a
-        href="https://twitter.com/GettingLively"
-        class="uk-button uk-button-text noSelect uk-margin-medium-right"
-        ><span uk-icon="icon: twitter; ratio: 2"></span
-      ></a>
-
-      <a
-        href="https://www.instagram.com/gettinglively/"
-        class="uk-button uk-button-text noSelect"
-        ><span uk-icon="icon: instagram; ratio: 2"></span
-      ></a>
-    </div>
-  </div>
-
-  <div class="uk-margin-medium-top">
-    <p class="uk-text-medium uk-text-center uk-margin-medium">
-      © 2021 Getting Lively. All Rights Reserved
-    </p>
-  </div>
-</footer>

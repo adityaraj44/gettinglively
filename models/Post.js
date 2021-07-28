@@ -9,10 +9,20 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    listing: {
+    // listing: {
+    //   type: String,
+    //   enum: ["basic", "premier", "premier advance", "promoted", "renew"],
+    //   default: "basic",
+    // },
+    premier: {
       type: String,
-      enum: ["basic", "premier", "premier advance", "promoted", "renew"],
-      default: "basic",
+    },
+    advance: {
+      type: String,
+    },
+
+    promoted: {
+      type: String,
     },
     userReview: {
       type: String,
@@ -107,15 +117,32 @@ const postSchema = new mongoose.Schema(
     entryCreationCardExpYear: String,
     entryCreationCardType: String,
     entryId: String,
-    planpaymentCreationDate: {
+    premierplanpaymentCreationDate: {
       type: Date,
     },
-    planCreationCardBrand: String,
-    planId: String,
-    planCreationCardLast4: String,
-    planCreationCardExpMon: String,
-    planCreationCardExpYear: String,
-    planCreationCardType: String,
+    premierplanCreationCardBrand: String,
+    premierplanId: String,
+    premierplanCreationCardLast4: String,
+    premierplanCreationCardExpMon: String,
+    premierplanCreationCardExpYear: String,
+    premierplanCreationCardType: String,
+    advanceplanpaymentCreationDate: {
+      type: Date,
+    },
+    advanceplanCreationCardBrand: String,
+    advanceplanId: String,
+    advanceplanCreationCardLast4: String,
+    advanceplanCreationCardExpMon: String,
+    advanceplanCreationCardExpYear: String,
+    advanceplanCreationCardType: String,
+    type: Date,
+    promotedplanpaymentCreationDate: { type: Date },
+    promotedplanId: String,
+    promotedplanCreationCardBrand: String,
+    promotedplanCreationCardLast4: String,
+    promotedplanCreationCardExpMon: String,
+    promotedplanCreationCardExpYear: String,
+    promotedplanCreationCardType: String,
   },
   { timestamps: true }
 );

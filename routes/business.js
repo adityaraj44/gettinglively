@@ -162,6 +162,9 @@ router.post(
         postcode,
         typeOfVenue,
         bookingStatus,
+        premier: "basic",
+        advance: "basic",
+        promoted: "basic",
         monopening,
         monclose,
         tueopening,
@@ -1411,6 +1414,42 @@ router.get(
   }
 );
 
+router.get(
+  "/entrieswithplans",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const allBusinessEntries = await Post.find({
+        user: req.user.id,
+        reviewStatus: "reviewed",
+      })
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean();
+
+      // const allVouchers = await Voucher.find({})
+      //   .populate("post")
+      //   .populate("user")
+      //   .populate("offer")
+      //   .sort({ createdAt: "desc" })
+      //   .lean();
+      // console.log(allVouchers);
+
+      res.render("businessmember/plans", {
+        layout: "layouts/layout",
+        allBusinessEntries,
+        // allVouchers,
+        user: req.user,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
 // get pricing and plans page
 router.get(
   "/pricingandplans/:id",
@@ -1485,7 +1524,7 @@ router.post(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      if (entry.listing == "basic" || entry.listing == "renew") {
+      if (entry.premier == "basic" || entry.premier == "renew") {
         const token = req.body.sourceId;
         const idempotencyKey = uuidv4();
         // get the currency for the location
@@ -1518,15 +1557,20 @@ router.post(
           if (result) {
             console.log(result);
             await Post.findById({ _id: req.params.id }).then((post) => {
-              if (post.listing == "basic" || post.listing == "renew") {
-                post.listing = "premier";
-                post.planId = payment.orderId;
-                post.planCreationCardBrand = payment.cardDetails.card.cardBrand;
-                post.planCreationCardLast4 = payment.cardDetails.card.last4;
-                post.planCreationCardExpMon = payment.cardDetails.card.expMonth;
-                post.planCreationCardExpYear = payment.cardDetails.card.expYear;
-                post.planCreationCardType = payment.cardDetails.card.cardType;
-                post.planpaymentCreationDate = payment.createdAt;
+              if (post.premier == "basic" || post.premier == "renew") {
+                post.premier = "valid";
+                post.premierplanId = payment.orderId;
+                post.premierplanCreationCardBrand =
+                  payment.cardDetails.card.cardBrand;
+                post.premierplanCreationCardLast4 =
+                  payment.cardDetails.card.last4;
+                post.premierplanCreationCardExpMon =
+                  payment.cardDetails.card.expMonth;
+                post.premierplanCreationCardExpYear =
+                  payment.cardDetails.card.expYear;
+                post.premierplanCreationCardType =
+                  payment.cardDetails.card.cardType;
+                post.premierplanpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 req.flash(
@@ -1568,7 +1612,7 @@ router.post(
                 //   });
 
                 setTimeout(() => {
-                  post.listing = "renew";
+                  post.premier = "renew";
                   post.save();
                   var smtpTransport = nodemailer.createTransport({
                     service: "gmail",
@@ -1669,7 +1713,7 @@ router.post(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      if (entry.listing == "basic" || entry.listing == "renew") {
+      if (entry.advance == "basic" || entry.advance == "renew") {
         const token = req.body.sourceId;
         const idempotencyKey = uuidv4();
         // get the currency for the location
@@ -1702,15 +1746,20 @@ router.post(
           if (result) {
             console.log(result);
             await Post.findById({ _id: req.params.id }).then((post) => {
-              if (post.listing == "basic" || post.listing == "renew") {
-                post.listing = "premier advance";
-                post.planId = payment.orderId;
-                post.planCreationCardBrand = payment.cardDetails.card.cardBrand;
-                post.planCreationCardLast4 = payment.cardDetails.card.last4;
-                post.planCreationCardExpMon = payment.cardDetails.card.expMonth;
-                post.planCreationCardExpYear = payment.cardDetails.card.expYear;
-                post.planCreationCardType = payment.cardDetails.card.cardType;
-                post.planpaymentCreationDate = payment.createdAt;
+              if (post.advance == "basic" || post.advance == "renew") {
+                post.advance = "valid";
+                post.advanceplanId = payment.orderId;
+                post.advanceplanCreationCardBrand =
+                  payment.cardDetails.card.cardBrand;
+                post.advanceplanCreationCardLast4 =
+                  payment.cardDetails.card.last4;
+                post.advanceplanCreationCardExpMon =
+                  payment.cardDetails.card.expMonth;
+                post.advanceplanCreationCardExpYear =
+                  payment.cardDetails.card.expYear;
+                post.advanceplanCreationCardType =
+                  payment.cardDetails.card.cardType;
+                post.advanceplanpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 req.flash(
@@ -1752,7 +1801,7 @@ router.post(
                 //   });
 
                 setTimeout(() => {
-                  post.listing = "renew";
+                  post.advance = "renew";
                   post.save();
                   var smtpTransport = nodemailer.createTransport({
                     service: "gmail",
@@ -1852,7 +1901,7 @@ router.post(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      if (entry.listing == "basic" || entry.listing == "renew") {
+      if (entry.promoted == "basic" || entry.promoted == "renew") {
         const token = req.body.sourceId;
         const idempotencyKey = uuidv4();
         // get the currency for the location
@@ -1885,15 +1934,20 @@ router.post(
           if (result) {
             console.log(result);
             await Post.findById({ _id: req.params.id }).then((post) => {
-              if (post.listing == "basic" || post.listing == "renew") {
-                post.listing = "promoted";
-                post.planId = payment.orderId;
-                post.planCreationCardBrand = payment.cardDetails.card.cardBrand;
-                post.planCreationCardLast4 = payment.cardDetails.card.last4;
-                post.planCreationCardExpMon = payment.cardDetails.card.expMonth;
-                post.planCreationCardExpYear = payment.cardDetails.card.expYear;
-                post.planCreationCardType = payment.cardDetails.card.cardType;
-                post.planpaymentCreationDate = payment.createdAt;
+              if (post.promoted == "basic" || post.promoted == "renew") {
+                post.promoted = "valid";
+                post.promotedplanId = payment.orderId;
+                post.promotedplanCreationCardBrand =
+                  payment.cardDetails.card.cardBrand;
+                post.promotedplanCreationCardLast4 =
+                  payment.cardDetails.card.last4;
+                post.promotedplanCreationCardExpMon =
+                  payment.cardDetails.card.expMonth;
+                post.promotedplanCreationCardExpYear =
+                  payment.cardDetails.card.expYear;
+                post.promotedplanCreationCardType =
+                  payment.cardDetails.card.cardType;
+                post.promotedplanpaymentCreationDate = payment.createdAt;
               }
               post.save((err) => {
                 var smtpTransport = nodemailer.createTransport({
@@ -1931,7 +1985,7 @@ router.post(
                 //   });
 
                 setTimeout(() => {
-                  post.listing = "renew";
+                  post.promoted = "renew";
                   post.save();
                   var smtpTransport = nodemailer.createTransport({
                     service: "gmail",
@@ -2122,7 +2176,7 @@ router.get(
 );
 
 router.get(
-  "/mypayments/carddetails/plan/:id",
+  "/mypayments/carddetails/premier/:id",
   ensureAuthenticated,
   ensureBusiness,
   async (req, res) => {
@@ -2146,7 +2200,93 @@ router.get(
       const offerPayments = await Offer.findById({
         _id: req.params.id,
       });
-      res.render("businessmember/carddetailsEntry", {
+      res.render("businessmember/carddetailsPlan", {
+        layout: "layouts/layout",
+        entryPayment,
+        offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/advance/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      const offerPayments = await Offer.findById({
+        _id: req.params.id,
+      });
+      res.render("businessmember/carddetailsadvance", {
+        layout: "layouts/layout",
+        entryPayment,
+        offerPayments,
+        // offerPayments,
+        // planPaymentPremier,
+        // planPaymentAdvance,
+        // planPaymentPromoted,
+        helper: require("../helpers/ejs"),
+        user: req.user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+router.get(
+  "/mypayments/carddetails/promoted/:id",
+  ensureAuthenticated,
+  ensureBusiness,
+  async (req, res) => {
+    try {
+      const entryPayment = await Post.findById({
+        _id: req.params.id,
+      }).lean();
+      //   console.log(entryPayment.length);
+      //   const planPaymentPremier = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier",
+      //   });
+      //   const planPaymentAdvance = await Post.find({
+      //     user: req.user.id,
+      //     listing: "premier advance",
+      //   });
+      //   const planPaymentPromoted = await Post.find({
+      //     user: req.user.id,
+      //     listing: "promoted",
+      //   });
+      const offerPayments = await Offer.findById({
+        _id: req.params.id,
+      });
+      res.render("businessmember/carddetailspromoted", {
         layout: "layouts/layout",
         entryPayment,
         offerPayments,

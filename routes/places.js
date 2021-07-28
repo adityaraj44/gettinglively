@@ -20,7 +20,7 @@ router.get("/bars", async (req, res) => {
     .sort({ createdAt: "desc" })
     .lean();
   const topPicks = await Post.find({
-    listing: "premier",
+    premier: "valid",
     typeOfPlace: "bar",
   })
     .populate("user")
@@ -28,7 +28,7 @@ router.get("/bars", async (req, res) => {
     .lean();
 
   const topPicksadv = await Post.find({
-    listing: "premier advance",
+    advance: "valid",
     typeOfPlace: "bar",
   })
     .populate("user")
@@ -76,7 +76,7 @@ router.get("/restaurant", async (req, res) => {
     .lean();
 
   const topPicks = await Post.find({
-    listing: "premier",
+    premier: "valid",
     typeOfPlace: "restaurant",
   })
     .populate("user")
@@ -84,7 +84,7 @@ router.get("/restaurant", async (req, res) => {
     .lean();
 
   const topPicksadv = await Post.find({
-    listing: "premier advance",
+    advance: "valid",
     typeOfPlace: "restaurant",
   })
     .populate("user")
@@ -135,7 +135,7 @@ router.get("/club", async (req, res) => {
     .lean();
 
   const topPicks = await Post.find({
-    listing: "premier",
+    premier: "valid",
     typeOfPlace: "club",
   })
     .populate("user")
@@ -143,7 +143,7 @@ router.get("/club", async (req, res) => {
     .lean();
 
   const topPicksadv = await Post.find({
-    listing: "premier advance",
+    advance: "valid",
     typeOfPlace: "club",
   })
     .populate("user")
@@ -189,7 +189,7 @@ router.get("/pubs", async (req, res) => {
     .sort({ createdAt: "desc" })
     .lean();
   const topPicks = await Post.find({
-    listing: "premier",
+    premier: "valid",
     typeOfPlace: "pub",
   })
     .populate("user")
@@ -197,7 +197,7 @@ router.get("/pubs", async (req, res) => {
     .lean();
 
   const topPicksadv = await Post.find({
-    listing: "premier advance",
+    advance: "valid",
     typeOfPlace: "pub",
   })
     .populate("user")
@@ -243,7 +243,7 @@ router.get("/venue", async (req, res) => {
     .lean();
 
   const topPicks = await Post.find({
-    listing: "premier",
+    premier: "valid",
     typeOfPlace: "venue",
   })
     .populate("user")
@@ -251,7 +251,7 @@ router.get("/venue", async (req, res) => {
     .lean();
 
   const topPicksadv = await Post.find({
-    listing: "premier advance",
+    advance: "valid",
     typeOfPlace: "venue",
   })
     .populate("user")

@@ -18,6 +18,18 @@
   </li>
   <li>
     <a
+      href="/admin/managelistings"
+      class="active uk-button uk-button-text noSelect"
+      >Manage Listings</a
+    >
+  </li>
+  <li>
+    <a href="/admin/allplans" class="active uk-button uk-button-text noSelect"
+      >All Plans</a
+    >
+  </li>
+  <li>
+    <a
       href="/admin/allpayments"
       class="active uk-button uk-button-text noSelect"
       >All Payments</a
@@ -76,7 +88,7 @@
                 <a class="uk-accordion-title" href="#">Order ID</a>
                 <div class="uk-accordion-content">
                   <p class="uk-text-uppercase uk-text-success">
-                    <%- entryPayment.planId %>
+                    <%- entryPayment.premierplanId %>
                   </p>
                 </div>
               </li>
@@ -84,7 +96,7 @@
                 <a class="uk-accordion-title" href="#">Card Brand</a>
                 <div class="uk-accordion-content">
                   <p class="uk-text-uppercase uk-text-success">
-                    <%- entryPayment.planCreationCardBrand %>
+                    <%- entryPayment.premierplanCreationCardBrand %>
                   </p>
                 </div>
               </li>
@@ -92,7 +104,7 @@
                 <a class="uk-accordion-title" href="#">Last 4 Digits</a>
                 <div class="uk-accordion-content">
                   <p class="uk-text-uppercase uk-text-success">
-                    <%- entryPayment.planCreationCardLast4 %>
+                    <%- entryPayment.premierplanCreationCardLast4 %>
                   </p>
                 </div>
               </li>
@@ -100,7 +112,7 @@
                 <a class="uk-accordion-title" href="#">Expiry Month</a>
                 <div class="uk-accordion-content">
                   <p class="uk-text-uppercase uk-text-success">
-                    <%- entryPayment.planCreationCardExpMon %>
+                    <%- entryPayment.premierplanCreationCardExpMon %>
                   </p>
                 </div>
               </li>
@@ -108,7 +120,7 @@
                 <a class="uk-accordion-title" href="#">Expiry Year</a>
                 <div class="uk-accordion-content">
                   <p class="uk-text-uppercase uk-text-success">
-                    <%- entryPayment.planCreationCardExpYear %>
+                    <%- entryPayment.premierplanCreationCardExpYear %>
                   </p>
                 </div>
               </li>
@@ -116,7 +128,7 @@
                 <a class="uk-accordion-title" href="#">Card Type</a>
                 <div class="uk-accordion-content">
                   <p class="uk-text-uppercase uk-text-success">
-                    <%- entryPayment.planCreationCardType %>
+                    <%- entryPayment.premierplanCreationCardType %>
                   </p>
                 </div>
               </li>

@@ -18,6 +18,18 @@
   </li>
   <li>
     <a
+      href="/admin/managelistings"
+      class="active uk-button uk-button-text noSelect"
+      >Manage Listings</a
+    >
+  </li>
+  <li>
+    <a href="/admin/allplans" class="active uk-button uk-button-text noSelect"
+      >All Plans</a
+    >
+  </li>
+  <li>
+    <a
       href="/admin/allpayments"
       class="active uk-button uk-button-text noSelect"
       >All Payments</a
@@ -181,6 +193,7 @@
       All payments are displayed here.
     </p>
     <hr class="uk-divider-icon" />
+    <p class="uk-text-center uk-text-bold">Premier Plan Payments</p>
     <div class="uk-overflow-auto">
       <table
         class="
@@ -201,22 +214,109 @@
         </thead>
         <tbody>
           <% if(entryPayments.length > 0) { %> <%
-          entryPayments.forEach((entryPayment)=> { %> <% if(entryPayment.listing
+          entryPayments.forEach((entryPayment)=> { %> <% if(entryPayment.premier
           != 'basic') { %>
           <tr>
             <td><%- entryPayment.name %></td>
-            <td><%- entryPayment.listing.toUpperCase() %></td>
-            <td>
-              <% if(entryPayment.listing == 'premier') { %> &#163; 50 <% } else
-              if(entryPayment.listing == 'premier advance') { %> &#163; 100 <% }
-              else if(entryPayment.listing == 'promoted') { %> &#163; 200 <% }
-              %>
-            </td>
-            <td><%- (entryPayment.planpaymentCreationDate) %></td>
+            <td>Premier</td>
+            <td>&#163; 50</td>
+            <td><%- (entryPayment.premierplanpaymentCreationDate) %></td>
             <td>
               <a
                 class="uk-button uk-button-text uk-text-primary noSelect"
-                href="/admin/mypayments/carddetails/plan/<%- entryPayment._id %>"
+                href="/admin/mypayments/carddetails/premier/<%- entryPayment._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% } %> <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <p class="uk-text-center uk-text-bold">Advance Premier Plan Payments</p>
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Plan type</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(entryPayments.length > 0) { %> <%
+          entryPayments.forEach((entryPayment)=> { %> <% if(entryPayment.advance
+          != 'basic') { %>
+          <tr>
+            <td><%- entryPayment.name %></td>
+            <td>Advance Premier</td>
+            <td>&#163; 50</td>
+            <td><%- (entryPayment.advanceplanpaymentCreationDate) %></td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/mypayments/carddetails/advance/<%- entryPayment._id %>"
+                >Details</a
+              >
+            </td>
+          </tr>
+          <% } %> <% }) %> <% } else { %>
+
+          <p class="uk-text-center uk-text-large info-text uk-text-warning">
+            No Payments
+          </p>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <p class="uk-text-center uk-text-bold">Promoted Premier Plan Payments</p>
+    <div class="uk-overflow-auto">
+      <table
+        class="
+          uk-table
+          uk-table-striped
+          uk-table-hover
+          uk-table-middle
+          uk-table-divider
+        "
+      >
+        <thead>
+          <tr>
+            <th class="uk-width-small">Name</th>
+            <th>Plan type</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(entryPayments.length > 0) { %> <%
+          entryPayments.forEach((entryPayment)=> { %> <%
+          if(entryPayment.promoted != 'basic') { %>
+          <tr>
+            <td><%- entryPayment.name %></td>
+            <td>Promoted</td>
+            <td>&#163; 50</td>
+            <td><%- (entryPayment.promotedplanpaymentCreationDate) %></td>
+            <td>
+              <a
+                class="uk-button uk-button-text uk-text-primary noSelect"
+                href="/admin/mypayments/carddetails/promoted/<%- entryPayment._id %>"
                 >Details</a
               >
             </td>
