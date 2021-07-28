@@ -81,8 +81,11 @@ router.get(
   ensureAdmin,
   async (req, res) => {
     try {
+      const pagedetails = await PageDetail.find({}).lean();
+
       res.render("admin/pagedetails", {
         layout: "layouts/layout",
+        pagedetails,
       });
     } catch (error) {
       console.log(error);
@@ -137,8 +140,106 @@ router.post(
 // edit page detail image
 
 // edit page detail
+router.get(
+  "/edit/pagedetail/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const pagedetail = await PageDetail.findOne({
+        _id: req.params.id,
+      }).lean();
+      if (!pagedetail) {
+        return res.render("error/404");
+      } else {
+        res.render("admin/editPageDetail", {
+          layout: "layouts/layout",
+          pagedetail,
+          user: req.user,
+          helper: require("../helpers/ejs"),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/500");
+    }
+  }
+);
+
+router.put(
+  "/edit/pagedetail/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const { title, desc, typeOfPlace } = req.body;
+      const errors = [];
+
+      let pagedetail = await PageDetail.findById(req.params.id).lean();
+      if (desc.length > 200) {
+        errors.push({ msg: "Description must be less than 200 characters" });
+        req.flash(
+          "warning_msg",
+          "Description must be less than 200 characters"
+        );
+        return res.render("admin/editPageDetail", {
+          layout: "layouts/layout",
+          title,
+
+          desc: desc.replace(/(<([^>]+)>)/gi, ""),
+
+          errors,
+        });
+      }
+
+      if (!pagedetail) {
+        return res.render("error/404");
+      } else {
+        pagedetail = await PageDetail.findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          {
+            desc,
+            typeOfPlace,
+
+            title,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+
+        pagedetail.save().then((go) => {
+          req.flash("success_msg", "Page Detail edited successfully!");
+          res.redirect(`/admincreate/pagedetails`);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/404");
+    }
+  }
+);
 
 // delete page detail
+router.delete(
+  "/delete/pagedetail/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      let pagedetail = await PageDetail.findById(req.params.id).lean();
+      await PageDetail.remove({ _id: req.params.id });
+      req.flash("success_msg", "Page Detail Deleted Successfully!");
+      res.redirect(`/admincreate/pagedetails`);
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/500");
+    }
+  }
+);
 
 router.get("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {

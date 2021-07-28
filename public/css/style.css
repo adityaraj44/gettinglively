@@ -503,3 +503,8 @@ input.ais-SearchBox-input {
   color: whitesmoke;
   background-color: #1d1b1b !important;
 }
+
+.label-page:hover {
+  color: whitesmoke;
+  /* background-color: #1d1b1b !important; */
+}

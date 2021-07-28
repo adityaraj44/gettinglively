@@ -1,0 +1,150 @@
+<%- include('../partials/adminNavbar.ejs'); %>
+
+<ul class="uk-breadcrumb uk-margin-large-left">
+  <li>
+    <a
+      href="/admincreate/pagedetails"
+      class="uk-button uk-text-danger uk-text-bold uk-button-text noSelect"
+      >Cancel Editing</a
+    >
+  </li>
+  <!-- <li>
+    <a href="/admincreate" class="uk-button uk-button-text noSelect"
+      >Create Email Updates</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
+      >Create New Entry</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
+      >All Entries</a
+    >
+  </li>
+  <li>
+    <a
+      href="/admincreate/reviewEntries"
+      class="uk-button uk-button-text noSelect"
+      >Review Entries</a
+    >
+  </li>
+  <li>
+    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
+      >My Entries</a
+    >
+  </li> -->
+</ul>
+
+<div
+  class="
+    uk-section uk-section-muted uk-section-create-uk-section-large
+    borderBottom
+  "
+>
+  <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
+    <div
+      class="
+        uk-child-width-1-1
+        uk-grid-small
+        uk-grid-match
+        uk-margin-large-top
+        uk-margin-large-bottom
+      "
+      uk-grid
+    >
+      <div>
+        <div
+          class="
+            uk-child-width-1-1
+            uk-grid-small
+            uk-grid-match
+            uk-margin-large-top
+            uk-margin-large-bottom
+          "
+          uk-grid
+        >
+          <!-- post creation -->
+          <div>
+            <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
+              <div class="uk-card-header">
+                <h3 class="uk-card-title uk-text-center">Edit Page Detail</h3>
+              </div>
+              <div class="uk-card-body">
+                <form
+                  action="/admincreate/edit/pagedetail/<%- pagedetail._id %>"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  <input type="hidden" name="_method" value="PUT" />
+                  <div class="uk-form-stacked">
+                    <div class="uk-margin-small">
+                      <div class="uk-form-control">
+                        <input
+                          type="text"
+                          required
+                          name="title"
+                          id="title"
+                          placeholder="Enter title"
+                          class="uk-input uk-form-large noSelect"
+                          value="<%- pagedetail.title %>"
+                        />
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="desc" class="uk-text-meta"
+                          >Short Description. Description should not be more
+                          than 200 characters.</label
+                        >
+                        <textarea
+                          required
+                          name="desc"
+                          id="desc"
+                          class="uk-textarea"
+                        >
+<%- pagedetail.desc %></textarea
+                        >
+                      </div>
+                      <div class="uk-form-control uk-margin-small-top">
+                        <label for="typeOfPlace" class="uk-text-meta"
+                          >Type of place (restaurant,bar,club,pub or
+                          venue)</label
+                        >
+                        <select
+                          name="typeOfPlace"
+                          id="typeOfPlace"
+                          class="uk-select"
+                          required
+                        >
+                          <option value="restaurant">Restaurant</option>
+                          <option value="bar">Bar</option>
+                          <option value="club">Club</option>
+                          <option value="pub">Pub</option>
+                          <option value="venue">Venue</option>
+                        </select>
+                      </div>
+                    </div>
+                    <%- include('../partials/errors.ejs'); %>
+                    <div class="uk-marign-medium uk-text-center">
+                      <div class="uk-form-control">
+                        <button
+                          type="submit"
+                          class="uk-button uk-button-custom noSelect"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="uk-card-footer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- post creation -->
+    </div>
+  </div>
+</div>
