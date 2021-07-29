@@ -50,7 +50,7 @@
 >
   <div class="uk-container">
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
-      Entries for review
+      Entries awaiting approval
     </h4>
     <hr class="uk-divider-icon" />
     <div
@@ -124,11 +124,12 @@
         >
       </div>
       <% }) %> <% } else { %>
+
+      <p class="uk-text-center uk-text-large info-text uk-text-warning">
+        No Entries
+      </p>
+      <% } %>
     </div>
-    <p class="uk-text-center uk-text-large info-text uk-text-warning">
-      No Entries
-    </p>
-    <% } %>
   </div>
 </div>
 <!-- footer -->

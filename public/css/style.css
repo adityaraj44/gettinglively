@@ -508,3 +508,7 @@ input.ais-SearchBox-input {
   color: whitesmoke;
   /* background-color: #1d1b1b !important; */
 }
+
+.review-text {
+  overflow-y: scroll;
+}

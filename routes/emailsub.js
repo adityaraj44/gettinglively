@@ -14,15 +14,21 @@ router.post("/", ensureAuthenticated, async (req, res) => {
           user.emailUpdates = "in";
           user.save((err) => {
             req.flash("success_msg", "Email subscribed to our newsletter!");
-            res.redirect("/home");
+            req.session.save(() => {
+              res.redirect("/home");
+            });
           });
         } else {
           req.flash("warning_msg", "Already subscribed");
-          res.redirect("/home");
+          req.session.save(() => {
+            res.redirect("/home");
+          });
         }
       } else {
         req.flash("error_msg", "Please use your email only!");
-        res.redirect("/home");
+        req.session.save(() => {
+          res.redirect("/home");
+        });
       }
     });
   } catch (error) {

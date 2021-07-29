@@ -2,44 +2,42 @@
 
 <ul class="uk-breadcrumb uk-margin-large-left">
   <li>
-    <a href="/admin" class="uk-button uk-button-text noSelect"
-      >Back to dashboard</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate" class="uk-button uk-button-text noSelect"
-      >Create Email Updates</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/pagedetails" class="uk-button uk-button-text noSelect"
-      >Create Page Detail</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
-      >Create New Entry</a
-    >
-  </li>
-  <li>
-    <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
-      >All Entries</a
-    >
-  </li>
-  <li>
     <a
-      href="/admincreate/reviewentries"
-      class="uk-button uk-button-text noSelect"
-      >Review Entries</a
+      href="/admin/allplans"
+      class="uk-button uk-text-danger uk-text-bold uk-button-text noSelect"
+      >Cancel Editing</a
     >
   </li>
-  <li>
-    <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
-      >My Entries</a
-    >
-  </li>
+  <!-- <li>
+      <a href="/admincreate" class="uk-button uk-button-text noSelect"
+        >Create Email Updates</a
+      >
+    </li>
+    <li>
+      <a href="/admincreate/entry" class="uk-button uk-button-text noSelect"
+        >Create New Entry</a
+      >
+    </li>
+    <li>
+      <a href="/admincreate/allentries" class="uk-button uk-button-text noSelect"
+        >All Entries</a
+      >
+    </li>
+    <li>
+      <a
+        href="/admincreate/reviewEntries"
+        class="uk-button uk-button-text noSelect"
+        >Review Entries</a
+      >
+    </li>
+    <li>
+      <a href="/admincreate/myentries" class="uk-button uk-button-text noSelect"
+        >My Entries</a
+      >
+    </li> -->
 </ul>
 
+<!-- form -->
 <div
   class="
     uk-section uk-section-muted uk-section-create-uk-section-large
@@ -47,7 +45,6 @@
   "
 >
   <div class="uk-container">
-    <%- include('../partials/uploadmess.ejs'); %>
     <div
       class="
         uk-child-width-1-1
@@ -60,68 +57,64 @@
     >
       <div>
         <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
-          <%- include('../partials/errors.ejs'); %>
           <div class="uk-card-header">
-            <h3 class="uk-card-title uk-text-center">Create Email Updates</h3>
-            <p
-              class="
-                uk-text-primary uk-text-center uk-padding-medium uk-text-break
-              "
-            >
-              Email notifications for all users
-            </p>
+            <h3 class="uk-card-title uk-text-center">Create detailed review</h3>
           </div>
           <div class="uk-card-body">
             <form
-              id="emailForm"
-              action="/admincreate/emailupdates"
+              action="/admin/promotedreview/edit/<%- detail._id %>"
               method="POST"
+              enctype="multipart/form-data"
             >
+              <input type="hidden" name="_method" value="PUT" />
               <div class="uk-form-stacked">
                 <div class="uk-margin-small">
                   <div class="uk-form-control">
                     <input
                       type="text"
                       required
-                      name="subject"
-                      id="subject"
-                      placeholder="Subject"
+                      name="title"
+                      id="title"
+                      placeholder="Enter title"
                       class="uk-input uk-form-large noSelect"
-                      value="<%- typeof subject != 'undefined' ? subject: '' %>"
+                      value="<%- detail.title %>"
                     />
                   </div>
-                  <div class="uk-form-control">
+                  <div class="uk-form-control uk-margin-small-top">
+                    <label for="desc" class="uk-text-meta"
+                      >Full Detailed Description. Must be atleast 300
+                      characters.</label
+                    >
                     <textarea
                       required
-                      name="body"
-                      id="body"
+                      name="desc"
+                      id="desc"
                       class="uk-textarea"
                     >
-<%- typeof body != 'undefined' ? body: '' %></textarea
+<%- detail.desc %></textarea
                     >
                   </div>
                 </div>
-
+                <%- include('../partials/errors.ejs'); %>
                 <div class="uk-marign-medium uk-text-center">
                   <div class="uk-form-control">
                     <button
                       type="submit"
                       class="uk-button uk-button-custom noSelect"
                     >
-                      Send
+                      Post
                     </button>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          <div class="uk-card-footer"></div>
         </div>
       </div>
-      <!-- post creation -->
     </div>
   </div>
 </div>
+
 <%- include('../partials/modals.ejs'); %>
 <footer class="uk-section uk-section-black">
   <div class="uk-text-center@s" uk-grid>

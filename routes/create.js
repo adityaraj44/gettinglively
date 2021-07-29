@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const Review = require("../models/Review");
 const Offer = require("../models/Offer");
+const Detailed = require("../models/Detailed");
 const { ensureAdmin, ensureAuthenticated } = require("../middlewares/auth");
 const nodemailer = require("nodemailer");
 const PageDetail = require("../models/PageDetail");
@@ -17,6 +18,7 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
     res.render("admin/create", {
       layout: "layouts/layout",
+      helper: require("../helpers/ejs"),
     });
   } catch (error) {
     console.log(error);
@@ -86,6 +88,7 @@ router.get(
       res.render("admin/pagedetails", {
         layout: "layouts/layout",
         pagedetails,
+        helper: require("../helpers/ejs"),
       });
     } catch (error) {
       console.log(error);
@@ -245,6 +248,7 @@ router.get("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
   try {
     res.render("admin/createEntry", {
       layout: "layouts/layout",
+      helper: require("../helpers/ejs"),
     });
   } catch (error) {
     console.log(error);
@@ -500,6 +504,7 @@ router.get(
         .populate("user")
         .sort({ createdAt: "desc" })
         .lean();
+      const detailed = await Detailed.find({}).populate("post").lean();
       const allReview = await Review.find({ post: req.params.id })
         .populate("post")
         .populate("user")
@@ -517,6 +522,7 @@ router.get(
         layout: "layouts/layout",
         entry,
         allOffers,
+        detailed,
         allReview,
         totalScore,
         user: req.user,

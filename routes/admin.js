@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const Voucher = require("../models/Voucher");
 const Offer = require("../models/Offer");
+const Detailed = require("../models/Detailed");
 
 // admin dashboard
 router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
@@ -42,6 +43,7 @@ router.get("/", ensureAuthenticated, ensureAdmin, async (req, res) => {
       planTransaction,
       planTransaction2,
       planTransaction3,
+      helper: require("../helpers/ejs"),
     });
   } catch (error) {
     console.log(error);
@@ -470,6 +472,8 @@ router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
       .sort({ createdAt: "desc" })
       .lean();
 
+    const detailed = await Detailed.find({}).populate("post").lean();
+    console.log(detailed);
     // const allVouchers = await Voucher.find({})
     //   .populate("post")
     //   .populate("user")
@@ -481,6 +485,7 @@ router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
     res.render("admin/allPlans", {
       layout: "layouts/layout",
       allEntries,
+      detailed,
       // allVouchers,
 
       helper: require("../helpers/ejs"),
@@ -490,6 +495,142 @@ router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
     res.render("errors/pagenotfound");
   }
 });
+
+// get add detailed review page
+router.get(
+  "/promotedreview/add/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id });
+      if (!entry) {
+        req.flash("error_msg", "No entry found at the moment.");
+        res.redirect("/admin/allplans");
+      }
+      res.render("admin/createDetailed", {
+        layout: "layouts/layout",
+        entry,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// post detailed review
+router.post(
+  "/promotedreview/add/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const { title, desc } = req.body;
+      const errors = [];
+      const entry = await Post.findById({ _id: req.params.id });
+      if (desc.length < 300) {
+        errors.push({ msg: "Description must be atleast 300 characters" });
+        //   req.flash("warning_msg", "Description must be atleast 500 characters");
+        return res.render("admin/createDetailed", {
+          layout: "layouts/layout",
+          title,
+          entry,
+          desc: desc.replace(/(<([^>]+)>)/gi, ""),
+          helper: require("../helpers/ejs"),
+          errors,
+        });
+      }
+      await Detailed.create({
+        title,
+        desc,
+
+        post: req.params.id,
+      });
+      req.flash("success_msg", "Detailed created successfully.");
+      res.redirect("/admin/allplans");
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// edit detailed review
+router.get(
+  "/promotedreview/edit/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const detail = await Detailed.findById({ _id: req.params.id });
+      if (!detail) {
+        req.flash("error_msg", "No review found at the moment.");
+        res.redirect("/admin/allplans");
+      }
+      res.render("admin/editDetailed", {
+        layout: "layouts/layout",
+        detail,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// put detailed review
+router.put(
+  "/promotedreview/edit/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const { title, desc } = req.body;
+      const errors = [];
+
+      let detail = await Detailed.findById({ _id: req.params.id }).lean();
+      if (desc.length < 300) {
+        errors.push({ msg: "Description must be atleast 300 characters" });
+        //   req.flash("warning_msg", "Description must be atleast 500 characters");
+        return res.render("admin/editDetailed", {
+          layout: "layouts/layout",
+          detail,
+          helper: require("../helpers/ejs"),
+          errors,
+        });
+      }
+
+      if (!detail) {
+        return res.render("error/404");
+      } else {
+        entry = await Detailed.findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          {
+            title,
+            desc,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+
+        entry.save().then((go) => {
+          req.flash("success_msg", "Review edited successfully!");
+          res.redirect(`/admin/allplans`);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/404");
+    }
+  }
+);
 
 router.get(
   "/managelistings",
@@ -553,14 +694,14 @@ router.get(
   async (req, res) => {
     try {
       await Post.findById({ _id: req.params.id })
-        .lean()
+
         .then((entry) => {
           if (entry.premier == "basic" || entry.premier == "renew") {
             entry.premier = "valid";
             entry.save((err) => {
               req.flash("success_msg", "Listing plan changed successfully!");
               req.session.save(function () {
-                res.redirect(req.originalUrl);
+                res.redirect(`/admin/pricingandplans/${req.params.id}`);
               });
             });
           } else if (entry.premier == "valid") {
@@ -569,13 +710,13 @@ router.get(
             entry.save((err) => {
               req.flash("success_msg", "Listing plan changed successfully!");
               req.session.save(function () {
-                res.redirect(req.originalUrl);
+                res.redirect(`/admin/pricingandplans/${req.params.id}`);
               });
             });
           } else {
             req.flash("error_msg", "Listing plan was not changed");
             req.session.save(function () {
-              res.redirect(req.originalUrl);
+              res.redirect(`/admin/pricingandplans/${req.params.id}`);
             });
           }
         })
@@ -583,7 +724,7 @@ router.get(
           console.log(err);
           req.flash("error_msg", "Listing plan was not changed");
           req.session.save(function () {
-            res.redirect(req.originalUrl);
+            res.redirect(`/admin/pricingandplans/${req.params.id}`);
           });
         });
     } catch (error) {
@@ -593,6 +734,98 @@ router.get(
   }
 );
 // get advance
+router.get(
+  "/pricingandplans/advancepremier/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      await Post.findById({ _id: req.params.id })
+
+        .then((entry) => {
+          if (entry.advance == "basic" || entry.advance == "renew") {
+            entry.advance = "valid";
+            entry.save((err) => {
+              req.flash("success_msg", "Listing plan changed successfully!");
+              req.session.save(function () {
+                res.redirect(`/admin/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else if (entry.advance == "valid") {
+            entry.advance = "basic";
+
+            entry.save((err) => {
+              req.flash("success_msg", "Listing plan changed successfully!");
+              req.session.save(function () {
+                res.redirect(`/admin/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else {
+            req.flash("error_msg", "Listing plan was not changed");
+            req.session.save(function () {
+              res.redirect(`/admin/pricingandplans/${req.params.id}`);
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          req.flash("error_msg", "Listing plan was not changed");
+          req.session.save(function () {
+            res.redirect(`/admin/pricingandplans/${req.params.id}`);
+          });
+        });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
 // get promoted
+router.get(
+  "/pricingandplans/promoted/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      await Post.findById({ _id: req.params.id })
+
+        .then((entry) => {
+          if (entry.promoted == "basic" || entry.promoted == "renew") {
+            entry.promoted = "valid";
+            entry.save((err) => {
+              req.flash("success_msg", "Listing plan changed successfully!");
+              req.session.save(function () {
+                res.redirect(`/admin/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else if (entry.promoted == "valid") {
+            entry.promoted = "basic";
+
+            entry.save((err) => {
+              req.flash("success_msg", "Listing plan changed successfully!");
+              req.session.save(function () {
+                res.redirect(`/admin/pricingandplans/${req.params.id}`);
+              });
+            });
+          } else {
+            req.flash("error_msg", "Listing plan was not changed");
+            req.session.save(function () {
+              res.redirect(`/admin/pricingandplans/${req.params.id}`);
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          req.flash("error_msg", "Listing plan was not changed");
+          req.session.save(function () {
+            res.redirect(`/admin/pricingandplans/${req.params.id}`);
+          });
+        });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
 
 module.exports = router;

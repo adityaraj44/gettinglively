@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Review = require("../models/Review");
 const Offer = require("../models/Offer");
 const Voucher = require("../models/Voucher");
+const Detailed = require("../models/Detailed");
 const path = require("path");
 const { paymentsApi, locationsApi } = require("../middlewares/square");
 const { v4: uuidv4 } = require("uuid");
@@ -260,6 +261,8 @@ router.get(
         .populate("user")
         .sort({ createdAt: "desc" })
         .lean();
+      // detail
+      const detailed = await Detailed.find({}).populate("post").lean();
       const allReview = await Review.find({ post: req.params.id })
         .populate("post")
         .populate("user")
@@ -277,6 +280,7 @@ router.get(
         entry,
         allReview,
         allOffers,
+        detailed,
         totalScore,
         user: req.user,
         helper: require("../helpers/ejs"),

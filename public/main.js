@@ -41,6 +41,7 @@ if (document.querySelector("#map-canvas")) {
                 position: results[0].geometry.location,
                 map: map,
                 title: address,
+
                 // icon: "https://img.icons8.com/color/48/000000/map-pin.png",
               });
               google.maps.event.addListener(marker, "click", function () {

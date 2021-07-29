@@ -10,6 +10,7 @@ const algoliasearch = require("algoliasearch");
 const squareConnect = require("square-connect");
 const NodeGeocoder = require("node-geocoder");
 const fetch = require("node-fetch");
+const Detailed = require("../models/Detailed");
 
 router.get("/bars", async (req, res) => {
   const allEntries = await Post.find({
@@ -305,6 +306,7 @@ router.get("/entries/entry/:id", async (req, res) => {
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean();
+    const detailed = await Detailed.find({}).populate("post").lean();
     const allReview = await Review.find({ post: req.params.id })
       .populate("post")
       .populate("user")
@@ -355,6 +357,7 @@ router.get("/entries/entry/:id", async (req, res) => {
       layout: "layouts/layout",
       entry,
       allOffers,
+      detailed,
       allReview,
       totalScore,
       user: req.user,
