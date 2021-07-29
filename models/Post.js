@@ -9,6 +9,17 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    detailTitle: {
+      type: String,
+    },
+    detailDesc: {
+      type: String,
+    },
+    detailPresent: {
+      type: String,
+      default: "no",
+      enum: ["no", "yes"],
+    },
     // listing: {
     //   type: String,
     //   enum: ["basic", "premier", "premier advance", "promoted", "renew"],

@@ -472,8 +472,8 @@ router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
       .sort({ createdAt: "desc" })
       .lean();
 
-    const detailed = await Detailed.find({}).populate("post").lean();
-    console.log(detailed);
+    // const detailed = await Detailed.find({}).populate("post").lean();
+    // console.log(detailed);
     // const allVouchers = await Voucher.find({})
     //   .populate("post")
     //   .populate("user")
@@ -485,7 +485,7 @@ router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
     res.render("admin/allPlans", {
       layout: "layouts/layout",
       allEntries,
-      detailed,
+      //   detailed,
       // allVouchers,
 
       helper: require("../helpers/ejs"),
@@ -495,142 +495,6 @@ router.get("/allplans", ensureAuthenticated, ensureAdmin, async (req, res) => {
     res.render("errors/pagenotfound");
   }
 });
-
-// get add detailed review page
-router.get(
-  "/promotedreview/add/:id",
-  ensureAuthenticated,
-  ensureAdmin,
-  async (req, res) => {
-    try {
-      const entry = await Post.findById({ _id: req.params.id });
-      if (!entry) {
-        req.flash("error_msg", "No entry found at the moment.");
-        res.redirect("/admin/allplans");
-      }
-      res.render("admin/createDetailed", {
-        layout: "layouts/layout",
-        entry,
-        helper: require("../helpers/ejs"),
-      });
-    } catch (error) {
-      console.log(error);
-      res.render("errors/pagenotfound");
-    }
-  }
-);
-
-// post detailed review
-router.post(
-  "/promotedreview/add/:id",
-  ensureAuthenticated,
-  ensureAdmin,
-  async (req, res) => {
-    try {
-      const { title, desc } = req.body;
-      const errors = [];
-      const entry = await Post.findById({ _id: req.params.id });
-      if (desc.length < 300) {
-        errors.push({ msg: "Description must be atleast 300 characters" });
-        //   req.flash("warning_msg", "Description must be atleast 500 characters");
-        return res.render("admin/createDetailed", {
-          layout: "layouts/layout",
-          title,
-          entry,
-          desc: desc.replace(/(<([^>]+)>)/gi, ""),
-          helper: require("../helpers/ejs"),
-          errors,
-        });
-      }
-      await Detailed.create({
-        title,
-        desc,
-
-        post: req.params.id,
-      });
-      req.flash("success_msg", "Detailed created successfully.");
-      res.redirect("/admin/allplans");
-    } catch (error) {
-      console.log(error);
-      res.render("errors/500");
-    }
-  }
-);
-
-// edit detailed review
-router.get(
-  "/promotedreview/edit/:id",
-  ensureAuthenticated,
-  ensureAdmin,
-  async (req, res) => {
-    try {
-      const detail = await Detailed.findById({ _id: req.params.id });
-      if (!detail) {
-        req.flash("error_msg", "No review found at the moment.");
-        res.redirect("/admin/allplans");
-      }
-      res.render("admin/editDetailed", {
-        layout: "layouts/layout",
-        detail,
-        helper: require("../helpers/ejs"),
-      });
-    } catch (error) {
-      console.log(error);
-      res.render("errors/pagenotfound");
-    }
-  }
-);
-
-// put detailed review
-router.put(
-  "/promotedreview/edit/:id",
-  ensureAuthenticated,
-  ensureAdmin,
-  async (req, res) => {
-    try {
-      const { title, desc } = req.body;
-      const errors = [];
-
-      let detail = await Detailed.findById({ _id: req.params.id }).lean();
-      if (desc.length < 300) {
-        errors.push({ msg: "Description must be atleast 300 characters" });
-        //   req.flash("warning_msg", "Description must be atleast 500 characters");
-        return res.render("admin/editDetailed", {
-          layout: "layouts/layout",
-          detail,
-          helper: require("../helpers/ejs"),
-          errors,
-        });
-      }
-
-      if (!detail) {
-        return res.render("error/404");
-      } else {
-        entry = await Detailed.findOneAndUpdate(
-          {
-            _id: req.params.id,
-          },
-          {
-            title,
-            desc,
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-
-        entry.save().then((go) => {
-          req.flash("success_msg", "Review edited successfully!");
-          res.redirect(`/admin/allplans`);
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      return res.render("errors/404");
-    }
-  }
-);
 
 router.get(
   "/managelistings",

@@ -277,24 +277,7 @@
             </div>
             <img src="<%- allEntry.cover %>" alt="<%- allEntry.cover %>" />
           </div>
-          <% if(detailed.length > 0) { %> <% detailed.forEach((detail)=> { %> <%
-          if(detail.post._id.toString() == allEntry._id.toString()) { %>
-          <div class="uk-card-body uk-text-center">
-            <a
-              class="uk-button uk-button-text uk-text-bold noSelect"
-              href="/admin/promotedreview/edit/<%- detail._id %>"
-              >Edit Review</a
-            >
-          </div>
-          <% } %> <% }) %> <% } else { %>
-          <div class="uk-card-body uk-text-center">
-            <a
-              class="uk-button uk-button-text uk-text-bold noSelect"
-              href="/admin/promotedreview/add/<%- allEntry._id %>"
-              >Write detailed review</a
-            >
-          </div>
-          <% } %>
+
           <div
             class="
               uk-card-footer

@@ -504,7 +504,7 @@ router.get(
         .populate("user")
         .sort({ createdAt: "desc" })
         .lean();
-      const detailed = await Detailed.find({}).populate("post").lean();
+      //   const detailed = await Detailed.find({}).populate("post").lean();
       const allReview = await Review.find({ post: req.params.id })
         .populate("post")
         .populate("user")
@@ -522,7 +522,7 @@ router.get(
         layout: "layouts/layout",
         entry,
         allOffers,
-        detailed,
+        // detailed,
         allReview,
         totalScore,
         user: req.user,
@@ -1247,6 +1247,149 @@ router.put(
     } catch (error) {
       console.log(error);
       res.render("errors/500");
+    }
+  }
+);
+
+//
+// get add detailed review page
+router.get(
+  "/promotedreview/add/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id });
+      if (!entry) {
+        req.flash("error_msg", "No entry found at the moment.");
+        res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+      }
+      res.render("admin/createDetailed", {
+        layout: "layouts/layout",
+        entry,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// post detailed review
+router.post(
+  "/promotedreview/add/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const { detailTitle, detailDesc } = req.body;
+      const errors = [];
+      const entry = await Post.findById({ _id: req.params.id });
+      if (detailDesc.length < 300) {
+        errors.push({ msg: "Description must be atleast 300 characters" });
+        //   req.flash("warning_msg", "Description must be atleast 500 characters");
+        return res.render("admin/createDetailed", {
+          layout: "layouts/layout",
+          detailTitle,
+          entry,
+          detailDesc: detailDesc.replace(/(<([^>]+)>)/gi, ""),
+          helper: require("../helpers/ejs"),
+          errors,
+        });
+      }
+      if (entry.detailPresent == "no") {
+        entry.detailPresent = "yes";
+        entry.detailTitle = detailTitle;
+        entry.detailDesc = detailDesc;
+        await entry.save();
+        req.flash("success_msg", "Detailed created successfully.");
+        req.session.save(() => {
+          res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+        });
+      }
+      //   req.flash("success_msg", "Detailed created successfully.");
+      //   res.redirect("/admin/allplans");
+    } catch (error) {
+      console.log(error);
+      res.render("errors/500");
+    }
+  }
+);
+
+// edit detailed review
+router.get(
+  "/promotedreview/edit/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const entry = await Post.findById({ _id: req.params.id });
+      if (!entry) {
+        req.flash("error_msg", "No review found at the moment.");
+        res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+      }
+      res.render("admin/editDetailed", {
+        layout: "layouts/layout",
+        entry,
+        helper: require("../helpers/ejs"),
+      });
+    } catch (error) {
+      console.log(error);
+      res.render("errors/pagenotfound");
+    }
+  }
+);
+
+// put detailed review
+router.put(
+  "/promotedreview/edit/:id",
+  ensureAuthenticated,
+  ensureAdmin,
+  async (req, res) => {
+    try {
+      const { detailTitle, detailDesc } = req.body;
+      const errors = [];
+
+      let entry = await Post.findById({ _id: req.params.id }).lean();
+      if (detailDesc.length < 300) {
+        errors.push({ msg: "Description must be atleast 300 characters" });
+        //   req.flash("warning_msg", "Description must be atleast 500 characters");
+        return res.render("admin/editDetailed", {
+          layout: "layouts/layout",
+          entry,
+          helper: require("../helpers/ejs"),
+          errors,
+        });
+      }
+
+      if (!entry) {
+        return res.render("error/404");
+      } else {
+        entry = await Post.findOneAndUpdate(
+          {
+            _id: req.params.id,
+          },
+          {
+            detailTitle,
+            detailDesc,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+
+        entry.save();
+        req.flash("success_msg", "Review edited successfully!");
+
+        req.session.save(() => {
+          res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.render("errors/404");
     }
   }
 );

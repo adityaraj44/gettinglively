@@ -3,7 +3,7 @@
 <ul class="uk-breadcrumb uk-margin-large-left">
   <li>
     <a
-      href="/admin/allplans"
+      href="/admincreate/myentries/entry/<%- entry._id %>"
       class="uk-button uk-text-danger uk-text-bold uk-button-text noSelect"
       >Cancel Editing</a
     >
@@ -62,7 +62,7 @@
           </div>
           <div class="uk-card-body">
             <form
-              action="/admin/promotedreview/edit/<%- detail._id %>"
+              action="/admincreate/promotedreview/edit/<%- entry._id %>"
               method="POST"
               enctype="multipart/form-data"
             >
@@ -73,11 +73,11 @@
                     <input
                       type="text"
                       required
-                      name="title"
+                      name="detailTitle"
                       id="title"
                       placeholder="Enter title"
                       class="uk-input uk-form-large noSelect"
-                      value="<%- detail.title %>"
+                      value="<%- entry.detailTitle %>"
                     />
                   </div>
                   <div class="uk-form-control uk-margin-small-top">
@@ -87,11 +87,11 @@
                     >
                     <textarea
                       required
-                      name="desc"
+                      name="detailDesc"
                       id="desc"
                       class="uk-textarea"
                     >
-<%- detail.desc %></textarea
+<%- entry.detailDesc %></textarea
                     >
                   </div>
                 </div>

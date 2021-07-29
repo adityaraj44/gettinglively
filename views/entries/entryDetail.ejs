@@ -307,14 +307,13 @@
           <li><a href="#">Location</a></li>
           <li><a href="#">Menus</a></li>
           <li><a href="#">Offers</a></li>
-          <% if(detailed.length > 0) { %> <% detailed.forEach((detail)=> { %> <%
-          if(detail.post._id.toString() == entry._id.toString()) { %>
+          <% if(entry.promoted == 'valid') { %>
           <li>
             <a href="#" class="uk-text-bold uk-text-success"
               >Detailed review from GETTING LIVELY</a
             >
           </li>
-          <% } %> <% }) %> <% } %>
+          <% } %>
         </ul>
 
         <ul
@@ -503,18 +502,85 @@
               <% } %>
             </div>
           </li>
-          <% if(detailed.length > 0) { %> <% detailed.forEach((detail)=> { %> <%
-          if(detail.post._id.toString() == entry._id.toString()) { %>
+
           <li>
+            <% if(entry.detailPresent == 'no') { %>
+            <div class="uk-text-center">
+              <span
+                ><a class="uk-button uk-button-text" href="#adddetail" uk-toggle
+                  >Add detailed review</a
+                ></span
+              >
+            </div>
+
+            <% } else if(entry.detailPresent == 'yes') { %>
+            <div class="uk-text-center">
+              <span
+                ><a
+                  class="uk-button uk-button-text"
+                  href="#editdetail"
+                  uk-toggle
+                  >Edit Detailed Review</a
+                ></span
+              >
+            </div>
+
+            <hr class="uk-divider-icon" />
             <p class="uk-text-bold uk-text-center uk-text-large">
-              <%- detail.title %>
+              <%- entry.detailTitle %>
             </p>
             <hr class="uk-divider-icon" />
             <p class="uk-text-default uk-text-break review-text">
-              <%- detail.desc %>
+              <%- entry.detailDesc %>
             </p>
+            <% } %>
           </li>
-          <% } %> <% }) %> <% } %>
+          <div id="editdetail" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+              <h2 class="uk-modal-title">Are you sure?</h2>
+              <p>Go to the edit page</p>
+              <span>
+                <button
+                  class="uk-button uk-button-default uk-modal-close noSelect"
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </span>
+              <span
+                ><a
+                  href="/admincreate/promotedreview/edit/<%- entry._id %>"
+                  class="uk-button uk-button-default noSelect"
+                  type="button"
+                >
+                  Edit
+                </a></span
+              >
+            </div>
+          </div>
+          <div id="adddetail" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+              <h2 class="uk-modal-title">Are you sure?</h2>
+              <p>Go to the Add Detailed Review Page</p>
+              <span>
+                <button
+                  class="uk-button uk-button-default uk-modal-close noSelect"
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </span>
+              <span
+                ><a
+                  href="/admincreate/promotedreview/add/<%- entry._id %>"
+                  class="uk-button uk-button-default noSelect"
+                  type="button"
+                >
+                  Yes
+                </a></span
+              >
+            </div>
+          </div>
         </ul>
       </div>
     </div>

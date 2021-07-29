@@ -134,14 +134,13 @@
           <li><a href="#">Location</a></li>
           <li><a href="#">Menus</a></li>
           <li><a href="#">Offers</a></li>
-          <% if(detailed.length > 0) { %> <% detailed.forEach((detail)=> { %> <%
-            if(detail.post._id.toString() == entry._id.toString()) { %>
+          <% if(entry.promoted == 'valid' && entry.detailPresent == "yes") { %>
             <li>
               <a href="#" class="uk-text-bold uk-text-success"
                 >Detailed review from GETTING LIVELY</a
               >
             </li>
-            <% } %> <% }) %> <% } %>
+            <% } %>
         </ul>
 
         <ul
@@ -258,18 +257,16 @@
                     <p class="uk-text-center uk-text-large uk-text-warning">No Offers</p>
                     <% } %>
             </div></li>
-            <% if(detailed.length > 0) { %> <% detailed.forEach((detail)=> { %> <%
-                if(detail.post._id.toString() == entry._id.toString()) { %>
+           
                 <li>
-                  <p class="uk-text-bold uk-text-center uk-text-large">
-                    <%- detail.title %>
-                  </p>
-                  <hr class="uk-divider-icon" />
-                  <p class="uk-text-default uk-text-break review-text">
-                    <%- detail.desc %>
-                  </p>
-                </li>
-                <% } %> <% }) %> <% } %>
+                    <p class="uk-text-bold uk-text-center uk-text-large">
+                      <%- entry.detailTitle %>
+                    </p>
+                    <hr class="uk-divider-icon" />
+                    <p class="uk-text-default uk-text-break review-text">
+                      <%- entry.detailDesc %>
+                    </p>
+                  </li>
         </ul>
       </div>
     </div>

@@ -205,7 +205,7 @@ router.post(
 
         .catch((err) => console.log(err));
       req.flash("success_msg", "Entry created and sent for verification.");
-      res.redirect("/business");
+      res.redirect("/business/createentries");
     } catch (error) {
       console.log(error);
       res.render("errors/500");
@@ -262,7 +262,7 @@ router.get(
         .sort({ createdAt: "desc" })
         .lean();
       // detail
-      const detailed = await Detailed.find({}).populate("post").lean();
+      //   const detailed = await Detailed.find({}).populate("post").lean();
       const allReview = await Review.find({ post: req.params.id })
         .populate("post")
         .populate("user")
@@ -280,7 +280,7 @@ router.get(
         entry,
         allReview,
         allOffers,
-        detailed,
+        // detailed,
         totalScore,
         user: req.user,
         helper: require("../helpers/ejs"),
