@@ -4,10 +4,26 @@
   <li>
     <a href="/home" class="uk-button uk-button-text noSelect">Back To Home</a>
   </li>
+  <li>
+    <a
+      href="/dashboard/changepassword"
+      class="uk-button uk-button-text noSelect"
+      >Change Password</a
+    >
+  </li>
+  <li>
+    <a
+      href="/users/logout"
+      class="uk-button active uk-button-text noSelect"
+      uk-toggle="target: #userslogout"
+      ><span class="noSelect"></span>Logout</a
+    >
+  </li>
 </ul>
 
 <div class="uk-section uk-section-muted uk-section-large borderBottom">
   <div class="uk-container">
+    <%- include('./partials/errors.ejs'); %>
     <p class="uk-text-medium uk-text-center info-text">
       Voucher codes can be redeemed offline on the venues or online on the
       merchant's website.
@@ -41,15 +57,13 @@
         </div>
       </div>
       <% }) %> <% } else { %>
+
+      <p class="uk-text-center uk-text-large uk-text-warning">
+        You don't have any vouchers now.
+      </p>
+
+      <% } %>
     </div>
-    <p class="uk-text-center uk-text-large uk-text-warning">
-      You don't have any vouchers now.
-    </p>
-    <br />
-    <p class="uk-text-center uk-margin-small-top uk-text-meta">
-      Your purchased offers appear here.
-    </p>
-    <% } %>
   </div>
 </div>
 

@@ -44,6 +44,13 @@
   </li>
   <li>
     <a
+      href="/admin/changepassword"
+      class="uk-button active uk-button-text noSelect"
+      ><span class="noSelect"></span>Change Password</a
+    >
+  </li>
+  <li>
+    <a
       href="/users/logout"
       class="uk-button active uk-button-text noSelect"
       uk-toggle="target: #userslogout"
@@ -59,6 +66,7 @@
   "
 >
   <div class="uk-container">
+    <%- include('../partials/errors.ejs'); %>
     <h4 class="uk-text-uppercase uk-text-center uk-margin-top-large tagline1">
       Admin Dashboard
     </h4>

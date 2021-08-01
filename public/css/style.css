@@ -516,3 +516,11 @@ input.ais-SearchBox-input {
 .review-text {
   overflow-y: scroll;
 }
+
+.uk-alert-danger {
+  color: #d04949;
+}
+
+.uk-alert-success {
+  color: #25a048;
+}
