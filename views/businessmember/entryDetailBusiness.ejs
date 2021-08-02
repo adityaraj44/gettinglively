@@ -272,16 +272,54 @@
         </div>
 
         <ul uk-tab>
-          <li><a href="#">Description</a></li>
-          <li><a href="#">Hours</a></li>
-          <li><a href="#">Location</a></li>
-          <li><a href="#">Menus</a></li>
-          <li><a href="#">Offers</a></li>
+          <li>
+            <a href="#"
+              >Description
+              <span uk-icon="icon: info; ratio: 1" class="uk-margin-left"></span
+            ></a>
+          </li>
+          <li>
+            <a href="#"
+              >Hours
+              <span
+                uk-icon="icon: clock; ratio: 1"
+                class="uk-margin-left"
+              ></span
+            ></a>
+          </li>
+          <li>
+            <a href="#"
+              >Location
+              <span
+                uk-icon="icon: location; ratio: 1"
+                class="uk-margin-left"
+              ></span
+            ></a>
+          </li>
+          <li>
+            <a href="#"
+              >Menus
+              <span
+                uk-icon="icon: file-text; ratio: 1"
+                class="uk-margin-left"
+              ></span
+            ></a>
+          </li>
+          <li>
+            <a href="#"
+              >Offers
+              <span uk-icon="icon: star; ratio: 1" class="uk-margin-left"></span
+            ></a>
+          </li>
           <% if(entry.promoted == 'valid' && entry.detailPresent == "yes") { %>
           <li>
             <a href="#" class="uk-text-bold uk-text-success"
-              >Detailed review from GETTING LIVELY</a
-            >
+              >Detailed review from GETTING LIVELY
+              <span
+                uk-icon="icon: comment; ratio: 1"
+                class="uk-margin-left"
+              ></span
+            ></a>
           </li>
           <% } %>
         </ul>
@@ -347,7 +385,7 @@
             <h1 class="uk-card-title">Address</h1>
             <p class="uk-text-break uk-margin" id="address">
               <span
-                class="uk-margin-medium-right uk-text-success"
+                class="uk-margin-right uk-text-success"
                 uk-icon="icon: location; ratio: 2"
               ></span
               ><%- entry.location + ',' + ' ' + entry.city + ',' + ' ' +
@@ -487,6 +525,31 @@
       </div>
     </div>
 
+    <div class="uk-child-width-1-1 uk-grid-small" uk-grid>
+      <div>
+        <div class="uk-card uk-card-primary uk-margin-top uk-light">
+          <div class="uk-card-body uk-text-center">
+            <p class="uk-text-center uk-text-break uk-text-medium uk-text-bold">
+              Go to Manage listing to set up Promotional Plans to promote your
+              business, great value, great promotions
+            </p>
+            <hr />
+            <a
+              href="/business/managelisting"
+              class="
+                uk-button uk-button-default uk-text-center uk-button-large
+                noSelect
+              "
+              ><span
+                uk-icon="icon: settings; ratio: 1"
+                class="uk-margin-right"
+              ></span>
+              Go to Manage Listing</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- form -->
     <div
       class="

@@ -524,3 +524,15 @@ input.ais-SearchBox-input {
 .uk-alert-success {
   color: #25a048;
 }
+
+.link-to-ml {
+  background-color: #c2f8d1;
+}
+
+.auth-card {
+  border-radius: 10px;
+
+  margin: auto;
+  height: fit-content;
+  width: 500px;
+}

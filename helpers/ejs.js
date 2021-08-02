@@ -28,19 +28,31 @@ module.exports = {
     ) {
       return `<span
       ><a href="#editEntryAdmin"  uk-toggle  class="uk-button uk-button-secondary noSelect"
-        >Edit</a
+        >Edit <span
+        uk-icon="icon: pencil; ratio: 1"
+        class="uk-margin-left"
+      ></span
+    ></a
       ></span
     >
     <span
     ><a href="#editEntryAdminAttach" uk-toggle class="uk-button uk-button-secondary noSelect"
-      >Edit/Add images and menu</a
+      >Edit/Add images and menu <span
+      uk-icon="icon: image; ratio: 1"
+      class="uk-margin-left"
+    ></span
+  ></a
     ></span
   >
     <span
       ><a
         href="#deleteEntryAdmin" uk-toggle
         class="uk-button uk-button-danger noSelect uk-marign-small-right"
-        >Delete</a
+        >Delete <span
+        uk-icon="icon: trash; ratio: 1"
+        class="uk-margin-left"
+      ></span
+    ></a
       ></span
     >`;
     } else {
@@ -51,19 +63,31 @@ module.exports = {
     if (loggedUser._id.toString() == entryUser._id.toString()) {
       return `<span
       ><a href="#editBusinessEntry"  uk-toggle  class="uk-button uk-button-secondary noSelect"
-        >Edit</a
+        >Edit <span
+        uk-icon="icon: pencil; ratio: 1"
+        class="uk-margin-left"
+      ></span
+    ></a
       ></span
     >
     <span
     ><a href="#editBusinessEntryAttach"  uk-toggle  class="uk-button uk-button-secondary noSelect"
-      >Edit/Add images and menu</a
+      >Edit/Add images and menu <span
+      uk-icon="icon: image; ratio: 1"
+      class="uk-margin-left"
+    ></span
+  ></a
     ></span
   >
     <span
       ><a
         href="#deleteBusinessEntry" uk-toggle
         class="uk-button uk-button-danger noSelect uk-marign-small-right"
-        >Delete</a
+        >Delete <span
+        uk-icon="icon: trash; ratio: 1"
+        class="uk-margin-left"
+      ></span
+    ></a
       ></span
     >`;
     } else {
@@ -76,11 +100,19 @@ module.exports = {
           ><a
             href="#markasreviewed" uk-toggle
             class="uk-button uk-button-primary noSelect uk-marign-small-right"
-            >Mark as reviewed</a
+            >Mark as reviewed <span
+            uk-icon="icon: plus; ratio: 1"
+            class="uk-margin-left"
+          ></span
+        ></a
           ></span
         >`;
     } else {
-      return `<span class="uk-label uk-label-success uk-margin-large-left">Reviewed</span>`;
+      return `<span class="uk-label uk-label-success uk-margin-large-left">Reviewed <span
+      uk-icon="icon: check; ratio: 1"
+      class="uk-margin-left"
+    ></span
+  ></span>`;
     }
   },
   getFooter: function (user) {

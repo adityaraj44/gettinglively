@@ -205,8 +205,13 @@ router.post(
         .sendMail(mailOptions)
 
         .catch((err) => console.log(err));
-      req.flash("success_msg", "Entry created and sent for verification.");
-      res.redirect("/business/createentries");
+      req.flash(
+        "success_msg",
+        "Entry created. Proceed with payment to send the newly created entry for approval."
+      );
+      req.session.save(() => {
+        res.redirect("/business/entries/pendingpayment");
+      });
     } catch (error) {
       console.log(error);
       res.render("errors/500");

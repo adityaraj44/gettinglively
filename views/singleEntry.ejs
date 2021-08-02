@@ -129,19 +129,57 @@
     <div class="uk-card uk-card-custom uk-card-hover uk-card-default">
       <div class="uk-card-body">
         <ul uk-tab>
-          <li><a href="#">Description</a></li>
-          <li><a href="#">Hours</a></li>
-          <li><a href="#">Location</a></li>
-          <li><a href="#">Menus</a></li>
-          <li><a href="#">Offers</a></li>
-          <% if(entry.promoted == 'valid' && entry.detailPresent == "yes") { %>
+            <li>
+              <a href="#"
+                >Description
+                <span uk-icon="icon: info; ratio: 1" class="uk-margin-left"></span
+              ></a>
+            </li>
+            <li>
+              <a href="#"
+                >Hours
+                <span
+                  uk-icon="icon: clock; ratio: 1"
+                  class="uk-margin-left"
+                ></span
+              ></a>
+            </li>
+            <li>
+              <a href="#"
+                >Location
+                <span
+                  uk-icon="icon: location; ratio: 1"
+                  class="uk-margin-left"
+                ></span
+              ></a>
+            </li>
+            <li>
+              <a href="#"
+                >Menus
+                <span
+                  uk-icon="icon: file-text; ratio: 1"
+                  class="uk-margin-left"
+                ></span
+              ></a>
+            </li>
+            <li>
+              <a href="#"
+                >Offers
+                <span uk-icon="icon: star; ratio: 1" class="uk-margin-left"></span
+              ></a>
+            </li>
+            <% if(entry.promoted == 'valid' && entry.detailPresent == "yes") { %>
             <li>
               <a href="#" class="uk-text-bold uk-text-success"
-                >Detailed review from GETTING LIVELY</a
-              >
+                >Detailed review from GETTING LIVELY
+                <span
+                  uk-icon="icon: comment; ratio: 1"
+                  class="uk-margin-left"
+                ></span
+              ></a>
             </li>
             <% } %>
-        </ul>
+          </ul>
 
         <ul
           class="uk-switcher uk-margin"
