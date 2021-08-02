@@ -149,6 +149,7 @@ router.delete(
   async (req, res) => {
     try {
       await User.remove({ _id: req.params.id });
+      req.flash("success_msg", "Customer deleted from records.");
       res.redirect("/admin/customers");
     } catch (error) {
       console.log(error);
@@ -166,6 +167,7 @@ router.delete(
   async (req, res) => {
     try {
       await User.remove({ _id: req.params.id });
+      req.flash("success_msg", "Business deleted from records.");
       res.redirect("/admin/business");
     } catch (error) {
       console.log(error);

@@ -739,11 +739,12 @@ router.post(
       const { offername, offeramount, offerdesc } = req.body;
 
       const entry = await Post.findById({ _id: req.params.id });
-      if (entry && entry.user._id.toString() == req.user._id.toString()) {
+      if (entry) {
         await Offer.create({
           offername,
           offerdesc,
           offeramount,
+          offerStatus: "paid",
           user: req.user.id,
           post: req.params.id,
         }).then((data) => {
@@ -751,10 +752,7 @@ router.post(
           res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
         });
       } else {
-        req.flash(
-          "error_msg",
-          "Not allowed to create offer as you are not the owner of this post."
-        );
+        req.flash("error_msg", "Error in creating offer.");
         res.redirect(`/admincreate/myentries/entry/${req.params.id}`);
       }
     } catch (error) {

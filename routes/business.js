@@ -1000,10 +1000,6 @@ router.get(
         .lean();
       if (!offer) {
         return res.render("error/404");
-      }
-      if (offer.user != req.user.id) {
-        req.flash("error_msg", "Cannot process request at the moment!");
-        res.redirect(`/business/myentries/entry/${offer.post._id}`);
       } else {
         res.render("businessmember/offeredit", {
           layout: "layouts/layout",
@@ -1034,11 +1030,6 @@ router.put(
       let offer = await Offer.findById(req.params.id).populate("post").lean();
       if (!offer) {
         return res.render("error/404");
-      }
-
-      if (offer.user != req.user.id) {
-        req.flash("error_msg", "You can not edit this offer. Try again!");
-        res.redirect(`/business/myentries/entry/${offer.post._id}`);
       } else {
         offer = await Offer.findOneAndUpdate(
           {

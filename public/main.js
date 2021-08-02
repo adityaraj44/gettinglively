@@ -303,7 +303,7 @@ if (document.querySelector("#card-container-voucher")) {
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -315,7 +315,7 @@ if (document.querySelector("#card-container-voucher")) {
         displayPaymentResults("FAILURE");
         console.error(e.message);
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -438,7 +438,7 @@ if (document.querySelector("#card-container-entry")) {
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -453,7 +453,7 @@ if (document.querySelector("#card-container-entry")) {
         displayPaymentResults("FAILURE");
         console.error(e.message);
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -574,7 +574,7 @@ if (document.querySelector("#card-container-premier")) {
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -709,7 +709,7 @@ if (document.querySelector("#card-container-advance")) {
         // displayPaymentResults("SUCCESS");
 
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -723,7 +723,7 @@ if (document.querySelector("#card-container-advance")) {
         console.error(e.message);
 
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -845,7 +845,7 @@ if (document.querySelector("#card-container-promoted")) {
         // displayPaymentResults("SUCCESS");
 
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -859,7 +859,7 @@ if (document.querySelector("#card-container-promoted")) {
         console.error(e.message);
 
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -982,7 +982,7 @@ if (document.querySelector("#card-container-offer")) {
         // displayPaymentResults("SUCCESS");
 
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
@@ -996,7 +996,7 @@ if (document.querySelector("#card-container-offer")) {
         console.error(e.message);
 
         UIkit.notification({
-          message: "Payment Successfull...",
+          message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });

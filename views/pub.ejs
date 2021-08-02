@@ -138,54 +138,6 @@
   </div>
 </div>
 
-<!-- search -->
-<div class="uk-section uk-section-large uk-section-auto borderBottom uk-dark">
-  <div class="uk-container search-container">
-    <h4
-      class="
-        uk-text-uppercase uk-text-center uk-margin-top-large
-        searchheading
-        tagline1
-      "
-      data-aos="fade-up"
-    >
-      Search For
-    </h4>
-    <p
-      class="uk-text-center uk-text-large uk-margin-medium-top tagline3"
-      data-aos="fade-up"
-    >
-      Pubs all over UK
-    </p>
-    <hr class="uk-divider-icon" />
-    <div class="uk-container uk-flex uk-flex-center tagline1">
-      <a
-        class="uk-navbar-toggle uk-button-text uk-text-large noSelect"
-        href="#searchbarmodal"
-        uk-icon="icon: search; ratio:3"
-        uk-toggle
-      >
-        <span class="uk-margin-medium-right search noSelect">Search...</span></a
-      >
-    </div>
-
-    <div id="searchbarmodal" uk-modal>
-      <div
-        class="uk-modal-dialog search-dialog"
-        uk-height-viewport
-        uk-width-viewport
-      >
-        <button class="uk-modal-close-full" type="button" uk-close></button>
-        <div class="uk-text-center ais-InstantSearch">
-          <div id="barsearch" class="ais-SearchBox uk-margin-medium"></div>
-        </div>
-        <div id="hits"></div>
-        <div id="pagination"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- search section ends here -->
 <!-- What we recommend -->
 <% if(topPicksadv.length > 0) { %>
 <div
@@ -257,6 +209,56 @@
   </div>
 </div>
 <% } %>
+
+<!-- search -->
+<div class="uk-section uk-section-large uk-section-auto borderBottom uk-dark">
+  <div class="uk-container search-container">
+    <h4
+      class="
+        uk-text-uppercase uk-text-center uk-margin-top-large
+        searchheading
+        tagline1
+      "
+      data-aos="fade-up"
+    >
+      Search For
+    </h4>
+    <p
+      class="uk-text-center uk-text-large uk-margin-medium-top tagline3"
+      data-aos="fade-up"
+    >
+      Pubs all over UK
+    </p>
+    <hr class="uk-divider-icon" />
+    <div class="uk-container uk-flex uk-flex-center tagline1">
+      <a
+        class="uk-navbar-toggle uk-button-text uk-text-large noSelect"
+        href="#searchbarmodal"
+        uk-icon="icon: search; ratio:3"
+        uk-toggle
+      >
+        <span class="uk-margin-medium-right search noSelect">Search...</span></a
+      >
+    </div>
+
+    <div id="searchbarmodal" uk-modal>
+      <div
+        class="uk-modal-dialog search-dialog"
+        uk-height-viewport
+        uk-width-viewport
+      >
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <div class="uk-text-center ais-InstantSearch">
+          <div id="barsearch" class="ais-SearchBox uk-margin-medium"></div>
+        </div>
+        <div id="hits"></div>
+        <div id="pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- search section ends here -->
+
 <!-- top picks -->
 <% if(topPicks.length > 0) { %>
 <div
