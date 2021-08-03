@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema(
     emailUpdates: {
       type: String,
       enum: ["in", "out"],
-      default: "out",
+      default: "in",
     },
     confirmationCode: {
       type: String,

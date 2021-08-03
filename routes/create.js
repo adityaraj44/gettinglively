@@ -45,7 +45,7 @@ router.post(
         });
         req.flash("error_msg", "Enter all the fields");
       } else {
-        const users = await User.find({ emailUpdates: "in" });
+        const users = await User.find({});
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {
@@ -67,7 +67,9 @@ router.post(
             .catch((err) => console.log(err));
         });
         req.flash("success_msg", "Emails sent successfully");
-        res.redirect("/admincreate");
+        req.session.save(() => {
+          res.redirect("/admincreate");
+        });
       }
     } catch (error) {
       console.log(error);
