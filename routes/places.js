@@ -92,6 +92,14 @@ router.get("/restaurant", async (req, res) => {
     .sort({ createdAt: "desc" })
     .lean();
 
+  const whatsGoing = await Post.find({
+    reviewStatus: "reviewed",
+    typeOfPlace: "restaurant",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+  //   console.log(whatsGoing);
   const pagedetails = await PageDetail.find({
     typeOfPlace: "restaurant",
   })
@@ -121,6 +129,7 @@ router.get("/restaurant", async (req, res) => {
     topPicksadv,
     reviews,
     pagedetails,
+    whatsGoing,
     helper: require("../helpers/ejs"),
   });
 });

@@ -268,7 +268,7 @@
           <li><h1 class="uk-card-title uk-text-center">All Offers</h1>
             <div class="
             uk-child-width-1-1
-            uk-child-width-1-2@s
+            uk-child-width-1-1@s
             uk-grid-small
            
             uk-margin-large-top
@@ -292,7 +292,13 @@
                 </div>
                 
                 <% }) %> <% } else { %>
-                    <p class="uk-text-center uk-text-large uk-text-warning">No Offers</p>
+                    <div
+                uk-alert
+                class="uk-text-center uk-text-bold uk-alert-warning"
+              >
+                This venue is not currently doing any offers, but keep checking
+                back for more in the future.
+              </div>
                     <% } %>
             </div></li>
            
@@ -324,6 +330,7 @@
                   name="userScore"
                   min="1"
                   max="5"
+                  step="any"
                   placeholder="Initial score out of 5"
                   id="rating"
                   class="uk-input uk-form-large noSelect"
@@ -350,7 +357,12 @@
           </div>
         </form>
         <hr class="uk-divider-icon" />
+        
       <% } %>
+      <div class="uk-text-center"><p class="uk-text-center uk-text-medium uk-text-bold">Sign up to Getting Lively to leave a review, it is free to sign up!</p>
+        <a href="/users/register" class="uk-button uk-button-custom paylink">Sign Up</a></div>
+      
+        <hr>
         <p class="uk-text-lead uk-text-bold uk-text-center@s">
           Total Reviews: <%- allReview.length %>
         </p>
@@ -370,6 +382,7 @@
                 uk-visible-toggle
                 uk-padding-small
                 uk-box-shadow-small
+                review-box
               "
               tabindex="-1"
             >

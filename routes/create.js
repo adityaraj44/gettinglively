@@ -34,7 +34,7 @@ router.post(
   ensureAdmin,
   async (req, res) => {
     try {
-      const { subject, body } = req.body;
+      const { subject, body, rou } = req.body;
       let errors = [];
       if (!subject || !body) {
         errors.push({ msg: "Enter all the fields" });
@@ -45,7 +45,7 @@ router.post(
         });
         req.flash("error_msg", "Enter all the fields");
       } else {
-        const users = await User.find({});
+        const users = await User.find({ role: `${rou}` });
         var smtpTransport = nodemailer.createTransport({
           service: "gmail",
           auth: {

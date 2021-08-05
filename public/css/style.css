@@ -536,3 +536,8 @@ input.ais-SearchBox-input {
   height: fit-content;
   width: 500px;
 }
+
+.review-box {
+  border-radius: 10px;
+  border-right: 5px solid #28a745;
+}

@@ -35,6 +35,7 @@
         uk-grid-small
         uk-margin-large-top
         uk-margin-large-bottom
+        uk-text-center
       "
       uk-grid
     >
@@ -57,13 +58,23 @@
         </div>
       </div>
       <% }) %> <% } else { %>
-
-      <p class="uk-text-center uk-text-large uk-text-warning">
-        You don't have any vouchers now.
-      </p>
-
-      <% } %>
     </div>
+    <div
+      uk-alert
+      class="uk-text-center uk-text-medium uk-text-bold uk-alert-warning"
+    >
+      You have not purchased any voucher.
+    </div>
+    <br />
+    <p
+      uk-alert
+      class="uk-text-center uk-text-medium uk-text-bold uk-alert-primary"
+    >
+      Why not buy one of the great vouchers, give a review , search for
+      wonderful Bars, Clubs, Pubs and Restaurants all on Getting Lively!
+    </p>
+
+    <% } %>
   </div>
 </div>
 
