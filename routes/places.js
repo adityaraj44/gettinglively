@@ -36,6 +36,14 @@ router.get("/bars", async (req, res) => {
     .sort({ createdAt: "desc" })
     .lean();
 
+  const promoted = await Post.find({
+    promoted: "valid",
+    typeOfPlace: "bar",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
   const pagedetails = await PageDetail.find({
     typeOfPlace: "bar",
   })
@@ -62,6 +70,7 @@ router.get("/bars", async (req, res) => {
     allEntries,
     topPicks,
     topPicksadv,
+    promoted,
     helper: require("../helpers/ejs"),
   });
 });
@@ -86,6 +95,14 @@ router.get("/restaurant", async (req, res) => {
 
   const topPicksadv = await Post.find({
     advance: "valid",
+    typeOfPlace: "restaurant",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
+
+  const promoted = await Post.find({
+    promoted: "valid",
     typeOfPlace: "restaurant",
   })
     .populate("user")
@@ -129,7 +146,7 @@ router.get("/restaurant", async (req, res) => {
     topPicksadv,
     reviews,
     pagedetails,
-    whatsGoing,
+    promoted,
     helper: require("../helpers/ejs"),
   });
 });
@@ -159,6 +176,14 @@ router.get("/club", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+
+  const promoted = await Post.find({
+    promoted: "valid",
+    typeOfPlace: "club",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
   const pagedetails = await PageDetail.find({
     typeOfPlace: "club",
   })
@@ -182,6 +207,7 @@ router.get("/club", async (req, res) => {
   res.render("club", {
     user: req.user,
     allEntries,
+    promoted,
     topPicks,
     topPicksadv,
     pagedetails,
@@ -213,6 +239,14 @@ router.get("/pubs", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+
+  const promoted = await Post.find({
+    promoted: "valid",
+    typeOfPlace: "pub",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
   const pagedetails = await PageDetail.find({
     typeOfPlace: "pub",
   })
@@ -238,6 +272,7 @@ router.get("/pubs", async (req, res) => {
     topPicks,
     topPicksadv,
     allEntries,
+    promoted,
     helper: require("../helpers/ejs"),
   });
 });
@@ -267,6 +302,13 @@ router.get("/venue", async (req, res) => {
     .populate("user")
     .sort({ createdAt: "desc" })
     .lean();
+  const promoted = await Post.find({
+    promoted: "valid",
+    typeOfPlace: "venue",
+  })
+    .populate("user")
+    .sort({ createdAt: "desc" })
+    .lean();
 
   const pagedetails = await PageDetail.find({
     typeOfPlace: "venue",
@@ -291,6 +333,7 @@ router.get("/venue", async (req, res) => {
     user: req.user,
     allEntries,
     topPicks,
+    promoted,
     topPicksadv,
     pagedetails,
     helper: require("../helpers/ejs"),
