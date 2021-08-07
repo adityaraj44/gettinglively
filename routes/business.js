@@ -1170,7 +1170,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_LOCATION_ID
+          process.env.SQUARE_PROD_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1263,7 +1263,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_LOCATION_ID
+          process.env.SQUARE_PROD_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1530,7 +1530,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_LOCATION_ID
+          process.env.SQUARE_PROD_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1538,7 +1538,7 @@ router.post(
           idempotencyKey,
           sourceId: token,
           amountMoney: {
-            amount: 5000,
+            amount: 100,
             currency,
           },
         };
@@ -1719,7 +1719,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_LOCATION_ID
+          process.env.SQUARE_PROD_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1727,7 +1727,7 @@ router.post(
           idempotencyKey,
           sourceId: token,
           amountMoney: {
-            amount: 10000, // $1.00 charge
+            amount: 100, // $1.00 charge
             currency,
           },
         };
@@ -1907,7 +1907,7 @@ router.post(
         const idempotencyKey = uuidv4();
         // get the currency for the location
         const locationResponse = await locationsApi.retrieveLocation(
-          process.env.SQUARE_LOCATION_ID
+          process.env.SQUARE_PROD_LOCATION_ID
         );
         const currency = locationResponse.result.location.currency;
         // Charge the customer's card
@@ -1915,7 +1915,7 @@ router.post(
           idempotencyKey,
           sourceId: token,
           amountMoney: {
-            amount: 20000, // $1.00 charge
+            amount: 100, // $1.00 charge
             currency,
           },
         };

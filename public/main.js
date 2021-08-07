@@ -202,11 +202,11 @@ if (document.querySelector("#barsearch")) {
 if (document.querySelector("#card-container-voucher")) {
   // payment
 
-  const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
-  const locationId = "WDX1WFYN7TBWD";
+  //   const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
+  //   const locationId = "WDX1WFYN7TBWD";
 
-  //   const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
-  //   const locationId = "LZ6W6KA5YDE19";
+  const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
+  const locationId = "LZ6W6KA5YDE19";
 
   async function initializeCard(payments) {
     const card = await payments.card();
@@ -337,11 +337,11 @@ if (document.querySelector("#card-container-voucher")) {
 if (document.querySelector("#card-container-entry")) {
   // payment
 
-  const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
-  const locationId = "WDX1WFYN7TBWD";
+  //   const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
+  //   const locationId = "WDX1WFYN7TBWD";
 
-  //   const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
-  //   const locationId = "LZ6W6KA5YDE19";
+  const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
+  const locationId = "LZ6W6KA5YDE19";
 
   async function initializeCard(payments) {
     const card = await payments.card();
@@ -473,11 +473,11 @@ if (document.querySelector("#card-container-entry")) {
 if (document.querySelector("#card-container-premier")) {
   // payment
 
-  const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
-  const locationId = "WDX1WFYN7TBWD";
+  //   const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
+  //   const locationId = "WDX1WFYN7TBWD";
 
-  //   const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
-  //   const locationId = "LZ6W6KA5YDE19";
+  const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
+  const locationId = "LZ6W6KA5YDE19";
 
   async function initializeCard(payments) {
     const card = await payments.card();
@@ -607,11 +607,11 @@ if (document.querySelector("#card-container-premier")) {
 if (document.querySelector("#card-container-advance")) {
   // payment
 
-  const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
-  const locationId = "WDX1WFYN7TBWD";
+  //   const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
+  //   const locationId = "WDX1WFYN7TBWD";
 
-  //   const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
-  //   const locationId = "LZ6W6KA5YDE19";
+  const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
+  const locationId = "LZ6W6KA5YDE19";
 
   async function initializeCard(payments) {
     const card = await payments.card();
@@ -743,11 +743,11 @@ if (document.querySelector("#card-container-advance")) {
 if (document.querySelector("#card-container-promoted")) {
   // payment
 
-  const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
-  const locationId = "WDX1WFYN7TBWD";
+  //   const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
+  //   const locationId = "WDX1WFYN7TBWD";
 
-  //   const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
-  //   const locationId = "LZ6W6KA5YDE19";
+  const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
+  const locationId = "LZ6W6KA5YDE19";
 
   async function initializeCard(payments) {
     const card = await payments.card();
@@ -880,11 +880,11 @@ if (document.querySelector("#card-container-promoted")) {
 if (document.querySelector("#card-container-offer")) {
   // payment
 
-  const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
-  const locationId = "WDX1WFYN7TBWD";
+  //   const appId = "sandbox-sq0idb-n_FZsMrbW0gzIkB2hKezLA";
+  //   const locationId = "WDX1WFYN7TBWD";
 
-  //   const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
-  //   const locationId = "LZ6W6KA5YDE19";
+  const appId = "sq0idp-gQwtYrVYBBKybGskRxvgVA";
+  const locationId = "LZ6W6KA5YDE19";
 
   async function initializeCard(payments) {
     const card = await payments.card();
