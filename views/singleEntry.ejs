@@ -358,11 +358,90 @@
         </form>
         <hr class="uk-divider-icon" />
         
-      <% } %>
+      <% } else if(user && user.role == 'admin') { %>
+        <h1 class="uk-card-title uk-text-center">Add reviews</h1>
+        <form action="/places/userreviews/<%- entry._id %>" method="POST">
+          <div class="uk-form-stacked">
+            <div class="uk-margin-small">
+              <div class="uk-form-control">
+                <input
+                  required
+                  type="number"
+                  name="userScore"
+                  min="1"
+                  max="5"
+                  step="any"
+                  placeholder="Initial score out of 5"
+                  id="rating"
+                  class="uk-input uk-form-large noSelect"
+                />
+              </div>
+              <div class="uk-form-control">
+                <textarea
+                  required
+                  class="uk-textarea"
+                  name="userComment"
+                ></textarea>
+              </div>
+            </div>
+            <div class="uk-marign-medium uk-text-center">
+              <div class="uk-form-control">
+                <button
+                  type="submit"
+                  class="uk-button uk-button-custom noSelect"
+                >
+                  Post review
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <hr class="uk-divider-icon" />
+        <% } else if(user && user.role == 'business') { %>
+            <h1 class="uk-card-title uk-text-center">Add reviews</h1>
+            <form action="/places/userreviews/<%- entry._id %>" method="POST">
+              <div class="uk-form-stacked">
+                <div class="uk-margin-small">
+                  <div class="uk-form-control">
+                    <input
+                      required
+                      type="number"
+                      name="userScore"
+                      min="1"
+                      max="5"
+                      step="any"
+                      placeholder="Initial score out of 5"
+                      id="rating"
+                      class="uk-input uk-form-large noSelect"
+                    />
+                  </div>
+                  <div class="uk-form-control">
+                    <textarea
+                      required
+                      class="uk-textarea"
+                      name="userComment"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="uk-marign-medium uk-text-center">
+                  <div class="uk-form-control">
+                    <button
+                      type="submit"
+                      class="uk-button uk-button-custom noSelect"
+                    >
+                      Post review
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <hr class="uk-divider-icon" />
+            <% } else { %>
       <div class="uk-text-center"><p class="uk-text-center uk-text-medium uk-text-bold">Sign up to Getting Lively to leave a review, it is free to sign up!</p>
         <a href="/users/register" class="uk-button uk-button-custom paylink">Sign Up</a></div>
       
         <hr>
+        <% } %>
         <p class="uk-text-lead uk-text-bold uk-text-center@s">
           Total Reviews: <%- allReview.length %>
         </p>
