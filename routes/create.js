@@ -444,8 +444,8 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
           <p>
             To ensure delivery to your inbox (not bulk or junk folders), please add
             <span
-              ><a href="mailto:noreply@gettinglively.co.uk"
-                >noreply@gettinglively.co.uk</a
+              ><a href="mailto:noreplymail@gettinglively.co.uk"
+                >noreplymail@gettinglively.co.uk</a
               ></span
             >
             to your safe senders list or address book.
@@ -470,8 +470,8 @@ router.post("/entry", ensureAuthenticated, ensureAdmin, async (req, res) => {
           <p>
             To ensure delivery to your inbox (not bulk or junk folders), please add
             <span
-              ><a href="mailto:noreply@gettinglively.co.uk"
-                >noreply@gettinglively.co.uk</a
+              ><a href="mailto:noreplymail@gettinglively.co.uk"
+                >noreplymail@gettinglively.co.uk</a
               ></span
             >
             to your safe senders list or address book.
