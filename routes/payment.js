@@ -58,6 +58,7 @@ router.post("/:id", ensureAuthenticated, async (req, res) => {
     const requestBody = {
       idempotencyKey,
       sourceId: token,
+      locationId: "LZ6W6KA5YDE19",
       amountMoney: {
         amount: allOffer.offeramount * 100, // $1.00 charge
         currency,

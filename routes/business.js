@@ -1177,6 +1177,7 @@ router.post(
         const requestBody = {
           idempotencyKey,
           sourceId: token,
+          locationId: "LZ6W6KA5YDE19",
           amountMoney: {
             amount: 100, // $1.00 charge
             currency,
@@ -1270,10 +1271,15 @@ router.post(
         const requestBody = {
           idempotencyKey,
           sourceId: token,
+          locationId: "LZ6W6KA5YDE19",
           amountMoney: {
             amount: 100, // $1.00 charge
             currency,
           },
+          //   appFeeMoney: {
+          //     amount: 10,
+          //     currency,
+          //   },
         };
         try {
           const {
@@ -1537,6 +1543,7 @@ router.post(
         const requestBody = {
           idempotencyKey,
           sourceId: token,
+          locationId: "LZ6W6KA5YDE19",
           amountMoney: {
             amount: 100,
             currency,
@@ -1726,6 +1733,7 @@ router.post(
         const requestBody = {
           idempotencyKey,
           sourceId: token,
+          locationId: "LZ6W6KA5YDE19",
           amountMoney: {
             amount: 100, // $1.00 charge
             currency,
@@ -1914,6 +1922,7 @@ router.post(
         const requestBody = {
           idempotencyKey,
           sourceId: token,
+          locationId: "LZ6W6KA5YDE19",
           amountMoney: {
             amount: 100, // $1.00 charge
             currency,
