@@ -315,9 +315,9 @@ if (document.querySelector("#card-container-voucher")) {
         displayPaymentResults("FAILURE");
         console.error(e.message);
         UIkit.notification({
-          message: "Payment Successful...",
+          message: "Payment Failed...",
           pos: "top-right",
-          status: "success",
+          status: "danger",
         });
         document.location.reload();
       }
@@ -437,28 +437,32 @@ if (document.querySelector("#card-container-entry")) {
         const token = await tokenize(paymentMethod);
         const paymentResults = await createPayment(token);
         // displayPaymentResults("SUCCESS");
+
+        console.log(paymentResults);
+
         UIkit.notification({
           message: "Payment Successful...",
           pos: "top-right",
           status: "success",
         });
+
         document.location.reload();
-        window.location.href = "/business/reviewentries";
+        window.location.href = "/business/entries/pendingpayment";
 
         //   displayPaymentResults("SUCCESS");
 
         console.debug("Payment Success", paymentResults);
       } catch (e) {
         cardButton.disabled = false;
-        displayPaymentResults("FAILURE");
+        // displayPaymentResults("FAILURE");
         console.error(e.message);
         UIkit.notification({
-          message: "Payment Successful...",
+          message: "Payment Failed...",
           pos: "top-right",
-          status: "success",
+          status: "danger",
         });
         document.location.reload();
-        window.location.href = "/business/reviewentries";
+        window.location.href = "/business/entries/pendingpayment";
       }
     }
 
@@ -723,9 +727,9 @@ if (document.querySelector("#card-container-advance")) {
         console.error(e.message);
 
         UIkit.notification({
-          message: "Payment Successful...",
+          message: "Payment Failed...",
           pos: "top-right",
-          status: "success",
+          status: "danger",
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
@@ -857,11 +861,10 @@ if (document.querySelector("#card-container-promoted")) {
         cardButton.disabled = false;
         displayPaymentResults("FAILURE");
         console.error(e.message);
-
         UIkit.notification({
-          message: "Payment Successful...",
+          message: "Payment Failed...",
           pos: "top-right",
-          status: "success",
+          status: "danger",
         });
         document.location.reload();
         window.location.href = "/business/managelisting";
@@ -996,9 +999,9 @@ if (document.querySelector("#card-container-offer")) {
         console.error(e.message);
 
         UIkit.notification({
-          message: "Payment Successful...",
+          message: "Payment Failed...",
           pos: "top-right",
-          status: "success",
+          status: "danger",
         });
         document.location.reload();
         window.location.href = "/business/entries/pendingpayment";
