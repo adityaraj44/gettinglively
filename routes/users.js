@@ -146,10 +146,7 @@ router.post("/register", ensureGuest, async (req, res) => {
             page on our website.
           </p>
           <p>Thank you for choosing us!</p>
-          <p>
-            If you have any questions or concerns, please do not hesitate to contact
-            us via our Live Chat or Contact Form on our website.
-          </p>
+        
           <p><strong>Regards,</strong></p>
           <p><strong>The Getting Lively Team</strong></p>
           <br />
@@ -353,10 +350,7 @@ router.post("/businessregister", ensureGuest, async (req, res) => {
             page on our website.
           </p>
           <p>Thank you for choosing us!</p>
-          <p>
-            If you have any questions or concerns, please do not hesitate to contact
-            us via our Live Chat or Contact Form on our website.
-          </p>
+        
           <p><strong>Regards,</strong></p>
           <p><strong>The Getting Lively Team</strong></p>
           <br />
@@ -577,10 +571,7 @@ router.post("/forgot", ensureGuest, (req, res) => {
             page on our website.
           </p>
           <p>Thank you for choosing us!</p>
-          <p>
-            If you have any questions or concerns, please do not hesitate to contact
-            us via our Live Chat or Contact Form on our website.
-          </p>
+        
           <p><strong>Regards,</strong></p>
           <p><strong>The Getting Lively Team</strong></p>
           <br />

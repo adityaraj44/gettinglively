@@ -260,10 +260,7 @@ router.post(
             page on our website.
           </p>
           <p>Thank you for choosing us!</p>
-          <p>
-            If you have any questions or concerns, please do not hesitate to contact
-            us via our Live Chat or Contact Form on our website.
-          </p>
+        
           <p><strong>Regards,</strong></p>
           <p><strong>The Getting Lively Team</strong></p>
           <br />
@@ -1508,10 +1505,7 @@ router.post(
             page on our website.
           </p>
           <p>Thank you for choosing us!</p>
-          <p>
-            If you have any questions or concerns, please do not hesitate to contact
-            us via our Live Chat or Contact Form on our website.
-          </p>
+        
           <p><strong>Regards,</strong></p>
           <p><strong>The Getting Lively Team</strong></p>
           <br />
@@ -1649,10 +1643,7 @@ router.post(
             page on our website.
           </p>
           <p>Thank you for choosing us!</p>
-          <p>
-            If you have any questions or concerns, please do not hesitate to contact
-            us via our Live Chat or Contact Form on our website.
-          </p>
+        
           <p><strong>Regards,</strong></p>
           <p><strong>The Getting Lively Team</strong></p>
           <br />
