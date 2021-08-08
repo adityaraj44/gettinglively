@@ -533,9 +533,9 @@ router.get(
   async (req, res) => {
     try {
       const entry = await Post.findById({ _id: req.params.id }).lean();
-      const amount_premier = 50;
-      const amount_advancedpremier = 100;
-      const amount_promoted = 200;
+      const amount_premier = 25;
+      const amount_advancedpremier = 50;
+      const amount_promoted = 100;
       if (entry) {
         res.render("admin/pricingplans", {
           entry,

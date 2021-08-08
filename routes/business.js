@@ -1815,9 +1815,9 @@ router.get(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      const amount_premier = 50;
-      const amount_advancedpremier = 100;
-      const amount_promoted = 200;
+      const amount_premier = 25;
+      const amount_advancedpremier = 50;
+      const amount_promoted = 100;
       if (entry) {
         res.render("businessmember/pricingplans", {
           entry,
@@ -1846,7 +1846,7 @@ router.get(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      const amount = 50;
+      const amount = 25;
       if (entry) {
         res.render("businessmember/paymentlisting", {
           entry,
@@ -1893,7 +1893,7 @@ router.post(
           sourceId: token,
           locationId: "LZ6W6KA5YDE19",
           amountMoney: {
-            amount: 100,
+            amount: 2500,
             currency,
           },
         };
@@ -2276,7 +2276,7 @@ router.get(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      const amount = 100;
+      const amount = 50;
       if (entry) {
         res.render("businessmember/paymentlistingadvance", {
           entry,
@@ -2321,7 +2321,7 @@ router.post(
           sourceId: token,
           locationId: "LZ6W6KA5YDE19",
           amountMoney: {
-            amount: 100, // $1.00 charge
+            amount: 5000, // $1.00 charge
             currency,
           },
         };
@@ -2702,7 +2702,7 @@ router.get(
       const entry = await Post.findById({ _id: req.params.id })
         .populate("user")
         .lean();
-      const amount = 200;
+      const amount = 100;
       if (entry) {
         res.render("businessmember/paymentlistingpromoted", {
           entry,
@@ -2749,7 +2749,7 @@ router.post(
           sourceId: token,
           locationId: "LZ6W6KA5YDE19",
           amountMoney: {
-            amount: 100, // $1.00 charge
+            amount: 10000, // $1.00 charge
             currency,
           },
         };
