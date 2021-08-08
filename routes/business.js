@@ -1429,7 +1429,7 @@ router.post(
               post.save((err) => {
                 req.flash(
                   "success_msg",
-                  "Payment successfull. Entry sent for review. You may now close this browser window."
+                  "Payment successfull. Entry now under review."
                 );
                 var smtpTransport = nodemailer.createTransport({
                   service: "gmail",
@@ -1974,10 +1974,12 @@ router.post(
                 }
               </style>
               <div style="color: #000;">
-                <p class="titleTxt" style="font-size:18px;"><strong>Dear ${req.user.name},</strong></p>
+                <p class="titleTxt" style="font-size:18px;"><strong>Dear ${
+                  req.user.name
+                },</strong></p>
                 <br />
                 <p>
-                You've bought our Premier listing plan. Plan expires in 7 days. You can renew your plan anytime or buy another too.
+                You've bought our Premier listing plan of ${"&#163;"} 25. Plan expires in 7 days. You can renew your plan anytime or buy another too.
                 </p>
                 
                 <button class="loginBtn" style="background-color:red;
@@ -2402,10 +2404,12 @@ router.post(
                 }
               </style>
               <div style="color: #000;">
-                <p class="titleTxt" style="font-size:18px;"><strong>Dear ${req.user.name},</strong></p>
+                <p class="titleTxt" style="font-size:18px;"><strong>Dear ${
+                  req.user.name
+                },</strong></p>
                 <br />
                 <p>
-                You've bought our Advance Premier listing plan. Plan expires in 7 days. You can renew your plan anytime or buy another too.
+                You've bought our Advance Premier listing plan of ${"&#163;"} 25. Plan expires in 7 days. You can renew your plan anytime or buy another too.
                 </p>
                 
                 <button class="loginBtn" style="background-color:red;
@@ -2826,10 +2830,12 @@ router.post(
                 }
               </style>
               <div style="color: #000;">
-                <p class="titleTxt" style="font-size:18px;"><strong>Dear ${req.user.name},</strong></p>
+                <p class="titleTxt" style="font-size:18px;"><strong>Dear ${
+                  req.user.name
+                },</strong></p>
                 <br />
                 <p>
-                You've bought our Promoted Premier Spot listing plan. Plan expires in 7 days. You can renew your plan anytime or buy another too.
+                You've bought our Promoted Premier Spot listing plan of ${"&#163;"} 25. Plan expires in 7 days. You can renew your plan anytime or buy another too.
                 </p>
                 
                 <button class="loginBtn" style="background-color:red;

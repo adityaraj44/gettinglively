@@ -441,7 +441,7 @@ if (document.querySelector("#card-container-entry")) {
         console.log(paymentResults);
 
         UIkit.notification({
-          message: "Payment Successful...",
+          message: "Payment Successful. Entry now under review.",
           pos: "top-right",
           status: "success",
         });
